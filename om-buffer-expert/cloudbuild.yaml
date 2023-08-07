@@ -3,7 +3,7 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build', '--prod']
+  args: ['run', 'build', '--configuration production']
 
 # Deploy to Firebase
 - name: 'gcr.io/$buffer-designer/firebase'
