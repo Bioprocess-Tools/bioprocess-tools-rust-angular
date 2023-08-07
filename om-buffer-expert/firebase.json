@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "predeploy": "ng build --prod",
+    "public": "dist/om-buffer-expert",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
