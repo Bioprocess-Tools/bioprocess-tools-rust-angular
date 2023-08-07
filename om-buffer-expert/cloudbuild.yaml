@@ -1,0 +1,10 @@
+steps:
+# Build the Angular project
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build', '--prod']
+
+# Deploy to Firebase
+- name: 'gcr.io/$buffer-designer/firebase'
+  args: ['deploy', '--token', '$FIREBASE_TOKEN']
