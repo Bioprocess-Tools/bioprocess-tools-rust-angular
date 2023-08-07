@@ -33,7 +33,7 @@ export class SolutionService {
 
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
 
-  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+  private apiUrl = 'https://buffer-designer-service-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     this.fetchCompoundFunDict();
