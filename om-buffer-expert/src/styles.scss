@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700&display=swap');
+
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+  
+
+ @import './shared-styles';
+ @import './buffer-theme';
+
+html, body { height: 100%; }
+  body {
+    font-family: "Roboto";
+  }
+
+
+
+
+ // styles.scss
+
+
+
+
+
+// Include the theme mixins for other components you use here.
+
+
+

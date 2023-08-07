@@ -1,0 +1,11 @@
+@import '../../shared-styles.scss';
+
+
+:host{
+    grid-area: side;
+    margin-right: 0.6rem;
+}
+
+mat-card{
+    background-color: whitesmoke;
+}

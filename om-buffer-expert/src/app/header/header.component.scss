@@ -1,0 +1,62 @@
+@use '@angular/material' as mat;
+@import '../../shared-styles.scss';
+
+
+
+/* .logo {
+    height: 40px;
+    margin-right: 16px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  } */
+
+   :host {
+    
+    font-size: 14px;
+    grid-area: header;
+    //text-align: center;
+
+  } 
+
+
+  .logo {
+    height: 0px;
+    margin-right: auto;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .app-name {
+    //margin-right: auto;
+   
+  
+  }
+  
+  .button-row {
+display: flex;
+flex-direction: row;
+
+  }
+.buttons {
+  justify-content: center;
+
+}
+
+.example-stretched-tabs {
+  max-width: 800px;
+}
+
+.toolbar-om {
+  background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
+}
+.mat-headline-4 {
+  margin-bottom: 2px;
+  font-family:'Roboto';
+  font-weight: 600;
+  color:whitesmoke;
+}
+  

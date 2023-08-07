@@ -1,0 +1,71 @@
+<mat-card class="card-background">
+  <mat-card-title>Your solutions</mat-card-title>
+  <mat-card class="grid-container">
+    <mat-card class="grid-item" *ngFor="let solution of solutions"
+      [class.highlighted-card]="selectedSolution === solution">
+      <mat-card-header>
+        <mat-card-title>{{solution.name}}</mat-card-title>
+      </mat-card-header>
+      <!--     <mat-card-content>
+      <mat-label> <h2> pH : {{solution.pH | number: '1.3-3'}} </h2></mat-label>
+    </mat-card-content> -->
+      <mat-card-actions>
+        <button mat-raised-button class="button-accent"
+          (click)="viewDetails(solution)"> <mat-icon>notes</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-card>
+  <mat-divider class="thick"> </mat-divider>
+</mat-card>
+
+<mat-card *ngIf="solution" class="solution-compunds">
+  <mat-card-title class="utext">Compounds in solution</mat-card-title>
+  <mat-card class="compound-card" *ngFor="let compound of solution.compounds">
+    <mat-card class="compound-sub">
+      <mat-card-title> {{compound.name}} </mat-card-title>
+      <mat-card-content class = "compound-details">
+        <!-- <img [src]="imageUrl"> -->
+        <p> Molecular Weight: {{compound.molecular_weight}}</p> 
+        <p> Buffer Ion: {{compound.buffer_ion}}</p>
+        <p> Concentration (M) :
+          {{solution.compound_concentrations[compound.name]
+          | number:'1.3-3'}}</p>
+        <p> Concentration (g/L) :
+          {{solution.compound_concentrations[compound.name]*compound.molecular_weight
+          | number:'1.3-3'}} </p>
+ 
+      </mat-card-content>
+        <mat-card class="ion-card">
+          <mat-card *ngFor="let ion of compound.ions; let i = index"
+            class="ion-sub">
+            <mat-card-title> {{ion.name}}</mat-card-title>
+            <mat-card-content>
+              <p> Ion Conc. (M): {{getIonConcentration(compound, i)|number:'1.3-3'}}</p>
+            </mat-card-content>
+           
+          </mat-card>
+  
+        </mat-card>
+        <mat-divider class="thick-color"> </mat-divider>
+    </mat-card>
+  </mat-card>
+
+  <mat-card-title class="utext"> Unique Ions</mat-card-title>
+
+    <mat-card class="unique-ions">
+
+
+      <mat-card *ngFor="let ion of solution.unique_ions" class="unique-sub">
+        <mat-card-title> {{ion.name}}</mat-card-title>
+        <mat-card-content>
+          <p> Ion Conc. (M): {{solution.ion_concentrations[ion.name]|number:'1.3-3'}}</p>
+          <p> pKa: {{ion.pka.join(',')}}</p>
+          <p> Ionic species conc. : {{getIonicConcs(ion.ionic_concs).join(',')}}</p>
+          <p> Ionic Charges : {{getIonCharges(ion.highest_charge).join(',')}}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
+
+
+
+</mat-card>
