@@ -7,28 +7,29 @@
 
 
       <mat-card class="intro">
-          <h1 class="mat-headline-4"> BUFFER DESIGNER</h1>
+          <h1 class="mat-headline-5"> BUFFER DESIGNER</h1>
 
 
         <ul class="list-container">
 
-          <li><h3>You can now get receipe for your buffer by providing a natural
+          <li><h3>GenAI : You can now get receipe for your buffer by providing a natural
               language input. Simply
               enter the buffer name as you see in the hint like
               "40mM Phosphate buffer, 0.1M Sodium Chloride, pH 7.0"
               and the ChatGPT will do the magic, along with the powerful
               calculation engine to generate a recipe.</h3></li>
 
-          <li><h3>You can also provide input the classic way. The total
+          <li><h3>Classic : You can also provide input the classic way. The total
               concentration value you
               provide will be taken as the first compound's concentration, if
               the buffering species is not present
               in both the compounds.</h3>
           </li>
-          <li><h3> Of course you can also calculate the pH of a solution by
+          <li><h3>pH :  Of course you can also calculate the pH of a solution by
               providing the compounds and their concentrations.</h3>
           </li>
         </ul>
+        <mat-divider class="thick"></mat-divider>
       </mat-card>
       <mat-card class="navigate">
         <nav mat-tab-nav-bar 
@@ -39,7 +40,7 @@
             routerLinkActive
             #firstTab="routerLinkActive"
             [active]="firstTab.isActive">
-            NLP Input Calculator
+            GenAI Buffer Calculator
           </a>
           <a mat-tab-link
             [routerLink]="['Drop-Down-Input']"
@@ -63,7 +64,7 @@
 
     <mat-card class="summary">
       <mat-card mat-elevation-z8 class="browser">
-        <h1 class="mat-headline-4" class= "h4new" > BUFFER BROWSER</h1>
+        <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1>
         <app-solution-table></app-solution-table>
 
       </mat-card>

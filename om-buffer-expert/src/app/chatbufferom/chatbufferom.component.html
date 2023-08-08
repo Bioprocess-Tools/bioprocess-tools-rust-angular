@@ -3,14 +3,14 @@
   <mat-card class="form-card">
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="formf">
-      <mat-form-field class="input-field">
-        <mat-label>Input God's Buffer Wish</mat-label>
-        <input matInput type="text" placeholder="40mM Phosphate buffer, pH 7.0"
+      <mat-form-field class="input-field mat-headline-5">
+        <mat-label>Describe the buffer</mat-label>
+        <input matInput class="chatin" type="text" placeholder="Hint: 40mM Phosphate buffer, pH 7.0"
           formControlName="userInput"
           [matTooltip]="ion_names.join(', ')" matTooltipPosition="above">
 
         <div *ngIf="form.get('userInput').errors">
-          Input should have a buffer species that I know. See tooltip.
+          <p class="instruct">Input should have a buffer species that I know. See tooltip.</p>
         </div>
       </mat-form-field>
       <button class="wide-button" color="primary" mat-raised-button type="submit"

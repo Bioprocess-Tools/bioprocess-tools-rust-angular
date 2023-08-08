@@ -10,8 +10,8 @@
       <mat-label> <h2> pH : {{solution.pH | number: '1.3-3'}} </h2></mat-label>
     </mat-card-content> -->
       <mat-card-actions>
-        <button mat-raised-button class="button-accent"
-          (click)="viewDetails(solution)"> <mat-icon>notes</mat-icon></button>
+        <button mat-stroked-button color="accent" class="button-accent"
+          (click)="viewDetails(solution)">Details</button>
       </mat-card-actions>
     </mat-card>
   </mat-card>
@@ -19,7 +19,7 @@
 </mat-card>
 
 <mat-card *ngIf="solution" class="solution-compunds">
-  <mat-card-title class="utext">Compounds in solution</mat-card-title>
+  <mat-card-title class="utext">Compounds in solution - {{solution.name}}</mat-card-title>
   <mat-card class="compound-card" *ngFor="let compound of solution.compounds">
     <mat-card class="compound-sub">
       <mat-card-title> {{compound.name}} </mat-card-title>

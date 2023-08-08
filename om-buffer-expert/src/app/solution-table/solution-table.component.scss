@@ -31,6 +31,11 @@
 }
 
 ///////This is for the solutions scroll list///////////////
+.highlighted-card {
+  border: 3px solid $accent-green; /* Change color as per your requirement */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
 .thick {
   border-top-width: 5px;
   border-color: $headtext-color;

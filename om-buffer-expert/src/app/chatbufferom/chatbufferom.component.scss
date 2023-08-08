@@ -15,6 +15,10 @@
   box-shadow: none;
   //align-items: center;
 }
+.instruct {
+  font-size:small;
+}
+
 
 .form-card{
   //background-color:rgb(170, 15, 15);
@@ -37,7 +41,7 @@ box-shadow: none;
 }
 
 .wide-button{
-  width:50%;
+  width:80%;
   margin-top:30px;
   margin-left:10px;
   margin-bottom: 20px;
@@ -58,7 +62,7 @@ box-shadow: none;
   margin-top:5vh;
   position:relative;
  // background-color: rgb(160, 57, 57);
-  width:75%;
+  width:97%;
   align-self: center;
 }
 
@@ -115,8 +119,8 @@ margin-bottom: 2px;
   .solution-card{
     margin-top:30px;
     position:relative;
-   // background-color: rgb(160, 57, 57);
-    width:75%;
+    //background-color: whitesmoke;
+    width:97%;
     align-self: center;
   }
 

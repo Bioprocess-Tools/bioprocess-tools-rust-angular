@@ -22,6 +22,7 @@ constructor(
 
 viewDetails(solution:Solution) {
   this.solution = solution;
+  this.selectedSolution = solution;
 }
 
 getIonCharges(highestCharge:number):number[] {
@@ -47,7 +48,9 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
     this.solutionService.solutionAdded.subscribe(() => {
       this.solutions = this.solutionService.getAllSolutions();
       this.jsonData = this.solutions;
+    
       this.solution = this.solutions[this.solutions.length-1];
+      this.selectedSolution=this.solution;
       this.example_solution = this.solutionService.example_solution;
     });
     this.apiService.getSafetyImageUrl(2244).subscribe(url => {
