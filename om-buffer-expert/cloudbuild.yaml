@@ -5,6 +5,8 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build', '--configuration production']
 
-# Deploy to Firebase
+# Deploy to Firebase 
 - name: 'gcr.io/$buffer-designer/firebase'
-  args: ['deploy']
+  args: ['deploy', '--token', '$_FIREBASE_TOKEN']
+  env: 
+  - 'FIREBASE_TOKEN=$_FIREBASE_TOKEN'
