@@ -2,7 +2,7 @@
 .main-card-container {
      display: grid;
      //margin-top: 15px;
-     grid-template-rows: 1fr .7fr;
+     grid-template-rows: 1fr 1.2fr;
      grid-template-areas:
      "calculator" 
      "summary";
@@ -12,7 +12,8 @@
      background-color: whitesmoke;
     grid-area:1/1;
     box-shadow: none;
-    align-items: center;
+    align-items:center;
+    //height:100%;
     }
 
     .calculator {
@@ -47,17 +48,19 @@
     //display: flex;
   }
   .summary{
+
     width: 97%;
-    background-color: whitesmoke;
+    //background-color: rgb(194, 43, 43);
     margin-left: 0.5vw;
     box-shadow: none;
+    //align-self: stretch;
   }
 
 
   .wide-button {
     grid-column: span 2;
     width: 90%;
-    margin-left: 5vw;
+    //margin-left: 5vw;
     //background-color: $background-green;
   }
 

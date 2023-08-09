@@ -7,4 +7,4 @@ steps:
 
 # Deploy to Firebase
 - name: 'gcr.io/$buffer-designer/firebase'
-  args: ['deploy', '--token', '$FIREBASE_TOKEN']
+  args: ['deploy', '--token', '1//01JveM_mCfZTbCgYIARAAGAESNwF-L9IrCVcWY40PLdjLdqZTXKSmJXG3DsRnt4cltkFTmJgiVuwwGM0zgoNDmoGBJtIosf66qRk']
