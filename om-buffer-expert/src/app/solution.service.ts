@@ -18,7 +18,7 @@ export class SolutionService {
   saltCompounds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   ion_names$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
-
+  edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
 
 
 
@@ -30,12 +30,14 @@ export class SolutionService {
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
+  edit_solution:Solution;
 
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
+  solutionEdited: EventEmitter<void> = new EventEmitter<void>();
 
- private apiUrl = 'https://buffer-designer-service-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+ //private apiUrl = 'https://buffer-designer-service-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
   
-  //private apiUrl = 'http://127.0.0.1:5000'; // Replace with your Flask API URL
+  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     this.fetchCompoundFunDict();
@@ -178,6 +180,17 @@ export class SolutionService {
     this.solutionAdded.emit(); 
   }
 
+  get_emitted() {
+    return this.edit_solution;
+  }
+
+edit_solutionf(solution:Solution){
+  this.edit_solution = solution;
+  console.log("God in solution service 1", this.edit_solution);
+  this.edit_solution$.next(this.edit_solution);
+    this.solutionEdited.emit();
+    //console.log("God in solution service 2", this.edit_solution);
+  }
 getAllSolutions(): Solution[] {
     return this.omSolutions;
   }

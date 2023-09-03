@@ -7,6 +7,7 @@ import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Solution } from '../shared/models/solution.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,10 @@ export class BufferCalculationOption1Component implements OnInit {
   saltCompounds: string[] = [];
   example_solution: Solution;
   compoundNames: string[] = [];
+  solutionedit:Solution;
+  acidconc:number;
+  baseconc:number;
+  saltconc:number;
 
   public godSolution = new Solution("God solution");
   public returnedSolution: Solution;
@@ -31,13 +36,54 @@ export class BufferCalculationOption1Component implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public solutionService: SolutionService
+    public solutionService: SolutionService,
+    public omroute:Router
 
+  ) { 
 
-  ) { }
+this.loadCompoundNames();
+this.acidCompounds = this.solutionService.acidCompounds;
+this.basicCompounds = this.solutionService.basicCompounds;
+this.saltCompounds = this.solutionService.saltCompounds;
+
+this.initializeForm()
+this.solutionService.example_solution$.subscribe(
+  example_solution => {
+    this.example_solution = example_solution;
+    this.returnedSolution = example_solution;
+    console.log("God example solution in buffer calc 1", this.example_solution);
+  }
+);
+    
+  }
+
+  changeForm(solution:Solution) {
+    //this.omroute.navigate(['./pH-Calculator']);
+    let acidname = solution.compounds[0].name;
+    let basename = solution.compounds[1].name;
+    console.log("God in change", solution)
+    let saltname:string=null;
+    let saltconc =0;
+    
+    if(solution.compounds.length=3) {
+      console.log("God here in salt", solution.compounds[2].name);
+      saltname = solution.compounds[2].name;
+      saltconc = solution.compound_concentrations[saltname];
+      this.bufferForm.controls['saltCompound'].setValue(saltname);
+      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+    }
+    let acidconc = solution.compound_concentrations[acidname];
+    let baseconc = solution.compound_concentrations[basename];
+    this.bufferForm.controls['acidicCompound'].setValue(acidname);
+    this.bufferForm.controls['basicCompound'].setValue(basename);
+    this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
+    this.bufferForm.controls['basicConcentration'].setValue (baseconc);
+    //console.log("God came to change",this.bufferForm);
+    
+    }
 
   ngOnInit() {
-    this.loadCompoundNames();
+/*     this.loadCompoundNames();
 
     //this.solutionService.get_example_solution();
     this.solutionService.example_solution$.subscribe(
@@ -54,7 +100,7 @@ export class BufferCalculationOption1Component implements OnInit {
     this.saltCompounds = this.solutionService.saltCompounds
     console.log("God: in init", this.acidCompounds)
     console.log("God: in init", this.basicCompounds)
-    console.log("God: in init", this.saltCompounds)
+    console.log("God: in init", this.saltCompounds) */
   }
 
   loadCompoundNames() {
@@ -81,8 +127,19 @@ export class BufferCalculationOption1Component implements OnInit {
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
     });
 
+    this.solutionService.solutionEdited.subscribe(() => {
+      this.solutionedit = this.solutionService.get_emitted();
+      console.log("God in buffer calc", this.solutionedit);
+      this.changeForm(this.solutionedit);
+    
+    
+    }); 
+ 
+}
 
-  }
+
+
+  
 
   onSubmit() {
     console.log("god here", this.bufferForm);
@@ -138,7 +195,9 @@ export class BufferCalculationOption1Component implements OnInit {
     this.calculatepH();
     // Reset the form
     this.bufferForm.reset();
-
+    //changeForm(this.godSolution);
+    //this.bufferForm.controls['acidicCompound'].setValue('Sodium Phosphate Monobasic');
+    //console.log("God form", this.bufferForm.controls['acidicCompound'].value);
   }
 
   user = {
@@ -158,3 +217,5 @@ export class BufferCalculationOption1Component implements OnInit {
   }
 
 }
+
+

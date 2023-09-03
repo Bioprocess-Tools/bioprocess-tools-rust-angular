@@ -3,6 +3,7 @@ import { SolutionService } from '../solution.service';
 import { Solution } from '../shared/models/solution.model';
 import { Compound } from '../shared/models/compound.model';
 import { ApiService } from '../api-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-solution-table',
   templateUrl: './solution-table.component.html',
@@ -18,6 +19,7 @@ export class SolutionTableComponent implements OnInit {
   example_solution:Solution;
 constructor(
   private solutionService: SolutionService, 
+  private omRoute:Router,
   private apiService:ApiService) {}
 
 viewDetails(solution:Solution) {
@@ -25,6 +27,11 @@ viewDetails(solution:Solution) {
   this.selectedSolution = solution;
 }
 
+editNewForm (solution:Solution){
+  this.omRoute.navigate(['./pH-Calculator']);
+  this.solutionService.edit_solutionf(solution);
+  console.log("God edit" , solution);
+}
 getIonCharges(highestCharge:number):number[] {
   let charges = [];
   for (let i = highestCharge; i>highestCharge-4;i--) {charges.push(i);}
