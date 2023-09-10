@@ -11,4 +11,4 @@ steps:
   args: ['install', '-g', 'firebase-tools']
 
 - name: 'gcr.io/cloud-builders/firebase'
-    args: ['deploy', '--token', '${_FIREBASE_TOKEN}', '--project', 'buffer-designer']
+    args: ['deploy', '--token', '1//01JveM_mCfZTbCgYIARAAGAESNwF-L9IrCVcWY40PLdjLdqZTXKSmJXG3DsRnt4cltkFTmJgiVuwwGM0zgoNDmoGBJtIosf66qRk', '--project', 'buffer-designer']
