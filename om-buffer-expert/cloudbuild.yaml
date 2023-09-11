@@ -1,32 +1,26 @@
 steps:
-  # Install the dependencies
   - name: gcr.io/cloud-builders/npm
-    dir: 'om-buffer-expert'
     args:
-      - 'install'
-  
-  # Build the Angular app
-  - name: gcr.io/cloud-builders/npm
-    dir: 'om-buffer-expert'
-    args:
-      - 'run'
-      - 'build'
-      - '--configuration'
-      - 'production'
+      - install
+    dir: om-buffer-expert
 
-  # Install firebase-tools globally
   - name: gcr.io/cloud-builders/npm
     args:
-      - 'install'
-      - '-g'
-      - 'firebase-tools'
+      - run
+      - build
+      - '--configuration production'
+    dir: om-buffer-expert
   
-  # Deploy to Firebase
-  - name: gcr.io/cloud-builders/firebase
-    dir: 'om-buffer-expert/dist' # Assuming your dist directory is inside ombuffer-expert; adjust if needed
+  # Build our custom Firebase docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/buffer-designer/firebase-deploy', './firebase_deploy']
+
+  # Use the custom Firebase docker image to deploy
+  - name: 'gcr.io/buffer-designer/firebase-deploy'
     args:
-      - 'deploy'
+      - deploy
       - '--token'
       - '1//01JveM_mCfZTbCgYIARAAGAESNwF-L9IrCVcWY40PLdjLdqZTXKSmJXG3DsRnt4cltkFTmJgiVuwwGM0zgoNDmoGBJtIosf66qRk'
       - '--project'
-      - 'buffer-designer'
+      - buffer-designer
+    dir: om-buffer-expert
