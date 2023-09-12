@@ -9,10 +9,6 @@ steps:
     args: ['run', 'build', '--', '--configuration=production']
     dir: 'om-buffer-expert'
 
-  # Deploy to Firebase
-  - name: 'gcr.io/cloud-builders/npm'
-    args: ['install', '-g', 'firebase-tools']
-
   - name: 'node:latest'
     entrypoint: 'sh'
     args:
