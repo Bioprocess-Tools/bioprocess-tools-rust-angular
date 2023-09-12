@@ -1,143 +1,68 @@
-[debug] [2023-09-11T21:17:12.155Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:12.156Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:12.157Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:12.157Z] Platform:      win32
-[debug] [2023-09-11T21:17:12.157Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:12.158Z] Time:          Mon Sep 11 2023 17:17:12 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:12.158Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T20:24:49.257Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T20:24:49.259Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-09-12T20:24:49.259Z] CLI Version:   12.5.3
+[debug] [2023-09-12T20:24:49.259Z] Platform:      win32
+[debug] [2023-09-12T20:24:49.260Z] Node Version:  v18.16.1
+[debug] [2023-09-12T20:24:49.261Z] Time:          Tue Sep 12 2023 16:24:49 GMT-0400 (Eastern Daylight Time)
+[debug] [2023-09-12T20:24:49.261Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-09-11T21:17:12.210Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:12.210Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:12.211Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:12.212Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:12.212Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:12.213Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:12.382Z] *** [apiv2] error from fetch(https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions, {"headers":{},"method":"POST","body":"{\"permissions\":[\"firebase.projects.get\",\"firebasehosting.sites.update\"]}"}): FetchError: request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions failed, reason: getaddrinfo ENOTFOUND cloudresourcemanager.googleapis.com
-[debug] [2023-09-11T21:17:12.383Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions
-[debug] [2023-09-11T21:17:12.384Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:12.526Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:12.526Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:12.529Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
-    at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
+[debug] [2023-09-12T20:24:49.308Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-12T20:24:49.309Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
+[debug] [2023-09-12T20:24:49.309Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-09-12T20:24:49.311Z] > refreshing access token with scopes: []
+[debug] [2023-09-12T20:24:49.312Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-09-12T20:24:49.312Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-12T20:24:49.473Z] *** [apiv2] error from fetch(https://www.googleapis.com/oauth2/v3/token, {"headers":{},"method":"POST","body":{"_overheadLength":545,"_valueLength":212,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------495626536306980506960154","_events":{},"_eventsCount":1}}): FetchError: request to https://www.googleapis.com/oauth2/v3/token failed, reason: getaddrinfo ENOTFOUND www.googleapis.com
+[debug] [2023-09-12T20:24:49.474Z] [iam] error while checking permissions, command may fail: FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2023-09-12T20:24:49.475Z] > refreshing access token with scopes: []
+[debug] [2023-09-12T20:24:49.475Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-09-12T20:24:49.475Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-12T20:24:49.479Z] *** [apiv2] error from fetch(https://www.googleapis.com/oauth2/v3/token, {"headers":{},"method":"POST","body":{"_overheadLength":545,"_valueLength":212,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------067102217202885999832867","_events":{},"_eventsCount":1}}): FetchError: request to https://www.googleapis.com/oauth2/v3/token failed, reason: getaddrinfo ENOTFOUND www.googleapis.com
+[debug] [2023-09-12T20:24:49.479Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2023-09-12T20:24:49.485Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at invalidCredentialError (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:144:12)
+    at refreshTokens (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:508:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.getAccessToken (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:149:22)
+    at async Client.addAuthHeader (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:140:21)
+    at async Client.request (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:96:34)
+    at async getFirebaseProject (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:295:21)
+    at async getDefaultHostingSite (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\getDefaultHostingSite.js:10:21)
+    at async requireHostingSite (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\requireHostingSite.js:9:18)
+    at async Object.fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\deploy.js:74:9)
 [error] 
 [error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-11T21:17:17.080Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:17.082Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:17.082Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:17.082Z] Platform:      win32
-[debug] [2023-09-11T21:17:17.082Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:17.083Z] Time:          Mon Sep 11 2023 17:17:17 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:17.083Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T20:25:03.533Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T20:25:03.534Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-09-12T20:25:03.535Z] CLI Version:   12.5.3
+[debug] [2023-09-12T20:25:03.535Z] Platform:      win32
+[debug] [2023-09-12T20:25:03.535Z] Node Version:  v18.16.1
+[debug] [2023-09-12T20:25:03.536Z] Time:          Tue Sep 12 2023 16:25:03 GMT-0400 (Eastern Daylight Time)
+[debug] [2023-09-12T20:25:03.536Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-09-11T21:17:17.136Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:17.136Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:17.137Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:17.138Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:17.138Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:17.139Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:17.165Z] *** [apiv2] error from fetch(https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions, {"headers":{},"method":"POST","body":"{\"permissions\":[\"firebase.projects.get\",\"firebasehosting.sites.update\"]}"}): FetchError: request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions failed, reason: getaddrinfo ENOTFOUND cloudresourcemanager.googleapis.com
-[debug] [2023-09-11T21:17:17.166Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions
-[debug] [2023-09-11T21:17:17.166Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:17.169Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:17.169Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:17.170Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
-    at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-11T21:17:21.803Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:21.804Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:21.805Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:21.805Z] Platform:      win32
-[debug] [2023-09-11T21:17:21.805Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:21.806Z] Time:          Mon Sep 11 2023 17:17:21 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:21.806Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-09-11T21:17:21.852Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:21.852Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:21.852Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:21.854Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:21.854Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:21.855Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:22.082Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions 200
-[debug] [2023-09-11T21:17:22.083Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:22.083Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:22.088Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:22.088Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:22.089Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
-    at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-11T21:17:25.808Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:25.809Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:25.809Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:25.810Z] Platform:      win32
-[debug] [2023-09-11T21:17:25.810Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:25.811Z] Time:          Mon Sep 11 2023 17:17:25 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:25.811Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-09-11T21:17:25.860Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:25.860Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:25.860Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:25.865Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:25.866Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:25.866Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:26.013Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions 200
-[debug] [2023-09-11T21:17:26.013Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:26.014Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:26.016Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:26.016Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:26.017Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
-    at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-11T21:17:30.160Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:30.161Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:30.162Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:30.162Z] Platform:      win32
-[debug] [2023-09-11T21:17:30.162Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:30.163Z] Time:          Mon Sep 11 2023 17:17:30 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:30.163Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-09-11T21:17:30.210Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:30.210Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:30.210Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:30.213Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:30.213Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:30.214Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:30.440Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions 200
-[debug] [2023-09-11T21:17:30.440Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:30.440Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:30.444Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:30.445Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:30.445Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
-    at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-11T21:17:34.496Z] ----------------------------------------------------------------------
-[debug] [2023-09-11T21:17:34.498Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-11T21:17:34.498Z] CLI Version:   12.5.3
-[debug] [2023-09-11T21:17:34.498Z] Platform:      win32
-[debug] [2023-09-11T21:17:34.499Z] Node Version:  v18.16.1
-[debug] [2023-09-11T21:17:34.500Z] Time:          Mon Sep 11 2023 17:17:34 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-11T21:17:34.500Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-09-11T21:17:34.554Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-11T21:17:34.554Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-11T21:17:34.555Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-11T21:17:34.556Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-11T21:17:34.556Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-11T21:17:34.557Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:34.784Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions 200
-[debug] [2023-09-11T21:17:34.785Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-11T21:17:34.785Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-11T21:17:34.788Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-11T21:17:34.788Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-11T21:17:34.789Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
+[debug] [2023-09-12T20:25:03.582Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-09-12T20:25:03.582Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
+[debug] [2023-09-12T20:25:03.582Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-09-12T20:25:03.584Z] > refreshing access token with scopes: []
+[debug] [2023-09-12T20:25:03.585Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-09-12T20:25:03.585Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-12T20:25:03.844Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-09-12T20:25:03.844Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
+[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
+[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-09-12T20:25:04.010Z] *** [apiv2] error from fetch(https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions, {"headers":{},"method":"POST","body":"{\"permissions\":[\"firebase.projects.get\",\"firebasehosting.sites.update\"]}"}): FetchError: request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions failed, reason: getaddrinfo ENOTFOUND cloudresourcemanager.googleapis.com
+[debug] [2023-09-12T20:25:04.011Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions
+[debug] [2023-09-12T20:25:04.012Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
+[debug] [2023-09-12T20:25:04.159Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
+[debug] [2023-09-12T20:25:04.160Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
+[debug] [2023-09-12T20:25:04.162Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
     at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
 [error] 
