@@ -12,8 +12,12 @@ steps:
   # Deploy to Firebase
   - name: 'gcr.io/cloud-builders/npm'
     args: ['install', '-g', 'firebase-tools']
-  
-  - name: 'gcr.io/cloud-builders/npm'
-    entrypoint: 'firebase'
-    args: ['deploy', '--token', "1//01uI_DrICCSmdCgYIARAAGAESNwF-L9IrqYyR7PynynVERvNwBiqVqpC4u149nP86jIZDjMVu7V-cDZXSQvOphjMUGTIAvFbG4Rw", '--project', 'buffer-designer']
-    dir: 'om-buffer-expert'
+
+  - name: 'node:latest'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        npm install -g firebase-tools &&
+        firebase deploy --token '1//01uI_DrICCSmdCgYIARAAGAESNwF-L9IrqYyR7PynynVERvNwBiqVqpC4u149nP86jIZDjMVu7V-cDZXSQvOphjMUGTIAvFbG4Rw' --project buffer-designer
+    dir: om-buffer-expert
