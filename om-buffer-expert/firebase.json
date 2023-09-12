@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "predeploy": "ng build --configuration production",
     "public": "dist/om-buffer-expert",
     "ignore": [
       "firebase.json",
