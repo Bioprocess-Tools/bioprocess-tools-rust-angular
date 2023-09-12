@@ -1,26 +1,20 @@
 steps:
-  - name: gcr.io/cloud-builders/npm
-    args:
-      - install
-    dir: om-buffer-expert
+  # Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+    dir: 'om-buffer-expert'
 
-  - name: gcr.io/cloud-builders/npm
-    args:
-      - run
-      - build
-      - '--configuration production'
-    dir: om-buffer-expert
+  # Build the Angular project
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build', '--configuration', 'production']
+    dir: 'om-buffer-expert'
+
+  # Deploy to Firebase
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install', '-g', 'firebase-tools']
   
-  # Build our custom Firebase docker image
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/buffer-designer/firebase-deploy', './firebase_deploy']
+  - name: 'gcr.io/cloud-builders/npm'
+    entrypoint: 'firebase'
+    args: ['deploy', '--token', "1//01uI_DrICCSmdCgYIARAAGAESNwF-L9IrqYyR7PynynVERvNwBiqVqpC4u149nP86jIZDjMVu7V-cDZXSQvOphjMUGTIAvFbG4Rw", '--project', 'buffer-designer']
+    dir: 'om-buffer-expert'
 
-  # Use the custom Firebase docker image to deploy
-  - name: 'gcr.io/buffer-designer/firebase-deploy'
-    args:
-      - deploy
-      - '--token'
-      - '1//01JveM_mCfZTbCgYIARAAGAESNwF-L9IrCVcWY40PLdjLdqZTXKSmJXG3DsRnt4cltkFTmJgiVuwwGM0zgoNDmoGBJtIosf66qRk'
-      - '--project'
-      - buffer-designer
-    dir: om-buffer-expert

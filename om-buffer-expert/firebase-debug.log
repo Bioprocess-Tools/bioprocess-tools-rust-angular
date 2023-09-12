@@ -1,69 +1,37 @@
-[debug] [2023-09-12T20:24:49.257Z] ----------------------------------------------------------------------
-[debug] [2023-09-12T20:24:49.259Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-12T20:24:49.259Z] CLI Version:   12.5.3
-[debug] [2023-09-12T20:24:49.259Z] Platform:      win32
-[debug] [2023-09-12T20:24:49.260Z] Node Version:  v18.16.1
-[debug] [2023-09-12T20:24:49.261Z] Time:          Tue Sep 12 2023 16:24:49 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-12T20:24:49.261Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T23:01:55.651Z] ----------------------------------------------------------------------
+[debug] [2023-09-12T23:01:55.653Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js login:ci
+[debug] [2023-09-12T23:01:55.653Z] CLI Version:   12.5.3
+[debug] [2023-09-12T23:01:55.653Z] Platform:      win32
+[debug] [2023-09-12T23:01:55.654Z] Node Version:  v18.16.1
+[debug] [2023-09-12T23:01:55.655Z] Time:          Tue Sep 12 2023 19:01:55 GMT-0400 (Eastern Daylight Time)
+[debug] [2023-09-12T23:01:55.655Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-09-12T20:24:49.308Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-12T20:24:49.309Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-12T20:24:49.309Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-12T20:24:49.311Z] > refreshing access token with scopes: []
-[debug] [2023-09-12T20:24:49.312Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2023-09-12T20:24:49.312Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-09-12T20:24:49.473Z] *** [apiv2] error from fetch(https://www.googleapis.com/oauth2/v3/token, {"headers":{},"method":"POST","body":{"_overheadLength":545,"_valueLength":212,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------495626536306980506960154","_events":{},"_eventsCount":1}}): FetchError: request to https://www.googleapis.com/oauth2/v3/token failed, reason: getaddrinfo ENOTFOUND www.googleapis.com
-[debug] [2023-09-12T20:24:49.474Z] [iam] error while checking permissions, command may fail: FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
-
-For CI servers and headless environments, generate a new token with firebase login:ci
-[debug] [2023-09-12T20:24:49.475Z] > refreshing access token with scopes: []
-[debug] [2023-09-12T20:24:49.475Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2023-09-12T20:24:49.475Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-09-12T20:24:49.479Z] *** [apiv2] error from fetch(https://www.googleapis.com/oauth2/v3/token, {"headers":{},"method":"POST","body":{"_overheadLength":545,"_valueLength":212,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------067102217202885999832867","_events":{},"_eventsCount":1}}): FetchError: request to https://www.googleapis.com/oauth2/v3/token failed, reason: getaddrinfo ENOTFOUND www.googleapis.com
-[debug] [2023-09-12T20:24:49.479Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
-
-For CI servers and headless environments, generate a new token with firebase login:ci
-[debug] [2023-09-12T20:24:49.485Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
-
-For CI servers and headless environments, generate a new token with firebase login:ci
-    at invalidCredentialError (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:144:12)
-    at refreshTokens (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:508:15)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async Client.getAccessToken (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:149:22)
-    at async Client.addAuthHeader (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:140:21)
-    at async Client.request (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:96:34)
-    at async getFirebaseProject (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:295:21)
-    at async getDefaultHostingSite (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\getDefaultHostingSite.js:10:21)
-    at async requireHostingSite (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\requireHostingSite.js:9:18)
-    at async Object.fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\deploy.js:74:9)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
-[debug] [2023-09-12T20:25:03.533Z] ----------------------------------------------------------------------
-[debug] [2023-09-12T20:25:03.534Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
-[debug] [2023-09-12T20:25:03.535Z] CLI Version:   12.5.3
-[debug] [2023-09-12T20:25:03.535Z] Platform:      win32
-[debug] [2023-09-12T20:25:03.535Z] Node Version:  v18.16.1
-[debug] [2023-09-12T20:25:03.536Z] Time:          Tue Sep 12 2023 16:25:03 GMT-0400 (Eastern Daylight Time)
-[debug] [2023-09-12T20:25:03.536Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2023-09-12T20:25:03.582Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-09-12T20:25:03.582Z] > authorizing via signed-in user (bioprocess.tools@gmail.com)
-[debug] [2023-09-12T20:25:03.582Z] [iam] checking project buffer-designer for permissions ["firebase.projects.get","firebasehosting.sites.update"]
-[debug] [2023-09-12T20:25:03.584Z] > refreshing access token with scopes: []
-[debug] [2023-09-12T20:25:03.585Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
-[debug] [2023-09-12T20:25:03.585Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-09-12T20:25:03.844Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
-[debug] [2023-09-12T20:25:03.844Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
-[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions [none]
-[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions x-goog-quota-user=projects/buffer-designer
-[debug] [2023-09-12T20:25:03.869Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
-[debug] [2023-09-12T20:25:04.010Z] *** [apiv2] error from fetch(https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions, {"headers":{},"method":"POST","body":"{\"permissions\":[\"firebase.projects.get\",\"firebasehosting.sites.update\"]}"}): FetchError: request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions failed, reason: getaddrinfo ENOTFOUND cloudresourcemanager.googleapis.com
-[debug] [2023-09-12T20:25:04.011Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/buffer-designer:testIamPermissions
-[debug] [2023-09-12T20:25:04.012Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/buffer-designer [none]
-[debug] [2023-09-12T20:25:04.159Z] *** [apiv2] error from fetch(https://firebase.googleapis.com/v1beta1/projects/buffer-designer, {"headers":{},"method":"GET","signal":{}}): FetchError: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com
-[debug] [2023-09-12T20:25:04.160Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer (original: request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer failed, reason: getaddrinfo ENOTFOUND firebase.googleapis.com)
-[debug] [2023-09-12T20:25:04.162Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/buffer-designer
+[warn] !  Authenticating with a `login:ci` token is deprecated and will be removed in a future major version of `firebase-tools`. Instead, use a service account key with `GOOGLE_APPLICATION_CREDENTIALS`: https://cloud.google.com/docs/authentication/getting-started 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=681246907&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2023-09-12T23:02:02.236Z] >>> [apiv2][query] POST https://accounts.google.com/o/oauth2/token [none]
+[debug] [2023-09-12T23:02:02.237Z] >>> [apiv2][body] POST https://accounts.google.com/o/oauth2/token [omitted]
+[debug] [2023-09-12T23:02:02.301Z] *** [apiv2] error from fetch(https://accounts.google.com/o/oauth2/token, {"headers":{},"method":"POST","body":{"_overheadLength":543,"_valueLength":208,"_valuesToMeasure":[],"writable":false,"readable":true,"dataSize":0,"maxDataSize":2097152,"pauseStreams":true,"_released":true,"_streams":[],"_currentStream":null,"_insideLoop":false,"_pendingNext":false,"_boundary":"--------------------------475801577431375902207793","_events":{},"_eventsCount":1}}): FetchError: request to https://accounts.google.com/o/oauth2/token failed, reason: getaddrinfo ENOTFOUND accounts.google.com
+[debug] [2023-09-12T23:02:02.301Z] Token Fetch Error: FirebaseError: Failed to make request to https://accounts.google.com/o/oauth2/token
     at RetryOperation._fn (C:\Users\natraj.ram\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:239:31)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[error] 
-[error] Error: Failed to get Firebase project buffer-designer. Please make sure the project exists and your account has permission to access it.
+[debug] [2023-09-12T23:02:02.322Z] >>> [apiv2][query] POST https://auth.firebase.tools/attest [none]
+[debug] [2023-09-12T23:02:02.323Z] >>> [apiv2][body] POST https://auth.firebase.tools/attest {"session_id":"a5652653-050a-42a0-b0be-dd4b85c08be8"}
+[debug] [2023-09-12T23:02:02.856Z] <<< [apiv2][status] POST https://auth.firebase.tools/attest 200
+[debug] [2023-09-12T23:02:02.856Z] <<< [apiv2][body] POST https://auth.firebase.tools/attest {"token":"2LnJRdFu90RNx-zTbJSzThg1SMrccXS5cM-E5YLews8"}
+[info] 
+[info] To sign in to the Firebase CLI:
+[info] 
+[info] 1. Take note of your session ID:
+[info] 
+[info]    A5652
+[info] 
+[info] 2. Visit the URL below on any device and follow the instructions to get your code:
+[info] 
+[info]    https://auth.firebase.tools/login?code_challenge=WKqr9gY4w1j1ocersqNyw6kce9Gv8yJvCAlK3qJ4evA&session=a5652653-050a-42a0-b0be-dd4b85c08be8&attest=2LnJRdFu90RNx-zTbJSzThg1SMrccXS5cM-E5YLews8
+[info] 
+[info] 3. Paste or enter the authorization code below once you have it:
+[info] 
