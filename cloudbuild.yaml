@@ -6,7 +6,7 @@ steps:
 
   # Build the Angular project
   - name: 'gcr.io/cloud-builders/npm'
-    args: ['run', 'build', '--configuration', 'production']
+    args: ['run', 'build', '--configuration', ' --configuration production']
     dir: 'om-buffer-expert'
 
   # Deploy to Firebase
