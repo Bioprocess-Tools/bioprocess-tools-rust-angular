@@ -10,6 +10,7 @@ export class Ion {
     ka1ka2: number;
     ka1ka2ka3: number;
     ionic_concs: number[];
+    unionized_conc:number;
   
     constructor(
       name: string,
@@ -28,6 +29,7 @@ export class Ion {
       this.ka1ka2 = this.ka1 * this.ka[1];
       this.ka1ka2ka3 = this.ka1ka2 * this.ka[2];
       this.ionic_concs = [0, 0, 0, 0];
+      this.unionized_conc = 0;
     }
   }
   

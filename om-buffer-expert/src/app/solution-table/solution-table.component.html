@@ -63,6 +63,7 @@
           <p> Ion Conc. (M): {{solution.ion_concentrations[ion.name]|number:'1.3-3'}}</p>
           <p> pKa: {{ion.pka.join(',')}}</p>
           <p> Ionic species conc. : {{getIonicConcs(ion.ionic_concs).join(',')}}</p>
+          <p> Ion conc. (un-ionized) : {{ion.unionized_conc}}</p>
           <p> Ionic Charges : {{getIonCharges(ion.highest_charge).join(',')}}</p>
         </mat-card-content>
       </mat-card>
