@@ -20,7 +20,10 @@ export class AppComponent implements OnInit{
     private router: Router
     
     
-    ) {}
+    ) {
+    
+
+    }
 
   ngOnInit() {
     //this.solution = this.solutionService.solution;
