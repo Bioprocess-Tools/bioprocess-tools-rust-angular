@@ -20,9 +20,6 @@ export class SolutionService {
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
   edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
 
-
-
-
   compoundNames: string[] = [];
   ion_names:string[]=[];
   compoundFunDict: { [name: string]: string } = {};
@@ -31,6 +28,12 @@ export class SolutionService {
   saltCompounds: string[] = [];
   example_solution: Solution;
   edit_solution:Solution;
+  compounds_acidic: string[] = [];
+  compounds_basic: string[] = [];
+  compounds_salt: string[] = [];
+
+
+  compoundFunDict2: { [name: string]: string } = {};
 
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
   solutionEdited: EventEmitter<void> = new EventEmitter<void>();
@@ -40,27 +43,65 @@ export class SolutionService {
   private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
-    this.fetchCompoundFunDict();
+
     console.log("God: in construction", this.acidCompounds);
     this.get_ion_names();
     this.get_example_solution();
+    this.populate_compounds();
   }
+
+  api_get_compounds(): Observable<{ [name: string]: string }> {
+    return this.http.get<{ [name: string]: string }>(this.apiUrl+ '/compound-fun-dict')
+  }
+  
+  populate_compounds(): void {
+
+      this.api_get_compounds().subscribe(
+        data => {
+          this.compoundFunDict2 = data;
+          this.group_compounds_type(this.compoundFunDict2);
+          console.log("God got dictionary", this.compoundFunDict2);
+          console.log("God got types", this.compounds_acidic, this.compounds_basic, this.compounds_salt);
+
+        },
+        error => {
+          console.error('Failed to fetch compounds', error);
+        }
+      );
+    
+  }
+
+// Assuming you have a dictionary of compounds like this:
+// let compounds_dict = {'compound1': 'A', 'compound2': 'B', 'compound3': 'S', ...};
+private group_compounds_type (compounds_dict) {
+
+
+for (let [compound, type] of Object.entries(compounds_dict)) {
+    switch (type) {
+        case 'A':
+            this.compounds_acidic.push(compound);
+            break;
+        case 'B':
+            this.compounds_basic.push(compound);
+            break;
+        case 'S':
+           this.compounds_salt.push(compound)
+            break;
+        default:
+            // Handle any other case or unexpected value here, if needed.
+            console.log(`Unexpected type: ${type} for compound: ${compound}`);
+            break;
+    }
+}
+this.compounds_salt.push("None")
+this.compounds_acidic.sort();
+this.compounds_salt.sort();
+this.compounds_basic.sort();
+}
+
   // Implement the necessary methods to interact with the solution object
   // For example:
-  get_compound_names(): Observable<string[]> {
-    const endpoint = `${this.apiUrl}/get_compound_names`; 
-    return this.http.get<string[]>(endpoint).pipe(
 
-      map((response: string[])=> {
-        this.compoundNames = response;
-        console.log("God in service", this.compoundNames);
-        return response;
-
-      }),
-  
-    );
-
-  }
 
   get_ion_names(): void {
     const endpoint = `${this.apiUrl}/get_ion_names`; 
@@ -96,59 +137,6 @@ export class SolutionService {
      
     }
 
-  
-
-
-
-
-  public fetchCompoundFunDict(): void {
-    this.http.get<{ [name: string]: string }>(this.apiUrl + '/compound-fun-dict').pipe(
-      tap((compoundFunDict: { [name: string]: string }) => {
-        this.compoundFunDict$.next(compoundFunDict);
-        this.groupCompoundsByType(compoundFunDict);
-      })
-    ).subscribe();
-  }
-
-  private groupCompoundsByType(compoundFunDict: { [name: string]: string }): void {
-    const acidCompounds: string[] = [];
-    const basicCompounds: string[] = [];
-    const saltCompounds: string[] = [];
-
-    for (const compound in compoundFunDict) {
-      const type = compoundFunDict[compound];
-
-      switch (type) {
-        case 'A':
-          this.acidCompounds.push(compound);
-          break;
-        case 'B':
-          this.basicCompounds.push(compound);
-          break;
-        case 'S':
-          this.saltCompounds.push(compound);
-          break;
-        default:
-          // Handle unrecognized compound types, if needed
-          break;
-      }
-    }
-    this.acidCompounds$.next(acidCompounds);
-    this.basicCompounds$.next(basicCompounds);
-    this.saltCompounds$.next(saltCompounds);
-  }
-  getAcidCompounds(): Observable<string[]> {
-    console.log("God: calling observable",this.acidCompounds);
-    return this.acidCompounds$.asObservable();
-  }
-
-  getBasicCompounds(): Observable<string[]> {
-    return this.basicCompounds$.asObservable();
-  }
-
-  getSaltCompounds(): Observable<string[]> {
-    return this.saltCompounds$.asObservable();
-  }
 
   solution_calculate_pH(solution: Solution): Observable<Solution> {
     const endpoint = `${this.apiUrl}/solution_calculate_pH`; 
@@ -194,6 +182,18 @@ edit_solutionf(solution:Solution){
 getAllSolutions(): Solution[] {
     return this.omSolutions;
   }
+
+getAppAcidCompounds(): string[] {
+  return this.compounds_acidic;
+}
+
+getAppBasicCompounds(): string[] {
+  return this.compounds_basic;
+}
+
+getAppSaltCompounds(): string[] {
+  return this.compounds_salt;
+}
 
   // Add other methods as needed
 }

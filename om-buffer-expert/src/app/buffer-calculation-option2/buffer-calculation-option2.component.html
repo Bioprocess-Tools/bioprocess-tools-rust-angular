@@ -9,16 +9,16 @@
           <mat-label for="acidicCompound">Acidic Compound</mat-label>
           <mat-select id="acidicCompound" name="acidicCompound"
             ngDefaultControl
-            formControlName="acidicCompound" required>
+            formControlName="acidicCompound"    required>
             <mat-option *ngFor="let compound of acidCompounds"
-              [value]="compound" selected=compoundNames[0]>
+              [value]="compound" >
               {{ compound }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field class="option1-full-width_Left" appearance="fill">
           <mat-label>Basic Compound</mat-label>
-          <mat-select formControlName="basicCompound" required>
+          <mat-select formControlName="basicCompound"   required>
             <mat-option *ngFor="let compound of basicCompounds"
               [value]="compound">
               {{ compound }}
@@ -28,7 +28,7 @@
 
         <mat-form-field class="option1-full-width_Left" appearance="fill">
           <mat-label>Salt Compound</mat-label>
-          <mat-select formControlName="saltCompound">
+          <mat-select formControlName="saltCompound" >
             <mat-option *ngFor="let compound of saltCompounds"
               [value]="compound">
               {{ compound }}
@@ -42,14 +42,14 @@
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Total buffer conc. (M) </mat-label>
-          <input matInput type="number" formControlName="totalConcentration"
+          <input matInput type="number" formControlName="totalConcentration" placeholder="total conc. of buffer species (M)"
             required>
           <mat-hint>Ex: 40 </mat-hint>
         </mat-form-field>
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Salt Conc. (M) </mat-label>
-          <input matInput type="number" formControlName="saltConcentration">
+          <input matInput type="number" formControlName="saltConcentration" placeholder="salt concentration">
           <mat-hint> Ex: 0.1 </mat-hint>
         </mat-form-field>
 

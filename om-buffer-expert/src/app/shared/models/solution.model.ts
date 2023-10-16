@@ -14,6 +14,7 @@ export class Solution {
   pH: number;
   result_flag: {[key:string]: string};
   buffer_species: string;
+ 
 
   constructor(name: string) {
     this.name = name;

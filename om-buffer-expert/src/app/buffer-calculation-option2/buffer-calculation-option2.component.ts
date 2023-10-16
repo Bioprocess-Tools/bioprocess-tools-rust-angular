@@ -20,23 +20,24 @@ export class BufferCalculationOption2Component implements OnInit {
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
-  compoundNames: string[] = [];
-  public godSolution = new Solution("God solution");
-  public returnedSolution: Solution;
-  public acidicCompound;
-  public basicCompound;
-  public saltCompound;
+  //compoundNames: string[] = [];
+  public godSolution = new Solution("God solution"); //solution to hold the user input
+  public returnedSolution: Solution; //solution to hold the return from api
+
 
   constructor(
     private formBuilder: FormBuilder,
     public solutionService: SolutionService
-
-
-  ) { }
+  ) { 
+    this.acidCompounds = this.solutionService.getAppAcidCompounds();
+    console.log("God acid",this.acidCompounds)
+    this.basicCompounds = this.solutionService.getAppBasicCompounds();
+    this.saltCompounds = this.solutionService.getAppSaltCompounds();
+  }
 
   ngOnInit(): void {
 
-    this.loadCompoundNames()
+
 
     //this.solutionService.get_example_solution();
     this.solutionService.example_solution$.subscribe(
@@ -46,34 +47,16 @@ export class BufferCalculationOption2Component implements OnInit {
         console.log("God example solution in buffer calc 2", this.example_solution);
       }
     );
-    this.acidCompounds = this.solutionService.acidCompounds
-    this.basicCompounds = this.solutionService.basicCompounds
-    this.saltCompounds = this.solutionService.saltCompounds
-    console.log("God: in acid", this.acidCompounds)
-    console.log("God: in base", this.basicCompounds)
-    console.log("God: in salt", this.saltCompounds)
+
     this.initializeForm()
   }
 
-  loadCompoundNames() {
-    // Implement the logic to fetch compound names from the server
-    // and populate the compoundNames array
-    // For example:
-    this.solutionService.get_compound_names().subscribe(
-      (compoundNames: string[]) => {
-        this.compoundNames = compoundNames;
-      },
-      (error: any) => {
-        console.error('Error fetching compounds:', error);
-      }
-    );
-  }
 
   initializeForm() {
     this.bufferForm = this.formBuilder.group({
-      acidicCompound: ['Sodium Phosphate Monobasic', Validators.required],
-      basicCompound: ['Sodium Phosphate Dibasic', Validators.required],
-      saltCompound: ['Sodium Chloride'],
+      acidicCompound: [this.acidCompounds[12], Validators.required],
+      basicCompound: [this.basicCompounds[12], Validators.required],
+      saltCompound: this.saltCompounds[2],
       totalConcentration: [.04, [Validators.required, Validators.min(0), Validators.max(.4)]],
       target_pH: [7.00, [Validators.required, Validators.min(3), Validators.max(10)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(2)]],
@@ -92,36 +75,16 @@ export class BufferCalculationOption2Component implements OnInit {
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;
-
     const totalConcentration = this.bufferForm.get('totalConcentration').value;
     const target_pH = this.bufferForm.get('target_pH').value;
     const saltCompoundConcentration = this.bufferForm.get('saltConcentration').value;
-
-    // Create Compound objects for the three compounds
-    this.acidicCompound = {
-      name: acidicCompoundName,
-      type: 'Acidic Compound',
-      concentration: 0
-    };
-
-    this.basicCompound = {
-      name: basicCompoundName,
-      type: 'Basic Compound',
-      concentration: 0
-    };
-
-    this.saltCompound = {
-      name: saltCompoundName,
-      type: 'Salt Compound',
-      concentration: saltCompoundConcentration
-    };
 
     // Create Solution object
     this.godSolution.name = "God";
     this.godSolution.target_buffer_concentration = totalConcentration;
     this.godSolution.compound_concentrations[acidicCompoundName] = 0;
     this.godSolution.compound_concentrations[basicCompoundName] = 0;
-    if (saltCompoundName != "") {
+    if (saltCompoundName != "None") {
       this.godSolution.compound_concentrations[saltCompoundName] = saltCompoundConcentration;
     }
 
@@ -138,7 +101,8 @@ export class BufferCalculationOption2Component implements OnInit {
 
     // Reset the form
     this.calculatepH()
-    this.bufferForm.reset();
+    //this.bufferForm.reset();
+  
 
   }
 
