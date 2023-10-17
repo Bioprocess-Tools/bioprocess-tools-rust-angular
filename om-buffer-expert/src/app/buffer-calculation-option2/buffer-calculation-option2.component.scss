@@ -104,7 +104,7 @@
 }
 
 .red_flag {
-  color:#ba4069;
+  color:red;
 }
 .avatar {
   position: absolute;
@@ -119,6 +119,14 @@
   line-height: 50px;
   text-align: center;
 }
+
+.message-card{
+  margin:10px;
+  padding: 20px;
+  width: 97%;
+  align-self: center;
+}
+
 
 .col1 {
   justify-self: left;

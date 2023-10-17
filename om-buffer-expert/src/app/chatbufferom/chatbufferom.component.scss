@@ -18,7 +18,9 @@
 .instruct {
   font-size:small;
 }
-
+.red_flag {
+  color:red;
+}
 
 .form-card{
   //background-color:rgb(170, 15, 15);
@@ -29,6 +31,13 @@ box-shadow: none;
 
 }
 .formf {display:flex;flex-direction: column;
+}
+
+.message-card{
+  margin:10px;
+  padding: 20px;
+  width: 97%;
+  align-self: center;
 }
 
 .input-field {

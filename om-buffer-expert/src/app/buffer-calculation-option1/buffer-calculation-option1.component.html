@@ -86,12 +86,14 @@
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
     </mat-card-actions> -->
-      <h2 class="pH"> pH : {{returnedSolution.pH | number: '1.3-3'}}</h2>
-      <p class="red_flag" *ngIf="returnedSolution.result_flag['flag'] !== 'green'">
-        Status: {{returnedSolution.result_flag['flag']}}
-      </p>
-      <p class="red_flag" *ngIf="returnedSolution.result_flag['comment'] && returnedSolution.result_flag['comment'].length">
-        Comment: {{ returnedSolution.result_flag['comment'] }}
+    <h2 class="pH"> pH : {{returnedSolution.pH | number:
+      '1.3-3'}}</h2>
+    </mat-card>
+    <mat-card class="message-card">
+     <p class="red_flag" *ngIf="returnedSolution.result_flag['flag'] !== 'green'">  <span class="material-icons">
+      error
+      </span>
+      {{ returnedSolution.result_flag['comment'] }}
       </p>
     </mat-card>
 

@@ -94,7 +94,9 @@
 }
 
 
- 
+.red_flag {
+  color:red;
+}
 
 
 .pH {
@@ -114,6 +116,13 @@
   font-size: 24px;
   line-height: 50px;
   text-align: center;
+}
+
+.message-card{
+  margin:10px;
+  padding: 20px;
+  width: 97%;
+  align-self: center;
 }
 
 @media (max-width: 1500px) {
