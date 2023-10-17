@@ -7,7 +7,7 @@ export class Compound {
   pos: number;
   stoichiometry: number[];
   ions: Ion[];
-  buffer_ion: Ion;
+  buffer_ion_name: string;
   type: string;
 
   constructor(
@@ -23,7 +23,7 @@ export class Compound {
     this.pos = -1;
     this.stoichiometry = stoichiometry;
     this.ions = this.addIons(ion_names);
-    this.buffer_ion = this.getBufferIon();
+    this.buffer_ion_name;
     this.type = type;
   }
 

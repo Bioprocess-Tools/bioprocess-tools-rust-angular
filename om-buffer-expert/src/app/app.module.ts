@@ -21,7 +21,7 @@ import { SolutionTableComponent } from './solution-table/solution-table.componen
 import { ChatbufferomComponent } from './chatbufferom/chatbufferom.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 import {MatTableModule} from '@angular/material/table';
 import {BufferCalculationOption2Component} from './buffer-calculation-option2/buffer-calculation-option2.component';
 import { NavComponent } from './nav/nav.component';
@@ -70,7 +70,17 @@ import {MatSliderModule} from '@angular/material/slider';
  
     
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        subscriptSizing: 'dynamic',  // This means space for hints/errors will only be reserved when needed.
+        // ... you can set other default options here
+      }
+    }
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

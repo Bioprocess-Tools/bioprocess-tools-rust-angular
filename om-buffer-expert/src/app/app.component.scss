@@ -17,11 +17,13 @@
     "nav content side"
     "footer footer footer";
   height: 100vh;
-  //background-color: $primary-color;
+ // background-color: $primary-color;
+ //background-color: yellow;
 }
 
 @media (max-width: 1800px) {
   .container {
+      display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
@@ -50,7 +52,44 @@
   background-color: $border-color;
 }
 
+@media (max-width: 600px) {
+  /* styles for screens less than 600px wide */
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "content"
+      "side"
+      "footer";
+    // grid-template-rows: auto 60px 1fr 70px auto;
+    grid-template-rows: auto minmax(60px, auto) 1fr minmax(70px, auto) auto;
+    //height:150vh;
+   // background-color:red;
+  }
 
+  
+.intro-text-main {
+  //padding: 40px;
+  background-color: whitesmoke;
+  
+  }
+  
+.small-title {
+    font-size: small;
+    padding:0px;
+  }
+  
+.intro-text {
+    font-size: smaller;
+   // padding: 10px;
+  }
+  
+.small-content {
+    padding:0 8px;
+    //margin:3px;
+  }
+}
 .calculator {
  // display:grid;
   overflow-y: auto;
@@ -89,7 +128,8 @@ padding:10px;
 }
 .intro {
   //margin: 10px;
- 
+  font-family: "Roboto";
+  font-style: normal;
   width:99.5%;
   //padding-right: 40px;
   background-color: whitesmoke;
@@ -97,8 +137,31 @@ padding:10px;
   align-self:center;
 }
 
-.list-container{
+
+.intro-text-main {
+//padding: 40px;
+background-color: whitesmoke;
+
+}
+
+.small-title {
+  //font-size: auto;
+  padding:0px;
+}
+
+.intro-text {
+  //font-size: auto;
+  padding: 0 16px;
+}
+
+.small-content {
+  padding:0 8px;
+  //margin:3px;
+}
+.list-container {
   padding-right: 40px;
+  font-family: "Roboto";
+  font-style: normal;
 }
 
 a {
@@ -113,7 +176,7 @@ a {
 }
 
 .example-stretched-tabs {
-  width: 98%;
+  width: 95%;
   margin: 5px;
 
   //background-color: 'accent';
@@ -124,7 +187,7 @@ a {
 
 .h4new {
   padding-top:15px;
-  padding-bottom:15px;
+  padding-bottom:10px;
   text-align: center;
   font-weight: 600;
   font-size: 24px;
@@ -158,7 +221,7 @@ a {
     grid-area: content;
     padding-top: 0.5vh;
     padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    padding-right: .5vw;
     padding-bottom:0.5vh;
     gap: .5vh;
     gap: .5vh;
@@ -196,7 +259,7 @@ a {
   .example-stretched-tabs {
     margin: 5px;
 
-    width:96%;
+    width:95%;
   }
 
   .intro {

@@ -44,19 +44,19 @@
           <mat-label>Total buffer conc. (M) </mat-label>
           <input matInput type="number" formControlName="totalConcentration" placeholder="total conc. of buffer species (M)"
             required>
-          <mat-hint>Ex: 40 </mat-hint>
+        
         </mat-form-field>
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Salt Conc. (M) </mat-label>
           <input matInput type="number" formControlName="saltConcentration" placeholder="salt concentration">
-          <mat-hint> Ex: 0.1 </mat-hint>
+        
         </mat-form-field>
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Target pH</mat-label>
           <input matInput type="number" formControlName="target_pH" required>
-          <mat-hint>pH</mat-hint>
+       
         </mat-form-field>
 
       </div>
@@ -76,7 +76,7 @@
       <mat-divider></mat-divider>
       <mat-card-content
         *ngFor="let compound of returnedSolution.compound_concentrations | keyvalue">
-        <h3>{{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</h3>
+        <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</p>
         <mat-divider></mat-divider> 
       </mat-card-content>
       <mat-divider></mat-divider>
@@ -85,6 +85,12 @@
     <button mat-button>SHARE</button>
   </mat-card-actions> -->
       <h2 class="pH"> pH : {{returnedSolution.pH | number: '1.3-3'}}</h2>
+      <p class="red_flag" *ngIf="returnedSolution.result_flag['flag'] !== 'green'">
+        Status: {{returnedSolution.result_flag['flag']}}
+      </p>
+      <p class="red_flag" *ngIf="returnedSolution.result_flag['comment'] && returnedSolution.result_flag['comment'].length">
+        Comment: {{ returnedSolution.result_flag['comment'] }}
+      </p>
     </mat-card>
 
     <ng-template #loadthis>

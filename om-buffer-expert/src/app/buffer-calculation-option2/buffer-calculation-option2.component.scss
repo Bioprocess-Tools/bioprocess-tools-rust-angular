@@ -99,7 +99,13 @@
   margin-bottom: 2px;
 }
 
+.less-space{
+  margin-bottom:1px;
+}
 
+.red_flag {
+  color:#ba4069;
+}
 .avatar {
   position: absolute;
   top: 10px;
@@ -145,6 +151,13 @@
     padding: 5px;
     align-items:center;
     justify-items: center;
+  }
+
+  .wide-button {
+    grid-column: span 2;
+    width: 90%;
+    margin-left: 5vw;
+    //background-color: $background-green;
   }
 
 }

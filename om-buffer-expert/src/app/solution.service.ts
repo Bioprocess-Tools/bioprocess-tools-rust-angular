@@ -20,6 +20,10 @@ export class SolutionService {
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
   edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
 
+
+  private solutionSource = new BehaviorSubject<Solution | null>(null);
+  currentSolution = this.solutionSource.asObservable();
+
   compoundNames: string[] = [];
   ion_names:string[]=[];
   compoundFunDict: { [name: string]: string } = {};
@@ -49,6 +53,13 @@ export class SolutionService {
     this.get_example_solution();
     this.populate_compounds();
   }
+
+  changeSolution(solution: Solution) {
+    this.solutionSource.next(solution);
+  }
+
+
+
 
   api_get_compounds(): Observable<{ [name: string]: string }> {
     return this.http.get<{ [name: string]: string }>(this.apiUrl+ '/compound-fun-dict')

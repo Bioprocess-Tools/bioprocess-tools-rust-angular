@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../solution.service';
 import { Compound } from '../shared/models/compound.model';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
   templateUrl: './buffer-calculation-option1.component.html',
   styleUrls: ['./buffer-calculation-option1.component.scss']
 })
-export class BufferCalculationOption1Component implements OnInit {
+export class BufferCalculationOption1Component implements OnInit, OnDestroy {
+  solutionSubscription?: Subscription;
   bufferForm: FormGroup | undefined;
 
   acidCompounds: string[] = [];
@@ -49,15 +50,16 @@ this.acidCompounds = this.solutionService.getAppAcidCompounds();
 this.basicCompounds = this.solutionService.getAppBasicCompounds();
 this.saltCompounds = this.solutionService.getAppSaltCompounds();
 
-this.initializeForm()
-this.solutionService.example_solution$.subscribe(
+
+this.solutionSubscription = this.solutionService.example_solution$.subscribe(
   example_solution => {
     this.example_solution = example_solution;
     this.returnedSolution = example_solution;
     console.log("God example solution in buffer calc 1", this.example_solution);
   }
+  
 );
-    
+this.initializeForm()
   }
 
   changeForm(solution:Solution) {
@@ -86,16 +88,49 @@ this.solutionService.example_solution$.subscribe(
     }
 
   ngOnInit() {
+    this.initializeForm();
 
+    this.solutionSubscription = this.solutionService.currentSolution.subscribe(solution => {
+      if (solution) {
+        // Assuming you have a method to handle the form population
+        this.populateForm(solution);
+      }
+    });
   }
 
+  populateForm(solution: Solution) {
+    let acidname = solution.non_salt_compounds[0].name;
+    let basename = solution.non_salt_compounds[1].name;
+    console.log("God in change", solution)
+    let saltname:string=null;
+    let saltconc =0;
+    
+    if(solution.compounds.length=3) {
+      console.log("God here in salt", solution.compounds[2].name);
+      saltname = solution.compounds[2].name;
+      saltconc = solution.compound_concentrations[saltname];
+      this.bufferForm.controls['saltCompound'].setValue(saltname);
+      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+    }
+    let acidconc = solution.compound_concentrations[acidname].toPrecision(4);
+    let baseconc = solution.compound_concentrations[basename].toPrecision(4);
+    this.bufferForm.controls['acidicCompound'].setValue(acidname);
+    this.bufferForm.controls['basicCompound'].setValue(basename);
+    this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
+    this.bufferForm.controls['basicConcentration'].setValue (baseconc);
+  }
 
+  ngOnDestroy(): void {
+    if (this.solutionSubscription) {
+      this.solutionSubscription.unsubscribe();
+    }
+  }
 
   initializeForm() {
     this.bufferForm = this.formBuilder.group({
       acidicCompound: [this.acidCompounds[12], Validators.required],
       basicCompound: [this.basicCompounds[12], Validators.required],
-      saltCompound: this.saltCompounds[1],
+      saltCompound: this.saltCompounds[2],
       acidicConcentration: [.019, [Validators.required, Validators.min(0), Validators.max(.4)]],
       basicConcentration: [.021, [Validators.required, Validators.min(0), Validators.max(.4)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],

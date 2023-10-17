@@ -32,6 +32,13 @@ editNewForm (solution:Solution){
   this.solutionService.edit_solutionf(solution);
   console.log("God edit" , solution);
 }
+
+editSolution(solution: Solution) {
+  // Assuming 'solution' is the data you want to pass to the forms
+  this.solutionService.changeSolution(solution);
+}
+
+
 getIonCharges(highestCharge:number):number[] {
   let charges = [];
   for (let i = highestCharge; i>highestCharge-4;i--) {charges.push(i);}
