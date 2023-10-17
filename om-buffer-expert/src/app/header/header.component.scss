@@ -58,6 +58,15 @@ flex-direction: row;
 
   font-family:'Roboto';
   font-weight: 600;
+  font-size: larger;
   color:whitesmoke;
+  align-self:flex-start;
+}
+.buttons
+{align-self:flex-end;}
+
+.button-row {
+  flex-direction: column;
+  
 }
   
