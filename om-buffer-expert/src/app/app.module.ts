@@ -65,8 +65,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatMenuModule,
     MatTableModule,
     MatSliderModule,
-    MatTooltipModule
-
+    MatTooltipModule,
+    MatSidenavModule
  
     
   ],

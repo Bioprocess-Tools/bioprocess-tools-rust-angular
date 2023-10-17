@@ -16,6 +16,7 @@
     
     font-size: 14px;
     grid-area: header;
+   
     //text-align: center;
 
   } 
@@ -46,27 +47,34 @@ flex-direction: row;
 
 }
 
-.example-stretched-tabs {
-  max-width: 800px;
+.menu-spacer {
+  flex: 1 1 auto;
 }
 
-.toolbar-om {
+
+.header-card {
+
   background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
+ // height:150px;
+  width:100%;
+  box-shadow: none;
+  max-height: 60px;
 }
 .mat-headline-4 {
   margin-bottom: 2px;
-
+  margin-left:10px;
   font-family:'Roboto';
   font-weight: 600;
   font-size: larger;
   color:whitesmoke;
-  align-self:flex-start;
+  
 }
 .buttons
-{align-self:flex-end;}
+{align-self:flex-end;color:whitesmoke;margin-bottom:5px;}
 
 .button-row {
-  flex-direction: column;
+  flex-direction: row;
+  background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
   
 }
   

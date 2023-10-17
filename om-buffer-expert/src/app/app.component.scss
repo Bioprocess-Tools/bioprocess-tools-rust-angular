@@ -32,7 +32,7 @@
       "side"
       "footer";
     // grid-template-rows: auto 60px 1fr 70px auto;
-    grid-template-rows: auto minmax(60px, auto) 1fr minmax(70px, auto) auto;
+    grid-template-rows: auto minmax(80px, auto) 1fr minmax(70px, auto) auto;
     //height:150vh;
   }
 }
@@ -142,6 +142,7 @@ padding:10px;
 //padding: 40px;
 background-color: whitesmoke;
 
+
 }
 
 .small-title {
@@ -156,6 +157,7 @@ background-color: whitesmoke;
 
 .small-content {
   padding:0 8px;
+  color:slategray;
   //margin:3px;
 }
 .list-container {
