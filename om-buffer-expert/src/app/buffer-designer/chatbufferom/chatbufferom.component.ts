@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,ValidatorFn,AbstractControl, FormGroup } from '@angular/forms';
-import { ApiService } from '../api-service.service';
-import { Solution } from '../shared/models/solution.model';
-import { SolutionService } from '../solution.service';
+import { ApiService } from '../../api-service.service';
+import { Solution } from '../../shared/models/solution.model';
+import { SolutionService } from '../../solution.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import {Router} from '@angular/router';
 

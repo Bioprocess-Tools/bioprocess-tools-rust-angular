@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SolutionService } from '../solution.service';
-import { Compound } from '../shared/models/compound.model';
+import { SolutionService } from '../../solution.service';
+import { Compound } from '../../shared/models/compound.model';
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Solution } from '../shared/models/solution.model';
+import { Solution } from '../../shared/models/solution.model';
 
 
 @Component({

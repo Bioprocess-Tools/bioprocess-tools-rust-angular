@@ -1,0 +1,80 @@
+<p>buffer-designer works!</p>
+<mat-card class="content"  >
+
+    <mat-card class="calculator mat-elevation-z4">
+
+
+      <mat-card class="intro">
+          <h1 class="mat-headline-5"> BUFFER DESIGNER</h1>
+        <mat-card class="intro-text-main">
+
+          <mat-card class="intro-text">
+            <mat-card-title class="small-title">Generative AI Input : Buffer Calculator </mat-card-title>
+            <mat-card-content class="small-content">You can now get receipe for your buffer by providing a natural
+              language input. Simply
+              enter the buffer name as you see in the hint like
+              "40mM Phosphate buffer, 0.1M Sodium Chloride, pH 7.0"
+              and the ChatGPT will do the magic, along with the powerful
+              calculation engine to generate a recipe.</mat-card-content>
+            </mat-card>
+       
+            <mat-card class="intro-text">
+              <mat-card-title class="small-title">Buffer Calculator with target concentration</mat-card-title>
+              <mat-card-content class="small-content">You can also provide input the classic way. The total
+              concentration value you
+              provide will be taken as the first compound's concentration, if
+              the buffering species is not present
+              in both the compounds.</mat-card-content>
+            </mat-card>
+            <mat-card class="intro-text">
+              <mat-card-title class="small-title">pH-Calculator</mat-card-title>
+              <mat-card-content class="small-content">
+              Of course you can also calculate the pH of a solution by
+              providing the compounds and their concentrations.
+            </mat-card-content>
+            </mat-card>
+         
+          </mat-card>
+        <mat-divider class="thick"></mat-divider>
+      </mat-card>
+      <mat-card class="navigate">
+        <nav mat-tab-nav-bar 
+          mat-stretch-tabs color="accent"
+          class="example-stretched-tabs" >
+          <a mat-tab-link
+            [routerLink]="['/buffer-designer/GenAI Buffer Designer']"
+            routerLinkActive
+            #firstTab="routerLinkActive"
+            [active]="firstTab.isActive">
+            GenAI Buffer Calculator
+          </a>
+          <a mat-tab-link
+            [routerLink]="['/buffer-designer/Classic Buffer Designer']"
+            routerLinkActive
+            #secondTab="routerLinkActive"
+            [active]="secondTab.isActive">
+            Classic Calculator
+          </a>
+          <a mat-tab-link
+            [routerLink]="['pH Calculator']"
+            routerLinkActive
+            #thirdTab="routerLinkActive"
+            [active]="thirdTab.isActive">
+            pH Calculator
+          </a>
+        </nav>
+
+            <router-outlet></router-outlet> 
+      </mat-card>
+    </mat-card>
+
+    <mat-card class="summary">
+      <mat-card mat-elevation-z8 class="browser">
+        <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1>
+        <app-solution-table></app-solution-table>
+
+      </mat-card>
+
+    </mat-card>
+
+  </mat-card>

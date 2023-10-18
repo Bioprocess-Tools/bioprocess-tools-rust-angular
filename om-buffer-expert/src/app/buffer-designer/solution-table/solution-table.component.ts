@@ -1,8 +1,8 @@
 import { Component,OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { SolutionService } from '../solution.service';
-import { Solution } from '../shared/models/solution.model';
-import { Compound } from '../shared/models/compound.model';
-import { ApiService } from '../api-service.service';
+import { SolutionService } from '../../solution.service';
+import { Solution } from '../../shared/models/solution.model';
+import { Compound } from '../../shared/models/compound.model';
+import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-solution-table',
