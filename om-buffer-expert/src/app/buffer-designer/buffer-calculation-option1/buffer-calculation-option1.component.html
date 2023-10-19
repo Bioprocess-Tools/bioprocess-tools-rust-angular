@@ -68,9 +68,9 @@
 
   <mat-card class="summary">
     <mat-divider></mat-divider>
-    <mat-card class="solution-card" *ngIf="returnedSolution; else loadthis">
+    <mat-card class="solution-card" *ngIf="returnedSolution;">
       <mat-card-header>
-        <div class="avatar">{{avatarLetter}}</div>
+        <!-- <div class="avatar">{{avatarLetter}}</div> -->
         <mat-card-title>{{returnedSolution.name}}</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
@@ -95,34 +95,15 @@
       </span>
       {{ returnedSolution.result_flag['comment'] }}
       </p>
+
+      <p class="green_flag" *ngIf="returnedSolution.result_flag['flag'] == 'green'">  <span class="material-icons">
+        check_circle
+        </span>
+        Done!
+        </p>
     </mat-card>
 
-    <ng-template #loadthis>
-      <mat-card class="example-card-holder">
-<!--         <mat-card-header>
-          <div class="avatar">{{avatarLetter}}</div>
-          <mat-card-title>Your buffer name</mat-card-title>
-          <mat-divider></mat-divider>
-          <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
-          <mat-divider></mat-divider>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-content>
-          <p>Acid Compound : Compound Concentration : ...M</p>
-          <mat-divider></mat-divider>
-          <p>Base Compound : Compound Concentration : ...M</p>
-          <mat-divider></mat-divider>
-          <p>Salt Compound: Compound Concentration : ...M</p>
-          <mat-divider></mat-divider>
-        </mat-card-content>
-        <mat-divider></mat-divider> -->
-        <!--     <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions> -->
-        <!-- <h1 class="pH"> pH : 7.00 </h1> -->
-      </mat-card>
-    </ng-template>
+
   </mat-card>
   </mat-card>
 

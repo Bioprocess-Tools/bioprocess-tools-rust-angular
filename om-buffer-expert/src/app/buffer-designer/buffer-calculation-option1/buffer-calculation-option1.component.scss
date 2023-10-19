@@ -3,7 +3,7 @@
 .main-card-container {
      display: grid;
      //margin-top: 15px;
-     grid-template-rows: 1fr 1.2fr;
+     grid-template-rows: .8fr 1fr;
      grid-template-areas:
      "calculator" 
      "summary";
@@ -23,6 +23,10 @@
 
     .red_flag {
       color:#ba4069;
+    }
+
+    .green_flag {
+      color:rgb(18, 121, 7);
     }
 
     .calculator {
@@ -98,11 +102,12 @@
 .red_flag {
   color:red;
 }
-
+.green_flag {
+  color:rgb(18, 121, 7);}
 
 .pH {
   align-self: center;
-  margin-bottom: 2px;
+ padding-bottom:5px;
 
 }
 .avatar {

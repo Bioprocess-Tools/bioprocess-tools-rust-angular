@@ -68,7 +68,7 @@
     <mat-divider></mat-divider>
     <mat-card class="solution-card" *ngIf="returnedSolution; else loadthis">
       <mat-card-header>
-        <div class="avatar">{{avatarLetter}}</div>
+        <!-- <div class="avatar">{{avatarLetter}}</div> -->
         <mat-card-title>{{returnedSolution.name}}</mat-card-title>
        <mat-divider></mat-divider>
         <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
@@ -93,6 +93,12 @@
     </span>
     {{ returnedSolution.result_flag['comment'] }}
     </p>
+    <p class="green_flag" *ngIf="returnedSolution.result_flag['flag'] == 'green'">  <span class="material-icons">
+      check_circle
+      </span>
+      Done!
+      </p>
+  
   </mat-card>
 
     <ng-template #loadthis>

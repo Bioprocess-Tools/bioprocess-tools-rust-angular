@@ -1,7 +1,7 @@
 .hero-container {
 display:flex;
 flex-direction: column;
-background-image: url("/assets/images/desktopomsmall.jpg");
+background-image: url("/assets/images/AppBground.png");
 background-size: cover;
 height:95vh;
 justify-content: center; 
@@ -21,27 +21,27 @@ text-align: center;
   }
 
   .main-text{
-    color: whitesmoke;
-     font-size: 60px; 
+    color: rgb(199, 190, 190);
+     font-size: 50px; 
      margin-bottom: 8px;  
      margin-top: 0.3vh;
 
   }
   .middle-text{
-    color: whitesmoke;
+    color: rgb(199, 190, 190);
     margin-top: 100px;
     margin-right: 50px; 
     margin-left: 50px;
-    font-size: 50px; 
+    font-size: 30px; 
     margin-bottom: 16px;
   }
 
   .end-text {
-    color: whitesmoke;
+    color: rgb(199, 190, 190);
     margin-top: 100px;
     margin-right: 50px; 
     margin-left: 50px;
-    font-size: 50px; 
+    font-size: 25px; 
     margin-bottom: 80px;
 
   }
@@ -59,7 +59,7 @@ text-align: center;
   /* For tablets */
 @media (max-width: 768px) {
     .hero-container {
-        background-image: url("/assets/images/tabletomsmall.jpg");
+        background-image: url("/assets/images/AppBground.png");
         background-size: cover;
         height:91vh;
         width:100%;
@@ -69,21 +69,21 @@ text-align: center;
   /* For mobile phones */
   @media (max-width: 480px) {
     .hero-container {
-        background-image: url("/assets/images/phoneomsmall.jpg");
+        background-image: url("/assets/images/AppBground.png");
         background-size: cover;
         width:100%;
        // height:100vh;
     }
 
     .main-text{
-        color: whitesmoke;
-         font-size: 40px; 
+      color: rgb(199, 190, 190);
+         font-size: 30px; 
          margin-bottom: 8px;  
          margin-top: 0.3vh;
     
       }
       .middle-text{
-        color: whitesmoke;
+        color: rgb(199, 190, 190);
         margin-top: 30px;
         margin-right: 50px; 
         margin-left: 50px;
@@ -92,7 +92,7 @@ text-align: center;
       }
     
       .end-text {
-        color: whitesmoke;
+        color: rgb(199, 190, 190);
         margin-top: 30px;
         margin-right: 50px; 
         margin-left: 50px;
@@ -108,7 +108,7 @@ text-align: center;
          font-size: large;
         
         // background-color: #4CAF50; 
-         color: whitesmoke;
+        color: rgb(199, 190, 190);
     
       }
   }

@@ -93,7 +93,8 @@
 
 .pH {
   align-self: center;
-  margin-bottom: 2px;
+
+  padding-bottom:5px;
 }
 .comp-conc {
   margin-bottom: 2px;
@@ -105,6 +106,10 @@
 
 .red_flag {
   color:red;
+}
+
+.green_flag {
+  color:rgb(18, 121, 7);
 }
 .avatar {
   position: absolute;
