@@ -1,84 +1,72 @@
 @use '@angular/material' as mat;
 @import '../../../shared-styles.scss';
 
-
-
-/* .logo {
-    height: 40px;
-    margin-right: 16px;
-  }
-  
   .spacer {
     flex: 1 1 auto;
-  } */
+  }
+  
+  .toolbar-items {
+    margin-right: 15px;
+  }
 
-   :host {
+  .men_button {
+    font-size: x-large;
     
-    font-size: 14px;
-    grid-area: header;
-   
-    //text-align: center;
-
-  } 
-
-
-  .logo {
-    height: 0px;
-    margin-right: auto;
   }
-  
-  .spacer {
-    flex: 1 1 auto;
+
+  .header-toolbar {
+    //margin:20px;
   }
-  
-  .app-name {
-    //margin-right: auto;
-   
-  
+
+  .toolbar-row {
+    margin:15px;
   }
-  
   .button-row {
 display: flex;
 flex-direction: row;
 
   }
-.buttons {
-  justify-content: center;
-
-}
 
 .menu-spacer {
   flex: 1 1 auto;
 }
 
-
 .header-card {
-
-  background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
+  //background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
  // height:150px;
   width:100%;
   box-shadow: none;
-  max-height: 60px;
+  height: 100px;
 }
 .mat-headline-4 {
   margin-bottom: 2px;
   margin-left:10px;
   font-family:'Roboto';
   font-weight: 600;
-  font-size: larger;
+  font-size: xx-large;
   color:whitesmoke;
   
 }
-.buttons
-{align-self:flex-end;color:whitesmoke;margin-bottom:5px;}
 
-.button-row {
-  flex-direction: row;
-  background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
-  
+@media (max-width: 1200px) {
+  .toolbar-items {display:none;}
+
 }
+
   
 @media (max-width: 480px) {
 .toolbar-items {display:none;}
-
+.header-card {
+  background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
+ // height:150px;
+  width:100%;
+  box-shadow: none;
+  height: 60px;
+}
+.toolbar-row {
+  margin:0px;
+}
+.mat-headline-4 {
+  font-size:large;
+}
 }

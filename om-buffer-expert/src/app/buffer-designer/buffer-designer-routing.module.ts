@@ -13,7 +13,7 @@ const bufferDesignerRoutes: Routes = [
     children: [
       { 
         path: '',  // empty path for default route
-        redirectTo: 'classic-buffer-designer',  // redirect to the GenAI component path
+        redirectTo: 'genai-buffer-designer',  // redirect to the GenAI component path
         pathMatch: 'full'  
       },  
       { 
@@ -22,11 +22,11 @@ const bufferDesignerRoutes: Routes = [
       },
       { 
         path: 'classic-buffer-designer', 
-        component: BufferCalculationOption1Component 
+        component: BufferCalculationOption2Component 
       },
       { 
         path: 'ph-calculator', 
-        component: BufferCalculationOption2Component 
+        component: BufferCalculationOption1Component 
       }
     ]
   }
