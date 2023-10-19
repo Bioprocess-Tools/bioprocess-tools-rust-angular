@@ -71,7 +71,43 @@ text-align: center;
     .hero-container {
         background-image: url("/assets/images/phoneomsmall.jpg");
         background-size: cover;
-        width:99%;
-        height:95vh;
+        width:87%;
+        height:180vh;
     }
+
+    .main-text{
+        color: whitesmoke;
+         font-size: 40px; 
+         margin-bottom: 8px;  
+         margin-top: 0.3vh;
+    
+      }
+      .middle-text{
+        color: whitesmoke;
+        margin-top: 30px;
+        margin-right: 50px; 
+        margin-left: 50px;
+        font-size: 20px; 
+        margin-bottom: 16px;
+      }
+    
+      .end-text {
+        color: whitesmoke;
+        margin-top: 30px;
+        margin-right: 50px; 
+        margin-left: 50px;
+        font-size: 20px; 
+        margin-bottom: 80px;
+    
+      }
+    
+      .action-button {
+        width: 300px;
+        height: 100px;
+        padding: 10px 20px;
+         font-size: xx-large; 
+         background-color: #4CAF50; 
+         color: whitesmoke;
+    
+      }
   }

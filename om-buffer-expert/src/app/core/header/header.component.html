@@ -14,7 +14,7 @@
     </button>
     <h1>omExpert</h1>
     <span class="menu-spacer"></span>
-    <div>
+    <div class="toolbar-items">
       <a mat-button  class="men_button" routerLink="/home" routerLinkActive="active-link">Home</a>
       <a mat-button  class="men_button" routerLink="/buffer-designer" routerLinkActive="active-link">Buffer Designer</a>
       <a mat-button  class="men_button" routerLink="/about-us" routerLinkActive="active-link">About Us</a>
@@ -26,17 +26,17 @@
 
 </mat-toolbar>
 
-<!-- <mat-menu #navigationMenu="matMenu">
-  <a mat-menu-item routerLink="/GenAI Buffer Designer">Home</a>
-  <a mat-menu-item routerLink="/Classic Buffer Designer">About Us</a>
-  <a mat-menu-item routerLink="/pH Calculator">Buffer Designer</a>
-   Add more links as needed    </mat-menu> -->
-
-
 <mat-menu #navigationMenu="matMenu">
-  <button mat-menu-item>Item 1</button>
-  <button mat-menu-item>Item 2</button>
-</mat-menu>
+  <a mat-menu-item routerLink="/home">Home</a>
+  <a mat-menu-item routerLink="/buffer-designer">Buffer Designer</a>
+  <a mat-menu-item routerLink="/about-us">About us</a>
+  <a mat-menu-item routerLink="/contact-us">Contact us</a>
+  <a mat-menu-item routerLink="/feedback">Feedback</a>
+  <a mat-menu-item routerLink="/user-guide">User guide</a>
+  </mat-menu>
+
+
+
 
 
 
