@@ -5,7 +5,32 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { UserGuideComponent } from './user-guide/user-guide.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+
+
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
+import {MatCardModule} from '@angular/material/card';
+import {MatSelectModule} from '@angular/material/select';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
+import {MatTableModule} from '@angular/material/table';
+
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatSliderModule} from '@angular/material/slider';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -17,7 +42,36 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     ContactUsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatCardModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatMenuModule,
+    MatTableModule,
+    MatSliderModule,
+    MatTooltipModule,
+    MatSidenavModule,
+    RouterModule
+  ],
+  exports: [
+    HomeComponent,
+    AboutUsComponent,
+    FeedbackComponent,
+    UserGuideComponent,
+    ContactUsComponent
+    // other components you want to use in other modules...
   ]
 })
 export class StaticPagesModule { }

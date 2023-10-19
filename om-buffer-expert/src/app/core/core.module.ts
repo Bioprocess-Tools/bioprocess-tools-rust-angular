@@ -33,6 +33,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
   declarations: [
     HeaderComponent,

@@ -20,13 +20,14 @@ import { BufferDesignerComponent } from './buffer-designer/buffer-designer.compo
 const routes: Routes = [
   // ...existing routes...
   { path: '', component: HomeComponent },  // if '' should point to the HomeComponent
+  { path: 'home', component: HomeComponent },
   { path: 'buffer-designer', component: BufferDesignerComponent },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'feedback', component: FeedbackComponent },
   { path: 'user-guide', component: UserGuideComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { 
-    path: 'designer', 
+    path: 'buffer-designer', 
     loadChildren: () => import('./buffer-designer/buffer-designer.module').then(m => m.BufferDesignerModule) 
   },
   // ... more routes ...

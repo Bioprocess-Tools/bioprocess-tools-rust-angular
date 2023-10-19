@@ -20,7 +20,11 @@ export class SolutionTableComponent implements OnInit {
 constructor(
   private solutionService: SolutionService, 
   private omRoute:Router,
-  private apiService:ApiService) {}
+  private apiService:ApiService) {
+    this.solutions = this.solutionService.getAllSolutions();
+    this.solution = this.solutions[this.solutions.length-1];
+
+  }
 
 viewDetails(solution:Solution) {
   this.solution = solution;

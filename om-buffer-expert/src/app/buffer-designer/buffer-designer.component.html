@@ -1,6 +1,5 @@
-<p>buffer-designer works!</p>
+<mat-card class="main">
 <mat-card class="content"  >
-
     <mat-card class="calculator mat-elevation-z4">
 
 
@@ -42,29 +41,29 @@
           mat-stretch-tabs color="accent"
           class="example-stretched-tabs" >
           <a mat-tab-link
-            [routerLink]="['/buffer-designer/GenAI Buffer Designer']"
+            [routerLink]="['genai-buffer-designer']"
             routerLinkActive
             #firstTab="routerLinkActive"
             [active]="firstTab.isActive">
             GenAI Buffer Calculator
           </a>
           <a mat-tab-link
-            [routerLink]="['/buffer-designer/Classic Buffer Designer']"
+            [routerLink]="['classic-buffer-designer']"
             routerLinkActive
             #secondTab="routerLinkActive"
             [active]="secondTab.isActive">
             Classic Calculator
           </a>
           <a mat-tab-link
-            [routerLink]="['pH Calculator']"
+            [routerLink]="['ph-calculator']"
             routerLinkActive
             #thirdTab="routerLinkActive"
             [active]="thirdTab.isActive">
             pH Calculator
           </a>
         </nav>
-
-            <router-outlet></router-outlet> 
+          
+             <router-outlet></router-outlet> 
       </mat-card>
     </mat-card>
 
@@ -78,3 +77,4 @@
     </mat-card>
 
   </mat-card>
+</mat-card>

@@ -1,3 +1,7 @@
+@import '../../shared-styles.scss';
+.main {
+display:flex;
+}
 
 .content {
     grid-area: content;

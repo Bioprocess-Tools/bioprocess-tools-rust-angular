@@ -9,21 +9,34 @@
 
 <mat-toolbar color="accent">
   <mat-toolbar-row>
-    <button mat-icon-button>
-      <mat-icon >menu</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="navigationMenu">
+      <mat-icon>menu</mat-icon>  <!-- This icon is typical for menus, but you can change it. -->
     </button>
     <h1>omExpert</h1>
     <span class="menu-spacer"></span>
     <div>
-      <a mat-button  class="men_button" routerLink="/GenAI Buffer Designer" routerLinkActive="active-link">GenAI Buffer Designer</a>
-      <a mat-button  class="men_button" routerLink="/Classic Buffer Designer" routerLinkActive="active-link">Classic Buffer Designer</a>
-      <a mat-button  class="men_button" routerLink="/pH Calculator" routerLinkActive="active-link">pH Calculator</a>
+      <a mat-button  class="men_button" routerLink="/home" routerLinkActive="active-link">Home</a>
+      <a mat-button  class="men_button" routerLink="/buffer-designer" routerLinkActive="active-link">Buffer Designer</a>
+      <a mat-button  class="men_button" routerLink="/about-us" routerLinkActive="active-link">About Us</a>
+      <a mat-button  class="men_button" routerLink="/contact-us" routerLinkActive="active-link">Contact Us</a>
+      <a mat-button  class="men_button" routerLink="/feedback" routerLinkActive="active-link">Feedback</a>
+      <a mat-button  class="men_button" routerLink="/user-guide" routerLinkActive="active-link">User Guide</a>
     </div>
   </mat-toolbar-row>
 
 </mat-toolbar>
 
+<!-- <mat-menu #navigationMenu="matMenu">
+  <a mat-menu-item routerLink="/GenAI Buffer Designer">Home</a>
+  <a mat-menu-item routerLink="/Classic Buffer Designer">About Us</a>
+  <a mat-menu-item routerLink="/pH Calculator">Buffer Designer</a>
+   Add more links as needed    </mat-menu> -->
 
+
+<mat-menu #navigationMenu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
 
 
 
