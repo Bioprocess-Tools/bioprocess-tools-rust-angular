@@ -3,7 +3,7 @@
 .main-content-card {
   display:grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
   grid-template-areas: 
   "form-card"
   "solution-card";
@@ -22,6 +22,10 @@
   color:red;
 }
 
+.green_flag {
+  color:rgb(18, 121, 7);
+}
+
 .form-card{
   //background-color:rgb(170, 15, 15);
   display:flex;
@@ -34,8 +38,8 @@ box-shadow: none;
 }
 
 .message-card{
-  margin:10px;
-  padding: 20px;
+  margin:3px;
+  padding: 0px;
   width: 97%;
   align-self: center;
 }
@@ -43,7 +47,7 @@ box-shadow: none;
 .input-field {
   display:flex;
   width:98%;
-  margin-top:8px;
+  margin-top:6px;
  // margin-left:10px;
   align-self: center;
   
@@ -51,9 +55,9 @@ box-shadow: none;
 
 .wide-button{
   width:80%;
-  margin-top:30px;
+  margin-top:2px;
   margin-left:10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   //background-color: $my-viva-magenta;
   align-self: center;
 
@@ -68,7 +72,7 @@ box-shadow: none;
 }
 
 .solution-card{
-  margin-top:5vh;
+  margin-top:0px;
   position:relative;
  // background-color: rgb(160, 57, 57);
   width:97%;
@@ -90,7 +94,7 @@ mat-card img[mat-card-image] {
 
 .pH {
 align-self: center;
-margin-bottom: 2px;
+padding-bottom:5px;
 
 }
 .avatar {
@@ -108,7 +112,7 @@ margin-bottom: 2px;
 }
 
 
-@media (max-width: 1800px) {
+@media (max-width: 1500px) {
   .main-card-container {
     grid-template-columns: 1fr;
     /* stack vertically */

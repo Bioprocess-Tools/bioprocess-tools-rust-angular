@@ -152,6 +152,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.solutionService.solution_calculate_total_Conc_target_pH(this.godSolution).subscribe((response: Solution) => {
       //  Update the returnedSolution property with the response
       this.returnedSolution = response;
+      this.avatarLetter = this.returnedSolution.buffer_species.charAt(0).toUpperCase()
       console.log("God: this is god solution", this.godSolution)
       console.log("God: this is returned solution", this.returnedSolution)
     });

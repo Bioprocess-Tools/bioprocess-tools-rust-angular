@@ -36,13 +36,14 @@ flex-direction: row;
  // height:150px;
   width:100%;
   box-shadow: none;
-  height: 100px;
+  height: 85px;
 }
 .mat-headline-4 {
   margin-bottom: 2px;
   margin-left:10px;
-  font-family:'Roboto';
-  font-weight: 600;
+  //font-family:'Roboto';
+  font-weight: 800;
+  font-stretch: expanded;
   font-size: xx-large;
   color:whitesmoke;
   

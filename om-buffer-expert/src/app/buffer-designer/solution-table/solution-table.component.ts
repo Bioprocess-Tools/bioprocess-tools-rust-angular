@@ -56,7 +56,7 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
   let numb = 0;
   for (let i = 0; i<Ionic_Concs.length;i++) {
     
-    truncConcs.push (Ionic_Concs[i].toFixed(3));
+    truncConcs.push (Ionic_Concs[i].toFixed(2));
   }
   return truncConcs;
 }

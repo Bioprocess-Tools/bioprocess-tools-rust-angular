@@ -22,7 +22,7 @@
   <mat-divider></mat-divider>
   <mat-card class="solution-card" *ngIf="response_solution; else loadthis">
     <mat-card-header>
-      <div class="avatar">{{avatarLetter}}</div>
+      <!-- <div class="avatar">{{avatarLetter}}</div> -->
       <mat-card-title>{{response_solution.name}}</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
@@ -43,6 +43,11 @@
       </span>
       {{ response_solution.result_flag['comment'] }}
       </p>
+      <p class="green_flag" *ngIf="response_solution.result_flag['flag'] == 'green'">  <span class="material-icons">
+        check_circle
+        </span>
+        Done!
+        </p>
     </mat-card>
 
 
@@ -50,7 +55,7 @@
 <ng-template #loadthis>
   <mat-card class="solution-card-placeholder">
     <mat-card-header>
-      <div class="avatar">{{avatarLetter}}</div>
+      <!-- <div class="avatar">{{avatarLetter}}</div> -->
       <mat-card-title>Your buffer name</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>

@@ -62,8 +62,8 @@
         <mat-card-content>
           <p class="less-space"> Conc. [M]: {{solution.ion_concentrations[ion.name]|number:'1.3-3'}}</p>
           <p class="less-space"> pKa: {{ion.pka.join(',')}}</p>
-          <p class="less-space"> Charges : {{getIonCharges(ion.highest_charge).join(',')}}</p>
-          <p class="less-space"> Species charge [M] : {{getIonicConcs(ion.ionic_concs).join(',')}}</p>
+          <!-- <p class="less-space"> Charges : {{getIonCharges(ion.highest_charge).join(',')}}</p>
+          <p class="less-space"> Species charge [M] : {{getIonicConcs(ion.ionic_concs).join(',')}}</p> -->
           <p class="less-space"> Un-ionized [M] : {{ion.unionized_conc}}</p>
         </mat-card-content>
       </mat-card>
