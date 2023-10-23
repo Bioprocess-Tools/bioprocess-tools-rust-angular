@@ -59,7 +59,7 @@ this.solutionSubscription = this.solutionService.example_solution$.subscribe(
   example_solution => {
     this.example_solution = example_solution;
     this.returnedSolution = example_solution;
-    console.log("God example solution in buffer calc 1", this.example_solution);
+    //console.log("God example solution in buffer calc 1", this.example_solution);
   }
   
 );
@@ -72,12 +72,12 @@ this.initializeForm()
     let basename = solution.compounds[1].name;
 
 
-    console.log("God in change", solution)
+    //console.log("God in change", solution)
     let saltname:string=null;
     let saltconc =0;
     
     if(solution.compounds.length=3) {
-      console.log("God here in salt", solution.compounds[2].name);
+      //console.log("God here in salt", solution.compounds[2].name);
       saltname = solution.compounds[2].name;
       saltconc = solution.compound_concentrations[saltname];
       this.bufferForm.controls['saltCompound'].setValue(saltname);
@@ -126,12 +126,12 @@ bufferSelectionValidator(): ValidatorFn {
   populateForm(solution: Solution) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
-    console.log("God in change", solution)
+    //console.log("God in change", solution)
     let saltname:string=null;
     let saltconc =0;
     
     if(solution.compounds.length=3) {
-      console.log("God here in salt", solution.compounds[2].name);
+      //console.log("God here in salt", solution.compounds[2].name);
       saltname = solution.compounds[2].name;
       saltconc = solution.compound_concentrations[saltname];
       this.bufferForm.controls['saltCompound'].setValue(saltname);
@@ -163,7 +163,7 @@ bufferSelectionValidator(): ValidatorFn {
 
     this.solutionService.solutionEdited.subscribe(() => {
       this.solutionedit = this.solutionService.get_emitted();
-      console.log("God in buffer calc", this.solutionedit);
+      //console.log("God in buffer calc", this.solutionedit);
       this.changeForm(this.solutionedit);
     
     
@@ -176,13 +176,13 @@ bufferSelectionValidator(): ValidatorFn {
   
 
   onSubmit() {
-    console.log("god here", this.bufferForm);
+    //console.log("god here", this.bufferForm);
     this.godSolution = new Solution("God solution");
     if (this.bufferForm.invalid) {
       return;
     }
-    console.log("god here 2");
-    console.log(this.bufferForm)
+    //console.log("god here 2");
+    //console.log(this.bufferForm)
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;
@@ -204,13 +204,13 @@ bufferSelectionValidator(): ValidatorFn {
     }
 
     this.submitted=true;
-    console.log(this.godSolution)
+    //console.log(this.godSolution)
     // Add Solution object to the SolutionService
     //this.solutionService.addSolution(solution);
 
     // Add the solution to the solution service
     this.solutionService.addSolution(this.godSolution);
-    console.log(this.solutionService.getAllSolutions());
+    //console.log(this.solutionService.getAllSolutions());
     this.calculatepH();
     // Reset the form
     //this.bufferForm.reset();
@@ -231,7 +231,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.solutionService.solution_calculate_pH(this.godSolution).subscribe((response: Solution) => {
       // Update the returnedSolution property with the response
       this.returnedSolution = response;
-      console.log(this.returnedSolution)
+      //console.log(this.returnedSolution)
     });
   }
 

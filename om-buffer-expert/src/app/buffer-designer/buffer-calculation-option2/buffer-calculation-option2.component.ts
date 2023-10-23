@@ -32,7 +32,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     public solutionService: SolutionService
   ) { 
     this.acidCompounds = this.solutionService.getAppAcidCompounds();
-    console.log("God acid",this.acidCompounds)
+    //console.log("God acid",this.acidCompounds)
     this.basicCompounds = this.solutionService.getAppBasicCompounds();
     this.saltCompounds = this.solutionService.getAppSaltCompounds();
     this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
@@ -48,7 +48,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       example_solution => {
         this.example_solution = example_solution;
         this.returnedSolution = example_solution;
-        console.log("God example solution in buffer calc 2", this.example_solution);
+        //console.log("God example solution in buffer calc 2", this.example_solution);
       }
     );
     this.solutionSubscription = this.solutionService.currentSolution.subscribe(solution => {
@@ -79,10 +79,10 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   populateForm(solution: Solution) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
-    console.log("God in change", solution)
+    //console.log("God in change", solution)
     let saltname:string=null;
     let saltconc =0;
-    console.log("God here in salt", solution.non_salt_compounds[0].name);
+    //console.log("God here in salt", solution.non_salt_compounds[0].name);
     if(solution.compounds.length=3) {
       
       saltname = solution.salt_compound.name;
@@ -116,13 +116,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     //console.log("God : example solution", this.example_solution)
   }
   onSubmit() {
-    console.log("god here", this.bufferForm);
+    //console.log("god here", this.bufferForm);
     this.godSolution = new Solution("God solution");
     if (this.bufferForm.invalid) {
       return;
     }
-    console.log("god here 2");
-    console.log(this.bufferForm)
+    //console.log("god here 2");
+    //console.log(this.bufferForm)
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;
@@ -142,13 +142,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
     this.godSolution.pH = target_pH;
 
-    console.log(this.godSolution)
+    //console.log(this.godSolution)
     // Add Solution object to the SolutionService
     //this.solutionService.addSolution(solution);
 
     // Add the solution to the solution service
     this.solutionService.addSolution(this.godSolution);
-    console.log(this.solutionService.getAllSolutions())
+    //console.log(this.solutionService.getAllSolutions())
 
     // Reset the form
     this.calculatepH()
@@ -166,13 +166,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
   calculatepH() {
     // Make the API call to calculate pH
-    console.log("God got to calc")
+    //console.log("God got to calc")
     this.solutionService.solution_calculate_total_Conc_target_pH(this.godSolution).subscribe((response: Solution) => {
       //  Update the returnedSolution property with the response
       this.returnedSolution = response;
       this.avatarLetter = this.returnedSolution.buffer_species.charAt(0).toUpperCase()
-      console.log("God: this is god solution", this.godSolution)
-      console.log("God: this is returned solution", this.returnedSolution)
+      //console.log("God: this is god solution", this.godSolution)
+     // console.log("God: this is returned solution", this.returnedSolution)
     });
     //console.log(this.godSolution)
   }

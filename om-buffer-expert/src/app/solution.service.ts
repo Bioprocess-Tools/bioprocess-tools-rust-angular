@@ -42,13 +42,13 @@ export class SolutionService {
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
   solutionEdited: EventEmitter<void> = new EventEmitter<void>();
 
- //private apiUrl = 'https://buffer-designer-service-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+ private apiUrl = 'https://buffer-designer-service-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
   
-  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ // private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
 
-    console.log("God: in construction", this.acidCompounds);
+    //console.log("God: in construction", this.acidCompounds);
     this.get_ion_names();
     this.get_example_solution();
     this.populate_compounds();
@@ -69,7 +69,7 @@ get_buffer_compound_names() {
     data => {
       this.buffer_compound_names = data;
       
-      console.log("God buffer names", this.buffer_compound_names);
+      //console.log("God buffer names", this.buffer_compound_names);
     },
     error => {
       console.error('Failed to fetch buffer compounds', error);
@@ -89,8 +89,8 @@ get_buffer_compound_names() {
         data => {
           this.compoundFunDict2 = data;
           this.group_compounds_type(this.compoundFunDict2);
-          console.log("God got dictionary", this.compoundFunDict2);
-          console.log("God got types", this.compounds_acidic, this.compounds_basic, this.compounds_salt);
+          //console.log("God got dictionary", this.compoundFunDict2);
+          //console.log("God got types", this.compounds_acidic, this.compounds_basic, this.compounds_salt);
 
         },
         error => {
@@ -118,7 +118,7 @@ for (let [compound, type] of Object.entries(compounds_dict)) {
             break;
         default:
             // Handle any other case or unexpected value here, if needed.
-            console.log(`Unexpected type: ${type} for compound: ${compound}`);
+            //console.log(`Unexpected type: ${type} for compound: ${compound}`);
             break;
     }
 }
@@ -139,7 +139,7 @@ this.compounds_basic.sort();
       map((response: string[])=> {
         this.ion_names = response;
         this.ion_names$.next(this.ion_names);
-        console.log("God in service", this.ion_names);
+        //console.log("God in service", this.ion_names);
         
 
       }),
@@ -154,7 +154,7 @@ this.compounds_basic.sort();
       (response) => {
         this.example_solution = response;
         this.example_solution$.next(this.example_solution);
-        console.log("God : example", this.example_solution);
+        //console.log("God : example", this.example_solution);
         this.addSolution(this.example_solution);
       },
 
@@ -173,19 +173,19 @@ this.compounds_basic.sort();
       map(response => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
-        console.log("God returned", response)
+        //console.log("God returned", response)
         return solution;
       })
     );
   }
   solution_calculate_total_Conc_target_pH(solution: Solution): Observable<Solution> {
-    console.log("God got here");
+    //console.log("God got here");
     const endpoint = `${this.apiUrl}/solution_totalconc_target_pH`; 
     return this.http.post<Solution>(endpoint, solution).pipe(
       map(response => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
-        console.log("God returned", response)
+        //console.log("God returned", response)
         return solution;
       })
     );
@@ -193,7 +193,7 @@ this.compounds_basic.sort();
 
  addSolution(solution: Solution) {
     this.omSolutions.push(solution);
-    console.log("God", this.omSolutions)
+    //console.log("God", this.omSolutions)
     this.solutionAdded.emit(); 
   }
 
@@ -203,7 +203,7 @@ this.compounds_basic.sort();
 
 edit_solutionf(solution:Solution){
   this.edit_solution = solution;
-  console.log("God in solution service 1", this.edit_solution);
+  //("God in solution service 1", this.edit_solution);
   this.edit_solution$.next(this.edit_solution);
     this.solutionEdited.emit();
     //console.log("God in solution service 2", this.edit_solution);

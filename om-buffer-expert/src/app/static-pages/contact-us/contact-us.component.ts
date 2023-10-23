@@ -31,7 +31,7 @@ export class ContactUsComponent {
     // Process contact form here
     if (this.contactForm.valid) {
      this.apiService.sendContactFormData(this.contactForm.value)
-     .subscribe(response => {console.log(response); }, error => {console.error(error);} )
+     .subscribe(response => { }, error => {} )
 
       // You can send this data to your backend server
       // for further processing like sending an email.

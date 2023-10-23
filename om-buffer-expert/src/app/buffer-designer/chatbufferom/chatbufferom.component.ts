@@ -42,7 +42,7 @@ ionValidator():ValidatorFn {
     this.solutionService.ion_names$.subscribe(
       ion_names => {
         this.ion_names = ion_names;
-        console.log("God got this", this.ion_names);
+        //console.log("God got this", this.ion_names);
       }
     );
 
@@ -50,7 +50,7 @@ ionValidator():ValidatorFn {
       example_solution => {
         this.example_solution = example_solution;
         this.response_solution = example_solution;
-        console.log("God example solution in buffer calc 2", this.example_solution);
+        //console.log("God example solution in buffer calc 2", this.example_solution);
       }
     );
   
@@ -86,20 +86,20 @@ ionValidator():ValidatorFn {
    // this.response = this.form.value.userInput
    const inputclean = this.getWords(this.form.value.userInput)
    this.ion_names_lower = this.ion_names.map(word => word.toLowerCase());
-    console.log('Great god', inputclean,this.ion_names_lower)
+    //console.log('Great god', inputclean,this.ion_names_lower)
     const isValid = inputclean.some(word => this.ion_names_lower.includes(word));
-    console.log("God: isValid", isValid, inputclean)
+    //console.log("God: isValid", isValid, inputclean)
     if(isValid==false) {
-      console.log("God: Please change the input")
+      //console.log("God: Please change the input")
     }
     else { 
-      console.log("God: Good to got.");
+      //console.log("God: Good to got.");
      this.apiService.sendUserInput(userInput)
       .subscribe(response => {
         this.response_solution = new Solution("God");
         Object.assign(this.response_solution,response);
         this.solutionService.addSolution(this.response_solution);
-        console.log(this.response_solution)
+        //console.log(this.response_solution)
       }); 
     
   }

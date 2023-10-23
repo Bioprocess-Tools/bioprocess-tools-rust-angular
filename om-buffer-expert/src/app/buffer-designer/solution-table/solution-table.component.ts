@@ -34,7 +34,7 @@ viewDetails(solution:Solution) {
 editNewForm (solution:Solution){
   this.omRoute.navigate(['./pH-Calculator']);
   this.solutionService.edit_solutionf(solution);
-  console.log("God edit" , solution);
+  //console.log("God edit" , solution);
 }
 
 editSolution(solution: Solution) {
