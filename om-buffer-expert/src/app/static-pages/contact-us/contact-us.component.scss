@@ -1,0 +1,32 @@
+.contact-form {
+    display:flex;
+    flex-direction: column;
+    //width:90%;
+    margin: 0 auto;
+    height:91vh;
+    align-items: center;
+    //background-color: aqua;
+  }
+  
+  .contact_f {
+    display:flex;
+    flex-direction: column;
+    width:96%;
+    min-width:150px;
+    max-width:800px;
+    gap:10px;
+    padding:30px;
+    background-color: #dee1e5;
+  }
+  .contact-form h2 {
+    text-align: center;
+  }
+
+  .input_full_width {
+    width:100%;
+  }
+  
+
+
+  
+  

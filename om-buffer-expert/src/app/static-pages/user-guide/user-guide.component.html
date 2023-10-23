@@ -1,1 +1,395 @@
-<p>user-guide works!</p>
+<div class="main-user-guide">
+  <h1>User Guide</h1>
+  <mat-accordion multi="true" displayMode="default" class="mat-elevation-z0">
+    
+    <!-- Section 1: Introduction -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Introduction
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Welcome to our software tool, a comprehensive tool that enables you to design your buffers.  The 
+        calculation engine is a first-principles based predictor, and has been time-tested. The algorithm used
+        is so powerful, robust, and fast, that it can handle the very non-linear nature of the solution.
+      </p>
+    </mat-expansion-panel>
+    <!-- Section 1: Introduction -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Quick Start Guide
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <ul>
+        <li>
+         <span><H2>Gen AI Buffer Designer</H2></span>
+         <ul>
+          <span><H3>Step 1: Enter the buffer description, in the following format:</H3></span>
+          <li>
+            <span><H4>target buffer species concentration  buffer species name(s) salt concentration salt compound name "pH" target pH </H4></span>
+          </li>
+          <li>
+            <span><H4>50 mM   Phosphate 0.1M Sodium Chloride pH 7.0  </H4></span>
+          </li>
+          <li>
+            <span><H4>Target buffer species concentration : Needs to provided as number, followed by the units (mM or M)  [Eg. 50mM or 0.05M or .05M ] </H4></span>
+          </li>
+          <li>
+            <span><H4>Buffer species name: Needs to be provided as a single or dual buffering species. The order determines which buffering species concentration will be targeted  [Phosphate or Tris Acetate or Tris-Acetate or Acetate-Tris, etc.] The list of acceptable buffer species is in the tooltip.  The input is validated for the presence of an acceptable buffer species</H4></span>
+          </li>
+          <li>
+            <span><H4>Salt concentration: Needs to provided as number (), followed by the units (mM or M)  [Eg. 50mM or 0.05M or .05M ]</H4></span>
+          </li>
+          <li>
+            <span><H4>Salt compound name: Choose from Sodium Chloride (or salt), Sodium Sulfate, Ammonium Sulfate. </H4></span>
+          </li>
+          <li>
+            <span><H4>Target pH: use the word pH before the number, you can specify as 7.0 or 7 or 7.12 etc. </H4></span>
+          </li>
+          <span><H3>Step 2: Click on the Get Recipe button!</H3></span>
+          <li>
+            <span> <H4> The Buffer Composition Summary, Buffer Details, etc will appear about a second or so later, due to the delay in API calls
+            </H4></span>
+            <span> <H4>   pH range choice limits:  Please note that when certain compounds are chosen, with the specified target concentrations, only limited range of pH can be achieved, due to the inherent
+              chemistry involved.  In this case, an error will be reported below the result, with the range of achievable pH.  Of course this will vary depending on the compounds, target concentration, etc.
+            </H4></span>
+              <span> <H4>   Concentration and pH limits:  The classic Designer has built in constraints on the choice of concentrations for the target concentration for the buffer compounds and salt compounds.
+              While this is not a limitation of the Designer calculation engine, we imposed these constraints to produce meaningful buffers, normally used in practice.  Further, please realize
+              that the ionic strength correction has its limitations, as these corrections are not accurate beyond 0.4M.  Since the GenAI Designer doesnt have this limitation, you can 
+              choose a broad range of concentrations, but will likely result in recipes that are not meaningful.
+            </H4></span>
+
+          </li>
+        </ul>
+      </ul> 
+
+      <ul>
+        <li>
+         <span><H2>Classic Buffer Designer</H2></span>
+         <ul>
+          <span><H3>Step 1: Pick Acidic and Basic Compounds</H3></span>
+          <li>
+            <span><H4>From the first drop-down list, which is a list of acidic compounds, pick the one that contains the buffering species that you want to target. Alternatively 
+              you can pick a non-buffering compound from this list.  However, you have to make sure you pick a buffering compound from the basic compound list below. </H4></span>
+          </li>
+          <li>
+            <span><H4>From the second drop-down list, which is a list of basic compounds, pick the one that contains the buffering species 
+              that you want to target. Alternatively you can pick a non-buffer containing compound,
+               or a compound that provides a different buffering species.  Please note that if the second compound does not contain the 
+              same buffering species as the first, this compound's concentration will be adjusted freely to achieve the target pH  </H4></span>
+          </li>
+          <span><H3>Step 2: Enter the target buffer species concentration</H3></span>
+          <li>
+            <span><H4>This number is entered as molar concentration. Enter only the number.  Please note that this will the concentration of the 
+              buffering species in the final buffer.  In case both compounds contain the same buffering species, the compound concentrations will
+              be adjusted to achieve this concentration.  If the basic compound is non-buffering or has a different buffering species from 
+              the first one, the concentration used here will be the target concentration for the first (acidic compound) buffering species.
+            </H4></span>
+          </li>
+          <li>
+            <span><H4>From the second drop-down list, which is a list of basic compounds, pick the one that contains the buffering species 
+              that you want to target. Alternatively you can pick a non-buffer containing compound,
+               or a compound that provides a different buffering species.  Please note that if the second compound does not contain the 
+              same buffering species as the first, this compound's concentration will be adjusted freely to achieve the target pH. Alternatively if you picked a non-buffering 
+            compound from the acidic compound list (eg. Hydrochloric Acid), you have to pick a buffering compound from the basic compound list (eg. Tris Base). </H4></span>
+          </li>
+          <span><H3>Step 3: Pick a salt compound name (optional) and concentration </H3></span>
+          <li>
+            <span><H4> You can pick a salt compound name from the Salt Compound list.  Currently the list is restricted to Sodium Chloride, Sodium Sulfate and 
+              Ammonium Sulfate.
+            </H4></span>
+            <span><H4> Enter a concentration for the salt compound.  This will be in Molar.
+            </H4></span>
+          </li>
+          <span><H3>Step 4: Enter the target pH </H3></span>
+          <li>
+            <span><H4> Enter the desired target pH.  The compound concentrations (acidic and basic) will be adjusted as applicable to achieve the target pH.
+            </H4></span>
+
+          </li>
+
+          <span><H3>Step 4: Click the Get Recipe button! </H3></span>
+          <li>
+            <span><H4> The request will be sent to the server to calculate the recipe and the details will be populated.
+            </H4></span>
+          </li>
+          <li>
+          <span> <H4>   pH range choice limits:  Please note that when certain compounds are chosen, with the specified target concentrations, only limited range of pH can be achieved, due to the inherent
+            chemistry involved.  In this case, an error will be reported below the result, with the range of achievable pH.  Of course this will vary depending on the compounds, target concentration, etc.
+          </H4></span>
+        </li>
+        <li>
+            <span> <H4>   Concentration and pH limits:  The classic Designer has built in constraints on the choice of concentrations for the target concentration for the buffer compounds and salt compounds.
+            While this is not a limitation of the Designer calculation engine, we imposed these constraints to produce meaningful buffers, normally used in practice.  Further, please realize
+            that the ionic strength correction has its limitations, as these corrections are not accurate beyond 0.4M.  Since the GenAI Designer doesnt have this limitation, you can 
+            choose a broad range of concentrations, but will likely result in recipes that are not meaningful.
+          </H4></span>
+        </li>
+        </ul>
+      </ul> 
+
+      <ul>
+        <li>
+         <span><H2>pH Calculator</H2></span>
+         <ul>
+          <span><H3>Step 1: Pick Acidic and Basic Compounds</H3></span>
+          <li>
+            <span><H4>From the first drop-down list, which is a list of acidic compounds, pick the one that contains the buffering species that you want. Alternatively 
+              you can pick a non-buffering compound from this list.  However, you have to make sure you pick a buffering compound from the basic compound list below. </H4></span>
+          </li>
+          <li>
+            <span><H4>From the second drop-down list, which is a list of basic compounds, pick the one that contains the buffering species 
+              that you want to target. Alternatively you can pick a non-buffer containing compound,
+               or a compound that provides a different buffering species.  </H4></span>
+          </li>
+          <span><H3>Step 2: Enter Acidic and Basic Compound concentrations</H3></span>
+          <li>
+            <span><H4>Enter the concentration for the acidic compound in the input provided. Similarly enter the concentration for the basic compound in the input provided.  
+              This number is entered as molar concentration. Enter only the number.
+            </H4></span>
+          </li>
+          <span><H3>Step 3: Pick a salt compound name (optional) and concentration </H3></span>
+          <li>
+            <span><H4> You can pick a salt compound name from the Salt Compound list.  Currently the list is restricted to Sodium Chloride, Sodium Sulfate and 
+              Ammonium Sulfate.
+            </H4></span>
+            <span><H4> Enter a concentration for the salt compound.  This will be in Molar.
+            </H4></span>
+          </li>
+          <span><H3>Step 4: Click the Calculate pH button </H3></span>
+          <li>
+            <span><H4> The request will be sent to the server to calculate the recipe and the details will be populated.
+            </H4></span>
+          </li>
+        </ul>
+      </ul> 
+      
+    </mat-expansion-panel>
+    <!-- Section 2: General Concepts -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          General Concepts and Terminologies
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Buffers are generally composed of a buffering species (such as Phosphate) and a counter-ion (Sodium), and
+         optionally a fully ionized salt, such as Sodium Chloride.
+        The buffering species provides the specific characteristic of the buffer, due to its dissociation properties.  Buffering species can 
+        have multiple dissociation steps, with each step having a specific dissociation constant (referred to as pKa).  For a detailed 
+        explanation of the dissociation constants jump to the section below.</p>
+
+       <p>Counter-ions are ions that are present in a buffering solution that provide the appropriate charge balance to achieve a specific pH.  See the charge balance equations 
+        below in the next section for details. The counter-ions should produce ions of the opposite charge to be able to modify the pH.</p>
+
+        <p>In order to prepare buffered solutions, we typically use compounds containing the buffering species, either in a "pure" form,
+        (eg. Phosphoric Acid) or "salt form" where the buffering species is present in combination with the counter ion (eg. Sodium Phosphate Monobasic). </p>
+        <p>If a pure form is chosen as one of the compounds, then the counter-ion is supplied separately as a "strong acid" (eg. Hydrochloric Acid) or 
+        "strong base" (eg. Sodium Hydroxide), depending on the counter-ion desired. We can call this pairing as "Weak Acid/Base" - "Strong Base/Acid".</p>
+        <p>If a salt form is chosen as one of the compounds, and if the compound in solution is "acidic", then the secondary compound is chosen to be one that will be "basic"
+        essentially to provide the charge balance to achieve the target pH. There are several scenarios with this pairing, which are described, and the way to achieve the target pH
+        and concentration in the app are included below.</p>
+      <!-- Include subsections or further detailed information here -->
+    </mat-expansion-panel>
+
+    <!-- Section 3: Getting Started -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Buffer design options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Gen AI Input Considerations
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      <p> GenAI Buffer Designer Input:  The GenAI Buffer Designer is quite flexible in handling different type of inputs.  First it checks if the input has one or more of the buffer species, and will not allow for you to proceed
+        without it.  The concentration of the buffer can be specified as 0.4M or 40mM. If you skip the units, it will interpret the number to be mM if it is greater than 1 and as M if it is less than 1.  You can 
+        specify the concentration within parenthesis.  You need to specify the salt with compound names. You can use "salt" for Sodium Chloride. Please note that the salts in the 
+        classic Designer, namely Sodium Sulfate, Sodium Chloride and Ammonium Sulfate are the only salts you can specify in GenAI too.  You also need to use the word pH in the request, 
+        with the value specified generally anywhere in context. For example, this will yield the right recipe: Yo dude can you whip me up a seventy one phosphate with good chunk of  hundred Sodium Chloride with an awesome pH of seven?</p>
+      <!-- Include subsections or further detailed information here -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         Single buffering species
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    
+      <p>1. Single buffering species, with each compound containing both the counter-ion and the buffering species - Example:  Sodium Phosphate Monobasic, Sodium Phosphate Dibasic. 
+        Here both compounds contain Phosphate as the buffering species, which is a negatively charged buffering species.  The counter-ion is Sodium (positively charged) and is supplied
+        by both compounds.</p>  
+        
+        <p>In specifying this buffer in the app with the "Classic Buffer Designer", you can pick an acidic compound from the first list, and a basic compound from the 
+        second list, such that both contain the same buffering species and the same counter-ion.  Then you can specify the target buffer concentration, which specifies the total buffering species
+        concentration in the final buffer and the target pH.  The Design calculation engine will then determine the right proportion of each compound to achieve the target pH, while
+        maintaining the target buffering species concentration.</p>
+
+        <p>With the GenAI Input, you can simply specify the buffering species (eg. Phosphate), specifying the target concentration as 40mM Phosphate.  The Designer in this case will
+        pick the appropriate compounds (typically two compounds, both containing the buffering species, with one or both containing the counter-ion).  The target pH is simply requested as 
+        "with a pH of X".  </p>
+
+        <p>2. Single buffering species, with one compound containing the buffering species - counter ion combination, and the other compound containing the counter-ion only. 
+        Example: Sodium Phosphate Monobasic and Sodium Hydroxide.  Here the Sodium Phosphate Monobasic provides both Phosphate and Sodium, while the Sodium Hydroxide provides the counter-ion only.
+        Again, the Sodium Phosphate Monobasic is "acidic" in solution and the Sodium Hydroxide is "basic" in solution, forming a pair.  Notice that the "strong base" (Sodium Hydroxide)
+        has the same ion as the ion in the first compound. While this is desirable to keep the solution simple, it is necessary to choose the same counter-ion. For example, you can 
+        choose Potassium Hydroxide, to achieve the target pH.  </p>
+
+        <p>In specifying this buffer in the app with the "Classic Buffer Designer", you can pick a compound in either of the list containing the buffering species counter-ion salt, and then
+        choose the other compound which contains only the counter-ion.  Again, you will specify the target buffering species concentration in the final solution, and the target pH.
+        The Design calculation engine will determine the right concentration of the two compounds to achieve the target pH, while achieving the target buffering species concentration.</p>
+
+        <p>You cannot achieve this with GenAI input currently, as mentioned above, it only chooses the pair with both containing the buffering species.
+    <!-- Include subsections or further detailed information here -->
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Two buffering species
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  
+    3. Two buffering species, achieved with two compounds one of each containing only the "pure form" of the buffering species.  One will choose the buffering species such that one 
+    contributes the positive (or basic) ions and the other the negative (or acidic) ions.  A popular example of this, is Acetate-Tris buffer, where Acetic Acid and Tris Base
+    combined to produce the buffer. In designing this buffer, you will first choose Acetic Acid from the first list and Tris Base from the second list.  It is important to note 
+    that the target concentration refers to the buffering species in the acidic component and not the basic component (the flexibility of choosing either will be a future improvement in the app).
+    With a target pH, the Design calculation engine will find the concentration of the second compoound that will achieve the target pH
+
+    <p>With GenAI, you can easily achieve this by specifying it like this "Make a 50mM Acetate Tris buffer, with pH of 5" to get the similar behavior as with the Classic Designer.  
+    However with GenAI, you can also achieve the reverse case easily, for example, you can target a 50mM Tris, by saying "Make a 50mM Tris Acetate buffer, pH 8". In this case the 
+    GenAI Designer will achieve a Tris concentration of 50mM and adjust Acetic acid to achieve the target pH.  </p>
+
+    <p>3. Two buffering species, achieved with two compounds, each containing a different buffering species, both may be salt forms or one pure and one salt form.  In either case the target
+    concentration refers to the concentration of the acidic compound.  The other compound is adjusted to achieve the target pH.  </p> 
+
+    <p>You cannot achieve this with GenAI input currently, as the Gen AI Designer automatically chooses the buffering compounds that will make the buffer.  </p>
+
+  <p>With each of these options, you can optionally choose to add a salt compound and specify the concentration.  The salt concentration, along with concentration of  the buffering
+    compounds plays a critical role in ionic strength of the solution, which affects the dissociation constant of the buffering species, and hence the pH.</p>
+  <!-- Include subsections or further detailed information here -->
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      pH and target buffer concentration limits
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  pH range choice limits:  Please note that when certain compounds are chosen, with the specified target concentrations, only limited range of pH can be achieved, due to the inherent
+  chemistry involved.  In this case, an error will be reported below the result, with the range of achievable pH.  Of course this will vary depending on the compounds, target concentration, etc.
+   
+  Concentration and pH limits:  The classic Designer has built in constraints on the choice of concentrations for the target concentration for the buffer compounds and salt compounds.
+  While this is not a limitation of the Designer calculation engine, we imposed these constraints to produce meaningful buffers, normally used in practice.  Further, please realize
+  that the ionic strength correction has its limitations, as these corrections are not accurate beyond 0.4M.  Since the GenAI Designer doesnt have this limitation, you can 
+  choose a broad range of concentrations, but will likely result in recipes that are not meaningful.
+<!-- Include subsections or further detailed information here -->
+</mat-expansion-panel>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      pH-Calculator Usage
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  pH Calculator gives the full flexibiity to specify the acidic and basic compounds from the list, and their concentrations respectively, and an optional salt compound and its
+  concentration, and then have the pH calculator determine the pH of the solution.  While the calculator will provide the accurate prediction of the pH of the solution, it is then 
+  upto you to determine if this is a viable and useful buffer.
+<!-- Include subsections or further detailed information here -->
+</mat-expansion-panel>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Understanding the results display and details
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <ul>
+    <li>Since the Design calculation engine is based on first-principles, ionic species level details are available for each ion in solution.  For the sake of simplicity, the results are 
+    summarized as provided in the app.
+  </li>
+
+  <li> The first output you see is the Buffer Composition Summary, which provides the compound name and molar concentration of each of the compounds in solution, as well as the actual pH achieved, to 3 decimal precision. Internally the engine targets a tolerance of 10^-6.  
+    Below the Buffer Composition Summary, you get a status card, which shows green if the results were achieved or shows red, and provides comments if there were any errors.  In general, you
+    can expect to see more errors with the GenAI as there are no constraints on the input.  With the pH Calculator, you will see the least errors as you are requesting a pH calculation versus targeting
+    a buffer concentration and pH level. </li>
+
+    <li> Next, you see the Buffer List and Details.  Here each of the buffers that were calculated, regardless of the calculator that you used, are listed here.  You can scroll horizontally 
+    to browse the buffers.  The buffer that was last 
+    calculated is highlighted with green. Alternatively, if you had clicked the "Details" button, the buffer whose details are shown below will be highlighted with a green outline.
+    You can click on the details button on any buffer card to get its details.  </li>
+
+    <li>The next button is the Edit button, which designed to intelligently take the buffer composition and represent it in both formats (Designer with target concentration and pH) and pH calculator
+    regardless of what produced the results.  You can then go to either of tabs and edit the appropriate values to create a new buffer.  Note that the concentrations are rounded to three decimal 
+    precision, which could result in minor errors in the results when you try editing on a different calculator.   </li>
+
+    <li>Below the scroll llist, we have the next level details on the Compounds in the buffer.  For each of the compounds, we provide the molecular weight, molar concentration, mass conc. (g/L)
+    . We also identify the buffer ion in that compound.  Next, for each compound, we provide the ions in the compound, and their total molar concentration.
+  </li>
+    <li>Next, we provide details at the ion level.  We identify the unique ions in the buffer.  For each unique ion, we provide the total concentration, pkA, and the unionized concentration. Keep
+    in mind that the ion concentrations includes both the buffer and non-buffer compounds. The ionic species concentration is available, but will be provided in future releases.
+  </li>
+  </ul>
+    <!-- Include subsections or further detailed information here -->
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Buffer Calculation Fundamentals - Phosphate Buffer Example
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>For the system containing sodium phosphate monobasic (NaH<sub>2</sub>PO<sub>4</sub>), sodium phosphate dibasic (Na<sub>2</sub>HPO<sub>4</sub>), and sodium chloride (NaCl), we apply 
+      first principles methods to calculate pH, involving dissociation equilibrium, and charge balance.</p>
+  
+  <h2>Dissociation Equations and Equilibrium Constants for Phosphoric Acid:</h2>
+  <p>Phosphoric acid (H<sub>3</sub>PO<sub>4</sub>) is a triprotic acid, meaning it can donate three protons (H<sup>+</sup>), each step with its specific equilibrium constant. The dissociation steps are as follows:</p>
+  
+  <ol>
+    <li><strong>First dissociation:</strong>
+      <p>H<sub>3</sub>PO<sub>4</sub> ⇌ H<sup>+</sup> + H<sub>2</sub>PO<sub>4</sub><sup>-</sup></p>
+      <p>The equilibrium constant expression for this step is:</p>
+      <p>K<sub>a1</sub> = [H<sup>+</sup>][H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]/[H<sub>3</sub>PO<sub>4</sub>]</p>
+    </li>
+  
+    <li><strong>Second dissociation:</strong>
+      <p>H<sub>2</sub>PO<sub>4</sub><sup>-</sup> ⇌ H<sup>+</sup> + HPO<sub>4</sub><sup>2-</sup></p>
+      <p>The equilibrium constant expression for this step is:</p>
+      <p>K<sub>a2</sub> = [H<sup>+</sup>][HPO<sub>4</sub><sup>2-</sup>]/[H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]</p>
+    </li>
+  
+    <li><strong>Third dissociation:</strong>
+      <p>HPO<sub>4</sub><sup>2-</sup> ⇌ H<sup>+</sup> + PO<sub>4</sub><sup>3-</sup></p>
+      <p>The equilibrium constant expression for this step is:</p>
+      <p>K<sub>a3</sub> = [H<sup>+</sup>][PO<sub>4</sub><sup>3-</sup>]/[HPO<sub>4</sub><sup>2-</sup>]</p>
+    </li>
+  </ol>
+  
+  <h2>Charge Balance Equation:</h2>
+  <p>The charge balance equation ensures that the total positive charges in solution equal the total negative charges. For the system with NaH<sub>2</sub>PO<sub>4</sub>, Na<sub>2</sub>HPO<sub>4</sub>, and NaCl, we consider all species that contribute to the charge, including the dissociation products of phosphoric acid and the ions from NaCl.</p>
+  
+  <p>Here's how the charge balance equation would look for this system:</p>
+  <p>[H<sup>+</sup>] + [Na<sup>+</sup>] = [H<sub>2</sub>PO<sub>4</sub><sup>-</sup>] + 2[HPO<sub>4</sub><sup>2-</sup>] + 3[PO<sub>4</sub><sup>3-</sup>] + [Cl<sup>-</sup>] + [OH<sup>-</sup>]</p>
+  <!-- Include subsections or further detailed information here -->
+  <p>By solving the charge balance equation, in combination with the dissociation equations, while accounting for the mass balance, you can calculate the [H<sup>+</sup>], which gives us the pH.
+
+    Given that the pkA depends on the ionic strength, one needs to incorporate corrections to the pKA using Debye-Huckel approximations.  The calculation engine incorporates this correction.  However, as mentioned before, 
+    the correction is only applicable upto 0.4M ionic strength, beyond which the actual results and predicted results will likely not match.
+  </p>
+  </mat-expansion-panel>
+    <!-- More sections... -->
+
+  </mat-accordion>
+</div>
+
+
+
+
+

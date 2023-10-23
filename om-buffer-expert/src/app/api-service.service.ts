@@ -16,6 +16,15 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/chat`, { userInput });
   }
 
+  sendContactFormData(formData:any) {
+    return this.http.post(`${this.apiUrl}/contact`,formData)
+  }
+
+  sendFeedbackFormData(formData:any) {
+    return this.http.post(`${this.apiUrl}/feedback`,formData)
+  }
+
+
   getSafetyImageUrl(id: number): Observable<string> {
     const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/${id}/JSON?heading=Chemical+Safety`;
     return this.http.get(url).pipe(

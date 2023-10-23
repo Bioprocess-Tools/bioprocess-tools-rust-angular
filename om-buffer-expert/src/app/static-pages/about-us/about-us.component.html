@@ -1,1 +1,26 @@
-<p>about-us works!</p>
+<div class="about-container">
+    <h1>About Us</h1>
+    <p class="intro">
+      Welcome to bioprocess-tools.com, the go-to-place for buffer design, today! 
+      Our vision is to revolutionize research by making advanced modeling tools accessible to everyone across the globe. 
+      Today, most of these tools are hidden in books and journal articles, severely hindering the ability for the average 
+      scientist or engineer to understand characterize and improve their processes.
+
+      We believe that we are significantly behind in translating our scientific and engineering understanding of processes, 
+      especially first-priniciples knowledge into insights and modeling of our processes.
+    
+      This cannot be done by one person or a small team, so we seek your help, support and feedback.
+    </p>
+  
+    <h2>Meet the Team</h2>
+    <div class="card-container">
+      
+      <!-- Card for each team member -->
+      <div class="team-card" *ngFor="let member of teamMembers">
+        <img [src]="member.image" alt="Photo of {{member.name}}" class="team-photo">
+        <h3>{{member.name}}</h3>
+        <H3 class="title">{{member.title}}</H3>
+        <p class="bio">{{member.bio}}</p>
+      </div>
+    </div>
+  </div>

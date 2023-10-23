@@ -1,0 +1,171 @@
+// /* other styles... */
+
+.feedback-form {
+  display:flex;
+  flex-direction: column;
+  //width:90%;
+  margin: 0 auto;
+  height:91vh;
+  align-items: center;
+  //background-color: aqua;
+}
+
+  .stars mat-icon {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    color:green /* Default color of stars */
+  }
+
+  .label_q {
+    font-size: large;
+  }
+
+.feedback_f {
+  display:flex;
+  flex-direction: column;
+  width:96%;
+  min-width:150px;
+  max-width:800px;
+  gap:10px;
+  padding:30px;
+  background-color: #dee1e5;
+}
+
+
+
+.input_full_width {
+  width:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .feedback-form {
+//     display:flex;
+//     align-items: center;
+//     max-width: 90%;
+//     margin: auto;
+//     height: 91vh;
+//     box-shadow: none;
+//     padding:40px;
+//     //margin:10px;
+//     //padding: 50px;
+    
+//   }
+
+//   .contact-form {
+//     display:flex;
+//     flex-direction: column;
+//     //width:90%;
+//     margin: 0 auto;
+//     height:91vh;
+//     align-items: center;
+//     //background-color: aqua;
+//   }
+
+//   .contact_f {
+//     display:flex;
+//     flex-direction: column;
+//     width:96%;
+//     min-width:150px;
+//     max-width:800px;
+//     gap:10px;
+//     padding:30px;
+//     background-color: #dee1e5;
+//   }
+
+//   .content {
+//     background-color: bisque;
+//     //margin:10px;
+//     padding:20px;
+//   }
+  
+//   .rating-section {
+//     display:flex;
+//     flex-direction:column;
+//     //margin-left: 50px;
+//    // padding-bottom: 50px;
+//    // margin: 50px;
+//     //padding-left: 70px;
+//     //width:80%;
+//     align-self:left;
+//     background-color: aqua;
+//   }
+
+//   .full-width {
+//    // width:100%;
+//   }
+  
+//   .label_q {
+//     font-size:large;
+//     padding:10px;
+
+//   }
+
+//     .text_input {
+//       height:20px;
+
+//     }
+  
+//   .form-class {
+//     display: flex;
+//     flex-direction:column;
+//    // width:80%;
+
+//   }
+//   .stars mat-icon {
+//     cursor: pointer;
+//     transition: color 0.2s ease-in-out;
+//     color:green /* Default color of stars */
+//   }
+  
+//   mat-icon.active {
+//     color: gold; /* Color when star is selected */
+//   }
+  
+//   wide-button {
+//     /* Styles for your submit button */
+//     //max-width:50px;
+//     align-self: center;
+    
+//   }
+  
+//   textarea {
+//   //  width:90%;
+//    // min-height: 60px; /* Adjust based on your design preference */
+//    // margin-top: 10px; /* Spacing between stars and comment box */
+//   }
+//   .active {
+//     color: gold; /* or any highlight color of your choice */
+//   }

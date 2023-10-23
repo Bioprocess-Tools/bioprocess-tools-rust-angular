@@ -31,26 +31,26 @@ export class BufferDesignerComponent implements OnInit{
   ngOnInit() {
     //this.solution = this.solutionService.solution;
   }
-  onTabChange(event: MatTabChangeEvent) {
-    const selectedIndex = event.index;
-    // Perform actions based on the selected tab index
+  // onTabChange(event: MatTabChangeEvent) {
+  //   const selectedIndex = event.index;
+  //   // Perform actions based on the selected tab index
 
-    switch(selectedIndex) {
+  //   switch(selectedIndex) {
 
-      case 0:
-        this.router.navigate(['NLP-Input']);
-        break;
+  //     case 0:
+  //       this.router.navigate(['NLP-Input']);
+  //       break;
   
-      case 1:  
-        this.router.navigate(['Drop-Down-Input']);
-        break;
+  //     case 1:  
+  //       this.router.navigate(['Drop-Down-Input']);
+  //       break;
       
-      case 2:
-        this.router.navigate(['pH-Calculator']);
-        break;
+  //     case 2:
+  //       this.router.navigate(['pH-Calculator']);
+  //       break;
       
-      default:
-        break;
-    }
-  }
+  //     default:
+  //       break;
+  //   }
+  // }
 }

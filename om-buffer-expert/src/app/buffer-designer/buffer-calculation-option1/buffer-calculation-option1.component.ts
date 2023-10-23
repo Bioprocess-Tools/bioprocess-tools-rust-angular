@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Compound } from '../../shared/models/compound.model';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -31,11 +31,14 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
   saltconc:number;
   submitted: boolean = false;
 
+
   public godSolution = new Solution("God solution");
   public returnedSolution: Solution;
   public acidicCompound;
   public basicCompound;
   public saltCompound;
+  public buffer_compound_names;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,6 +52,7 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
 this.acidCompounds = this.solutionService.getAppAcidCompounds();
 this.basicCompounds = this.solutionService.getAppBasicCompounds();
 this.saltCompounds = this.solutionService.getAppSaltCompounds();
+this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
 
 
 this.solutionSubscription = this.solutionService.example_solution$.subscribe(
@@ -66,6 +70,8 @@ this.initializeForm()
     //this.omroute.navigate(['./pH-Calculator']);
     let acidname = solution.compounds[0].name;
     let basename = solution.compounds[1].name;
+
+
     console.log("God in change", solution)
     let saltname:string=null;
     let saltconc =0;
@@ -95,8 +101,27 @@ this.initializeForm()
         // Assuming you have a method to handle the form population
         this.populateForm(solution);
       }
-    });
+    }
+    );
+
   }
+
+bufferSelectionValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const selection1 = control.get('acidicCompound')?.value;
+      const selection2 = control.get('basicCompound')?.value;
+  
+      const isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+  
+      // Return error object or null based on validation result
+      return isValid ? null : { 'invalidBufferSelection': true };
+    };
+  }
+
+
+  
+
+  
 
   populateForm(solution: Solution) {
     let acidname = solution.non_salt_compounds[0].name;
@@ -134,7 +159,7 @@ this.initializeForm()
       acidicConcentration: [.019, [Validators.required, Validators.min(0), Validators.max(.4)]],
       basicConcentration: [.021, [Validators.required, Validators.min(0), Validators.max(.4)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
-    });
+    },{validators: this.bufferSelectionValidator()});
 
     this.solutionService.solutionEdited.subscribe(() => {
       this.solutionedit = this.solutionService.get_emitted();
@@ -161,6 +186,8 @@ this.initializeForm()
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;
+
+ 
 
     const acidicCompoundConcentration = this.bufferForm.get('acidicConcentration').value;
     const basicCompoundConcentration = this.bufferForm.get('basicConcentration').value;

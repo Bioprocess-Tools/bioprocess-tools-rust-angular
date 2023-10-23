@@ -1,1 +1,67 @@
-<p>feedback works!</p>
+<mat-card class="feedback-form">
+  <h2>We are still learning - and working together we can make this app great!</h2>
+  <form [formGroup]="feedbackForm" class="feedback_f" (ngSubmit)="onSubmit()">
+    <label class="label_q">What were the issues you faced with the user
+      interface? What did you like?</label>
+    <mat-form-field appearance="fill" class="input_full_width">
+      <textarea matInput formControlName="userExperienceComments" rows="5" required></textarea>
+      <mat-label>User experience feedback</mat-label>
+    </mat-form-field>
+    <label class="label_q">How would you rate the user interface and
+      experience?</label>
+      <div class="stars">
+      <mat-icon
+          *ngFor="let star of stars; let i = index"
+          (click)="countStar(i + 1, 'userExperience')"
+          [ngClass]="{'active': star <= feedbackForm.get('userExperience').value}">
+          {{ star <= feedbackForm.get('userExperience').value ? 'star' :
+          'star_border' }}
+      </mat-icon>
+      <mat-divider></mat-divider>
+    </div>
+    <label class="label_q">What were the issues you had with the
+      calculations or designer results ? What went well?</label>
+    <mat-form-field appearance="fill" class="input_full_width">
+      <textarea matInput formControlName="calculationConfidenceComments" rows="5" required></textarea>
+      <mat-label>Calculation and Designer feedback</mat-label>
+    </mat-form-field>
+
+    <label class="label_q">How would you rate the calculators and designers?</label>
+      <div class="stars">
+      <mat-icon
+          *ngFor="let star of stars; let i = index"
+          (click)="countStar(i + 1, 'calculationConfidence')"
+          [ngClass]="{'active': star <= feedbackForm.get('calculationConfidence').value}">
+          {{ star <= feedbackForm.get('calculationConfidence').value ? 'star' :
+          'star_border' }}
+      </mat-icon>
+      <mat-divider></mat-divider>
+    </div>
+    <label class="label_q">What were features that you would like to
+      see added? Which features did you like?</label>
+    <mat-form-field appearance="fill" class="input_full_width">
+      <textarea matInput formControlName="featureSetComments" rows="5" required></textarea>
+      <mat-label>Feature set feedback</mat-label>
+    </mat-form-field>
+    
+    <label class="label_q">How would you rate the features set?</label>
+      <div class="stars">
+      <mat-icon
+          *ngFor="let star of stars; let i = index"
+          (click)="countStar(i + 1, 'featureSet')"
+          [ngClass]="{'active': star <= feedbackForm.get('featureSet').value}">
+          {{ star <= feedbackForm.get('featureSet').value ? 'star' :
+          'star_border' }}
+      </mat-icon>
+      <mat-divider></mat-divider>
+    </div>
+    <label class="label_q">May we contact you?, if yes, provide email</label>
+    <mat-form-field appearance="fill" class="input_full_width">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <button mat-raised-button color="accent" class="wide-button" type="submit"
+    [disabled]="!feedbackForm.valid">Submit Feedback</button>
+  </form>
+</mat-card>

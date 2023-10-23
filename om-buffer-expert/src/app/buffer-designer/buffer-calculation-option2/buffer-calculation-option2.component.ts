@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Compound } from '../../shared/models/compound.model';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
@@ -21,6 +21,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
+  public buffer_compound_names;
   //compoundNames: string[] = [];
   public godSolution = new Solution("God solution"); //solution to hold the user input
   public returnedSolution: Solution; //solution to hold the return from api
@@ -34,6 +35,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     console.log("God acid",this.acidCompounds)
     this.basicCompounds = this.solutionService.getAppBasicCompounds();
     this.saltCompounds = this.solutionService.getAppSaltCompounds();
+    this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
     this.initializeForm()
   }
 
@@ -57,6 +59,22 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     });
   
   }
+
+  bufferSelectionValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const selection1 = control.get('acidicCompound')?.value;
+      const selection2 = control.get('basicCompound')?.value;
+  
+      const isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+  
+      // Return error object or null based on validation result
+      return isValid ? null : { 'invalidBufferSelection': true };
+    };
+  }
+
+
+
+
 
   populateForm(solution: Solution) {
     let acidname = solution.non_salt_compounds[0].name;
@@ -92,8 +110,8 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       saltCompound: this.saltCompounds[2],
       totalConcentration: [.04, [Validators.required, Validators.min(0), Validators.max(.4)]],
       target_pH: [7.00, [Validators.required, Validators.min(3), Validators.max(10)]],
-      saltConcentration: [0.1, [Validators.min(0), Validators.max(2)]],
-    });
+      saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
+    },{validators: this.bufferSelectionValidator()});
     //this.example_solution = this.solutionService.example_solution;
     //console.log("God : example solution", this.example_solution)
   }

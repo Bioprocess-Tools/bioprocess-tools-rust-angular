@@ -12,10 +12,10 @@ export class HeaderComponent {
 
 
 
-  onTabChange(event: MatTabChangeEvent) {
-    const selectedIndex = event.index;
-    // Perform actions based on the selected tab index
-  }
+  // onTabChange(event: MatTabChangeEvent) {
+  //   const selectedIndex = event.index;
+  //   // Perform actions based on the selected tab index
+  // }
 
 }
 

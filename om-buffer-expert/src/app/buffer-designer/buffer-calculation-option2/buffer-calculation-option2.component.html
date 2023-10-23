@@ -42,6 +42,7 @@
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Total buffer conc. (M) </mat-label>
+          <mat-hint *ngIf="bufferForm.get('totalConcentration').errors?.['max'] ">Conc should be less than 0.4 </mat-hint>
           <input matInput type="number" formControlName="totalConcentration" placeholder="total conc. of buffer species (M)"
             required>
         
@@ -49,19 +50,22 @@
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Salt Conc. (M) </mat-label>
+          <mat-hint *ngIf="bufferForm.get('saltConcentration').errors?.['max']">Conc should be less than 1 </mat-hint>
           <input matInput type="number" formControlName="saltConcentration" placeholder="salt concentration">
         
         </mat-form-field>
 
         <mat-form-field class="option1-full-width_Right" appearance="fill">
           <mat-label>Target pH</mat-label>
+          <mat-hint *ngIf="bufferForm.get('target_pH').errors?.['max'] || bufferForm.get('target_pH').errors?.['min'] ">Conc should be between 3 and 10 </mat-hint>
           <input matInput type="number" formControlName="target_pH" required>
        
         </mat-form-field>
 
       </div>
+      <div *ngIf="bufferForm.hasError('invalidBufferSelection')"><p class="red_flag">Choose atleast one buffer species containing compound</p></div>
       <button class="wide-button"  mat-raised-button color="accent"
-        type="submit">Get Buffer Recipe</button>
+      type="submit"[disabled]="bufferForm.invalid">Get Buffer Recipe</button>
     </mat-card>
   </form>
   <mat-card class="summary">

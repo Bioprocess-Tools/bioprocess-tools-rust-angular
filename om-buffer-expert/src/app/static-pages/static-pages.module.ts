@@ -18,6 +18,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion'
 
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -63,7 +64,8 @@ import { RouterModule } from '@angular/router';
     MatSliderModule,
     MatTooltipModule,
     MatSidenavModule,
-    RouterModule
+    RouterModule,
+    MatExpansionModule
   ],
   exports: [
     HomeComponent,

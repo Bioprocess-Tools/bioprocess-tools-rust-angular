@@ -36,7 +36,7 @@ export class SolutionService {
   compounds_basic: string[] = [];
   compounds_salt: string[] = [];
 
-
+  buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
@@ -52,14 +52,32 @@ export class SolutionService {
     this.get_ion_names();
     this.get_example_solution();
     this.populate_compounds();
+    this.get_buffer_compound_names();
   }
 
   changeSolution(solution: Solution) {
     this.solutionSource.next(solution);
   }
 
+api_get_buffer_compound_names(): Observable<string[]> {
+  return this.http.get<string[]>(this.apiUrl+ '/get_buffer_compound_names')
+}
+
+get_buffer_compound_names() {
+
+  this.api_get_buffer_compound_names().subscribe(
+    data => {
+      this.buffer_compound_names = data;
+      
+      console.log("God buffer names", this.buffer_compound_names);
+    },
+    error => {
+      console.error('Failed to fetch buffer compounds', error);
+    }
+  );
 
 
+}
 
   api_get_compounds(): Observable<{ [name: string]: string }> {
     return this.http.get<{ [name: string]: string }>(this.apiUrl+ '/compound-fun-dict')
@@ -204,6 +222,10 @@ getAppBasicCompounds(): string[] {
 
 getAppSaltCompounds(): string[] {
   return this.compounds_salt;
+}
+
+getAppBufferCompounds(): string[] {
+  return this.buffer_compound_names;
 }
 
   // Add other methods as needed
