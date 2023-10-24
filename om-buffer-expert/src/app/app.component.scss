@@ -5,28 +5,56 @@
 
 .main {
   display: grid;
-  grid-template-rows: 85px auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px auto;
   grid-template-areas: 
   "header"
   "main-content";
+  //background-color:rgb(222, 195, 25);//REMOVE
+  padding:15px; //DO NOT REMOVE
+  //width:102vw;
 }
 
 .header {
   grid-area:"header";
+  //background-color: green;
+  //padding:3px; //REMOVE
   
 }
 
 .main-content {
   grid-area: "main-content";
+  //width:95%;
+  //background-color: aquamarine; //REMOVE
+ //padding:3px;//REMOVE
+  //margin-top:2px;//REMOVE
 }
+
+@media (max-width: 1500px){
+  .main {
+    display: grid;
+    grid-template-rows:  80px auto;
+    grid-template-areas: 
+    "header"
+    "main-content";
+    //background-color:rgb(222, 195, 25);
+    padding:10px; //REMOVE
+  }
+}
+  
+
+
 
 @media (max-width: 480px){
   .main {
     display: grid;
+    width:100%;
     grid-template-rows: 60px auto;
     grid-template-areas: 
     "header"
     "main-content";
+    //background-color:rgb(222, 195, 25);
+    padding:8px; //REMOVE
   }
 }
   

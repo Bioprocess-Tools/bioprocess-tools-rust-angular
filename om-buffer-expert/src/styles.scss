@@ -11,12 +11,14 @@
  @import './shared-styles';
  @import './buffer-theme';
 
-html, body { height: 100%; }
+
   body {
-    background-color:whitesmoke;
+   // background-color:rgb(149, 115, 115);
    // display:flex;
-    width:1fr;
+    //height:100%;
     font-family: "Roboto";
+    margin:0;
+    padding:0;
   }
 
 

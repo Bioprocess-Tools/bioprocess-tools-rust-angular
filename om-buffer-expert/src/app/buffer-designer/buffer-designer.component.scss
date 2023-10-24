@@ -3,6 +3,7 @@
 display:flex;
 }
 
+//////////////////////////////////TWO PAGE LAYOUT////////////////////////////////////////////////////////////
 .content {
     grid-area: content;
     padding-top: 0.3vh;
@@ -10,88 +11,60 @@ display:flex;
     padding-right: 0.25vw;
     gap: .5vh;
     display: grid;
-    grid-template-columns: 1fr 1.25fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "calculator" "summary";
-    grid-template-rows: 1fr;
+    grid-template-rows: 90vh;
   
     background-color: $border-color;
   }
-  
-  
-.intro-text-main {
-    //padding: 40px;
-    background-color: whitesmoke;
-    
-    }
-    
-  .small-title {
-      font-size: large;
-      padding:0px;
-    }
-    
-  .intro-text {
-      font-size: large;
-     // padding: 10px;
-    }
-    
-  .small-content {
-      padding:0 8px;
-      //margin:3px;
-    }
-  
+
   .calculator {
-   // display:grid;
     overflow-y: auto;
-   max-height: 90vh;
-   //grid-template-columns: 1fr;
-    //grid-template-rows: auto;
-  
-   // grid-template-areas: 
-  //  "intro"
-   // "navigate"
-  //  ;
-  
-     //background-color: mat.get-color-from-palette(mat.$orange-palette,900);
+    //max-height: 90vh;
     background-color: whitesmoke;
-  
-  
     padding: 5px;  
-  
+   }
+
+
+  .intro {
+    width:100%;
   }
-  
-  
-  mat-card {
-    box-shadow: none;
-  }
-  
-  
+
   .mat-headline-5 {
-   // margin-top: .2em;
     text-align: center;
     font-weight: 600;
     margin-bottom: 2px;
     color: $headtext-color;
     background-color: $primary-color;
-  
-  padding:10px;
+    padding:10px;
   }
-  .intro {
-    //margin: 10px;
-    width:99.5%;
-    //padding-right: 40px;
-    background-color: whitesmoke;
-    text-align: justify;
-    align-self:center;
-  }
-  
-  
+
   .intro-text-main {
-  //padding: 40px;
-  background-color: whitesmoke;
-  
-  
+
+    background-color: whitesmoke;
   }
+  
+  .intro-text {
+    font-size: large;
+
+  }
+  
+  .small-title {
+      font-size: large;
+      padding:0px;
+    }
+    
+  .small-content {
+      padding:0 8px;
+      padding:8px 8px;
+      text-align:justify;
+      font-size: medium;
+    }
+  mat-card {
+    box-shadow: none;
+  }
+
   
   .small-title {
     //font-size: auto;
@@ -102,21 +75,15 @@ display:flex;
     //font-size: auto;
     padding: 8px 10px;
   }
-  
-  .small-content {
-    padding:0 8px;
-    color:slategray;
-    //margin:3px;
-  }
-  .list-container {
-    padding-right: 40px;
 
-  }
-  
   a {
     font-size:larger;
     font-weight: 900;
     
+  }
+
+  .thick {
+    border-width: 5px;
   }
   
   .navigate {
@@ -127,12 +94,17 @@ display:flex;
   .example-stretched-tabs {
     width: 98%;
     margin: 5px;
- 
-    //background-color: 'accent';
-    // color:aqua;
   }
-  
-  
+
+  .summary {
+    // min-width: 400px;
+     overflow-y: auto;
+     //max-height: 90vh;
+     gap: 10px;
+     //background-color:red;
+   }
+   
+ 
   
   .h4new {
     padding-top:0px;
@@ -146,23 +118,6 @@ display:flex;
     background-color: $primary-color;
   }
   
-  .thick {
-    border-width: 5px;
-  }
-  
-  .summary {
-   // min-width: 400px;
-    overflow-y: auto;
-    max-height: 90vh;
-    gap: 10px;
-    background-color: whitesmoke;
-  }
-  
-  .browser {
-    background-color: whitesmoke;
-    padding: 2px;
-    gap: 10px;
-  }
   
   @media (max-width: 1500px) {
     .content {
@@ -204,38 +159,33 @@ display:flex;
       background-color: aqua;
   
     } */
-  
-    @media (max-width:800px) {
+  }
+    @media (max-width:400px) {
       .example-stretched-tabs {
         margin: 5px;
-        font-size: x-small;
-        width:98%;
+        font-size: small;
+        width:100%;
       }
-
-    }
-
   
-    .intro {
-      width:95%;
-    }
     .navigate {
       width:95%;
      // background-color: mat-color($teall-palette,500)
     }
 
     .small-title {
-      font-size: small;
+      font-size: normal;
       padding:0px;
     }
     
     .intro-text {
       font-size: small;
-      padding: 10px 10px;
+      text-align:left;
+      //padding: 10px 10px;
     }
     
     .small-content {
-      padding:0 8px;
-      color:slategray;
+     // padding:0 8px;
+      //color:rgb(43, 47, 50);
       //margin:3px;
     }
   

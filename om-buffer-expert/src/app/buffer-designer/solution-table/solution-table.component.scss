@@ -1,7 +1,7 @@
 @import '../../../shared-styles.scss';
 
 .card-background {
-  background-color: whitesmoke;
+ //background-color: rgb(201, 28, 28);
   color:black;
   margin: 5px;
 }
@@ -15,21 +15,23 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  background-color: whitesmoke;
+  //background-color: $card-background-cream;
   box-shadow:none;
-  //background-color: rgb(241, 245, 245);
+  //background-color: rgb(176, 239, 239);
 }
 
 .grid-item {
   //gap:20px;
   min-width: 160px;
+  max-height: 270px;
   margin: 10px;
   scroll-snap-align: start;
-  //background-color: $card-background;
+ //background-color: $card-background;
   color: black;
 
   //background-color: rgb(184, 178, 178);
 }
+
 
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
@@ -52,7 +54,8 @@
 .solution-compunds {
   display: grid;
   grid-template-columns: 1fr;
-  background-color: whitesmoke;
+
+  background-color: transparent;
 }
 
 .compound-card {
@@ -123,6 +126,10 @@ mat-card-title {
   margin: 5px;
 }
 
+.scroll-title {
+ font-size: larger;
+ text-transform: capitalize;
+}
 /* .mat-headline-5 {
   margin-top: .2em;
   text-align: center;
@@ -139,3 +146,14 @@ mat-icon {
  
 } 
 */
+
+@media (max-width:400px){
+.scroll-title {
+ font-size: 15px;
+ text-transform: capitalize;
+}
+
+.less-space {font-size: smaller;}
+
+
+}
