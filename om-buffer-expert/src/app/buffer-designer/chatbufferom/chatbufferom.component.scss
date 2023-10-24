@@ -27,14 +27,15 @@
 }
 
 .form-card{
-  //background-color:rgb(170, 15, 15);
+ background-color:rgb(15, 36, 170);
   display:flex;
   width:96%;
   margin-left: 10px;
-box-shadow: none;
+  box-shadow: none;
 
 }
 .formf {display:flex;flex-direction: column;
+  background-color:rgb(170, 15, 15);
 }
 
 .message-card{
