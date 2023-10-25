@@ -9,21 +9,27 @@
     "summary";
   gap: 5px;
   padding:5px;
-  background-color: whitesmoke;
+  background-color:transparent;
   grid-area: 1/1;
   box-shadow: none;
   align-items: center;
 }
-
+.formf{
+  background-color: transparent;
+}
 .calculator {
   display: grid;
+  //background-color: #ba4069;
+  border-color: $primary-color;
+  border-width: 3px;
+  
   grid-template-columns: 1.5fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
     "col1" "col2";
 
-  width: 97%;
-  background-color: whitesmoke;
+  width: 98%;
+
   margin-left: .5vw;
   //gap:1em;
   padding: 5px;
@@ -53,7 +59,7 @@
 
 .summary {
   width: 97%;
-  background-color: whitesmoke;
+ // background-color: whitesmoke;
   margin-left: 0.5vw;
   box-shadow: none;
 // padding:5px;
@@ -73,9 +79,11 @@
 .solution-card {
   //display:flex;
   margin-top:5px;
+  border-width: 3px;
+  border-color: $primary-color;
   //position: relative;
   //background-color:$card-background-cream;
-  width:97%;
+  width:99%;
   align-self:center;
   //flex-direction: column;
   //align-items: stretch;
@@ -106,10 +114,12 @@
 
 .red_flag {
   color:red;
+  margin-left:20px;
 }
 
 .green_flag {
   color:rgb(18, 121, 7);
+  margin-left:20px;
 }
 .avatar {
   position: absolute;
@@ -128,7 +138,7 @@
 .message-card{
   margin:5px;
   padding: 0px;
-  width: 97%;
+  width: 99%;
   align-self: center;
 }
 
@@ -148,17 +158,20 @@
     grid-template-rows: auto 1fr;
     /* order with summary on bottom */
     grid-area: 1/1;
+    background-color: transparent;
   }
   
   .calculator {
     display:grid;
+    border-color: $primary-color;
+    border-width: 3px;
     grid-template-columns: 1.5fr 1fr;
     grid-template-rows:1fr;
    grid-template-areas:
    "col1" "col2";
 
     width:97%;
-    background-color: whitesmoke;
+    //background-color: whitesmoke;
     margin-left:0.5vw;
     //gap:1em;
     padding: 5px;
@@ -178,7 +191,7 @@
 
 
 
-@media (max-width: 800px) {
+@media (max-width: 400px) {
   .main-card-container {
     grid-template-columns: 1fr;
     /* stack vertically */
@@ -222,7 +235,7 @@
 
   .summary {
     width: 97%;
-    background-color: whitesmoke;
+   // background-color: whitesmoke;
     margin-left: 1vw;
    
   }

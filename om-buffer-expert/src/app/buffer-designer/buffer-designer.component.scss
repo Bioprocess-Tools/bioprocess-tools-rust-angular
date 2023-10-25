@@ -28,26 +28,31 @@ display:flex;
 
 
   .intro {
-    width:100%;
+    //width:100%;
   }
 
   .mat-headline-5 {
     text-align: center;
     font-weight: 600;
+    margin-top:5px;
     margin-bottom: 2px;
     color: $headtext-color;
     background-color: $primary-color;
-    padding:10px;
+    padding:5px;
   }
 
   .intro-text-main {
-
+    padding:2px;
+    margin:2px;
     background-color: whitesmoke;
+    box-shadow: inset;
   }
   
   .intro-text {
-    font-size: large;
-
+   // font-size: large;
+background-color: transparent;
+box-shadow: none;
+//margin:10px;
   }
   
   .small-title {
@@ -87,7 +92,7 @@ display:flex;
   }
   
   .navigate {
-    background-color: rgb(12, 206, 38);
+   // background-color: rgb(12, 206, 38);
    // height:100%;
   }
   

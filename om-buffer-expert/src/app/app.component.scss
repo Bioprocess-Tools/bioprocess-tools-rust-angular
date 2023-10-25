@@ -48,7 +48,7 @@
 @media (max-width: 480px){
   .main {
     display: grid;
-    width:100%;
+    grid-template-columns: 1fr;//DONT CHANGE
     grid-template-rows: 60px auto;
     grid-template-areas: 
     "header"
