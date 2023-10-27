@@ -41,7 +41,7 @@
 
 
 .option1-full-width_Left {
-  width: 90%;
+  width: 100%;
   //height:100%;
   margin-bottom: 8px;
   //display: flex;
@@ -77,17 +77,12 @@
 }
 
 .solution-card {
-  //display:flex;
+  display:none;
   margin-top:5px;
   border-width: 3px;
   border-color: $primary-color;
-  //position: relative;
-  //background-color:$card-background-cream;
   width:99%;
   align-self:center;
-  //flex-direction: column;
-  //align-items: stretch;
-  //justify-content: space-around;
  
 }
 
@@ -215,22 +210,6 @@
     align-self: center;
     //align-items: center;
    justify-items: center;
-  }
-
-  .option1-full-width_Left {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
-  }
-  
-  .option1-full-width_Right {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
   }
 
   .summary {

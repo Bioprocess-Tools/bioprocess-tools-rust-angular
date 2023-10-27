@@ -32,6 +32,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatSliderModule} from '@angular/material/slider';
 import { BufferDesignerRoutingModule } from './buffer-designer-routing.module';
 import { RouterModule } from '@angular/router';
+import {MatExpansionModule} from '@angular/material/expansion'
 
 
 
@@ -67,7 +68,8 @@ BufferDesignerComponent
     MatTooltipModule,
     MatSidenavModule,
     BufferDesignerRoutingModule,
-    RouterModule
+    RouterModule,
+     MatExpansionModule
   ],
   exports: [
     BufferDesignerComponent  // <- This is important

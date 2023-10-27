@@ -100,6 +100,7 @@ this.initializeForm()
       if (solution) {
         // Assuming you have a method to handle the form population
         this.populateForm(solution);
+        this.returnedSolution = solution;
       }
     }
     );

@@ -10,24 +10,18 @@
   
      gap: 5px; /* gap between */
      padding:5px;
-     background-color: whitesmoke;
+     background-color: transparent;
     grid-area:1/1;
     box-shadow: none;
     align-items:center;
     //height:100%;
     }
-
-    .less-space{
-      margin-bottom:1px;
+    .formf{
+      background-color: transparent;
     }
 
-    .red_flag {
-      color:#ba4069;
-    }
 
-    .green_flag {
-      color:rgb(18, 121, 7);
-    }
+
 
     .calculator {
       display:grid;
@@ -36,8 +30,9 @@
      grid-template-areas:
      "col1" "col2";
   
-      width:97%;
-      background-color: whitesmoke;
+      width:98%;
+      border-color: $primary-color;
+      border-width: 3px;
       margin-left:0.5vw;
       //gap:1em;
       padding: 5px;
@@ -46,49 +41,46 @@
       box-shadow: none;
     }
 
-  .option1-full-width_Left {
-    width:90%;
-    //height:100%;
-    margin-bottom:8px;
-    //display: flex;
-
-  }
-
-  .option1-full-width_Right{
-    width:100%;
-    //height:100%;
-    margin-bottom:8px;
-    //display: flex;
-  }
-  .summary{
-
-    width: 97%;
-    //background-color: rgb(194, 43, 43);
-    margin-left: 0.5vw;
-    box-shadow: none;
-    //align-self: stretch;
-  }
-
-
-  .wide-button {
-    grid-column: span 2;
-    width: 90%;
-    //margin-left: 5vw;
-    //background-color: $background-green;
-  }
-
-.col1 {
-  justify-self: center;
-}
+    .option1-full-width_Left {
+      width:100%;
+      //height:100%;
+      margin-bottom:8px;
+      //display: flex;
   
+    }
+  
+    .option1-full-width_Right{
+      width:100%;
+      //height:100%;
+      margin-bottom:8px;
+      //display: flex;
+    }
+    .summary{
+
+      width: 97%;
+      //background-color: rgb(194, 43, 43);
+      margin-left: 0.5vw;
+      box-shadow: none;
+      //align-self: stretch;
+    }
+  
+    .wide-button {
+      grid-column: span 2;
+      width: 90%;
+      //margin-left: 5vw;
+      //background-color: $background-green;
+    }
 
 .solution-card {
+  display:none;
   margin-top:5px;
-  //position: relative;
-  //background-color: rgb(116, 11, 11);
-  width:97%;
+  border-width: 3px;
+  border-color: $primary-color;
+  width:99%;
+
   align-self:center;
 }
+
 
 .example-card-holder {
   position:relative;
@@ -98,18 +90,39 @@
   margin-bottom:5px;
 }
 
-
-.red_flag {
-  color:red;
-}
-.green_flag {
-  color:rgb(18, 121, 7);}
-
 .pH {
   align-self: center;
- padding-bottom:5px;
+
 
 }
+
+.less-space{
+  margin-bottom:1px;
+}
+
+.red_flag {
+  color:#ba4069;
+}
+
+.green_flag {
+  color:rgb(18, 121, 7);
+}
+
+
+
+
+
+
+.col1 {
+  justify-self: left; //CHECK
+}
+  
+.col2 {
+  justify-self: left;
+}
+
+
+
 .avatar {
   position: absolute;
   top: 10px;
@@ -127,7 +140,7 @@
 .message-card{
   margin:3px;
   padding: 0px;
-  width: 97%;
+  width: 99%;
   align-self: center;
 }
 
@@ -138,46 +151,28 @@
     grid-template-rows: auto 1fr;
     /* order with summary on bottom */
     grid-area: 1/1;
+    background-color: transparent;
   }
   
   .calculator {
     display:grid;
-    grid-template-columns: 2fr 1fr;
+    border-color: $primary-color;
+    border-width: 3px;
+    grid-template-columns: 1.5fr 1fr;
     grid-template-rows:1fr;
    grid-template-areas:
    "col1" "col2";
 
     width:97%;
-    background-color: whitesmoke;
+    //background-color: whitesmoke;
     margin-left:0.5vw;
     //gap:1em;
     padding: 5px;
     align-items:center;
-    justify-items: stretch;
+    justify-items: center;
   }
 
-  .option1-full-width_Left {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
-  }
-  
-  .option1-full-width_Right {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
-  }
 
-  .summary {
-    width: 97%;
-    background-color: whitesmoke;
-    margin-left: 1vw;
-   
-  }
 
   .wide-button {
     grid-column: span 2;
@@ -194,7 +189,7 @@
 
 
 
-@media (max-width: 800px) {
+@media (max-width: 400px) {
   .main-card-container {
     grid-template-columns: 1fr;
     /* stack vertically */
@@ -220,21 +215,6 @@
    // justify-items: stretch;
   }
 
-  .option1-full-width_Left {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
-  }
-  
-  .option1-full-width_Right {
-    width: 100%;
-    //height:100%;
-    margin-bottom: 8px;
-    //display: flex;
-  
-  }
 
   .summary {
     width: 97%;

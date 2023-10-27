@@ -1,15 +1,16 @@
-import { Component,OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component,OnInit, Input, ViewChild, ElementRef , ViewChildren, QueryList, AfterViewInit} from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Solution } from '../../shared/models/solution.model';
 import { Compound } from '../../shared/models/compound.model';
 import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-solution-table',
   templateUrl: './solution-table.component.html',
   styleUrls: ['./solution-table.component.scss']
 })
-export class SolutionTableComponent implements OnInit {
+export class SolutionTableComponent implements OnInit, AfterViewInit {
   solutions: Solution[] = [];
   solution: Solution;
   jsonData: Solution[] = [];
@@ -17,6 +18,7 @@ export class SolutionTableComponent implements OnInit {
   imageUrl:string;
   displayedColumns: string[] = [];
   example_solution:Solution;
+ 
 constructor(
   private solutionService: SolutionService, 
   private omRoute:Router,
@@ -26,9 +28,37 @@ constructor(
 
   }
 
-viewDetails(solution:Solution) {
+  @ViewChildren('solutionElement') solutionElements!: QueryList<ElementRef>; // Access the elements as a QueryList
+
+  ngAfterViewInit() {
+    // Subscribe to changes in the list
+    this.solutionElements.changes.subscribe(_ => {
+      this.scrollToSolution(this.solution);
+    });
+  }
+  scrollToSolution(solution: any, index?: number) {
+    // If the index is not provided, find the index
+    if (index === undefined) {
+      index = this.solutions.indexOf(solution);
+    }
+
+    // Scroll to the specific solution
+    const solutionElementsArray = this.solutionElements.toArray();
+    if (solutionElementsArray[index]) {
+      solutionElementsArray[index].nativeElement.scrollIntoView({ behavior: 'smooth', block:'nearest', inline:'start' });
+    }
+  }
+
+
+
+
+viewDetails(solution:Solution, index:number,event: MouseEvent) {
+  //event.preventDefault();
   this.solution = solution;
   this.selectedSolution = solution;
+  this.editSolution(solution);
+  this.scrollToSolution(solution, index)
+
 }
 
 editNewForm (solution:Solution){

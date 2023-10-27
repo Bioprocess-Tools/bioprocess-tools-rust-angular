@@ -10,7 +10,7 @@
 .grid-container {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 45%;
+  grid-auto-columns: 25%;
   margin: 5px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -18,20 +18,36 @@
   //background-color: $card-background-cream;
   box-shadow:none;
   //background-color: rgb(176, 239, 239);
+  border-width: 3px;
+border-color: $primary-color;
 }
 
 .grid-item {
   //gap:20px;
-  min-width: 160px;
+  max-width: 250px;
   max-height: 270px;
   margin: 10px;
   scroll-snap-align: start;
  //background-color: $card-background;
   color: black;
+  margin:3px;
+
 
   //background-color: rgb(184, 178, 178);
 }
 
+.solution_summary {
+box-shadow:inset;
+//background-color: aqua;
+margin:3px;
+border-width: 3px;
+border-color: $primary-color;
+}
+
+.solution_title {
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
@@ -154,6 +170,33 @@ mat-icon {
 }
 
 .less-space {font-size: smaller;}
+
+// .grid-container {
+//   display: grid;
+//   grid-auto-flow: row; /* Adjust to allow content to flow in rows */
+//   grid-auto-rows: 25%; /* Define the size for the auto-generated grid rows */
+//   margin: 5px;
+//   overflow-y: auto; /* Allow vertical scrolling */
+//   overscroll-behavior-y: contain; /* Contain overscroll to the current container */
+//   scroll-snap-type: y proximity; /* Snap scrolling to the closest element edge */
+  
+//   /* Your other styles remain unchanged */
+//   box-shadow: none;
+//   /* Other style properties you need */
+// }
+
+.grid-item {
+  //gap:20px;
+  min-width: 120px;
+  max-height: 270px;
+  //margin: 10px;
+ // padding:5px;
+  scroll-snap-align: start;
+ background-color: $card-background;
+  color: black;
+
+  //background-color: rgb(184, 178, 178);
+}
 
 
 }
