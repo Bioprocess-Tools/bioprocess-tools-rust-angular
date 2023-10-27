@@ -101,13 +101,14 @@
 }
 
 .red_flag {
-  color:#ba4069;
+  color:red;
+  margin-left:20px;
 }
 
 .green_flag {
   color:rgb(18, 121, 7);
+  margin-left:20px;
 }
-
 
 
 
@@ -138,8 +139,8 @@
 }
 
 .message-card{
-  margin:3px;
-  padding: 0px;
+  margin:15px;
+ // padding-left: px;
   width: 99%;
   align-self: center;
 }

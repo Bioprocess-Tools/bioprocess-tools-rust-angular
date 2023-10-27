@@ -72,7 +72,6 @@
   </form>
 
   <mat-card class="summary">
-    <mat-divider></mat-divider>
     <mat-card class="solution-card" *ngIf="returnedSolution;">
       <mat-card-header>
         <!-- <div class="avatar">{{avatarLetter}}</div> -->
@@ -98,13 +97,13 @@
      <p class="red_flag" *ngIf="returnedSolution.result_flag['flag'] !== 'green'">  <span class="material-icons">
       error
       </span>
-      {{ returnedSolution.result_flag['comment'] }}
+      {{ '  '+returnedSolution.result_flag['comment'] }}
       </p>
 
       <p class="green_flag" *ngIf="returnedSolution.result_flag['flag'] == 'green'">  <span class="material-icons">
         check_circle
         </span>
-        Done!
+        &nbsp; Done!
         </p>
     </mat-card>
 

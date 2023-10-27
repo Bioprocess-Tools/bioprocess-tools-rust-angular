@@ -56,29 +56,30 @@
 
 
       <mat-card class="navigate">
-        <nav mat-tab-nav-bar 
-          mat-stretch-tabs color="accent"
+        <nav mat-tab-nav-bar mat-stretch-tabs="false"
+          color="accent"
           class="example-stretched-tabs" >
-          <a mat-tab-link
+          <a mat-tab-link 
+
             [routerLink]="['genai-buffer-designer']"
             routerLinkActive
             #firstTab="routerLinkActive"
             [active]="firstTab.isActive">
-            GenAI Buffer Designer
+            GenAI Input
           </a>
           <a mat-tab-link
             [routerLink]="['classic-buffer-designer']"
             routerLinkActive
             #secondTab="routerLinkActive"
             [active]="secondTab.isActive">
-            Classic Buffer Designer
+            Designer
           </a>
           <a mat-tab-link
             [routerLink]="['ph-calculator']"
             routerLinkActive
             #thirdTab="routerLinkActive"
             [active]="thirdTab.isActive">
-            pH Calculator
+            Calculator
           </a>
         </nav>
      
@@ -88,7 +89,7 @@
 
     <mat-card class="summary">
 
-        <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1>
+        <!-- <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1> -->
         <app-solution-table></app-solution-table>
 
  

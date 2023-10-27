@@ -1,5 +1,5 @@
 <mat-card class="card-background">
-  <mat-card-title>Your solutions</mat-card-title>
+  <!-- <mat-card-title>Your solutions</mat-card-title> -->
   <mat-card class="grid-container">
     <mat-card class="grid-item"  *ngFor="let solution of solutions; let i = index"
       [class.highlighted-card]="selectedSolution === solution" (click)="viewDetails(solution,i,$event)">
@@ -19,10 +19,11 @@
       </mat-card-actions> -->
     </mat-card>
   </mat-card>
-  <!-- <mat-divider class="thick"> </mat-divider> -->
+
 </mat-card>
 
 <mat-card class="solution_summary" *ngIf="solution">
+ <mat-divider class="thick"> </mat-divider>
 <mat-card-header  >
   <h4 class="solution_title"> {{solution.name}}</h4>
 </mat-card-header>
