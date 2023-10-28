@@ -24,8 +24,8 @@ border-color: $primary-color;
 
 .grid-item {
   //gap:20px;
-  max-width: 250px;
-  max-height: 270px;
+  width: 250px;
+  //max-height: 270px;
   margin: 10px;
   scroll-snap-align: start;
  //background-color: $card-background;
@@ -187,8 +187,8 @@ mat-icon {
 
 .grid-item {
   //gap:20px;
-  min-width: 120px;
-  max-height: 270px;
+  width: 30vw;
+  //max-height: 30vw;s
   //margin: 10px;
  // padding:5px;
   scroll-snap-align: start;

@@ -44,7 +44,7 @@ export class SolutionService {
 
  private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
   
-// private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ //private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
 
