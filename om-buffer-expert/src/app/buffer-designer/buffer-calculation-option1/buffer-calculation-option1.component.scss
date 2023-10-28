@@ -1,146 +1,101 @@
-@import '../../../shared-styles.scss';
+@import "../../../shared-styles.scss";
 
 .main-card-container {
-     display: grid;
-     //margin-top: 15px;
-     grid-template-rows: auto auto;
-     grid-template-areas:
-     "calculator" 
-     "summary";
-  
-     gap: 5px; /* gap between */
-     padding:5px;
-     background-color: transparent;
-    grid-area:1/1;
-    box-shadow: none;
-    align-items:center;
-    //height:100%;
-    }
-    .formf{
-      background-color: transparent;
-    }
+  display: grid;
+  //margin-top: 15px;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "calculator"
+    "summary";
 
-
-
-
-    .calculator {
-      display:grid;
-      grid-template-columns: 1.5fr 1fr;
-      grid-template-rows:1fr;
-     grid-template-areas:
-     "col1" "col2";
-  
-      width:98%;
-      border-color: $primary-color;
-      border-width: 3px;
-      margin-left:0.5vw;
-      //gap:1em;
-      padding: 5px;
-      align-items:center;
-      justify-items: center;
-      box-shadow: none;
-    }
-
-    .option1-full-width_Left {
-      width:100%;
-      //height:100%;
-      margin-bottom:8px;
-      //display: flex;
-  
-    }
-  
-    .option1-full-width_Right{
-      width:100%;
-      //height:100%;
-      margin-bottom:8px;
-      //display: flex;
-    }
-    .summary{
-
-      width: 97%;
-      //background-color: rgb(194, 43, 43);
-      margin-left: 0.5vw;
-      box-shadow: none;
-      //align-self: stretch;
-    }
-  
-    .wide-button {
-      grid-column: span 2;
-      width: 90%;
-      //margin-left: 5vw;
-      //background-color: $background-green;
-    }
-
-.solution-card {
-  display:none;
-  margin-top:5px;
-  border-width: 3px;
+  gap: 5px; /* gap between */
+  padding: 5px;
+  background-color: transparent;
+  grid-area: 1/1;
+  box-shadow: none;
+  align-items: center;
+}
+.formf {
+  background-color: transparent;
+}
+.calculator {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "col1" "col2";
+  width: 98%;
   border-color: $primary-color;
-  width:99%;
-
-  align-self:center;
+  border-width: 3px;
+  margin-left: 0.5vw;
+  padding: 5px;
+  align-items: center;
+  justify-items: center;
+  box-shadow: none;
 }
 
+.option1-full-width_Left {
+  width: 98%;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+.option1-full-width_Right {
+  width: 100%;
+  margin-bottom: 8px;
+}
+.col1 {
+  justify-self: left;
+}
+
+.col2 {
+  justify-self: right;
+}
+.summary {
+  width: 97%;
+  margin-left: 0.5vw;
+  box-shadow: none;
+}
+
+.wide-button {
+  grid-column: span 2;
+  width: 90%;
+}
+
+.solution-card {
+  display: none;
+  margin-top: 5px;
+  border-width: 3px;
+  border-color: $primary-color;
+  width: 99%;
+  align-self: center;
+}
 
 .example-card-holder {
-  position:relative;
+  position: relative;
   background-color: rgb(248, 242, 247);
-  width:98%;
-  margin-left:5px;
-  margin-bottom:5px;
+  width: 98%;
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
 
 .pH {
   align-self: center;
-
-
 }
-
-.less-space{
-  margin-bottom:1px;
+.less-space {
+  margin-bottom: 1px;
 }
-
 .red_flag {
-  color:red;
-  margin-left:20px;
+  color: red;
+  margin-left: 20px;
 }
-
 .green_flag {
-  color:rgb(18, 121, 7);
-  margin-left:20px;
+  color: rgb(18, 121, 7);
+  margin-left: 20px;
 }
 
-
-
-
-
-.col1 {
-  justify-self: left; //CHECK
-}
-  
-.col2 {
-  justify-self: left;
-}
-
-
-
-.avatar {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  color: #fff;
-  background: #ba4069;
-  font-size: 24px;
-  line-height: 50px;
-  text-align: center;
-}
-
-.message-card{
+.message-card {
   //margin:15px;
- // padding-left: px;
+  // padding-left: px;
   width: 99%;
   align-self: center;
 }
@@ -154,26 +109,23 @@
     grid-area: 1/1;
     background-color: transparent;
   }
-  
+
   .calculator {
-    display:grid;
+    display: grid;
     border-color: $primary-color;
     border-width: 3px;
-    grid-template-columns: 1.5fr 1fr;
-    grid-template-rows:1fr;
-   grid-template-areas:
-   "col1" "col2";
+    grid-template-columns: 1.25fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1" "col2";
 
-    width:97%;
+    width: 100%;
     //background-color: whitesmoke;
-    margin-left:0.5vw;
+    margin-left: 0.5vw;
     //gap:1em;
     padding: 5px;
-    align-items:center;
+    align-items: center;
     justify-items: center;
   }
-
-
 
   .wide-button {
     grid-column: span 2;
@@ -181,54 +133,35 @@
     margin-left: 5vw;
     //background-color: $background-green;
   }
-
-
 }
 
-
-
-
-
-
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .main-card-container {
     grid-template-columns: 1fr;
-    /* stack vertically */
     grid-template-rows: auto 1fr;
-    /* order with summary on bottom */
     grid-area: 1/1;
   }
   .calculator {
     display: flex;
-    //grid-template-columns: 1fr;
-    //grid-template-rows: 1fr 1fr;
-   // grid-template-areas:
-   //   "col1" 
-    //  "col2";
-    align-items:center;
+    align-items: center;
     width: 97%;
-    //background-color: rgb(183, 16, 16);
     margin-left: 1vw;
-    //gap:1em;
+
     padding: 10px;
     align-self: center;
-    //align-items: center;
-   // justify-items: stretch;
+    justify-items: center;
   }
-
-
   .summary {
     width: 97%;
-    background-color: whitesmoke;
     margin-left: 1vw;
-   
   }
 
   .wide-button {
     grid-column: span 2;
     width: 90%;
-    //margin-left: 5vw;
-    //background-color: $background-green;
   }
 
+  .option1-full-width_Left {
+    width:100%;
+  }
 }

@@ -90,6 +90,9 @@ box-shadow: none;
     box-shadow: none;
   }
 
+  .mat-mdc-tab-links {
+    justify-content: flex-end;
+  }
   
   .small-title {
     //font-size: auto;
@@ -173,7 +176,9 @@ box-shadow: none;
     .summary {
       max-height: max-content;
     }
-  
+    .mat-mdc-tab-links {
+      justify-content: space-evenly;
+    }
    /*  .calculator {
       display:grid;
       grid-template-rows: auto;
@@ -189,7 +194,7 @@ box-shadow: none;
   
     } */
   }
-    @media (max-width:400px) {
+    @media (max-width:480px) {
       .example-stretched-tabs {
         margin: 0px;
         font-size: small;
@@ -210,16 +215,24 @@ box-shadow: none;
     }
     
     .a {
-    //  font-size: 3px;
+     font-size: small;
       padding:0px;
 
     }
 
     .mdc-tab {
-      padding-right:13px;
-      padding-left:13px;
+      padding-right:3vw;
+      padding-left:3vw;
     }
 
+    .mat-mdc-tab-header-pagination {
+      min-width: 4px;
+
+    }
+    .mat-mdc-tab-header {
+      line-height: 12px;
+      font-size:12px;
+    }
   
     .mat-tab-label {
      // font-size: 3px;

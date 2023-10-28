@@ -3,9 +3,9 @@
   <mat-card class="grid-container">
     <mat-card class="grid-item"  *ngFor="let solution of solutions; let i = index"
       [class.highlighted-card]="selectedSolution === solution" (click)="viewDetails(solution,i,$event)">
-      <mat-card-header  >
+
         <p class="scroll-title" #solutionElement> {{solution.name}}</p>
-      </mat-card-header>
+
       <!-- <mat-card-content
         *ngFor="let compound of solution.compound_concentrations | keyvalue">
         <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</p>
