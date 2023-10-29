@@ -10,7 +10,7 @@
 .grid-container {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 25%;
+  grid-auto-columns: auto;
   margin: 5px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -20,6 +20,7 @@
   //background-color: rgb(176, 239, 239);
   border-width: 3px;
 border-color: $primary-color;
+gap:5px;
 }
 
 .grid-item {
@@ -52,6 +53,11 @@ border-color: $primary-color;
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
   border: 3px solid $accent-green; /* Change color as per your requirement */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.unhighlighted-card {
+  border:$primary-color;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .less-space{
@@ -190,15 +196,18 @@ mat-icon {
 //   box-shadow: none;
 //   /* Other style properties you need */
 // }
-
+.grid-container{
+  grid-auto-columns: auto;
+}
 .grid-item {
   //gap:20px;
-  width: 38vw;
+  width: 30vw;
   //width:auto;
-  max-height: 15vh;
+ max-height: 40vw;
   //max-height: auto;
-  //margin: 10px;
+ // margin: 10px;
  // padding:5px;
+ //gap:15px;
   scroll-snap-align: start;
  background-color: whitesmoke;
   color: black;
