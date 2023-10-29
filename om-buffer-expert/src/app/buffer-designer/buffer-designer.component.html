@@ -58,7 +58,7 @@
       <mat-card class="navigate">
         <nav mat-tab-nav-bar mat-stretch-tabs="false"
           color="accent"
-          class="example-stretched-tabs" >
+          class="example-stretched-tabs"  [tabPanel]="tabPanel">
           <a mat-tab-link 
 
             [routerLink]="['genai-buffer-designer']"
@@ -82,8 +82,9 @@
             Calculator
           </a>
         </nav>
-     
-             <router-outlet></router-outlet> 
+        <mat-tab-nav-panel #tabPanel>
+          <router-outlet></router-outlet>
+        </mat-tab-nav-panel>
       </mat-card>
     </mat-card>
 

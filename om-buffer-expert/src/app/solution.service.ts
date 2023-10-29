@@ -42,17 +42,17 @@ export class SolutionService {
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
   solutionEdited: EventEmitter<void> = new EventEmitter<void>();
 
- private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+ //private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
   
- //private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
 
     //console.log("God: in construction", this.acidCompounds);
     this.get_ion_names();
-    this.get_example_solution();
-    this.populate_compounds();
     this.get_buffer_compound_names();
+    this.populate_compounds();
+    this.get_example_solution();
   }
 
   changeSolution(solution: Solution) {

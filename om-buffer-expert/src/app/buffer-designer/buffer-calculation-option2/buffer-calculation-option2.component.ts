@@ -36,18 +36,39 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.basicCompounds = this.solutionService.getAppBasicCompounds();
     this.saltCompounds = this.solutionService.getAppSaltCompounds();
     this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-    this.initializeForm()
+    // this.solutionSubscription = this.solutionService.example_solution$.subscribe(
+    //   example_solution => {
+    //     this.example_solution = example_solution;
+    //     this.returnedSolution = example_solution;
+    //     //console.log("God example solution in buffer calc 1", this.example_solution);
+    //   }
+
+      
+      
+    // );
+
+
+    //console.log("God: came here first on on refresh", this.returnedSolution)
+    
+   // console.log("God: came here first on on refresh example", this.returnedSolution)
+
+    
+   // this.initializeForm()
   }
 
   ngOnInit(): void {
 
-    this.initializeForm();
+    //console.log("God: came here on refresh", this.returnedSolution)
 
     //this.solutionService.get_example_solution();
     this.solutionService.example_solution$.subscribe(
       example_solution => {
         this.example_solution = example_solution;
         this.returnedSolution = example_solution;
+        this.initializeForm();
+        this.populateForm(this.returnedSolution);
+        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
+
         //console.log("God example solution in buffer calc 2", this.example_solution);
       }
     );
@@ -55,18 +76,29 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       if (solution) {
         // Assuming you have a method to handle the form population
         this.populateForm(solution);
-        this.returnedSolution = solution;
+         this.returnedSolution = solution;
+         this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
+  
       }
     });
+
+    //console.log("God: came here third on refresh", this.returnedSolution)
+
   
+    //console.log("God: came here fourth on refresh", this.returnedSolution)
+   
   }
 
   bufferSelectionValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+      let isValid = true;
       const selection1 = control.get('acidicCompound')?.value;
       const selection2 = control.get('basicCompound')?.value;
-  
-      const isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+      if (this.buffer_compound_names.length!=0) {
+       isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+     // console.log("God: validator ", this.buffer_compound_names,isValid)
+      }
+      //console.log("God: validator true ", this.buffer_compound_names,isValid)
   
       // Return error object or null based on validation result
       return isValid ? null : { 'invalidBufferSelection': true };
@@ -78,6 +110,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
 
   populateForm(solution: Solution) {
+    if(solution) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
     //console.log("God in change", solution)
@@ -96,7 +129,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.bufferForm.controls['basicCompound'].setValue(basename);
     this.bufferForm.controls['totalConcentration'].setValue(solution.target_buffer_concentration);
     this.bufferForm.controls['target_pH'].setValue( solution.pH);
- 
+    this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
+
+  }
   }
 
   ngOnDestroy() {
@@ -106,9 +141,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   }
   initializeForm() {
     this.bufferForm = this.formBuilder.group({
-      acidicCompound: [this.acidCompounds[12], Validators.required],
-      basicCompound: [this.basicCompounds[12], Validators.required],
-      saltCompound: this.saltCompounds[2],
+      acidicCompound: ['Sodium Phosphate Monobasic', Validators.required],
+      basicCompound: ['Sodium Phosphate Dibasic', Validators.required],
+      saltCompound: 'Sodium Chloride',
       totalConcentration: [.04, [Validators.required, Validators.min(0), Validators.max(.4)]],
       target_pH: [7.00, [Validators.required, Validators.min(3), Validators.max(10)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],

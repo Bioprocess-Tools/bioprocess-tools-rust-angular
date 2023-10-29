@@ -29,9 +29,12 @@
 </mat-card-header>
 <mat-card-content
   *ngFor="let compound of solution.compound_concentrations | keyvalue">
-  <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</p>
+  <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.4-4' }}M</p>
   <mat-divider></mat-divider>
 </mat-card-content>
+<mat-card-content ><p class="pH"> pH : {{solution.pH | number:
+  '1.3-3'}}</p></mat-card-content>
+
 </mat-card>
 <mat-card *ngIf="solution" class="solution-compunds">
   <!-- <mat-card-title class="utext">Compounds in solution - {{solution.name}}</mat-card-title> -->
@@ -46,7 +49,7 @@
         <p class="less-space"> Buffer Ion: {{compound.buffer_ion_name}}</p>
         <p class="less-space"> Concentration (M) :
           {{solution.compound_concentrations[compound.name]
-          | number:'1.3-3'}}</p>
+          | number:'1.4-4'}}</p>
         <p class="less-space"> Concentration (g/L) :
           {{solution.compound_concentrations[compound.name]*compound.molecular_weight
           | number:'1.3-3'}} </p>

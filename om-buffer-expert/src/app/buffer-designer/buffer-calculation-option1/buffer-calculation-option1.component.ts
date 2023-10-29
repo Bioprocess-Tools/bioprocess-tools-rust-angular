@@ -37,7 +37,7 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
   public acidicCompound;
   public basicCompound;
   public saltCompound;
-  public buffer_compound_names;
+  public buffer_compound_names=null;
 
 
   constructor(
@@ -55,15 +55,17 @@ this.saltCompounds = this.solutionService.getAppSaltCompounds();
 this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
 
 
-this.solutionSubscription = this.solutionService.example_solution$.subscribe(
-  example_solution => {
-    this.example_solution = example_solution;
-    this.returnedSolution = example_solution;
-    //console.log("God example solution in buffer calc 1", this.example_solution);
-  }
+// this.solutionSubscription = this.solutionService.example_solution$.subscribe(
+//   example_solution => {
+//     this.example_solution = example_solution;
+//     this.returnedSolution = example_solution;
+//     this.populateForm(this.returnedSolution);
+ 
+//     //console.log("God example solution in buffer calc 1", this.example_solution);
+//   }
   
-);
-this.initializeForm()
+// );
+//this.initializeForm()
   }
 
   changeForm(solution:Solution) {
@@ -94,25 +96,44 @@ this.initializeForm()
     }
 
   ngOnInit() {
-    this.initializeForm();
+
+    //this.bufferForm.reset;
+
+    this.solutionService.example_solution$.subscribe(
+      example_solution => {
+        this.example_solution = example_solution;
+        this.returnedSolution = example_solution;
+        this.initializeForm();
+        this.populateForm(this.returnedSolution);
+        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
+
+        //console.log("God example solution in buffer calc 2", this.example_solution);
+      }
+    );
+
 
     this.solutionSubscription = this.solutionService.currentSolution.subscribe(solution => {
       if (solution) {
         // Assuming you have a method to handle the form population
         this.populateForm(solution);
         this.returnedSolution = solution;
+        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
       }
     }
     );
-
+   // this.initializeForm();
   }
 
 bufferSelectionValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
+       let isValid = true;
       const selection1 = control.get('acidicCompound')?.value;
       const selection2 = control.get('basicCompound')?.value;
-  
-      const isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+      if (this.buffer_compound_names.length!=0) {
+       isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+      //console.log("God: validator ", this.buffer_compound_names,isValid)
+      }
+      //console.log("God: validator true ", this.buffer_compound_names,isValid)
   
       // Return error object or null based on validation result
       return isValid ? null : { 'invalidBufferSelection': true };
@@ -125,11 +146,15 @@ bufferSelectionValidator(): ValidatorFn {
   
 
   populateForm(solution: Solution) {
+
+    if(solution) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
     //console.log("God in change", solution)
     let saltname:string=null;
     let saltconc =0;
+    let acidconc = 0;
+    let baseconc = 0;
     
     if(solution.compounds.length=3) {
       //console.log("God here in salt", solution.compounds[2].name);
@@ -138,12 +163,14 @@ bufferSelectionValidator(): ValidatorFn {
       this.bufferForm.controls['saltCompound'].setValue(saltname);
       this.bufferForm.controls['saltConcentration'].setValue( saltconc);
     }
-    let acidconc = solution.compound_concentrations[acidname].toPrecision(4);
-    let baseconc = solution.compound_concentrations[basename].toPrecision(4);
+    acidconc = parseFloat(solution.compound_concentrations[acidname].toPrecision(4));
+    baseconc =  parseFloat(solution.compound_concentrations[basename].toPrecision(4));
     this.bufferForm.controls['acidicCompound'].setValue(acidname);
     this.bufferForm.controls['basicCompound'].setValue(basename);
     this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
     this.bufferForm.controls['basicConcentration'].setValue (baseconc);
+  }
+
   }
 
   ngOnDestroy(): void {
@@ -154,9 +181,9 @@ bufferSelectionValidator(): ValidatorFn {
 
   initializeForm() {
     this.bufferForm = this.formBuilder.group({
-      acidicCompound: [this.acidCompounds[12], Validators.required],
-      basicCompound: [this.basicCompounds[12], Validators.required],
-      saltCompound: this.saltCompounds[2],
+      acidicCompound: ['Sodium Phosphate Monobasic', Validators.required],
+      basicCompound: ['Sodium Phosphate Dibasic', Validators.required],
+      saltCompound: 'Sodium Chloride',
       acidicConcentration: [.019, [Validators.required, Validators.min(0), Validators.max(.4)]],
       basicConcentration: [.021, [Validators.required, Validators.min(0), Validators.max(.4)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],

@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'om-buffer-expert';
-  solution:Solution | undefined;
+ // solution:Solution | undefined;
   constructor(
     
     private solutionService: SolutionService,
