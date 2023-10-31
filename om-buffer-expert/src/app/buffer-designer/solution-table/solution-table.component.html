@@ -2,7 +2,7 @@
   <!-- <mat-card-title>Your solutions</mat-card-title> -->
   <mat-card class="grid-container">
     <mat-card class="grid-item"  *ngFor="let solution of solutions; let i = index"
-    [ngClass]="{ 'highlighted-card': selectedSolution === solution, 'unhighlighted-card': selectedSolution.result_flag===null }"  (click)="viewDetails(solution,i,$event)">
+    [ngClass]="{ 'highlighted-card': solutions.length==1 ||  selectedSolution === solution, 'unhighlighted-card': selectedSolution==null }"  (click)="viewDetails(solution,i,$event)">
 
         <p class="scroll-title" #solutionElement> {{solution.name}}</p>
 

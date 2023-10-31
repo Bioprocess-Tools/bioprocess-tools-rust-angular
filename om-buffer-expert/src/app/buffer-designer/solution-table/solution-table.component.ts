@@ -91,7 +91,25 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
   return truncConcs;
 }
   ngOnInit() {
+    this.solutionService.example_solution$.subscribe(
+      example_solution => {
+        this.example_solution = example_solution;
+        this.selectedSolution = example_solution;
+
+        //console.log("God example solution in buffer calc 2", this.example_solution);
+      }
+    );
+
+
+
+
+
     this.solutions = this.solutionService.getAllSolutions();
+
+
+
+
+
     // Subscribe to changes in the solution service
     this.solutionService.solutionAdded.subscribe(() => {
       this.solutions = this.solutionService.getAllSolutions();
@@ -99,6 +117,7 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
     
       this.solution = this.solutions[this.solutions.length-1];
       this.selectedSolution=this.solution;
+      console.log("God: got selectedsolution", this.selectedSolution)
       this.example_solution = this.solutionService.example_solution;
     });
     this.apiService.getSafetyImageUrl(2244).subscribe(url => {
