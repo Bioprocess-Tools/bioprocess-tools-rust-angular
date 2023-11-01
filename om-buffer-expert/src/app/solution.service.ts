@@ -1,37 +1,42 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SolutionService {
-
   omSolutions: Solution[] = [];
 
-  compoundFunDict$: BehaviorSubject<{ [name: string]: string }> = new BehaviorSubject<{ [name: string]: string }>({});
+  compoundFunDict$: BehaviorSubject<{ [name: string]: string }> =
+    new BehaviorSubject<{ [name: string]: string }>({});
   acidCompounds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  basicCompounds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  basicCompounds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
+    []
+  );
   saltCompounds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   ion_names$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
-  example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
-  edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(null);
-
+  example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
+    null
+  );
+  edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
+    null
+  );
 
   private solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
 
   compoundNames: string[] = [];
-  ion_names:string[]=[];
+  ion_names: string[] = [];
   compoundFunDict: { [name: string]: string } = {};
   acidCompounds: string[] = [];
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
-  edit_solution:Solution;
+  edit_solution: Solution;
   compounds_acidic: string[] = [];
   compounds_basic: string[] = [];
   compounds_salt: string[] = [];
@@ -42,12 +47,12 @@ export class SolutionService {
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
   solutionEdited: EventEmitter<void> = new EventEmitter<void>();
 
- private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
-  
- //private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ // private apiUrl =
+    'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+
+  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
-
     //console.log("God: in construction", this.acidCompounds);
     this.get_ion_names();
     this.get_buffer_compound_names();
@@ -59,97 +64,94 @@ export class SolutionService {
     this.solutionSource.next(solution);
   }
 
-api_get_buffer_compound_names(): Observable<string[]> {
-  return this.http.get<string[]>(this.apiUrl+ '/get_buffer_compound_names')
-}
+  api_get_buffer_compound_names(): Observable<string[]> {
+    return this.http.get<string[]>(this.apiUrl + '/get_buffer_compound_names');
+  }
 
-get_buffer_compound_names() {
+  get_buffer_compound_names() {
+    this.api_get_buffer_compound_names().subscribe(
+      (data) => {
+        this.buffer_compound_names = data;
 
-  this.api_get_buffer_compound_names().subscribe(
-    data => {
-      this.buffer_compound_names = data;
-      
-      //console.log("God buffer names", this.buffer_compound_names);
-    },
-    error => {
-      console.error('Failed to fetch buffer compounds', error);
-    }
-  );
+        //console.log('God buffer names', this.buffer_compound_names);
 
-
-}
+      },
+      (error) => {
+        console.error('Failed to fetch buffer compounds', error);
+      }
+    );
+  }
 
   api_get_compounds(): Observable<{ [name: string]: string }> {
-    return this.http.get<{ [name: string]: string }>(this.apiUrl+ '/compound-fun-dict')
+    return this.http.get<{ [name: string]: string }>(
+      this.apiUrl + '/compound-fun-dict'
+    );
   }
-  
+
   populate_compounds(): void {
-
-      this.api_get_compounds().subscribe(
-        data => {
-          this.compoundFunDict2 = data;
-          this.group_compounds_type(this.compoundFunDict2);
-          //console.log("God got dictionary", this.compoundFunDict2);
-          //console.log("God got types", this.compounds_acidic, this.compounds_basic, this.compounds_salt);
-
-        },
-        error => {
-          console.error('Failed to fetch compounds', error);
-        }
-      );
-    
+    this.api_get_compounds().subscribe(
+      (data) => {
+        this.compoundFunDict2 = data;
+        this.group_compounds_type(this.compoundFunDict2);
+        //console.log("God got dictionary", this.compoundFunDict2);
+        // console.log(
+        //   'God got types',
+        //   this.compounds_acidic,
+        //   this.compounds_basic,
+        //   this.compounds_salt
+        // );
+      },
+      (error) => {
+        console.error('Failed to fetch compounds', error);
+      }
+    );
   }
 
-// Assuming you have a dictionary of compounds like this:
-// let compounds_dict = {'compound1': 'A', 'compound2': 'B', 'compound3': 'S', ...};
-private group_compounds_type (compounds_dict) {
-
-
-for (let [compound, type] of Object.entries(compounds_dict)) {
-    switch (type) {
+  // Assuming you have a dictionary of compounds like this:
+  // let compounds_dict = {'compound1': 'A', 'compound2': 'B', 'compound3': 'S', ...};
+  private group_compounds_type(compounds_dict) {
+    for (let [compound, type] of Object.entries(compounds_dict)) {
+      switch (type) {
         case 'A':
-            this.compounds_acidic.push(compound);
-            break;
+          this.compounds_acidic.push(compound);
+          break;
         case 'B':
-            this.compounds_basic.push(compound);
-            break;
+          this.compounds_basic.push(compound);
+          break;
         case 'S':
-           this.compounds_salt.push(compound)
-            break;
+          this.compounds_salt.push(compound);
+          break;
         default:
-            // Handle any other case or unexpected value here, if needed.
-            //console.log(`Unexpected type: ${type} for compound: ${compound}`);
-            break;
+          // Handle any other case or unexpected value here, if needed.
+          //console.log(`Unexpected type: ${type} for compound: ${compound}`);
+          break;
+      }
     }
-}
-this.compounds_salt.push("None")
-this.compounds_acidic.sort();
-this.compounds_salt.sort();
-this.compounds_basic.sort();
-}
+    this.compounds_salt.push('None');
+    this.compounds_acidic.sort();
+    this.compounds_salt.sort();
+    this.compounds_basic.sort();
+  }
 
   // Implement the necessary methods to interact with the solution object
   // For example:
 
-
   get_ion_names(): void {
-    const endpoint = `${this.apiUrl}/get_ion_names`; 
-    this.http.get<string[]>(endpoint).pipe(
-
-      map((response: string[])=> {
-        this.ion_names = response;
-        this.ion_names$.next(this.ion_names);
-        //console.log("God in service", this.ion_names);
-        
-
-      }),
-  
-    ).subscribe();
-
+    const endpoint = `${this.apiUrl}/get_ion_names`;
+    this.http
+      .get<string[]>(endpoint)
+      .pipe(
+        map((response: string[]) => {
+          this.ion_names = response;
+          this.ion_names$.next(this.ion_names);
+          //console.log("God in service", this.ion_names);
+        })
+      )
+      .subscribe();
   }
 
   get_example_solution(): void {
-    const endpoint = `${this.apiUrl}/get_example_solution`; 
+    const endpoint = `${this.apiUrl}/get_example_solution`;
     this.http.get<Solution>(endpoint).subscribe(
       (response) => {
         this.example_solution = response;
@@ -159,18 +161,15 @@ this.compounds_basic.sort();
       },
 
       (error) => {
-        console.error('Error fetching solution', error)
+        console.error('Error fetching solution', error);
       }
-
     );
-     
-    }
-
+  }
 
   solution_calculate_pH(solution: Solution): Observable<Solution> {
-    const endpoint = `${this.apiUrl}/solution_calculate_pH`; 
+    const endpoint = `${this.apiUrl}/solution_calculate_pH`;
     return this.http.post<Solution>(endpoint, solution).pipe(
-      map(response => {
+      map((response) => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
         //console.log("God returned", response)
@@ -178,55 +177,58 @@ this.compounds_basic.sort();
       })
     );
   }
-  solution_calculate_total_Conc_target_pH(solution: Solution): Observable<Solution> {
+  solution_calculate_total_Conc_target_pH(
+    solution: Solution
+  ): Observable<Solution> {
     //console.log("God got here");
-    const endpoint = `${this.apiUrl}/solution_totalconc_target_pH`; 
+    const endpoint = `${this.apiUrl}/solution_totalconc_target_pH`;
     return this.http.post<Solution>(endpoint, solution).pipe(
-      map(response => {
+      map((response) => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
-        //console.log("God returned", response)
+        console.log("God returned", response)
         return solution;
       })
     );
   }
 
- addSolution(solution: Solution) {
+  addSolution(solution: Solution) {
     this.omSolutions.push(solution);
     //console.log("God", this.omSolutions)
-    this.solutionAdded.emit(); 
+    this.solutionAdded.emit();
   }
 
   get_emitted() {
     return this.edit_solution;
   }
 
-edit_solutionf(solution:Solution){
-  this.edit_solution = solution;
-  //("God in solution service 1", this.edit_solution);
-  this.edit_solution$.next(this.edit_solution);
+  edit_solutionf(solution: Solution) {
+    this.edit_solution = solution;
+    //("God in solution service 1", this.edit_solution);
+    this.edit_solution$.next(this.edit_solution);
     this.solutionEdited.emit();
     //console.log("God in solution service 2", this.edit_solution);
   }
-getAllSolutions(): Solution[] {
+  getAllSolutions(): Solution[] {
     return this.omSolutions;
   }
 
-getAppAcidCompounds(): string[] {
-  return this.compounds_acidic;
-}
+  getAppAcidCompounds(): string[] {
+    return this.compounds_acidic;
+  }
 
-getAppBasicCompounds(): string[] {
-  return this.compounds_basic;
-}
+  getAppBasicCompounds(): string[] {
+    return this.compounds_basic;
+  }
 
-getAppSaltCompounds(): string[] {
-  return this.compounds_salt;
-}
+  getAppSaltCompounds(): string[] {
+    return this.compounds_salt;
+  }
 
-getAppBufferCompounds(): string[] {
-  return this.buffer_compound_names;
-}
+  getAppBufferCompounds(): string[] {
+    //console.log('God buffer names getApp', this.buffer_compound_names);
+    return this.buffer_compound_names;
+  }
 
   // Add other methods as needed
 }

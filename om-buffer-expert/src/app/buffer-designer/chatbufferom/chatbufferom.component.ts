@@ -5,6 +5,7 @@ import { Solution } from '../../shared/models/solution.model';
 import { SolutionService } from '../../solution.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import {Router} from '@angular/router';
+import * as levenshtein from 'fast-levenshtein'
 
 @Component({
   selector: 'app-chatbufferom',
@@ -28,13 +29,56 @@ export class ChatbufferomComponent implements OnInit{
 ionValidator():ValidatorFn {
   return (control:AbstractControl): {   [key:string]:any} | null => {
  
-   // console.log("got here goddess")
+    //console.log("got here goddess",this.getCorrectionSuggestion("Please make me 40mM Pispate buffer pH 4") )
     const inputwords = this.getWords(control.value);
+
     this.ion_names_lower = this.ion_names.map(word => word.toLowerCase());
     const isValid = inputwords.some(word => this.ion_names_lower.includes(word));
     //console.log("God is valid", isValid);
     return isValid ? null : {'invalidIon': {value: control.value} };
   };
+}
+
+suggestWord(inputWord: string): string {
+  const maxDistance = 5; // Set a threshold. Adjust as needed.
+  let closestWord = "";
+  let minDistance = Infinity;
+
+  for (const word of this.ion_names) {
+    let distance = levenshtein.get(inputWord, word);
+    if (inputWord[0].toLowerCase() !== word[0].toLowerCase()) {
+      distance += 0.5;  // Add a penalty for mismatched starting letters
+    }
+
+    if (distance < minDistance && distance <= maxDistance) {
+      minDistance = distance;
+      closestWord = word;
+    }
+  }
+
+  return minDistance <= maxDistance ? closestWord : "";
+}
+
+
+getCorrectionSuggestion(input: string): string {
+  const inputWords = input.split(/\s+/); // Split input string by spaces
+  let suggestions: string[] = [];
+
+  for (const word of inputWords) {
+    const suggestedWord = this.suggestWord(word);
+    if (suggestedWord && suggestedWord !== word) {
+      suggestions.push(suggestedWord);
+    }
+  }
+
+  if (suggestions.length === 0) {
+    return ""; // No suggestions
+  } else if (suggestions.length === 1) {
+    return `Did you mean ${suggestions[0]}?`;
+  } else {
+    const lastSuggestion = suggestions.pop();
+    return `Did you mean ${suggestions.join(', ')} or ${lastSuggestion}?`;
+  }
 }
 
   ngOnInit() {

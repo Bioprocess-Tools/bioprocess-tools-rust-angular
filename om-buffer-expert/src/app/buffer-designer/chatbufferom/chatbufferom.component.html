@@ -13,6 +13,14 @@
           <p class="instruct">Input should have a buffer species that I know. See tooltip.</p>
         </div>
       </mat-form-field>
+      <p class="green_flag" *ngIf="form.valid"><span class="material-icons">
+        check_circle
+        </span>  Buffer species</p> 
+  
+      <!-- Cross icon for invalid state -->
+      <p class="red_flag" *ngIf="form.invalid && form.dirty"><span class="material-icons">
+        error
+        </span>  Buffer species</p>
       <button class="wide-button" color="primary" mat-raised-button type="submit"
         [disabled]="!form.valid">Get Buffer Design</button>
     </form>
@@ -38,12 +46,12 @@
       '1.3-3'}}</h2>
     </mat-card>
     <mat-card class="message-card" *ngIf="response_solution">
-     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] !== 'green'">  <span class="material-icons">
+     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] !== 'green' && form.dirty==false">  <span class="material-icons">
       error
       </span>
         {{ '  '+response_solution.result_flag['comment'] }}
       </p>
-      <p class="green_flag" *ngIf="response_solution.result_flag['flag'] == 'green'">  <span class="material-icons">
+      <p class="green_flag" *ngIf="response_solution.result_flag['flag'] == 'green'&& form.dirty==false">  <span class="material-icons">
         check_circle
         </span>
         &nbsp; Done!

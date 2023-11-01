@@ -56,6 +56,7 @@ viewDetails(solution:Solution, index:number,event: MouseEvent) {
   //event.preventDefault();
   this.solution = solution;
   this.selectedSolution = solution;
+  console.log("God you selected",this.solutionService.getAllSolutions());
   this.editSolution(solution);
   this.scrollToSolution(solution, index)
 
@@ -117,7 +118,7 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
     
       this.solution = this.solutions[this.solutions.length-1];
       this.selectedSolution=this.solution;
-      console.log("God: got selectedsolution", this.selectedSolution)
+      //console.log("God: got selectedsolution", this.selectedSolution)
       this.example_solution = this.solutionService.example_solution;
     });
     this.apiService.getSafetyImageUrl(2244).subscribe(url => {

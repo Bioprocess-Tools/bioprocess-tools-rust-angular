@@ -53,7 +53,7 @@ this.acidCompounds = this.solutionService.getAppAcidCompounds();
 this.basicCompounds = this.solutionService.getAppBasicCompounds();
 this.saltCompounds = this.solutionService.getAppSaltCompounds();
 this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-
+//console.log("God:cmpds", this.acidCompounds, this.buffer_compound_names)
 
 // this.solutionSubscription = this.solutionService.example_solution$.subscribe(
 //   example_solution => {
@@ -106,7 +106,7 @@ this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
         this.initializeForm();
         this.populateForm(this.returnedSolution);
         this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
-
+        this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
         //console.log("God example solution in buffer calc 2", this.example_solution);
       }
     );
@@ -156,7 +156,7 @@ bufferSelectionValidator(): ValidatorFn {
     let acidconc = 0;
     let baseconc = 0;
     
-    if(solution.compounds.length=3) {
+    if(solution.compounds.length==3) {
       //console.log("God here in salt", solution.compounds[2].name);
       saltname = solution.compounds[2].name;
       saltconc = solution.compound_concentrations[saltname];
@@ -169,8 +169,9 @@ bufferSelectionValidator(): ValidatorFn {
     this.bufferForm.controls['basicCompound'].setValue(basename);
     this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
     this.bufferForm.controls['basicConcentration'].setValue (baseconc);
+    this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
   }
-
+ // this.bufferForm.markAsUntouched();
   }
 
   ngOnDestroy(): void {
@@ -240,6 +241,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.solutionService.addSolution(this.godSolution);
     //console.log(this.solutionService.getAllSolutions());
     this.calculatepH();
+    this.bufferForm.markAsUntouched();
     // Reset the form
     //this.bufferForm.reset();
     //changeForm(this.godSolution);
@@ -259,6 +261,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.solutionService.solution_calculate_pH(this.godSolution).subscribe((response: Solution) => {
       // Update the returnedSolution property with the response
       this.returnedSolution = response;
+      //this.bufferForm.markAsPristine;
       //console.log(this.returnedSolution)
     });
   }

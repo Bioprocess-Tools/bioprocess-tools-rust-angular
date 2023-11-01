@@ -21,7 +21,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
-  public buffer_compound_names;
+  buffer_compound_names: string[] = [];
   //compoundNames: string[] = [];
   public godSolution = new Solution("God solution"); //solution to hold the user input
   public returnedSolution: Solution; //solution to hold the return from api
@@ -31,11 +31,10 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     public solutionService: SolutionService
   ) { 
-    this.acidCompounds = this.solutionService.getAppAcidCompounds();
-    //console.log("God acid",this.acidCompounds)
-    this.basicCompounds = this.solutionService.getAppBasicCompounds();
-    this.saltCompounds = this.solutionService.getAppSaltCompounds();
-    this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
+
+
+
+
     // this.solutionSubscription = this.solutionService.example_solution$.subscribe(
     //   example_solution => {
     //     this.example_solution = example_solution;
@@ -58,8 +57,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    //console.log("God: came here on refresh", this.returnedSolution)
 
+
+    
     //this.solutionService.get_example_solution();
     this.solutionService.example_solution$.subscribe(
       example_solution => {
@@ -67,9 +67,15 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
         this.returnedSolution = example_solution;
         this.initializeForm();
         this.populateForm(this.returnedSolution);
-        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
 
-        //console.log("God example solution in buffer calc 2", this.example_solution);
+        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true});
+        this.acidCompounds = this.solutionService.getAppAcidCompounds();
+        //console.log("God acid",this.acidCompounds)
+        this.basicCompounds = this.solutionService.getAppBasicCompounds();
+        this.saltCompounds = this.solutionService.getAppSaltCompounds();
+        this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
+
+        //console.log("God example solution in buffer calc 2", this.buffer_compound_names);
       }
     );
     this.solutionSubscription = this.solutionService.currentSolution.subscribe(solution => {
@@ -94,11 +100,12 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       let isValid = true;
       const selection1 = control.get('acidicCompound')?.value;
       const selection2 = control.get('basicCompound')?.value;
+
       if (this.buffer_compound_names.length!=0) {
-       isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
-     // console.log("God: validator ", this.buffer_compound_names,isValid)
-      }
-      //console.log("God: validator true ", this.buffer_compound_names,isValid)
+        isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
+       //console.log("God: validator ", this.buffer_compound_names,isValid)
+       }
+    // console.log("God: validator true ", this.buffer_compound_names,isValid,selection1,selection2)
   
       // Return error object or null based on validation result
       return isValid ? null : { 'invalidBufferSelection': true };
@@ -117,7 +124,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     let saltname:string=null;
     let saltconc =0;
     //console.log("God here in salt", solution.non_salt_compounds[0].name);
-    if(solution.compounds.length=3) {
+    if(solution.compounds.length==3) {
       
       saltname = solution.salt_compound.name;
       saltconc = solution.compound_concentrations[saltname];
@@ -132,6 +139,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
 
   }
+  //this.bufferForm.markAsUntouched();
   }
 
   ngOnDestroy() {
@@ -188,7 +196,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
     // Reset the form
     this.calculatepH()
-    //this.bufferForm.reset();
+    this.bufferForm.markAsUntouched();
   
 
   }
@@ -207,6 +215,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       //  Update the returnedSolution property with the response
       this.returnedSolution = response;
       this.avatarLetter = this.returnedSolution.buffer_species.charAt(0).toUpperCase()
+      //this.bufferForm.markAsPristine;
       //console.log("God: this is god solution", this.godSolution)
      // console.log("God: this is returned solution", this.returnedSolution)
     });

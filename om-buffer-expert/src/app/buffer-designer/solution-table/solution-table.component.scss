@@ -139,7 +139,8 @@ mat-card-title {
 .unique-ions {
   background-color: whitesmoke;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: column;
+  grid-template-columns: auto;
   margin: 5px;
   padding: 0px;
   overflow-x: auto;
@@ -151,6 +152,7 @@ mat-card-title {
 .unique-sub {
  // box-shadow: inset;
   //background-color: $card-background;
+  
   margin: 5px;
 }
 
@@ -179,6 +181,9 @@ mat-icon {
 @media (max-width:450px){
 .scroll-title {
 
+}
+.unique-sub{
+  width:38vw;
 }
 
 .less-space {font-size: smaller;}

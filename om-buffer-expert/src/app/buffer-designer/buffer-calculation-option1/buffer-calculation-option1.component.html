@@ -93,7 +93,7 @@
       <mat-divider></mat-divider>
 
     </mat-card>
-    <mat-card class="message-card" *ngIf="returnedSolution">
+    <mat-card class="message-card" *ngIf="returnedSolution && bufferForm.untouched==true">
      <p class="red_flag" *ngIf="returnedSolution?.result_flag['flag'] !== 'green'">  <span class="material-icons">
       error
       </span>
