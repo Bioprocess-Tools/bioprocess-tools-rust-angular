@@ -8,3 +8,16 @@
     max-width: 600px;
   }
 
+  .two-column-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.two-column-list li {
+    margin: 0;
+    padding: 0;
+}
+
