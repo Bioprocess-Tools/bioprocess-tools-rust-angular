@@ -142,7 +142,7 @@ getCorrectionSuggestion(input: string): string {
       .subscribe(response => {
         this.response_solution = new Solution("God");
         Object.assign(this.response_solution,response);
-        this.solutionService.addSolution(this.response_solution);
+        this.solutionService.add_Solution(this.response_solution);
         //console.log(this.response_solution)
       }); 
     

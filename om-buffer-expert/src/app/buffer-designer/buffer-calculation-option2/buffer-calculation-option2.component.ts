@@ -57,36 +57,49 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-
+    this.initializeForm();
 
     
     //this.solutionService.get_example_solution();
-    this.solutionService.example_solution$.subscribe(
-      example_solution => {
-        this.example_solution = example_solution;
-        this.returnedSolution = example_solution;
-        this.initializeForm();
-        this.populateForm(this.returnedSolution);
+    // this.solutionService.example_solution$.subscribe(
+    //   example_solution => {
+    //     this.example_solution = example_solution;
+    //     this.returnedSolution = example_solution;
+    //     this.initializeForm();
+    //     this.populateForm(this.returnedSolution);
 
-        this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true});
+    //     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true});
+    //     this.acidCompounds = this.solutionService.getAppAcidCompounds();
+    //     //console.log("God acid",this.acidCompounds)
+    //     this.basicCompounds = this.solutionService.getAppBasicCompounds();
+    //     this.saltCompounds = this.solutionService.getAppSaltCompounds();
+    //     this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
+
+    //     //console.log("God example solution in buffer calc 2", this.buffer_compound_names);
+    //   }
+    // );
+
+
+    this.solutionSubscription = this.solutionService.currentSolution.subscribe({
+      next:(solution) => {
+      if (solution) {
         this.acidCompounds = this.solutionService.getAppAcidCompounds();
         //console.log("God acid",this.acidCompounds)
         this.basicCompounds = this.solutionService.getAppBasicCompounds();
         this.saltCompounds = this.solutionService.getAppSaltCompounds();
         this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-
-        //console.log("God example solution in buffer calc 2", this.buffer_compound_names);
-      }
-    );
-    this.solutionSubscription = this.solutionService.currentSolution.subscribe(solution => {
-      if (solution) {
         // Assuming you have a method to handle the form population
         this.populateForm(solution);
          this.returnedSolution = solution;
          this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
-  
+
       }
-    });
+    }
+  }
+    );
+
+
+
 
     //console.log("God: came here third on refresh", this.returnedSolution)
 
@@ -191,7 +204,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     //this.solutionService.addSolution(solution);
 
     // Add the solution to the solution service
-    this.solutionService.addSolution(this.godSolution);
+    //this.solutionService.addSolution(this.godSolution);
     //console.log(this.solutionService.getAllSolutions())
 
     // Reset the form

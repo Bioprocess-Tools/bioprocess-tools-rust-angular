@@ -29,6 +29,10 @@ export class SolutionService {
   private solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
 
+
+  private solution_list_Source = new BehaviorSubject<Solution[]>([]);
+  solutions_list = this.solution_list_Source.asObservable();
+
   compoundNames: string[] = [];
   ion_names: string[] = [];
   compoundFunDict: { [name: string]: string } = {};
@@ -47,9 +51,9 @@ export class SolutionService {
   solutionAdded: EventEmitter<void> = new EventEmitter<void>();
   solutionEdited: EventEmitter<void> = new EventEmitter<void>();
 
-  private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+ // private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
- // private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     //console.log("God: in construction", this.acidCompounds);
@@ -156,7 +160,9 @@ export class SolutionService {
         this.example_solution = response;
         this.example_solution$.next(this.example_solution);
         //console.log("God : example", this.example_solution);
-        this.addSolution(this.example_solution);
+        this.add_Solution(this.example_solution);
+        this.changeSolution(this.example_solution);
+
       },
 
       (error) => {
@@ -165,6 +171,17 @@ export class SolutionService {
     );
   }
 
+  add_Solution(newSolution: Solution) {
+    // Get the current list of solutions
+    const currentSolutions = this.solution_list_Source.value;
+    // Add the new solution to the list
+    const updatedSolutions = [...currentSolutions, newSolution];
+    // Update the BehaviorSubject with the new list
+    this.solution_list_Source.next(updatedSolutions);
+  }
+
+
+
   solution_calculate_pH(solution: Solution): Observable<Solution> {
     const endpoint = `${this.apiUrl}/solution_calculate_pH`;
     return this.http.post<Solution>(endpoint, solution).pipe(
@@ -172,6 +189,9 @@ export class SolutionService {
         // Update the original solution object with the response data
         Object.assign(solution, response);
         //console.log("God returned", response)
+        this.add_Solution(solution);
+        this.changeSolution(solution);
+       
         return solution;
       })
     );
@@ -185,32 +205,35 @@ export class SolutionService {
       map((response) => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
-        console.log("God returned", response)
+        console.log("God returned", response);
+        this.add_Solution(solution);
+        this.changeSolution(solution);
+
         return solution;
       })
     );
   }
 
-  addSolution(solution: Solution) {
-    this.omSolutions.push(solution);
-    //console.log("God", this.omSolutions)
-    this.solutionAdded.emit();
-  }
+  // addSolution(solution: Solution) {
+  //   this.omSolutions.push(solution);
+  //   //console.log("God", this.omSolutions)
+  //   this.solutionAdded.emit();
+  // }
 
-  get_emitted() {
-    return this.edit_solution;
-  }
+  // get_emitted() {
+  //   return this.edit_solution;
+  // }
 
-  edit_solutionf(solution: Solution) {
-    this.edit_solution = solution;
-    //("God in solution service 1", this.edit_solution);
-    this.edit_solution$.next(this.edit_solution);
-    this.solutionEdited.emit();
-    //console.log("God in solution service 2", this.edit_solution);
-  }
-  getAllSolutions(): Solution[] {
-    return this.omSolutions;
-  }
+  // edit_solutionf(solution: Solution) {
+  //   this.edit_solution = solution;
+  //   //("God in solution service 1", this.edit_solution);
+  //   this.edit_solution$.next(this.edit_solution);
+  //   this.solutionEdited.emit();
+  //   //console.log("God in solution service 2", this.edit_solution);
+  // }
+  // getAllSolutions(): Solution[] {
+  //   return this.omSolutions;
+  // }
 
   getAppAcidCompounds(): string[] {
     return this.compounds_acidic;

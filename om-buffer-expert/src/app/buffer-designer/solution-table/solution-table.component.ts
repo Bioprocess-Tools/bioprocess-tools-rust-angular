@@ -1,30 +1,29 @@
-import { Component,OnInit, Input, ViewChild, ElementRef , ViewChildren, QueryList, AfterViewInit} from '@angular/core';
+import { Component,OnInit, Input, ViewChild, ElementRef , ViewChildren, QueryList, AfterViewInit,OnDestroy} from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Solution } from '../../shared/models/solution.model';
 import { Compound } from '../../shared/models/compound.model';
 import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
-
+import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-solution-table',
   templateUrl: './solution-table.component.html',
   styleUrls: ['./solution-table.component.scss']
 })
-export class SolutionTableComponent implements OnInit, AfterViewInit {
+export class SolutionTableComponent implements OnInit, AfterViewInit,OnDestroy {
   solutions: Solution[] = [];
   solution: Solution;
   jsonData: Solution[] = [];
   selectedSolution:Solution=null;
   imageUrl:string;
-  displayedColumns: string[] = [];
   example_solution:Solution;
- 
+  solutionSubscription?:Subscription;
 constructor(
   private solutionService: SolutionService, 
   private omRoute:Router,
   private apiService:ApiService) {
-    this.solutions = this.solutionService.getAllSolutions();
-    this.solution = this.solutions[this.solutions.length-1];
+   
+    // this.solution = this.solutions[this.solutions.length-1];
 
   }
 
@@ -50,29 +49,27 @@ constructor(
   }
 
 
-
+  ngOnDestroy(): void {
+    if (this.solutionSubscription) {
+      this.solutionSubscription.unsubscribe();
+    }
+  }
 
 viewDetails(solution:Solution, index:number,event: MouseEvent) {
   //event.preventDefault();
   this.solution = solution;
   this.selectedSolution = solution;
-  console.log("God you selected",this.solutionService.getAllSolutions());
+
   this.editSolution(solution);
   this.scrollToSolution(solution, index)
 
 }
 
-editNewForm (solution:Solution){
-  this.omRoute.navigate(['./pH-Calculator']);
-  this.solutionService.edit_solutionf(solution);
-  //console.log("God edit" , solution);
-}
 
 editSolution(solution: Solution) {
   // Assuming 'solution' is the data you want to pass to the forms
   this.solutionService.changeSolution(solution);
 }
-
 
 getIonCharges(highestCharge:number):number[] {
   let charges = [];
@@ -92,35 +89,51 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
   return truncConcs;
 }
   ngOnInit() {
-    this.solutionService.example_solution$.subscribe(
-      example_solution => {
-        this.example_solution = example_solution;
-        this.selectedSolution = example_solution;
+    // this.solutionService.example_solution$.subscribe(
+    //   example_solution => {
+    //     this.example_solution = example_solution;
+    //     this.selectedSolution = example_solution;
 
-        //console.log("God example solution in buffer calc 2", this.example_solution);
+    //     //console.log("God example solution in buffer calc 2", this.example_solution);
+    //   }
+    // );
+    this.solutionService.solutions_list.subscribe(solutions => {
+      this.solutions = solutions;
+    });
+    this.solutionSubscription = this.solutionService.currentSolution.subscribe({
+      next:(solution) => {
+      if (solution) {
+        // Assuming you have a method to handle the form population
+       
+         this.selectedSolution = solution;
+         this.solution = this.selectedSolution;
+  
       }
+    }
+  }
     );
 
 
 
 
 
-    this.solutions = this.solutionService.getAllSolutions();
 
 
 
 
 
     // Subscribe to changes in the solution service
-    this.solutionService.solutionAdded.subscribe(() => {
-      this.solutions = this.solutionService.getAllSolutions();
-      this.jsonData = this.solutions;
+    // this.solutionService.solutionAdded.subscribe(() => {
+    //   this.solutions = this.solutionService.getAllSolutions();
+    //   this.jsonData = this.solutions;
     
-      this.solution = this.solutions[this.solutions.length-1];
-      this.selectedSolution=this.solution;
-      //console.log("God: got selectedsolution", this.selectedSolution)
-      this.example_solution = this.solutionService.example_solution;
-    });
+    //   this.solution = this.solutions[this.solutions.length-1];
+    //   this.selectedSolution=this.solution;
+    //   //console.log("God: got selectedsolution", this.selectedSolution)
+    //   this.example_solution = this.solutionService.example_solution;
+    // });
+
+
     this.apiService.getSafetyImageUrl(2244).subscribe(url => {
         this.imageUrl = url;
       });
