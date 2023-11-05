@@ -22,25 +22,21 @@ export class SolutionService {
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
     null
   );
-  edit_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
-    null
-  );
 
   private solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
 
-
   private solution_list_Source = new BehaviorSubject<Solution[]>([]);
   solutions_list = this.solution_list_Source.asObservable();
 
-  compoundNames: string[] = [];
+
   ion_names: string[] = [];
-  compoundFunDict: { [name: string]: string } = {};
+
   acidCompounds: string[] = [];
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
   example_solution: Solution;
-  edit_solution: Solution;
+
   compounds_acidic: string[] = [];
   compounds_basic: string[] = [];
   compounds_salt: string[] = [];
@@ -48,10 +44,7 @@ export class SolutionService {
   buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
-  solutionAdded: EventEmitter<void> = new EventEmitter<void>();
-  solutionEdited: EventEmitter<void> = new EventEmitter<void>();
-
- // private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+  // private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
   private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
@@ -77,7 +70,6 @@ export class SolutionService {
         this.buffer_compound_names = data;
 
         //console.log('God buffer names', this.buffer_compound_names);
-
       },
       (error) => {
         console.error('Failed to fetch buffer compounds', error);
@@ -162,7 +154,6 @@ export class SolutionService {
         //console.log("God : example", this.example_solution);
         this.add_Solution(this.example_solution);
         this.changeSolution(this.example_solution);
-
       },
 
       (error) => {
@@ -180,8 +171,6 @@ export class SolutionService {
     this.solution_list_Source.next(updatedSolutions);
   }
 
-
-
   solution_calculate_pH(solution: Solution): Observable<Solution> {
     const endpoint = `${this.apiUrl}/solution_calculate_pH`;
     return this.http.post<Solution>(endpoint, solution).pipe(
@@ -191,7 +180,7 @@ export class SolutionService {
         //console.log("God returned", response)
         this.add_Solution(solution);
         this.changeSolution(solution);
-       
+
         return solution;
       })
     );
@@ -205,7 +194,7 @@ export class SolutionService {
       map((response) => {
         // Update the original solution object with the response data
         Object.assign(solution, response);
-        console.log("God returned", response);
+        console.log('God returned', response);
         this.add_Solution(solution);
         this.changeSolution(solution);
 
@@ -213,27 +202,6 @@ export class SolutionService {
       })
     );
   }
-
-  // addSolution(solution: Solution) {
-  //   this.omSolutions.push(solution);
-  //   //console.log("God", this.omSolutions)
-  //   this.solutionAdded.emit();
-  // }
-
-  // get_emitted() {
-  //   return this.edit_solution;
-  // }
-
-  // edit_solutionf(solution: Solution) {
-  //   this.edit_solution = solution;
-  //   //("God in solution service 1", this.edit_solution);
-  //   this.edit_solution$.next(this.edit_solution);
-  //   this.solutionEdited.emit();
-  //   //console.log("God in solution service 2", this.edit_solution);
-  // }
-  // getAllSolutions(): Solution[] {
-  //   return this.omSolutions;
-  // }
 
   getAppAcidCompounds(): string[] {
     return this.compounds_acidic;

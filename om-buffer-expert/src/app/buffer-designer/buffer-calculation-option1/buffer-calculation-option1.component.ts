@@ -198,13 +198,6 @@ bufferSelectionValidator(): ValidatorFn {
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
     },{validators: this.bufferSelectionValidator()});
 
-    // this.solutionService.solutionEdited.subscribe(() => {
-    //   this.solutionedit = this.solutionService.get_emitted();
-    //   //console.log("God in buffer calc", this.solutionedit);
-    //   this.changeForm(this.solutionedit);
-    
-    
-    // }); 
  
 }
 
@@ -241,20 +234,10 @@ bufferSelectionValidator(): ValidatorFn {
     }
 
     this.submitted=true;
-    //console.log(this.godSolution)
-    // Add Solution object to the SolutionService
-    //this.solutionService.addSolution(solution);
 
-    // Add the solution to the solution service
-    //this.solutionService.addSolution(this.godSolution);
-    //console.log(this.solutionService.getAllSolutions());
     this.calculatepH();
     this.bufferForm.markAsUntouched();
-    // Reset the form
-    //this.bufferForm.reset();
-    //changeForm(this.godSolution);
-    //this.bufferForm.controls['acidicCompound'].setValue('Sodium Phosphate Monobasic');
-    //console.log("God form", this.bufferForm.controls['acidicCompound'].value);
+  
   }
 
   user = {
@@ -269,8 +252,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.solutionService.solution_calculate_pH(this.godSolution).subscribe((response: Solution) => {
       // Update the returnedSolution property with the response
       this.returnedSolution = response;
-      //this.bufferForm.markAsPristine;
-      //console.log(this.returnedSolution)
+
     });
   }
 

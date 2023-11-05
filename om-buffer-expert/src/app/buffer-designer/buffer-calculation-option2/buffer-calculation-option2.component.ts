@@ -32,54 +32,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     public solutionService: SolutionService
   ) { 
 
-
-
-
-    // this.solutionSubscription = this.solutionService.example_solution$.subscribe(
-    //   example_solution => {
-    //     this.example_solution = example_solution;
-    //     this.returnedSolution = example_solution;
-    //     //console.log("God example solution in buffer calc 1", this.example_solution);
-    //   }
-
-      
-      
-    // );
-
-
-    //console.log("God: came here first on on refresh", this.returnedSolution)
-    
-   // console.log("God: came here first on on refresh example", this.returnedSolution)
-
-    
-   // this.initializeForm()
   }
 
   ngOnInit(): void {
 
     this.initializeForm();
 
-    
-    //this.solutionService.get_example_solution();
-    // this.solutionService.example_solution$.subscribe(
-    //   example_solution => {
-    //     this.example_solution = example_solution;
-    //     this.returnedSolution = example_solution;
-    //     this.initializeForm();
-    //     this.populateForm(this.returnedSolution);
-
-    //     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true});
-    //     this.acidCompounds = this.solutionService.getAppAcidCompounds();
-    //     //console.log("God acid",this.acidCompounds)
-    //     this.basicCompounds = this.solutionService.getAppBasicCompounds();
-    //     this.saltCompounds = this.solutionService.getAppSaltCompounds();
-    //     this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-
-    //     //console.log("God example solution in buffer calc 2", this.buffer_compound_names);
-    //   }
-    // );
-
-
+ 
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next:(solution) => {
       if (solution) {
@@ -98,13 +57,6 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   }
     );
 
-
-
-
-    //console.log("God: came here third on refresh", this.returnedSolution)
-
-  
-    //console.log("God: came here fourth on refresh", this.returnedSolution)
    
   }
 
@@ -124,9 +76,6 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       return isValid ? null : { 'invalidBufferSelection': true };
     };
   }
-
-
-
 
 
   populateForm(solution: Solution) {
@@ -169,17 +118,15 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       target_pH: [7.00, [Validators.required, Validators.min(3), Validators.max(10)]],
       saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
     },{validators: this.bufferSelectionValidator()});
-    //this.example_solution = this.solutionService.example_solution;
-    //console.log("God : example solution", this.example_solution)
+
   }
   onSubmit() {
-    //console.log("god here", this.bufferForm);
+
     this.godSolution = new Solution("God solution");
     if (this.bufferForm.invalid) {
       return;
     }
-    //console.log("god here 2");
-    //console.log(this.bufferForm)
+
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;
@@ -199,15 +146,6 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
     this.godSolution.pH = target_pH;
 
-    //console.log(this.godSolution)
-    // Add Solution object to the SolutionService
-    //this.solutionService.addSolution(solution);
-
-    // Add the solution to the solution service
-    //this.solutionService.addSolution(this.godSolution);
-    //console.log(this.solutionService.getAllSolutions())
-
-    // Reset the form
     this.calculatepH()
     this.bufferForm.markAsUntouched();
   
@@ -222,17 +160,14 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   avatarLetter = this.user.name.charAt(0).toUpperCase();
 
   calculatepH() {
-    // Make the API call to calculate pH
-    //console.log("God got to calc")
+
     this.solutionService.solution_calculate_total_Conc_target_pH(this.godSolution).subscribe((response: Solution) => {
       //  Update the returnedSolution property with the response
       this.returnedSolution = response;
       this.avatarLetter = this.returnedSolution.buffer_species.charAt(0).toUpperCase()
-      //this.bufferForm.markAsPristine;
-      //console.log("God: this is god solution", this.godSolution)
-     // console.log("God: this is returned solution", this.returnedSolution)
+
     });
-    //console.log(this.godSolution)
+
   }
 
 }
