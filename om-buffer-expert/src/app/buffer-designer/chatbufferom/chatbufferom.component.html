@@ -45,8 +45,8 @@
     <h2 class="pH"> pH : {{response_solution.pH | number:
       '1.3-3'}}</h2>
     </mat-card>
-    <mat-card class="message-card" *ngIf="response_solution">
-     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] !== 'green' && form.dirty==false">  <span class="material-icons">
+    <mat-card class="message-card" *ngIf="response_solution && form.untouched==true">
+     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] !== 'green'">  <span class="material-icons">
       error
       </span>
         {{ '  '+response_solution.result_flag['comment'] }}

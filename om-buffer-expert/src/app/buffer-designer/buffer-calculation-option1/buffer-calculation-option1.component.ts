@@ -24,8 +24,6 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
   example_solution: Solution;
   //solutionedit:Solution;
   submitted: boolean = false;
-
-
   public godSolution = new Solution("God solution");
   public returnedSolution: Solution;
   buffer_compound_names: string[] = [];
@@ -38,96 +36,33 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
 
   ) { 
 
-//this.loadCompoundNames();
 
-// this.acidCompounds = this.solutionService.getAppAcidCompounds();
-// this.basicCompounds = this.solutionService.getAppBasicCompounds();
-// this.saltCompounds = this.solutionService.getAppSaltCompounds();
-// this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-//console.log("God:cmpds", this.acidCompounds, this.buffer_compound_names)
-
-// this.solutionSubscription = this.solutionService.example_solution$.subscribe(
-//   example_solution => {
-//     this.example_solution = example_solution;
-//     this.returnedSolution = example_solution;
-//     this.populateForm(this.returnedSolution);
- 
-//     //console.log("God example solution in buffer calc 1", this.example_solution);
-//   }
-  
-// );
-//this.initializeForm()
   }
 
-  // changeForm(solution:Solution) {
-  //   //this.omroute.navigate(['./pH-Calculator']);
-  //   let acidname = solution.compounds[0].name;
-  //   let basename = solution.compounds[1].name;
-
-
-  //   //console.log("God in change", solution)
-  //   let saltname:string=null;
-  //   let saltconc =0;
-    
-  //   if(solution.compounds.length=3) {
-  //     //console.log("God here in salt", solution.compounds[2].name);
-  //     saltname = solution.compounds[2].name;
-  //     saltconc = solution.compound_concentrations[saltname];
-  //     this.bufferForm.controls['saltCompound'].setValue(saltname);
-  //     this.bufferForm.controls['saltConcentration'].setValue( saltconc);
-  //   }
-  //   let acidconc = solution.compound_concentrations[acidname];
-  //   let baseconc = solution.compound_concentrations[basename];
-  //   this.bufferForm.controls['acidicCompound'].setValue(acidname);
-  //   this.bufferForm.controls['basicCompound'].setValue(basename);
-  //   this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
-  //   this.bufferForm.controls['basicConcentration'].setValue (baseconc);
-  //   //console.log("God came to change",this.bufferForm);
-    
-  //   }
 
   ngOnInit(): void {
 
     //this.bufferForm.reset;
     this.initializeForm();
-    // this.solutionService.example_solution$.subscribe(
-    //   example_solution => {
-    //     this.example_solution = example_solution;
-    //     this.returnedSolution = example_solution;
-    //     this.initializeForm();
-    //     this.populateForm(this.returnedSolution);
-    //     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
-    //     this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-    //     //console.log("God example solution in buffer calc 2", this.example_solution);
-    //   }
-    // );
-
-
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next:(solution) => {
       if (solution) {
 
         this.acidCompounds = this.solutionService.getAppAcidCompounds();
-        //console.log("God acid",this.acidCompounds)
+       // console.log("God acid option 1",this.acidCompounds)
         this.basicCompounds = this.solutionService.getAppBasicCompounds();
         this.saltCompounds = this.solutionService.getAppSaltCompounds();
         this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-
-
         // Assuming you have a method to handle the form population
+        this.returnedSolution = solution;
         this.populateForm(solution);
-         this.returnedSolution = solution;
+
          this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
   
       }
     }
   }
     );
-
-
-
-
-
 
    // this.initializeForm();
   }
@@ -159,25 +94,33 @@ bufferSelectionValidator(): ValidatorFn {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
     //console.log("God in change", solution)
-    let saltname:string=null;
+    let saltname:string="None";
     let saltconc =0;
     let acidconc = 0;
     let baseconc = 0;
     
-    if(solution.compounds.length==3) {
-      //console.log("God here in salt", solution.compounds[2].name);
-      saltname = solution.compounds[2].name;
-      saltconc = solution.compound_concentrations[saltname];
-      this.bufferForm.controls['saltCompound'].setValue(saltname);
-      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
-    }
     acidconc = parseFloat(solution.compound_concentrations[acidname].toPrecision(4));
     baseconc =  parseFloat(solution.compound_concentrations[basename].toPrecision(4));
     this.bufferForm.controls['acidicCompound'].setValue(acidname);
     this.bufferForm.controls['basicCompound'].setValue(basename);
     this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
     this.bufferForm.controls['basicConcentration'].setValue (baseconc);
+
+    if(solution.compounds.length==3) {
+      //console.log("God here in salt", solution.compounds[2].name);
+      saltname = solution.salt_compound.name;
+      saltconc = solution.compound_concentrations[saltname];
+      this.bufferForm.controls['saltCompound'].setValue(saltname);
+      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+    } 
+    else {
+      this.bufferForm.controls['saltCompound'].setValue(saltname);
+      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+    }
+
     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
+
+
   }
  // this.bufferForm.markAsUntouched();
   }

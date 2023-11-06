@@ -99,12 +99,19 @@ ionValidator():ValidatorFn {
     }
     else { 
       //console.log("God: Good to got.");
+
+
+
+
      this.apiService.sendUserInput(userInput)
       .subscribe(response => {
         this.response_solution = new Solution("God");
         Object.assign(this.response_solution,response);
         this.solutionService.add_Solution(this.response_solution);
-        //console.log(this.response_solution)
+
+        this.solutionService.changeSolution(this.response_solution);
+        this.form.markAsUntouched();
+        console.log(this.response_solution);
       }); 
     
   }

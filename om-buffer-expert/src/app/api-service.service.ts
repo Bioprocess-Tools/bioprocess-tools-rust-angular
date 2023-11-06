@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
- // private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api';
+// private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api';
  private apiUrl = 'http://127.0.0.1:5000/api'; 
   constructor(private http: HttpClient) { }
 
@@ -24,34 +24,5 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/feedback`,formData)
   }
 
-
-  getSafetyImageUrl(id: number): Observable<string> {
-    const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/${id}/JSON?heading=Chemical+Safety`;
-    return this.http.get(url).pipe(
-      map(response => this.parseImageUrl(response))
-    );
-  }
-  private parseImageUrl(data: any): string {
-    const sections = data['Record']['Section'];
-    for (const section of sections) {
-      if (section['TOCHeading'] === 'Chemical Safety') {
-        const informations = section['Information'];
-        for (const information of informations) {
-          if (information['Name'] === 'Chemical Safety') {
-            const stringWithMarkup = information['Value']['StringWithMarkup'];
-            for (const string of stringWithMarkup) {
-              const markups = string['Markup'];
-              for (const markup of markups) {
-                if (markup['Type'] === 'Icon') {
-                  return markup['URL'];
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return null;
-  }
 
 }

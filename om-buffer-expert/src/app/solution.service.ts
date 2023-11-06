@@ -44,9 +44,9 @@ export class SolutionService {
   buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
-  // private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+  //private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
-  private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     //console.log("God: in construction", this.acidCompounds);
@@ -58,6 +58,7 @@ export class SolutionService {
 
   changeSolution(solution: Solution) {
     this.solutionSource.next(solution);
+    console.log("God: changing solution", solution);
   }
 
   api_get_buffer_compound_names(): Observable<string[]> {
@@ -169,6 +170,7 @@ export class SolutionService {
     const updatedSolutions = [...currentSolutions, newSolution];
     // Update the BehaviorSubject with the new list
     this.solution_list_Source.next(updatedSolutions);
+    console.log("God added solution", newSolution);
   }
 
   solution_calculate_pH(solution: Solution): Observable<Solution> {
@@ -185,6 +187,25 @@ export class SolutionService {
       })
     );
   }
+
+
+  sendUserInput(userInput:string): void{
+    const requestBody = {text:userInput};
+
+    const endpoint = `${this.apiUrl}/chat`;
+   this.http.post<Solution>(endpoint,userInput).subscribe(
+      (response:Solution) => {
+        const solution = Object.assign(new Solution("God"),response);
+        
+        //console.log("God returned", response)
+        this.add_Solution(solution);
+        this.changeSolution(solution);
+      });
+
+  }
+
+
+
   solution_calculate_total_Conc_target_pH(
     solution: Solution
   ): Observable<Solution> {

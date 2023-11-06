@@ -99,7 +99,7 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
        
          this.selectedSolution = solution;
          this.solution = this.selectedSolution;
-  
+        
       }
     }
   }

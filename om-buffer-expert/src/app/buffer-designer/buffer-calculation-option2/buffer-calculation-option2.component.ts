@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Compound } from '../../shared/models/compound.model';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
@@ -29,7 +29,8 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    public solutionService: SolutionService
+    public solutionService: SolutionService,
+    private cdRef: ChangeDetectorRef
   ) { 
 
   }
@@ -42,21 +43,32 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next:(solution) => {
       if (solution) {
+        //this.initializeForm();
         this.acidCompounds = this.solutionService.getAppAcidCompounds();
-        //console.log("God acid",this.acidCompounds)
+       // console.log("God acid option 2",this.acidCompounds)
         this.basicCompounds = this.solutionService.getAppBasicCompounds();
         this.saltCompounds = this.solutionService.getAppSaltCompounds();
         this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
+      //  console.log("God: got buffer compounds", this.buffer_compound_names);
+      //  console.log("God: current solution",solution )
         // Assuming you have a method to handle the form population
+        this.returnedSolution = solution;
         this.populateForm(solution);
-         this.returnedSolution = solution;
+      //  this.cdRef.detectChanges();
+     //   console.log("God: done populating", this.bufferForm.value);
+        
+       
          this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
 
       }
     }
+    
+
   }
     );
 
+   // console.log("God: done populating after subscribe", this.bufferForm.value);
+   
    
   }
 
@@ -82,22 +94,34 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     if(solution) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
-    //console.log("God in change", solution)
-    let saltname:string=null;
+   // console.log("God in populate form option 2 ", solution)
+    let saltname:string="None";
     let saltconc =0;
+    this.bufferForm.controls['acidicCompound'].setValue(acidname);
+  //  console.log("God: getvalue", this.bufferForm.controls['acidicCompound'].getRawValue());
+if(acidname in this.acidCompounds) {
+ // console.log("God: the acid compound is here");
+}
+
+    this.bufferForm.controls['basicCompound'].setValue(basename);
+    this.bufferForm.controls['totalConcentration'].setValue(solution.target_buffer_concentration);
+    this.bufferForm.controls['target_pH'].setValue( solution.pH);
     //console.log("God here in salt", solution.non_salt_compounds[0].name);
     if(solution.compounds.length==3) {
-      
+      console.log("God: came here because there is salt",solution.salt_compound.name );
       saltname = solution.salt_compound.name;
       saltconc = solution.compound_concentrations[saltname];
       this.bufferForm.controls['saltCompound'].setValue(saltname);
       this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+      //console.log("God: loggin in salt option", this.bufferForm.value);
     }
- 
-    this.bufferForm.controls['acidicCompound'].setValue(acidname);
-    this.bufferForm.controls['basicCompound'].setValue(basename);
-    this.bufferForm.controls['totalConcentration'].setValue(solution.target_buffer_concentration);
-    this.bufferForm.controls['target_pH'].setValue( solution.pH);
+    else {
+      this.bufferForm.controls['saltCompound'].setValue(saltname);
+      this.bufferForm.controls['saltConcentration'].setValue( saltconc);
+
+    }
+  console.log("God: populating", this.bufferForm.value);
+
     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
 
   }
