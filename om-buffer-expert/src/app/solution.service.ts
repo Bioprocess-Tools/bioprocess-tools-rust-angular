@@ -32,6 +32,9 @@ export class SolutionService {
 
   ion_names: string[] = [];
 
+  buffer_species_names$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  buffer_species_names: string[] = [];
+
   acidCompounds: string[] = [];
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
@@ -44,9 +47,9 @@ export class SolutionService {
   buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
-  //private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
+  private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
- private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+ //private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     //console.log("God: in construction", this.acidCompounds);
@@ -54,11 +57,12 @@ export class SolutionService {
     this.get_buffer_compound_names();
     this.populate_compounds();
     this.get_example_solution();
+    this.get_buffer_species_names();
   }
 
   changeSolution(solution: Solution) {
     this.solutionSource.next(solution);
-    console.log("God: changing solution", solution);
+    //console.log("God: changing solution", solution);
   }
 
   api_get_buffer_compound_names(): Observable<string[]> {
@@ -146,6 +150,23 @@ export class SolutionService {
       .subscribe();
   }
 
+  get_buffer_species_names(): void {
+    const endpoint = `${this.apiUrl}/get_buffer_species_list`;
+    this.http
+      .get<string[]>(endpoint)
+      .pipe(
+        map((response: string[]) => {
+          this.buffer_species_names = response;
+          this.buffer_species_names$.next(this.buffer_species_names);
+          //console.log("God in service", this.ion_names);
+        })
+      )
+      .subscribe();
+  }
+
+
+
+
   get_example_solution(): void {
     const endpoint = `${this.apiUrl}/get_example_solution`;
     this.http.get<Solution>(endpoint).subscribe(
@@ -170,7 +191,7 @@ export class SolutionService {
     const updatedSolutions = [...currentSolutions, newSolution];
     // Update the BehaviorSubject with the new list
     this.solution_list_Source.next(updatedSolutions);
-    console.log("God added solution", newSolution);
+    //console.log("God added solution", newSolution);
   }
 
   solution_calculate_pH(solution: Solution): Observable<Solution> {

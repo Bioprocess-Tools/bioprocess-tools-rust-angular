@@ -5,6 +5,8 @@ import { Solution } from '../../shared/models/solution.model';
 import { SolutionService } from '../../solution.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import {Router} from '@angular/router';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -19,6 +21,9 @@ export class ChatbufferomComponent implements OnInit{
   ion_names:string[]=[];
   ion_names_lower:string[]=[];
   example_solution: Solution;
+  buffer_species_names:string[]=[];
+  filteredBufferSpecies: Observable<string[]>;
+ // bufferSpeciesControl= new FormControl();
 
   constructor(private apiService: ApiService,  private router: Router,   public solutionService: SolutionService)
    { 
@@ -50,6 +55,26 @@ ionValidator():ValidatorFn {
         //console.log("God got this", this.ion_names);
       }
     );
+    this.solutionService.buffer_species_names$.subscribe(
+      buffer_species_names => {
+        this.buffer_species_names = buffer_species_names;
+        //console.log("God got this", this.buffer_species_names);
+      }
+    );
+
+    this.form = new FormGroup({
+      userInput: new FormControl('',),
+      bufferSpeciesControl: new FormControl('',)
+    });
+   this.form.get('userInput').setValidators([this.ionValidator()]);
+ this.form.get('userInput').updateValueAndValidity();
+
+    this.filteredBufferSpecies = this.form.controls['bufferSpeciesControl'].valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
 
     this.solutionService.example_solution$.subscribe(
       example_solution => {
@@ -62,13 +87,14 @@ ionValidator():ValidatorFn {
     //this.ion_names_lower = this.ion_names.map(word => word.toLowerCase());
     //console.log("God: on init ", this.ion_names_lower);
 
-    this.form = new FormGroup({
-      userInput: new FormControl('',),
 
-    });
-   this.form.get('userInput').setValidators([this.ionValidator()]);
- this.form.get('userInput').updateValueAndValidity();
   }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.buffer_species_names.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
 
   getWords(sentence: string): string[] {
     // The regular expression matches any word (sequence of letters) that is
@@ -110,8 +136,11 @@ ionValidator():ValidatorFn {
         this.solutionService.add_Solution(this.response_solution);
 
         this.solutionService.changeSolution(this.response_solution);
+        this.form.controls['userInput'].setValue("");
+       //this.form.reset();
+        this.form.updateValueAndValidity({onlySelf:false, emitEvent:true});
         this.form.markAsUntouched();
-        console.log(this.response_solution);
+        //console.log(this.response_solution);
       }); 
     
   }

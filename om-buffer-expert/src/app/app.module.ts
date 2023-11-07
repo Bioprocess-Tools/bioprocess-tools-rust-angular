@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -21,11 +20,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
-import {MatTableModule} from '@angular/material/table';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatSliderModule} from '@angular/material/slider';
 import { CoreModule } from './core/core.module';
 import { BufferDesignerModule } from './buffer-designer/buffer-designer.module';
 import { StaticPagesModule } from './static-pages/static-pages.module';
@@ -43,7 +40,6 @@ import { StaticPagesModule } from './static-pages/static-pages.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,
@@ -56,10 +52,7 @@ import { StaticPagesModule } from './static-pages/static-pages.module';
     MatTabsModule,
     MatFormFieldModule,
     MatMenuModule,
-    MatTableModule,
-    MatSliderModule,
     MatTooltipModule,
-    MatSidenavModule,
     CoreModule,
     StaticPagesModule
 

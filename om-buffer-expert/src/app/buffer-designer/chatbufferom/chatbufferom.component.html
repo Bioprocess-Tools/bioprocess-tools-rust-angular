@@ -3,22 +3,35 @@
   <mat-card class="form-card">
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="formf">
-      <mat-form-field class="input-field mat-headline-5">
+      <mat-form-field class="input-field p">
         <mat-label>Describe the buffer</mat-label>
-        <input matInput class="chatin" type="text" placeholder="Hint: 40mM Phosphate buffer, pH 7.0"
+        <input matInput class="chatin" type="text" placeholder="50mM Phosphate buffer, 0.1M Sodium Chloride pH 7.0"
           formControlName="userInput"
-          [matTooltip]="ion_names.join(', ')" matTooltipPosition="above">
+          [matTooltip]="buffer_species_names.join(', ')" matTooltipPosition="above">
 
         <div *ngIf="form.get('userInput').errors">
-          <p class="instruct">Input should have a buffer species that I know. See tooltip.</p>
+          <p class="instruct">Input needs a buffer species; See Quick Start above.</p>
         </div>
       </mat-form-field>
-      <p class="green_flag" *ngIf="form.valid"><span class="material-icons">
+      <mat-form-field class="input-field-2">
+        <mat-label>Buffer Species Choices</mat-label>
+        <input  type="text"
+               placeholder="Type to Browse"
+               matInput
+               formControlName ="bufferSpeciesControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredBufferSpecies | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <p class="green_flag" *ngIf="form.valid && form.untouched ==false"><span class="material-icons">
         check_circle
         </span>  Buffer species</p> 
   
       <!-- Cross icon for invalid state -->
-      <p class="red_flag" *ngIf="form.invalid && form.dirty"><span class="material-icons">
+      <p class="red_flag" *ngIf="form.invalid && form.untouched==false"><span class="material-icons">
         error
         </span>  Buffer species</p>
       <button class="wide-button" color="primary" mat-raised-button type="submit"
@@ -45,13 +58,13 @@
     <h2 class="pH"> pH : {{response_solution.pH | number:
       '1.3-3'}}</h2>
     </mat-card>
-    <mat-card class="message-card" *ngIf="response_solution && form.untouched==true">
-     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] !== 'green'">  <span class="material-icons">
+    <mat-card class="message-card" *ngIf="response_solution && form.dirty==false">
+     <p class="red_flag" *ngIf="response_solution.result_flag['flag'] != 'green'">  <span class="material-icons">
       error
       </span>
         {{ '  '+response_solution.result_flag['comment'] }}
       </p>
-      <p class="green_flag" *ngIf="response_solution.result_flag['flag'] == 'green'&& form.dirty==false">  <span class="material-icons">
+      <p class="green_flag" *ngIf="response_solution.result_flag['flag'] == 'green'">  <span class="material-icons">
         check_circle
         </span>
         &nbsp; Done!

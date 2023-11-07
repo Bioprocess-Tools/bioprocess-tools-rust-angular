@@ -25,11 +25,10 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
-import {MatTableModule} from '@angular/material/table';
+
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatSliderModule} from '@angular/material/slider';
 import { BufferDesignerRoutingModule } from './buffer-designer-routing.module';
 import { RouterModule } from '@angular/router';
 import {MatExpansionModule} from '@angular/material/expansion'
@@ -50,7 +49,6 @@ BufferDesignerComponent
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,
@@ -63,13 +61,11 @@ BufferDesignerComponent
     MatTabsModule,
     MatFormFieldModule,
     MatMenuModule,
-    MatTableModule,
-    MatSliderModule,
-    MatTooltipModule,
     MatSidenavModule,
     BufferDesignerRoutingModule,
     RouterModule,
-     MatExpansionModule
+     MatExpansionModule,
+     MatTooltipModule
   ],
   exports: [
     BufferDesignerComponent  // <- This is important

@@ -58,9 +58,18 @@
   
 }
 
+.input-field-2 {
+  display:none;
+  width:98%;
+  margin-top:6px;
+ // margin-left:10px;
+  align-self: center;
+  
+}
+
 .wide-button{
   width:80%;
-  margin-top:2px;
+  margin-top:5px;
   margin-left:10px;
   margin-bottom: 10px;
   //background-color: $my-viva-magenta;
@@ -98,6 +107,10 @@
 mat-card img[mat-card-image] {
   max-width: 100%;
   height: auto;
+}
+
+.chatin {
+  font-size: small;
 }
 
 .pH {

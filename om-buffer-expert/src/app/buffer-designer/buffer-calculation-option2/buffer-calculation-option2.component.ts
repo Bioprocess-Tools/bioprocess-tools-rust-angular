@@ -108,7 +108,7 @@ if(acidname in this.acidCompounds) {
     this.bufferForm.controls['target_pH'].setValue( solution.pH);
     //console.log("God here in salt", solution.non_salt_compounds[0].name);
     if(solution.compounds.length==3) {
-      console.log("God: came here because there is salt",solution.salt_compound.name );
+      //console.log("God: came here because there is salt",solution.salt_compound.name );
       saltname = solution.salt_compound.name;
       saltconc = solution.compound_concentrations[saltname];
       this.bufferForm.controls['saltCompound'].setValue(saltname);
@@ -120,7 +120,7 @@ if(acidname in this.acidCompounds) {
       this.bufferForm.controls['saltConcentration'].setValue( saltconc);
 
     }
-  console.log("God: populating", this.bufferForm.value);
+  //console.log("God: populating", this.bufferForm.value);
 
     this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
 
