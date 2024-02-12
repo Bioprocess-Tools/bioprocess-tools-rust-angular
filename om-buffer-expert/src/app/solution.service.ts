@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class SolutionService {
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
     null
   );
-
+ 
   private solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
 
@@ -47,9 +48,9 @@ export class SolutionService {
   buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
-  private apiUrl = 'https://bioprocess-tools-buffer-api-zuynyusrbq-uc.a.run.app/api'; // Replace with your Flask API URL
 
- //private apiUrl = 'http://127.0.0.1:5000/api'; // Replace with your Flask API URL
+
+ private apiUrl = environment.apiUrl; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     //console.log("God: in construction", this.acidCompounds);

@@ -14,6 +14,8 @@ export class Solution {
   pH: number;
   result_flag: {[key:string]: string};
   buffer_species: string;
+  volume: number;
+  solution_type: string;
  
 
   constructor(name: string) {
@@ -30,6 +32,8 @@ export class Solution {
     this.salt_compound = null;
     this.result_flag = {}
     this.buffer_species = "";
+    this.volume = 0;
+    this.solution_type = "";
 
   }
 }
