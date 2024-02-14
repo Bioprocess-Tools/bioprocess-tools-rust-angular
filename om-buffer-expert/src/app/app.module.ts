@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { SolutionMixtureService } from './solution-mixture.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CoreModule } from './core/core.module';
 import { BufferDesignerModule } from './buffer-designer/buffer-designer.module';
 import { StaticPagesModule } from './static-pages/static-pages.module';
+
 
 
 
@@ -60,15 +62,15 @@ import { StaticPagesModule } from './static-pages/static-pages.module';
     
   ],
   providers: [
+    SolutionMixtureService,
     {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: {
-        subscriptSizing: 'dynamic',  // This means space for hints/errors will only be reserved when needed.
-        // ... you can set other default options here
-      }
-    }
+      provide:  APP_INITIALIZER,
+      useFactory: (solution_mixture_service: SolutionMixtureService) => solution_mixture_service.initData(),
+      deps: [SolutionMixtureService],
+      multi: true,
 
-
+    },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { subscriptSizing: 'dynamic',  } }
   ],
   bootstrap: [AppComponent]
 })

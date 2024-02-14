@@ -10,6 +10,18 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SolutionService {
+
+
+
+
+
+
+
+
+
+
+
+  
   omSolutions: Solution[] = [];
 
   compoundFunDict$: BehaviorSubject<{ [name: string]: string }> =
