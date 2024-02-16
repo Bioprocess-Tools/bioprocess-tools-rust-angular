@@ -14,7 +14,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -27,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { CoreModule } from './core/core.module';
 import { BufferDesignerModule } from './buffer-designer/buffer-designer.module';
 import { StaticPagesModule } from './static-pages/static-pages.module';
+import { SolutionMixtureMainModule } from './solution-mixture/solution-mixture-main/solution-mixture-main.module';
 
 
 
@@ -38,6 +40,7 @@ import { StaticPagesModule } from './static-pages/static-pages.module';
   ],
   imports: [
     BufferDesignerModule,
+    SolutionMixtureMainModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -56,7 +59,9 @@ import { StaticPagesModule } from './static-pages/static-pages.module';
     MatMenuModule,
     MatTooltipModule,
     CoreModule,
-    StaticPagesModule
+    StaticPagesModule,
+    MatStepperModule,
+    MatChipsModule
 
  
     

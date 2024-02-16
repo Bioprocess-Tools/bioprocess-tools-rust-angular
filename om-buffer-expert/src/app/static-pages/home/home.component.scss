@@ -17,7 +17,7 @@ text-align: center;
        justify-content: center; 
        align-items: center; 
        text-align: center;
-
+       
   }
 
   .main-text{
@@ -29,7 +29,7 @@ text-align: center;
   }
   .middle-text{
     color: rgb(199, 190, 190);
-    margin-top: 100px;
+    margin-top: 10px;
     margin-right: 50px; 
     margin-left: 50px;
     font-size: 30px; 
@@ -38,12 +38,22 @@ text-align: center;
 
   .end-text {
     color: rgb(199, 190, 190);
-    margin-top: 100px;
+    margin-top: 10px;
     margin-right: 50px; 
     margin-left: 50px;
     font-size: 25px; 
     margin-bottom: 80px;
 
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    background-color:transparent;
   }
 
   .action-button {

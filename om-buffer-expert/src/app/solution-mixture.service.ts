@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { map, tap,shareReplay, share } from 'rxjs/operators';
 import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
@@ -18,12 +18,22 @@ import { environment } from 'src/environments/environment';
 })
 export class SolutionMixtureService {
   private apiUrl = environment.apiUrl;
+  solutionsLibrary: {[category: string]: {[subCategory: string]: Solution[]}} = {};
+  bufferSpecies: {[key: string]: any} = {};
+  compounds: {[key: string]: any} = {};
 
-  constructor(private http: HttpClient) {this.getBufferSpeciesProcessed().subscribe(); this.getCompoundsProcessed().subscribe(); this.getSolutionsLibraryProcessed().subscribe();}
+
+  constructor(private http: HttpClient) {
+    
+    
+   }
+
+
+
   getSolutionsLibraryProcessed(): Observable<any> {
     return this.http.get<{[key: string]: Solution}>(`${this.apiUrl}/get_all_solutions`).pipe(
       
-      map(data => this.processSolutions(data))
+      map(data => this.processSolutions(data)),shareReplay(1)
     );
   }
 
@@ -34,7 +44,7 @@ export class SolutionMixtureService {
       'dual': { withSalt: [], withoutSalt: [] },
       'stock': []
     };
-     console.log(solutions);
+     //console.log(solutions);
      for (let key in solutions) {
       let solution = solutions[key];
       if (solution.solution_type in categorized) {
@@ -53,7 +63,7 @@ export class SolutionMixtureService {
 
   getBufferSpeciesProcessed(): Observable<any> {
     return this.http.get<{[key: string]: any}>(`${this.apiUrl}/get_buffer_species_compound_list_map`).pipe(
-      map(data => this.processBufferSpecies(data)),shareReplay(1)
+      map(data => this.processBufferSpecies(data))
     );
   }
 
@@ -61,7 +71,7 @@ getCompoundsProcessed(): Observable<any> {
   return this.http.get<{[key: string]: any}>(`${this.apiUrl}/compound-fun-dict`).pipe(
 
 
-    map(data => this.processCompounds(data)),shareReplay(1)
+    map(data => this.processCompounds(data))
   ); // replace with your actual endpoint
 }
 
@@ -90,7 +100,7 @@ getCompoundsProcessed(): Observable<any> {
 
 
   processCompounds(compounds: {[key: string]: any}): any {
-    console.log(compounds);
+    //console.log(compounds);
     const processed = { A: [], B: [], S: [] };
 
     for (let name in compounds) {
@@ -105,16 +115,25 @@ getCompoundsProcessed(): Observable<any> {
     return processed;
   }
 
+
   initData() {
     return (): Promise<any> => {
       return new Promise((resolve, reject) => {
-        this.getSolutionsLibraryProcessed().subscribe({
-          next: (data) => resolve(data),
+        forkJoin({
+          solutionsLibrary: this.getSolutionsLibraryProcessed(),
+          compounds: this.getCompoundsProcessed(),
+          bufferSpecies: this.getBufferSpeciesProcessed()
+        }).subscribe({
+          next: (data) => {
+            this.solutionsLibrary = data.solutionsLibrary;
+            this.compounds = data.compounds; // Assuming data.compounds is already processed
+            this.bufferSpecies = data.bufferSpecies; // Assuming data.bufferS
+            resolve(data);
+          },
           error: (error) => reject(error)
         });
       });
     };
+  }
 
-
-}
 }

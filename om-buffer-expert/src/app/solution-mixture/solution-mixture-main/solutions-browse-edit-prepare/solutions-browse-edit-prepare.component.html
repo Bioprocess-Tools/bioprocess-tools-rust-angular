@@ -1,0 +1,28 @@
+<div>
+    <mat-chip-list>
+      <mat-chip *ngFor="let category of categories" (click)="selectCategory(category)" [selected]="selectedCategory === category">
+        {{ category }}
+      </mat-chip>
+    </mat-chip-list>
+    
+    <!-- Assuming you want to allow subcategory selection -->
+    <mat-chip-list *ngIf="selectedCategory">
+      <mat-chip (click)="selectSubCategory('withSalt')" [selected]="selectedSubCategory === 'withSalt'">With Salt</mat-chip>
+      <mat-chip (click)="selectSubCategory('withoutSalt')" [selected]="selectedSubCategory === 'withoutSalt'">Without Salt</mat-chip>
+    </mat-chip-list>
+  </div>
+  
+  <mat-form-field appearance="fill">
+    <input matInput [formControl]="solutionsControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution.name">
+        {{ solution.name }}
+      </mat-option>
+    </mat-autocomplete>
+    <p>solutions-browse-edit-prepare works!</p>
+  </mat-form-field>
+  
+
+
+
+

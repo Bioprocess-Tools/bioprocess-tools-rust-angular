@@ -6,16 +6,22 @@
  
     <!-- Text overlay container -->
       <!-- Title -->
-      <h1 class="main-text">Expedite Your Research with the Best Designed Buffers</h1>
+      <h1 class="middle-text">Expedite Your Research with the Best Designed Buffers and Formulations</h1>
       
       <!-- Subtitle -->
       <h2 class="middle-text">Harness the precision and power of first-principles predictions</h2>
+
+      <h2 class="end-text">Leverage hundreds of pre-made library of buffers and solutions</h2>
+
+      <h2 class="end-text">Design the step-by-step workflow for preparing your formulations</h2>
       <!-- <h2 class="end-text">Designed to help you experiment, learn, and optimize</h2>     -->
   
       <h2 class="end-text">Design using GenAI natural language input</h2>
 
       <!-- Call-to-Action Button -->
-      <button mat-raised-button color="accent" class="action-button" (click)="navigateToTool()">Start Designing</button>
-   
-   
-</div>
+     <!-- <button mat-raised-button color="accent" class="action-button" (click)="navigateToTool()">Start Designing</button> -->
+   <mat-card class="button-container">
+      <button mat-raised-button color="accent" routerLink="/buffer-designer" class="action-button">Buffer Designer</button>
+      <button mat-raised-button color="accent" routerLink="/solution-mixture-designer" class="action-button">Formulation Designer</button>
+    </mat-card>
+    </div>

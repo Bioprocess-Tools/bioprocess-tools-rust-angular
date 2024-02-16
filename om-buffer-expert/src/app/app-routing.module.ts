@@ -8,6 +8,7 @@ import { UserGuideComponent } from './static-pages/user-guide/user-guide.compone
 import { ContactUsComponent } from './static-pages/contact-us/contact-us.component';
 import { BufferDesignerComponent } from './buffer-designer/buffer-designer.component';
 
+
 // const routes: Routes = [
 // {path:'NLP-Input',component:ChatbufferomComponent},
 // {path:'Drop-Down-Input', component:BufferCalculationOption2Component},
@@ -28,7 +29,10 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent },
   { 
     path: 'buffer-designer', 
-    loadChildren: () => import('./buffer-designer/buffer-designer.module').then(m => m.BufferDesignerModule) 
+    loadChildren: () => import('./buffer-designer/buffer-designer.module').then(m => m.BufferDesignerModule)} ,
+  {
+    path: 'solution-mixture-designer', 
+    loadChildren: () => import('./solution-mixture/solution-mixture-main/solution-mixture-main.module').then(m => m.SolutionMixtureMainModule)
   },
   // ... more routes ...
 ];

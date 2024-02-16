@@ -1,0 +1,28 @@
+
+<!-- this page will have a material stepper, that will have 4 steps, each step will have a form, and the last step will have a display of the results from the api.
+we will use all angular material components for the forms and the stepper.
+the first part will be the solutions-browse-edit-prepare components
+the second part will the solutions-review component
+the third part will be the solution-mixture-steps component
+the fourth part will be the solution-mixture-analysis component
+
+lets start with the stepper
+
+we will use css-grid to layout the stepper and the forms -->
+
+<div class="container">
+  <mat-horizontal-stepper>
+    <mat-step label="Browse/Edit/Prepare">
+      <app-solutions-browse-edit-prepare></app-solutions-browse-edit-prepare>
+    </mat-step>
+    <mat-step label="Review">
+      <app-solutions-review></app-solutions-review>
+    </mat-step>
+    <mat-step label="Mixture Steps">
+      <app-solution-mixture-steps></app-solution-mixture-steps>
+    </mat-step>
+    <mat-step label="Analysis">
+      <app-solution-mixture-analysis></app-solution-mixture-analysis>
+    </mat-step>
+  </mat-horizontal-stepper>
+  
