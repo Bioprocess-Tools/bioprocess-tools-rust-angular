@@ -42,7 +42,7 @@ export class SolutionMixtureService {
       'single': { withSalt: [], withoutSalt: [] },
       'single-strong': { withSalt: [], withoutSalt: [] },
       'dual': { withSalt: [], withoutSalt: [] },
-      'stock': []
+      'stock': { withSalt: [], withoutSalt: [] }
     };
      //console.log(solutions);
      for (let key in solutions) {
@@ -53,7 +53,8 @@ export class SolutionMixtureService {
         } else if ('withoutSalt' in categorized[solution.solution_type] && solution.salt_compound === null) {
           categorized[solution.solution_type].withoutSalt.push(solution);
         } else if (solution.solution_type === 'stock') {
-          categorized['stock'].push(solution);
+          categorized['stock'].withoutSalt.push(solution);
+          console.log(categorized);
         }
       }
     }

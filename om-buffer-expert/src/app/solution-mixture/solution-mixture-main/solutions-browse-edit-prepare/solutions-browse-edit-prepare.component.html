@@ -1,28 +1,92 @@
 <div>
-    <mat-chip-list>
-      <mat-chip *ngFor="let category of categories" (click)="selectCategory(category)" [selected]="selectedCategory === category">
+    <mat-chip-listbox>
+      <mat-chip-option *ngFor="let category of categories" (click)="selectCategory(category)" [selected]="selectedCategory === category">
         {{ category }}
-      </mat-chip>
-    </mat-chip-list>
+      </mat-chip-option>
+    </mat-chip-listbox>
     
     <!-- Assuming you want to allow subcategory selection -->
-    <mat-chip-list *ngIf="selectedCategory">
-      <mat-chip (click)="selectSubCategory('withSalt')" [selected]="selectedSubCategory === 'withSalt'">With Salt</mat-chip>
-      <mat-chip (click)="selectSubCategory('withoutSalt')" [selected]="selectedSubCategory === 'withoutSalt'">Without Salt</mat-chip>
-    </mat-chip-list>
+    <mat-chip-listbox *ngIf="selectedCategory">
+      <mat-chip-option (click)="selectSubCategory('withSalt')" [selected]="selectedSubCategory === 'withSalt'">With Salt</mat-chip-option>
+      <mat-chip-option (click)="selectSubCategory('withoutSalt')" [selected]="selectedSubCategory === 'withoutSalt'">Without Salt</mat-chip-option>
+    </mat-chip-listbox>
   </div>
   
   <mat-form-field appearance="fill">
-    <input matInput [formControl]="solutionsControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution.name">
+    <input matInput [formControl]="solutionsControl" [matAutocomplete]="auto" >
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSolutionSelected($event.option.value)" [displayWith]="displayFn">
+      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution">
+        {{ solution.name }}
+      </mat-option>     
+    </mat-autocomplete>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Solution Type</mat-label>
+    <input type="text" matInput [formControl]="solutionsControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSolutionSelected($event.option.value)">
+      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution">
         {{ solution.name }}
       </mat-option>
     </mat-autocomplete>
-    <p>solutions-browse-edit-prepare works!</p>
   </mat-form-field>
   
+  <!-- Conditional form fields -->
+  <form [formGroup]="solutionForm" (ngSubmit)="onSubmit()">
+    <!-- Fields for buffer species solutions -->
+    <div *ngIf="isBufferSolution">
+      <mat-form-field appearance="fill">
+        <mat-label>Buffer Species</mat-label>
+        <input matInput formControlName="buffer_species">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Target Concentration</mat-label>
+        <input matInput formControlName="target_conc" type="number">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Target pH</mat-label>
+        <input matInput formControlName="target_pH" type="number">
+      </mat-form-field>
+      <!-- Conditional fields for salt -->
+      <div *ngIf="solutionForm.value['salt_compound_name']">
+        <mat-form-field appearance="fill">
+          <mat-label>Salt Compound Name</mat-label>
+          <input matInput formControlName="salt_compound_name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Salt Concentration</mat-label>
+          <input matInput formControlName="salt_conc" type="number">
+        </mat-form-field>
+      </div>
+    </div>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Target Concentration</mat-label>
+      <input matInput formControlName="target_conc">
+      <mat-error *ngIf="solutionForm.get('target_conc').hasError('required')">
+        Target concentration is required.
+      </mat-error>
+      <mat-error *ngIf="solutionForm.get('target_conc').hasError('min') || solutionForm.get('target_conc').hasError('max')">
+        Target concentration must be between 0.01 and 10.
+      </mat-error>
+    </mat-form-field>
 
+    <!-- Fields for stock solutions -->
+    <div *ngIf="isStockSolution">
+      <mat-form-field appearance="fill">
+        <mat-label>Compound Name</mat-label>
+        <input matInput formControlName="compound_name">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Compound Concentration</mat-label>
+        <input matInput formControlName="compound_conc" type="number">
+      </mat-form-field>
+    </div>
+  
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit">Add Step</button>
+  </form>
+  
 
 
 

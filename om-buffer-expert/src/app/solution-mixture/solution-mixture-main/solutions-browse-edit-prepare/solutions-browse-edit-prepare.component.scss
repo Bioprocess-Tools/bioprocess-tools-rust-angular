@@ -1,0 +1,9 @@
+.dynamic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adjust based on your layout preference */
+  }
+  
+  .dynamic-form .mat-form-field {
+    width: 100%; /* Ensures form fields take full width */
+  }
