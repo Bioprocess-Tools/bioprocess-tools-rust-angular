@@ -16,12 +16,15 @@
   justify-content: center;
   width:100%;
 }
-
+.less-space{
+  margin-bottom:1px;
+  margin-top:3px;
+}
   .solution-list-container {
     max-width:90vw;
     display: grid;
     grid-auto-flow:column ; /* Adjust based on your layout preference */
-   
+    grid-template-columns: repeat(3, 1fr); /* Adjust based on your layout preference */
     margin: 5px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -35,17 +38,22 @@
   }
   .solution-card {
     white-space: nowrap;
-    max-width: 35vw;
-    min-width:150px;
-    max-height: 350px;
-     margin: 10px;
-     scroll-snap-align: start;
-    //background-color: $card-background;
+    // max-width: 35vw;
+    // min-width:150px;
+    // max-height: 350px;
+    //  margin: 10px;
+    //  scroll-snap-align: start;
+    // //background-color: $card-background;
      color: black;
      margin:3px;
   }
-  
+  .buffer-name {
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    text-wrap:pretty;
 
+  }
   .chip-categories {
     display: flex;
     //i want the chips to be centered on the card

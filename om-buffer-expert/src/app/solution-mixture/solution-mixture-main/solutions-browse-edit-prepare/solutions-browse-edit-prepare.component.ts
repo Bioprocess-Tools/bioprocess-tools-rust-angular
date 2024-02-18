@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit,ViewChild } from '@angular/core';
 import { SolutionMixtureService } from '../../../solution-mixture.service';
 import {
   FormBuilder,
@@ -20,8 +20,10 @@ import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
 
 //get the solutionslibrary from the service, and then process it.
 //we need to get the names from the objects in the library and use the names to generate the autocomplete list.
-export class SolutionsBrowseEditPrepareComponent {
+export class SolutionsBrowseEditPrepareComponent implements OnInit,AfterViewInit {
   //get solutionmixture service
+  @ViewChild('scrollRef') private solutionlistcontainer: ElementRef;
+  
   solutions_selection_Control = new FormControl();
   bufferspecieswithSaltForm: FormGroup;
   bufferspecieswithoutSaltForm: FormGroup;
@@ -63,6 +65,28 @@ export class SolutionsBrowseEditPrepareComponent {
 
     this.initForms();
   }
+
+
+
+ngAfterViewInit(): void {
+    this.scrollToLastItem();
+}
+
+scrollToLastItem() {
+  const scrollElement = this.solutionlistcontainer.nativeElement;
+  // Option 1: Instant scroll
+  scrollElement.scrollLeft = scrollElement.scrollWidth;
+
+  // Option 2: Smooth scroll (if you prefer a smooth scrolling effect)
+  scrollElement.scrollTo({
+    left: scrollElement.scrollWidth,
+    behavior: 'smooth'
+  });
+}
+
+
+
+
   ngOnInit() {
     this.solutions_selection_Control = new FormControl();
     this.solutionsLibrary = this.solutionMixtureService.solutionsLibrary;
@@ -203,6 +227,9 @@ export class SolutionsBrowseEditPrepareComponent {
 
   onSubmitBufferwithSalt() {
     console.log(this.bufferspecieswithSaltForm.value);
+    this.isBufferwithSaltSolution = false;
+    this.isBufferwithoutSaltSolution = false;
+    this.isStockSolution = false;
     // first we need to form it into a step object
     // in the step object, there is the operations_method and parameters
     // the operations method is different for solution with salt and without salt and stock solution
@@ -233,6 +260,9 @@ export class SolutionsBrowseEditPrepareComponent {
   }
 
    onSubmitBufferwithoutSalt() {
+    this.isBufferwithSaltSolution = false;
+    this.isBufferwithoutSaltSolution = false;
+    this.isStockSolution = false;
   //   console.log(this.bufferspecieswithoutSaltForm.value);
     let id;
     if (this.solution_mixture_steps === null) {
@@ -257,6 +287,9 @@ export class SolutionsBrowseEditPrepareComponent {
 }
 
  onSubmitStockSolution() {
+  this.isBufferwithSaltSolution = false;
+  this.isBufferwithoutSaltSolution = false;
+  this.isStockSolution = false;
     console.log(this.stockSolutionForm.value);
     let id;
     if (this.solution_mixture_steps === null) {
@@ -286,6 +319,7 @@ export class SolutionsBrowseEditPrepareComponent {
       },
       error: (error) => console.error('Error fetching solution mixture:', error)
     });
+    this.scrollToLastItem();
   }
 
 
