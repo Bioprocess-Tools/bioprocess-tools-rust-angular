@@ -5,6 +5,7 @@ import { map, tap,shareReplay, share } from 'rxjs/operators';
 import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
 import { environment } from 'src/environments/environment';
+import { SolutionMixture } from './shared/models/solution_mixture.model';
 
 
 //1. solutions_library a dictionary which contains a solution name and the solution object, 
@@ -30,10 +31,16 @@ export class SolutionMixtureService {
 
 
 
-  getSolutionsLibraryProcessed(): Observable<any> {
-    return this.http.get<{[key: string]: Solution}>(`${this.apiUrl}/get_all_solutions`).pipe(
+   getSolutionsLibraryProcessed(): Observable<any> {
+    return this.http.get<{[key: string]: any}>(`${this.apiUrl}/get_all_solutions`).pipe(
+      map(data => {
+        const solutions: {[key: string]: Solution} = {};
+        for (const key in data) {
+          solutions[key] = Object.assign(new Solution(""), data[key]);
+        }
+        return this.processSolutions(solutions);
+      }),
       
-      map(data => this.processSolutions(data)),shareReplay(1)
     );
   }
 
@@ -116,9 +123,19 @@ getCompoundsProcessed(): Observable<any> {
     return processed;
   }
 
+// create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
+// to display the solutions in the mixture
+// solution_mixture object will be a single object
+postStepsAndGetSolutionMixture(steps: any[]): Observable<SolutionMixture> {
+  // Use the SolutionMixture interface to cast the response
+  return this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps });
+}
 
-  initData() {
-    return (): Promise<any> => {
+
+
+
+      initData() {
+        return (): Promise<any> => {
       return new Promise((resolve, reject) => {
         forkJoin({
           solutionsLibrary: this.getSolutionsLibraryProcessed(),

@@ -1,92 +1,207 @@
-<div>
+
+<mat-card class="browse-edit-prepare-card">
+  <mat-card-header>
+    <mat-card-title>Solutions Browse, Edit, Prepare</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+
+
+
+<mat-card class="solution-select-card">
+  <mat-card-header>
+    <mat-card-title>Pick Solution from Library</mat-card-title>
+    <mat-card-subtitle
+      >Filter solutions by single buffer species, dual buffer species, single
+      species with acid/base, stock solution (single compound)
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="chip-categories">
     <mat-chip-listbox>
-      <mat-chip-option *ngFor="let category of categories" (click)="selectCategory(category)" [selected]="selectedCategory === category">
-        {{ category }}
+      <mat-chip-option
+        *ngFor="let category of categories"
+        (click)="selectCategory(category)"
+        [selected]="selectedCategory === category"
+      >
+        {{ categoryDisplayNames[category] }}
       </mat-chip-option>
     </mat-chip-listbox>
-    
+  </mat-card-content>
+  <mat-divider></mat-divider>
+  <mat-card-content class="chip-subcategories">
     <!-- Assuming you want to allow subcategory selection -->
     <mat-chip-listbox *ngIf="selectedCategory">
-      <mat-chip-option (click)="selectSubCategory('withSalt')" [selected]="selectedSubCategory === 'withSalt'">With Salt</mat-chip-option>
-      <mat-chip-option (click)="selectSubCategory('withoutSalt')" [selected]="selectedSubCategory === 'withoutSalt'">Without Salt</mat-chip-option>
+      <mat-chip-option
+        (click)="selectSubCategory('withSalt')"
+        [selected]="selectedSubCategory === 'withSalt'"
+        [disabled]="stockSolutionsSelected"
+        (selectionChange)="onChipSelection('withSalt', $event.selected)"
+        >With Salt</mat-chip-option
+      >
+      <mat-chip-option
+        (click)="selectSubCategory('withoutSalt')"
+        [selected]="selectedSubCategory === 'withoutSalt'"
+        [disabled]="stockSolutionsSelected"
+        (selectionChange)="onChipSelection('withoutSalt', $event.selected)"
+        >Without Salt</mat-chip-option
+      >
     </mat-chip-listbox>
-  </div>
-  
+</mat-card-content> 
+</mat-card>
+<mat-card class="autocomplete-select">
   <mat-form-field appearance="fill">
-    <input matInput [formControl]="solutionsControl" [matAutocomplete]="auto" >
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSolutionSelected($event.option.value)" [displayWith]="displayFn">
-      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution">
-        {{ solution.name }}
-      </mat-option>     
-    </mat-autocomplete>
-  </mat-form-field>
-  
-  <mat-form-field appearance="fill">
-    <mat-label>Solution Type</mat-label>
-    <input type="text" matInput [formControl]="solutionsControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSolutionSelected($event.option.value)">
-      <mat-option *ngFor="let solution of filteredSolutions | async" [value]="solution">
+    <input
+      matInput
+      [formControl]="solutions_selection_Control"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onSolutionSelected($event.option.value)"
+      [displayWith]="displayFn"
+    >
+      <mat-option
+        *ngFor="let solution of filteredSolutions | async"
+        [value]="solution"
+      >
         {{ solution.name }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  
+</mat-card>
+
+<mat-card class="solution-edit-card">
+  <mat-card-header>
+    <mat-card-title>Edit Solution</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
   <!-- Conditional form fields -->
-  <form [formGroup]="solutionForm" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="bufferspecieswithSaltForm"
+    (ngSubmit)="onSubmitBufferwithSalt()"
+  >
     <!-- Fields for buffer species solutions -->
-    <div *ngIf="isBufferSolution">
-      <mat-form-field appearance="fill">
+    <mat-card *ngIf="isBufferwithSaltSolution" class="solution-edits">
+      <mat-form-field appearance="fill" class="input-fields">
         <mat-label>Buffer Species</mat-label>
-        <input matInput formControlName="buffer_species">
+        <input matInput formControlName="buffer_species" />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="input-fields">
         <mat-label>Target Concentration</mat-label>
-        <input matInput formControlName="target_conc" type="number">
+        <input matInput formControlName="target_conc" type="number" />
+        <mat-error
+          *ngIf="
+            bufferspecieswithSaltForm.get('target_conc').hasError('required')
+          "
+        >
+          Target concentration is required.
+        </mat-error>
+        <mat-error
+          *ngIf="
+            bufferspecieswithSaltForm.get('target_conc').hasError('min') ||
+            bufferspecieswithSaltForm.get('target_conc').hasError('max')
+          "
+        >
+          Target concentration must be between 0.01 and 10.
+        </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Salt Compound Name</mat-label>
+        <input matInput formControlName="salt_compound_name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Salt Concentration</mat-label>
+        <input matInput formControlName="salt_conc" type="number" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-fields">
         <mat-label>Target pH</mat-label>
-        <input matInput formControlName="target_pH" type="number">
+        <input matInput formControlName="target_pH" type="number" />
       </mat-form-field>
-      <!-- Conditional fields for salt -->
-      <div *ngIf="solutionForm.value['salt_compound_name']">
-        <mat-form-field appearance="fill">
-          <mat-label>Salt Compound Name</mat-label>
-          <input matInput formControlName="salt_compound_name">
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Salt Concentration</mat-label>
-          <input matInput formControlName="salt_conc" type="number">
-        </mat-form-field>
-      </div>
-    </div>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Target Concentration</mat-label>
-      <input matInput formControlName="target_conc">
-      <mat-error *ngIf="solutionForm.get('target_conc').hasError('required')">
-        Target concentration is required.
-      </mat-error>
-      <mat-error *ngIf="solutionForm.get('target_conc').hasError('min') || solutionForm.get('target_conc').hasError('max')">
-        Target concentration must be between 0.01 and 10.
-      </mat-error>
-    </mat-form-field>
-
-    <!-- Fields for stock solutions -->
-    <div *ngIf="isStockSolution">
-      <mat-form-field appearance="fill">
-        <mat-label>Compound Name</mat-label>
-        <input matInput formControlName="compound_name">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Compound Concentration</mat-label>
-        <input matInput formControlName="compound_conc" type="number">
-      </mat-form-field>
-    </div>
-  
-    <!-- Submit Button -->
-    <button mat-raised-button color="primary" type="submit">Add Step</button>
+      <button mat-raised-button color="primary" type="submit">
+        Add Solution
+      </button>
+    </mat-card>
   </form>
-  
 
+  <form
+    [formGroup]="bufferspecieswithoutSaltForm"
+    (ngSubmit)="onSubmitBufferwithoutSalt()"
+  >
+    <!-- Fields for buffer species solutions -->
+    <mat-card *ngIf="isBufferwithoutSaltSolution" class="solution-edits">
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Buffer Species</mat-label>
+        <input matInput formControlName="buffer_species" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Target Concentration</mat-label>
+        <input matInput formControlName="target_conc" type="number" />
+        <mat-error
+          *ngIf="
+            bufferspecieswithSaltForm.get('target_conc').hasError('required')
+          "
+        >
+          Target concentration is required.
+        </mat-error>
+        <mat-error
+          *ngIf="
+            bufferspecieswithSaltForm.get('target_conc').hasError('min') ||
+            bufferspecieswithSaltForm.get('target_conc').hasError('max')
+          "
+        >
+          Target concentration must be between 0.01 and 10.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Target pH</mat-label>
+        <input matInput formControlName="target_pH" type="number" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        Add Solution
+      </button>
+    </mat-card>
+  </form>
 
+  <form [formGroup]="stockSolutionForm" (ngSubmit)="onSubmitStockSolution()">
+    <!-- Fields for stock solutions -->
+    <mat-card *ngIf="isStockSolution" class="solution-edits">
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Compound Name</mat-label>
+        <input matInput formControlName="compound_name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="input-fields">
+        <mat-label>Compound Concentration</mat-label>
+        <input matInput formControlName="compound_conc" type="number" />
+      </mat-form-field>
 
+      <button mat-raised-button class="input-fields" color="primary" type="submit">
+        Add Solution
+      </button>
+    </mat-card>
+
+    <!-- Submit Button -->
+  </form>
+</mat-card>
+<mat-card
+  class="solution-list-container"
+  *ngIf="solution_mixture_result_object"
+>
+  <mat-divider></mat-divider>
+  <mat-card
+    class="solution-card"
+    *ngFor="let solution of solution_mixture_result_object.solutions"
+  >
+    <mat-card-header>
+      <mat-card-subtitle>{{ solution.name }}</mat-card-subtitle>
+      <mat-divider></mat-divider>
+    </mat-card-header>
+    <mat-card-content
+      *ngFor="let compound of solution.compound_concentrations | keyvalue"
+    >
+      <p>{{ compound.key }} : {{ compound.value | number : "1.3-3" }}M</p>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
+</mat-card-content>
+</mat-card>

@@ -13,8 +13,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-
-
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     SolutionMixtureMainComponent,
@@ -31,7 +33,11 @@ import { MatChipsModule } from '@angular/material/chips';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class SolutionMixtureMainModule { }

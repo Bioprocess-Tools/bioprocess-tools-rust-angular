@@ -36,4 +36,13 @@ export class Solution {
     this.solution_type = "";
 
   }
+  //write a function to get the name of the first compound in the solution
+  getFirstCompoundName(): string {
+    return this.compounds[0].name;
+  }
+  //get firstcompound concentration
+  getFirstCompoundConcentration(): number {
+    return this.compound_concentrations[this.getFirstCompoundName()];
+  } 
+
 }
