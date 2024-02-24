@@ -6,6 +6,7 @@ import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
 import { environment } from 'src/environments/environment';
 import { SolutionMixture } from './shared/models/solution_mixture.model';
+import { Step } from './shared/models/step.model';
 
 
 //1. solutions_library a dictionary which contains a solution name and the solution object, 
@@ -24,6 +25,8 @@ export class SolutionMixtureService {
   compounds: {[key: string]: any} = {};
   solutionMixtureSolutionsReviewSubject = new BehaviorSubject<SolutionMixture>(null);  
   solutionMixtureSolutionsReview$ = this.solutionMixtureSolutionsReviewSubject.asObservable();  
+  StepsSubject = new BehaviorSubject<Step[]>([]);
+  Steps$ = this.StepsSubject.asObservable();
 
   constructor(private http: HttpClient) {
     
@@ -127,20 +130,30 @@ getCompoundsProcessed(): Observable<any> {
 // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
 // to display the solutions in the mixture
 // solution_mixture object will be a single object
-postStepsAndGetSolutionMixture(steps: any[]) {
-  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
+// postStepsAndGetSolutionMixture(steps: any[]) {
+ 
+
+
+//   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
+//   .subscribe({
+//   next: (solutionMixture) => {
+//   this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+// },
+// error: (error) => console.error(error)
+// });
+// }
+
+postStepswithTrigger() {
+
+  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
   .subscribe({
-  next: (solutionMixture) => {
-  this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
-},
-error: (error) => console.error(error)
-});
-}
-
-
-  // Use the SolutionMixture interface to cast the response
+    next: (solutionMixture) => {
+    this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+  },
+  error: (error) => console.error(error)
+  });
   
-
+}
 
 
 

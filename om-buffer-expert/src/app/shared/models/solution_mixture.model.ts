@@ -2,24 +2,30 @@ import { Compound } from "./compound.model";
 import { Ion } from "./ion.model";
 import { Solution } from "./solution.model";
 import { Step } from "./step.model";
+import { isEqual } from 'lodash/isEqual';
 
 export class SolutionMixture {
     name: string;
     solutions: Solution[]; // Specify more detailed types as needed
-    solutionIndices: { [key: string]: number };
+    solution_indices: { [key: string]: number };
     pH: number;
     volume: number;
     compounds: Compound[];
-    uniqueIons: Ion[];
-    uniqueIonNames: string[];
-    compoundConcentrations: { [key: string]: number };
-    ionConcentrations: { [key: string]: number };
-    phaseData: { [key: string]: any };
-    dataDictionary: { [key: string]: any };
+    unique_ions: Ion[];
+    unique_ion_names: string[];
+    compound_concentrations: { [key: string]: number };
+    ion_concentrations: { [key: string]: number };
+    phase_data: { [key: string]: any };
+    pH_interval_data:number[];
+    volume_interval_data:number[];
+    data_dictionary: { [key: string]: any };
     steps: Step[]; // Could be an array of Step instances if using Step class
-    resultFlag: { flag: string; comment: string };
+    result_flag: { flag: string; comment: string };
 
 //write function to add a step to the steps array
+
+
+
     addStep(step: Step) {
       
       const new_id = this.steps.length + 1;

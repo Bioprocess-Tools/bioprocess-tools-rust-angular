@@ -74,7 +74,9 @@ constructor(private fb:FormBuilder, private solutionMixtureService:SolutionMixtu
 
 
 ngOnInit() {
-
+  this.solutionMixtureService.Steps$.subscribe((steps) => {
+    this.steps_list = steps;
+  });
 
     this.getSolutionNames()
 
@@ -83,18 +85,13 @@ ngOnInit() {
 
 getSolutionNames() {
   //this.solution_names = this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe()
-  this.solution_names =[]
+
   this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
     (solutionMixture) => {
       if (solutionMixture) {
         // do something with solutionMixture
         this.solution_mixture_steps = solutionMixture;
-        let solutions = this.solution_mixture_steps.solutions;
-        for (let solution of this.solution_mixture_steps.solutions ){
-            this.solution_names.push(solution.name);
-        }
-        console.log("God solname", this.solution_names)
-        console.log("God sol", this.solution_mixture_steps)
+        this.solution_names = Object.keys(this.solution_mixture_steps.solution_indices)
       }
     }
   );
@@ -216,7 +213,7 @@ form_config_solution_modification_actions = {
 }
 
   onVolumeActionSelect(id) {
-    this.getSolutionNames()
+
     console.log("God-parameters",this.getParametersById(this.volume_actions,id));
    // console.log("God-id",this.volume_actions[id].id);
    // console.log("God-parameters",this.volume_actions[id].parameters);
@@ -272,16 +269,25 @@ form_config_solution_modification_actions = {
     console.log ("God param",this.selected_parameters)
     this.steps_list.push(new Step(this.steps_list.length+1,this.selected_operations_method,this.selected_parameters))
    // this.steps_list.push(this.currentStepForm.value);
-    console.log(this.steps_list);
+    console.log("God - add step:",this.steps_list);
   }
 
   onExecute() {
-    console.log("God Original Steps", this.solution_mixture_steps.steps)
-    console.log("God New Steps", this.steps_list)
-    this.solution_mixture_steps.addSteps(this.steps_list);
-    console.log("God New Steps after concat", this.solution_mixture_steps.steps)
+    console.log("God subscribed list", this.steps_list)
+    
+    // for ( let step of this.steps_list) {
+    //   let lensteps = this.solution_mixture_steps.steps.length
+    //   let newStep = new Step(lensteps+1,step.operation_method,step.parameters)
+    //   this.solution_mixture_steps.steps.push(newStep);
+
+    // }
+
+
+    // console.log("God New Steps", this.steps_list)
+    // //this.solution_mixture_steps.addSteps(this.steps_list);
+    // console.log("God New Steps after concat", this.solution_mixture_steps.steps)
   
-    this.solutionMixtureService.postStepsAndGetSolutionMixture(this.solution_mixture_steps.steps);
+    this.solutionMixtureService.postStepswithTrigger();
     
    
   }

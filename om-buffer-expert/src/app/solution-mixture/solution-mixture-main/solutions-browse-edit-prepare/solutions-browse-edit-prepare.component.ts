@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit,ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { SolutionMixtureService } from '../../../solution-mixture.service';
 import {
   FormBuilder,
@@ -20,10 +27,12 @@ import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
 
 //get the solutionslibrary from the service, and then process it.
 //we need to get the names from the objects in the library and use the names to generate the autocomplete list.
-export class SolutionsBrowseEditPrepareComponent implements OnInit,AfterViewInit {
+export class SolutionsBrowseEditPrepareComponent
+  implements OnInit, AfterViewInit
+{
   //get solutionmixture service
   @ViewChild('scrollRef') private solutionlistcontainer: ElementRef;
-  
+
   solutions_selection_Control = new FormControl();
   bufferspecieswithSaltForm: FormGroup;
   bufferspecieswithoutSaltForm: FormGroup;
@@ -33,14 +42,16 @@ export class SolutionsBrowseEditPrepareComponent implements OnInit,AfterViewInit
   solutionsLibrary: {
     [category: string]: { [subCategory: string]: Solution[] };
   };
+  message: string = '';
+  isDuplicate: boolean = false;
   selectedCategory: string | null = null;
   selectedSubCategory: string | null = null; // For "withSalt" and "withoutSalt"
   categories = ['dual', 'single', 'single-strong', 'stock']; // Your main categories
   categoryDisplayNames = {
-    'dual': 'Dual Species',
-    'single': 'Single Buffer Species',
+    dual: 'Dual Species',
+    single: 'Single Buffer Species',
     'single-strong': 'Single w/ Base',
-    'stock': 'Stock Solutions',
+    stock: 'Stock Solutions',
   };
   solution_mixture_steps: Step[] = []; // Array of Step instances - we will use this to capture the solutions that the user chooses with Make Solution steps
   solution_mixture_result_object: SolutionMixture; // We will use this to capture the returned result from the API call
@@ -53,39 +64,24 @@ export class SolutionsBrowseEditPrepareComponent implements OnInit,AfterViewInit
     private solutionMixtureService: SolutionMixtureService,
     private fb: FormBuilder
   ) {
-    //   this.solutionForm = this.fb.group({
-    //   buffer_species: ['', Validators.required], // Makes the buffer_species field required
-    //   target_conc: ['', [Validators.required, Validators.min(0.005), Validators.max(.7)]], // Example: Requires target_conc, must be between 0.01 and 10
-    //   target_pH: ['', [Validators.required, Validators.min(0), Validators.max(14)]], // pH must be between 0 and 14
-    //   salt_compound_name: [''], // No validators for optional fields
-    //   salt_conc: ['', Validators.min(0),Validators.max(0.7)], // Must be non-negative, but optional
-    //   compound_name: ['', Validators.required], // Required for stock solutions
-    //   compound_conc: ['', [Validators.required, Validators.min(0.005),Validators.max(0.7)]], // Required, must be positive
-    // });
-
     this.initForms();
   }
 
+  ngAfterViewInit(): void {
+    //this.scrollToLastItem(); TODO
+  }
 
+  scrollToLastItem() {
+    const scrollElement = this.solutionlistcontainer.nativeElement;
+    // Option 1: Instant scroll
+    scrollElement.scrollLeft = scrollElement.scrollWidth;
 
-ngAfterViewInit(): void {
-    //this.scrollToLastItem();
-}
-
-scrollToLastItem() {
-  const scrollElement = this.solutionlistcontainer.nativeElement;
-  // Option 1: Instant scroll
-  scrollElement.scrollLeft = scrollElement.scrollWidth;
-
-  // Option 2: Smooth scroll (if you prefer a smooth scrolling effect)
-  scrollElement.scrollTo({
-    left: scrollElement.scrollWidth,
-    behavior: 'smooth'
-  });
-}
-
-
-
+    // Option 2: Smooth scroll (if you prefer a smooth scrolling effect)
+    scrollElement.scrollTo({
+      left: scrollElement.scrollWidth,
+      behavior: 'smooth',
+    });
+  }
 
   ngOnInit() {
     this.solutions_selection_Control = new FormControl();
@@ -95,6 +91,23 @@ scrollToLastItem() {
       map((value) => (typeof value === 'string' ? value.toLowerCase() : '')),
       map((value) => this.filterSolutions(value)) // Fixed the method name
     );
+    this.solutionMixtureService.Steps$.subscribe((steps) => {
+      this.solution_mixture_steps = steps;
+    });
+
+    this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
+      (solutionMixture) => {
+        if (solutionMixture) {
+          // do something with solutionMixture
+          for(let [index, solution] of solutionMixture.solutions.entries()){
+            this.solution_mixture_steps[index].associated_solution = solution.name;
+          }
+        }
+      }
+    );
+
+
+
   }
 
   initForms() {
@@ -118,16 +131,10 @@ scrollToLastItem() {
     });
   }
 
-  //solutionsNames = Object.keys(this.solutionsLibrary);
-  //console.log(this.solutionsNames);
-  //console.log(this
-
   onChipSelection(category: string, selected: boolean) {
     if (category === 'Stock Solutions') {
       this.stockSolutionsSelected = true;
-
-    }
-    else {
+    } else {
       this.stockSolutionsSelected = false;
     }
     // Rest of your method here
@@ -185,7 +192,7 @@ scrollToLastItem() {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-    
+
     if (solution.solution_type === 'stock') {
       this.isStockSolution = true;
       this.stockSolutionForm.patchValue({
@@ -212,7 +219,9 @@ scrollToLastItem() {
           target_pH: solution.pH.toFixed(3),
           salt_compound_name: solution.salt_compound?.name,
           salt_conc:
-            solution.compound_concentrations[solution.salt_compound?.name].toFixed(3),
+            solution.compound_concentrations[
+              solution.salt_compound?.name
+            ].toFixed(3),
         });
         this.bufferspecieswithSaltForm.get('buffer_species').disable(); // Disable the buffer_species field
         this.bufferspecieswithSaltForm.get('salt_compound_name').disable(); // Disable the salt_compound_name field
@@ -226,6 +235,7 @@ scrollToLastItem() {
   }
 
   onSubmitBufferwithSalt() {
+    this.isDuplicate = false;
     console.log(this.bufferspecieswithSaltForm.value);
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
@@ -241,9 +251,11 @@ scrollToLastItem() {
     } else {
       id = this.solution_mixture_steps.length + 1;
     }
-    const operations_method = 'Make Solution with Buffer Species with salt to Target Concentration and pH';
+    const operations_method =
+      'Make Solution with Buffer Species with salt to Target Concentration and pH';
     const parameters = {
-      buffer_species: this.bufferspecieswithSaltForm.getRawValue().buffer_species,
+      buffer_species:
+        this.bufferspecieswithSaltForm.getRawValue().buffer_species,
       target_conc: parseFloat(this.bufferspecieswithSaltForm.value.target_conc),
       target_pH: parseFloat(this.bufferspecieswithSaltForm.value.target_pH),
       salt_compound_name:
@@ -251,45 +263,71 @@ scrollToLastItem() {
       salt_conc: parseFloat(this.bufferspecieswithSaltForm.value.salt_conc),
     };
 
-    this.solution_mixture_steps.push(
-      new Step(id, operations_method, parameters)
+    let step_to_add = new Step(id, operations_method, parameters);
+    this.isDuplicate = Step.isDuplicateStep(
+      this.solution_mixture_steps,
+      step_to_add
     );
 
-    console.log(this.solution_mixture_steps);
-    this.submitSteps(this.solution_mixture_steps);
+    if (!this.isDuplicate) {
+      this.solution_mixture_steps.push(step_to_add);
+      console.log("God - ready to post", this.solution_mixture_steps)
+      this.triggerStepPOST();
+      this.message = '';
+    } else {
+      console.log("God - duplicate", this.solution_mixture_steps)
+      this.message = 'You have already added this solution';
+    }
+
   }
 
-   onSubmitBufferwithoutSalt() {
+  triggerStepPOST() {
+    this.solutionMixtureService.postStepswithTrigger();
+  }
+  onSubmitBufferwithoutSalt() {
+    this.isDuplicate = false;
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-  //   console.log(this.bufferspecieswithoutSaltForm.value);
+    //   console.log(this.bufferspecieswithoutSaltForm.value);
     let id;
     if (this.solution_mixture_steps === null) {
       id = 1;
     } else {
       id = this.solution_mixture_steps.length + 1;
     }
-    const operations_method = 'Make Solution with Buffer Species to Target Concentration and pH';
+    const operations_method =
+      'Make Solution with Buffer Species to Target Concentration and pH';
     const parameters = {
-      buffer_species: this.bufferspecieswithoutSaltForm.getRawValue().buffer_species,
-      target_conc: parseFloat(this.bufferspecieswithoutSaltForm.value.target_conc),
+      buffer_species:
+        this.bufferspecieswithoutSaltForm.getRawValue().buffer_species,
+      target_conc: parseFloat(
+        this.bufferspecieswithoutSaltForm.value.target_conc
+      ),
       target_pH: parseFloat(this.bufferspecieswithoutSaltForm.value.target_pH),
     };
 
-    this.solution_mixture_steps.push(
-      new Step(id, operations_method, parameters)
+    let step_to_add = new Step(id, operations_method, parameters);
+    this.isDuplicate = Step.isDuplicateStep(
+      this.solution_mixture_steps,
+      step_to_add
     );
 
-    console.log(this.solution_mixture_steps);
-    this.submitSteps(this.solution_mixture_steps);
+    if (!this.isDuplicate) {
+      this.solution_mixture_steps.push(step_to_add);
+      console.log("God - ready to post", this.solution_mixture_steps);
+      this.triggerStepPOST();
+      this.message = '';
+    } else {
+      this.message = 'You have already added this solution';
+    }
+  }
 
-}
-
- onSubmitStockSolution() {
-  this.isBufferwithSaltSolution = false;
-  this.isBufferwithoutSaltSolution = false;
-  this.isStockSolution = false;
+  onSubmitStockSolution() {
+    this.isDuplicate = false;
+    this.isBufferwithSaltSolution = false;
+    this.isBufferwithoutSaltSolution = false;
+    this.isStockSolution = false;
     console.log(this.stockSolutionForm.value);
     let id;
     if (this.solution_mixture_steps === null) {
@@ -301,18 +339,59 @@ scrollToLastItem() {
     const parameters = {
       compound_name: this.stockSolutionForm.getRawValue().compound_name,
       compound_conc: parseFloat(this.stockSolutionForm.value.compound_conc),
-    };
-    this.solution_mixture_steps.push(
-      new Step(id, operations_method, parameters)
+    };    
+    
+    let step_to_add = new Step(id, operations_method, parameters);
+    this.isDuplicate = Step.isDuplicateStep(
+      this.solution_mixture_steps,
+      step_to_add
     );
-    console.log(this.solution_mixture_steps);
-    this.submitSteps(this.solution_mixture_steps);
+
+    if (!this.isDuplicate) {
+      this.solution_mixture_steps.push(step_to_add);
+      this.triggerStepPOST();
+      this.message = '';
+    } else {
+      this.message = 'You have already added this solution';
+    }
+}
+
+
+removeSolution(i: number) {
+    this.solution_mixture_steps.splice(i, 1);
+
+    this.triggerStepPOST();
   }
 
+  EditSolution(i:number) {
+    this.isDuplicate = false;
+    this.isBufferwithSaltSolution = false;
+    this.isBufferwithoutSaltSolution = false;
+    this.isStockSolution = false;
 
-  submitSteps(steps: any[]) {
-    this.solutionMixtureService.postStepsAndGetSolutionMixture(steps);
-    //this.scrollToLastItem();
-  }
-
+    // We will use this to edit the step
+    if (this.solution_mixture_steps[i].operation_method === 'Make Solution with Buffer Species with salt to Target Concentration and pH') {
+      this.isBufferwithSaltSolution = true;
+      this.bufferspecieswithSaltForm.patchValue({
+        buffer_species: this.solution_mixture_steps[i].parameters['buffer_species'],
+        target_conc: this.solution_mixture_steps[i].parameters['target_conc'],
+        target_pH: this.solution_mixture_steps[i].parameters['target_pH'],
+        salt_compound_name: this.solution_mixture_steps[i].parameters['salt_compound_name'],
+        salt_conc: this.solution_mixture_steps[i].parameters['salt_conc'],
+      });}
+      else if (this.solution_mixture_steps[i].operation_method === 'Make Solution with Buffer Species to Target Concentration and pH') {
+        this.isBufferwithoutSaltSolution = true;
+        this.bufferspecieswithoutSaltForm.patchValue({
+          buffer_species: this.solution_mixture_steps[i].parameters['buffer_species'],
+          target_conc: this.solution_mixture_steps[i].parameters['target_conc'],
+          target_pH: this.solution_mixture_steps[i].parameters['target_pH'],
+        });
+      } else if (this.solution_mixture_steps[i].operation_method === 'Make Stock Solution') { 
+        this.isStockSolution = true;
+        this.stockSolutionForm.patchValue({
+          compound_name: this.solution_mixture_steps[i].parameters['compound_name'],
+          compound_conc: this.solution_mixture_steps[i].parameters['compound_conc'],
+        });
+      }
+}
 }

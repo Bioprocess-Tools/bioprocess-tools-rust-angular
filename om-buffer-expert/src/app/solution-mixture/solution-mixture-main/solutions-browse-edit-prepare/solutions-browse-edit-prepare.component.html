@@ -116,6 +116,13 @@
             >
               Target concentration must be between 0.01 and 10.
             </mat-error>
+
+            <mat-error
+              *ngIf="isDuplicate">
+              You have already added this solution
+              </mat-error>
+
+
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="input-fields">
@@ -206,24 +213,31 @@
       </form>
     </mat-card>
 
-    <app-solutions-review></app-solutions-review>
-    <mat-card class="solution-list-background" *ngIf="solution_mixture_result_object">
+
+    <mat-card class="solution-list-background" *ngIf="solution_mixture_steps">
       <mat-card-header>
         <mat-card-title>Solution List </mat-card-title>
       </mat-card-header>
-      <mat-card class="solution-list-container"  #scrollRef *ngIf="solution_mixture_result_object">
+      <mat-card class="solution-list-container"  #scrollRef *ngIf="solution_mixture_steps">
 
 
         <mat-card class="solution-card" *ngFor="
-            let solution of solution_mixture_result_object.solutions;
+            let step of solution_mixture_steps;
             let i = index"
           [attr.data-index]="i">
           <mat-card-header>
-            <mat-card-subtitle class="buffer-name">{{ solution.name }}</mat-card-subtitle>
+            <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content *ngFor="let compound of solution.compound_concentrations | keyvalue">
-            <p>{{ compound.key }} : {{ compound.value | number : "1.3-3" }}M</p>
+          <mat-card-content>
+            <div *ngFor="let item of step.parameters | keyvalue">
+              <p>{{item.key}}: {{item.value}}</p>
+            </div>
+
           </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)="removeSolution(i)">Remove</button>
+            <button mat-button (click)="EditSolution(i)">Edit</button>
+          </mat-card-actions>
         </mat-card>
       </mat-card>
     </mat-card>
