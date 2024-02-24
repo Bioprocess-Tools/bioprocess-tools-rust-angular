@@ -1,1 +1,93 @@
-<p>solutions-review works!</p>
+<mat-card class="card-background">
+    <!-- <mat-card-title>Your solutions</mat-card-title> -->
+    <mat-card class="grid-container">
+      <mat-card class="grid-item"  *ngFor="let solution of solutions; let i = index"
+      [ngClass]="{ 'highlighted-card': solutions.length==1 ||  selectedSolution === solution, 'unhighlighted-card': selectedSolution==null }"  (click)="viewDetails(solution,i,$event)">
+  
+          <p class="scroll-title" #solutionElement> {{solution.name}}</p>
+  
+        <!-- <mat-card-content
+          *ngFor="let compound of solution.compound_concentrations | keyvalue">
+          <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</p>
+          <mat-divider></mat-divider>
+        </mat-card-content> -->
+        <!-- <mat-card-actions>
+          <button mat-stroked-button color="accent" class="button-accent"
+            (click)="viewDetails(solution)">Details</button>
+            <button mat-stroked-button color="accent" class="button-accent"
+            (click)="editSolution(solution)">Edit</button>
+        </mat-card-actions> -->
+      </mat-card>
+    </mat-card>
+  
+  </mat-card>
+  
+  <mat-card class="solution_summary" *ngIf="selectedSolution">
+   <mat-divider class="thick"> </mat-divider>
+  <mat-card-header  >
+    <h4 class="solution_title"> {{solution.name}}</h4>
+  </mat-card-header>
+  <mat-card-content
+    *ngFor="let compound of solution.compound_concentrations | keyvalue">
+    <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.4-4' }}M</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-content ><p class="pH"> pH : {{solution.pH | number:
+    '1.3-3'}}</p></mat-card-content>
+  
+  </mat-card>
+  <mat-card *ngIf="solution" class="solution-compunds">
+    <!-- <mat-card-title class="utext">Compounds in solution - {{solution.name}}</mat-card-title> -->
+   <mat-card-title class="utext">Compounds in solution</mat-card-title>
+    <mat-divider class="thick-color"> </mat-divider>
+    <mat-card class="compound-card" *ngFor="let compound of solution.compounds">
+      <mat-card class="compound-sub">
+        <mat-card-title> {{compound.name}} </mat-card-title>
+        <mat-card-content class = "compound-details">
+          <!-- <img [src]="imageUrl"> -->
+          <p class="less-space"> Molecular Weight: {{compound.molecular_weight}}</p> 
+          <p class="less-space"> Buffer Ion: {{compound.buffer_ion_name}}</p>
+          <p class="less-space"> Concentration (M) :
+            {{solution.compound_concentrations[compound.name]
+            | number:'1.4-4'}}</p>
+          <p class="less-space"> Concentration (g/L) :
+            {{solution.compound_concentrations[compound.name]*compound.molecular_weight
+            | number:'1.3-3'}} </p>
+   
+        </mat-card-content>
+          <mat-card class="ion-card">
+            <mat-card *ngFor="let ion of compound.ions; let i = index"
+              class="ion-sub">
+              <mat-card-title> {{ion.name}}</mat-card-title>
+              <mat-card-content>
+                <p class="less-space"> Ion Conc. (M): {{getIonConcentration(compound, i)|number:'1.3-3'}}</p>
+              </mat-card-content>
+             
+            </mat-card>
+    
+          </mat-card>
+          <mat-divider class="thick-color"> </mat-divider>
+      </mat-card>
+    </mat-card>
+  
+    <mat-card-title class="utext"> Unique Ions in the Solution</mat-card-title>
+  
+      <mat-card class="unique-ions">
+  
+  
+        <mat-card *ngFor="let ion of solution.unique_ions" class="unique-sub">
+          <mat-card-title> {{ion.name}}</mat-card-title>
+          <mat-card-content>
+            <p class="less-space"> Conc. [M]: {{solution.ion_concentrations[ion.name]|number:'1.3-3'}}</p>
+            <p class="less-space"> pKa: {{ion.pka.join(',')}}</p>
+            <!-- <p class="less-space"> Charges : {{getIonCharges(ion.highest_charge).join(',')}}</p>
+            <p class="less-space"> Species charge [M] : {{getIonicConcs(ion.ionic_concs).join(',')}}</p> -->
+            <p class="less-space"> Un-ionized [M] : {{ion.unionized_conc}}</p>
+          </mat-card-content>
+        </mat-card>
+      </mat-card>
+  
+  
+  
+  </mat-card>
+  

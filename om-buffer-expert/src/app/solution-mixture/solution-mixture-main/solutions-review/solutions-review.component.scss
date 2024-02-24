@@ -1,0 +1,223 @@
+@import "../../../../shared-styles.scss";
+
+.card-background {
+  //background-color: rgb(201, 28, 28);
+  color: black;
+  margin: 5px;
+}
+
+///////This is for the solutions scroll list///////////////
+.grid-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  margin: 5px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  //background-color: $card-background-cream;
+  box-shadow: none;
+  //background-color: rgb(176, 239, 239);
+  border-width: 3px;
+  border-color: $primary-color;
+  gap: 5px;
+}
+
+.grid-item {
+  //gap:20px;
+  max-width: 35vw;
+  max-height: 350px;
+  margin: 10px;
+  scroll-snap-align: start;
+  //background-color: $card-background;
+  color: black;
+  margin: 3px;
+
+  //background-color: rgb(184, 178, 178);
+}
+
+.solution_summary {
+  box-shadow: inset;
+  //background-color: aqua;
+  margin: 3px;
+  border-width: 3px;
+  border-color: $primary-color;
+}
+
+.solution_title {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+///////This is for the solutions scroll list///////////////
+.highlighted-card {
+  border: 3px solid $accent-green; /* Change color as per your requirement */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.unhighlighted-card {
+  border: $primary-color;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.less-space {
+  margin-bottom: 1px;
+  margin-top: 3px;
+}
+
+.pH {
+  margin-bottom: 1px;
+  margin-top: 3px;
+  // padding-left:5px;
+}
+.thick {
+  border-top-width: 2px;
+  border-color: $headtext-color;
+}
+.thick-color {
+  border-top-width: 2px;
+  border-color: $divider-green;
+}
+.solution-compunds {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  background-color: transparent;
+}
+
+.compound-card {
+  background-color: transparent;
+  padding: 4px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+
+  box-shadow: none;
+}
+
+.compound-sub {
+  background-color: whitesmoke;
+  box-shadow: none;
+}
+
+.compound-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 15px;
+}
+
+mat-card-title {
+  margin-left: 8px;
+  font-size: medium;
+}
+.utext {
+  color: black;
+}
+
+.ion-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  padding: 4px;
+  background-color: transparent;
+  box-shadow: none;
+}
+.ion-sub {
+  //background-color: $card-background;
+
+  margin: 5px;
+  //border-color: rgb(5, 13, 91);
+  //border-width: .1px;
+  // margin-bottom:0px;
+}
+.unique-ions {
+  background-color: whitesmoke;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto;
+  margin: 5px;
+  padding: 0px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  box-shadow: none;
+}
+
+.unique-sub {
+  // box-shadow: inset;
+  //background-color: $card-background;
+
+  margin: 5px;
+}
+
+.scroll-title {
+  font-size: larger;
+  //text-transform: capitalize;
+  margin: 10px;
+}
+/* .mat-headline-5 {
+  margin-top: .2em;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+mat-icon {
+  font-size: 24px;
+}
+
+.highlighted-card {
+  border: 2px solid #ff2a00;
+ 
+} 
+*/
+
+@media (max-width: 450px) {
+
+  .unique-sub {
+    width: 38vw;
+  }
+
+  .less-space {
+    font-size: smaller;
+  }
+
+  // .grid-container {
+  //   display: grid;
+  //   grid-auto-flow: row; /* Adjust to allow content to flow in rows */
+  //   grid-auto-rows: 25%; /* Define the size for the auto-generated grid rows */
+  //   margin: 5px;
+  //   overflow-y: auto; /* Allow vertical scrolling */
+  //   overscroll-behavior-y: contain; /* Contain overscroll to the current container */
+  //   scroll-snap-type: y proximity; /* Snap scrolling to the closest element edge */
+
+  //   /* Your other styles remain unchanged */
+  //   box-shadow: none;
+  //   /* Other style properties you need */
+  // }
+  .grid-container {
+    grid-auto-columns: auto;
+  }
+  .grid-item {
+    //gap:20px;
+    width: 30vw;
+    //width:auto;
+    max-height: 25vw;
+    //max-height: auto;
+    // margin: 10px;
+    // padding:5px;
+    //gap:15px;
+    scroll-snap-align: start;
+    background-color: whitesmoke;
+    color: black;
+
+    //background-color: rgb(184, 178, 178);
+  }
+
+  .scroll-title {
+    padding: 3px;
+    margin: 1vw;
+    font-size: 13px;
+    // text-transform: capitalize;
+  }
+}

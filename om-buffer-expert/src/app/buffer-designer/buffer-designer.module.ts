@@ -13,14 +13,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
 
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
@@ -53,7 +51,6 @@ BufferDesignerComponent
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatAutocompleteModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
@@ -61,7 +58,6 @@ BufferDesignerComponent
     MatTabsModule,
     MatFormFieldModule,
     MatMenuModule,
-    MatSidenavModule,
     BufferDesignerRoutingModule,
     RouterModule,
      MatExpansionModule,

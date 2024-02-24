@@ -22,7 +22,8 @@ export class SolutionMixtureService {
   solutionsLibrary: {[category: string]: {[subCategory: string]: Solution[]}} = {};
   bufferSpecies: {[key: string]: any} = {};
   compounds: {[key: string]: any} = {};
-
+  solutionMixtureSolutionsReviewSubject = new BehaviorSubject<SolutionMixture>(null);  
+  solutionMixtureSolutionsReview$ = this.solutionMixtureSolutionsReviewSubject.asObservable();  
 
   constructor(private http: HttpClient) {
     
@@ -126,10 +127,20 @@ getCompoundsProcessed(): Observable<any> {
 // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
 // to display the solutions in the mixture
 // solution_mixture object will be a single object
-postStepsAndGetSolutionMixture(steps: any[]): Observable<SolutionMixture> {
-  // Use the SolutionMixture interface to cast the response
-  return this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps });
+postStepsAndGetSolutionMixture(steps: any[]) {
+  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
+  .subscribe({
+  next: (solutionMixture) => {
+  this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+},
+error: (error) => console.error(error)
+});
 }
+
+
+  // Use the SolutionMixture interface to cast the response
+  
+
 
 
 

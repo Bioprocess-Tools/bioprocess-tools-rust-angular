@@ -69,7 +69,7 @@ export class SolutionsBrowseEditPrepareComponent implements OnInit,AfterViewInit
 
 
 ngAfterViewInit(): void {
-    this.scrollToLastItem();
+    //this.scrollToLastItem();
 }
 
 scrollToLastItem() {
@@ -311,17 +311,8 @@ scrollToLastItem() {
 
 
   submitSteps(steps: any[]) {
-    this.solutionMixtureService.postStepsAndGetSolutionMixture(steps).subscribe({
-      next: (solutionMixture) => {
-        this.solution_mixture_result_object= solutionMixture;
-        console.log('God Solution mixture:', solutionMixture);
-        // You can now access this.solutionMixture.solutions and other properties
-      },
-      error: (error) => console.error('Error fetching solution mixture:', error)
-    });
-    this.scrollToLastItem();
+    this.solutionMixtureService.postStepsAndGetSolutionMixture(steps);
+    //this.scrollToLastItem();
   }
-
-
 
 }

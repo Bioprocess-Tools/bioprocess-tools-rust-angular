@@ -1,1 +1,158 @@
-<p>solution-mixture-steps works!</p>
+<mat-card class="solution-mixture-steps-card">
+    <mat-card-header>
+        <mat-card-title>
+            Select, Edit and Execute Solution Mixture Preparation Workflow
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card class="solution-operations-group-choice-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Choose Solution Operations Group</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                create a mat-chip-list or option
+                <mat-chip-listbox class="group-option-choice">
+                    <mat-chip-option *ngFor="let group of operationGroups"
+                        (click)="onOperationGroupSelect(group.id)">
+                        {{ group.displayName }}
+                    </mat-chip-option>
+                </mat-chip-listbox>
+
+            </mat-card-content>
+
+        </mat-card>
+
+        <mat-card class="step-editor-card" *ngIf="volumeAdditions || targetConc_pH || solutionModification">
+
+            <mat-card-header>
+                <mat-card-title>
+                    <h2>Edit Solution Mixture Preparation Steps</h2>
+                </mat-card-title>
+
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card class="step-editor-details">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <h3>Step Editor</h3>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content *ngIf="volumeAdditions" class="action_choice_card_content">
+                        <mat-chip-listbox class="group-option-choice">
+                            <mat-chip-option *ngFor="let action of volume_actions"
+                                (click)="onVolumeActionSelect(action.id)">
+                                {{ action.displayName }}
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+                    </mat-card-content>
+
+                    <mat-card-content *ngIf="targetConc_pH" class="action_choice_card_content">
+                        <mat-chip-listbox class="group-option-choice">
+                            <mat-chip-option *ngFor="let action of target_conc_pH_actions"
+                                (click)="onTargetConc_pHActionSelect(action.id)">
+                                {{ action.displayName }}
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+
+
+                    </mat-card-content>
+
+
+                    <mat-card-content *ngIf="solutionModification" class="action_choice_card_content">
+                            <mat-chip-listbox class="group-option-choice">
+                                <mat-chip-option *ngFor="let action of solution_modification_actions"
+                                    (click)="onSolutionModificationActionSelect(action.id)">
+                                    {{ action.displayName }}
+                                </mat-chip-option>
+                            </mat-chip-listbox>
+
+
+                    </mat-card-content>
+                    <mat-card-content>
+                        <mat-card class="volumeAdditionsCard" *ngIf="volumeAdditions && volumeAdditionsActionsSelected">
+                            <mat-card-header>
+                                <mat-card-title>Volume Additions Actions too
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+
+                                
+                                    <ng-container *ngTemplateOutlet="TitrateSpecifiedVolumeofSolution"></ng-container>
+
+                          
+                            </mat-card-content>
+
+
+                        </mat-card>
+
+                        <mat-card class="targetConc_pHCard" *ngIf="targetConc_pH && targetConc_pHActionsSelected">
+                            <mat-card-header>
+                                <mat-card-title>Target Compound, Ion
+                                    Concentrations or pH Actions
+                                </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+
+                                <p> Target Compound Form goes here</p>
+                            </mat-card-content>
+
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary">Add Step</button>
+                            </mat-card-actions>
+                        </mat-card>
+
+                        <mat-card class="solutionModificationCard" *ngIf="solutionModification && solutionModificationActionsSelected">
+                            <mat-card-header>
+                                <mat-card-title>Target Ion Concentration and pH
+                                    Actions </mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+
+                                <p> Target Solution Mod Form goes here</p>
+                            </mat-card-content>
+
+                            <mat-card-actions>
+                                <button mat-raised-button color="primary">Add Step</button>
+                            </mat-card-actions>
+                        </mat-card>
+
+                    </mat-card-content>
+
+                </mat-card>
+
+            </mat-card-content>
+
+        </mat-card>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="onExecute()">Execute Workflow</button>
+    </mat-card-actions>
+</mat-card>
+
+
+<ng-template #TitrateSpecifiedVolumeofSolution>
+    <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">  
+    <mat-card class="VolumeActionForm">
+        <mat-card-header>
+            <mat-card-title> Titrate Specified Volume of Solution</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field appearance="fill">
+                <mat-label>Solution Name</mat-label>
+                <mat-select formControlName="solution_name">
+                  <mat-option *ngFor="let name of solution_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Volume to Titrate</mat-label>
+                    <input matInput formControlName="volume">
+                </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add Step</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</ng-template>

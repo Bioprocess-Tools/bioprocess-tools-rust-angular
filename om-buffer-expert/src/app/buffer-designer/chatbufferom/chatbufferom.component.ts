@@ -136,7 +136,7 @@ ionValidator():ValidatorFn {
         this.solutionService.add_Solution(this.response_solution);
 
         this.solutionService.changeSolution(this.response_solution);
-        this.form.controls['userInput'].setValue("");
+        this.form.controls['userInput'].setValue(userInput);
        //this.form.reset();
         this.form.updateValueAndValidity({onlySelf:false, emitEvent:true});
         this.form.markAsUntouched();
