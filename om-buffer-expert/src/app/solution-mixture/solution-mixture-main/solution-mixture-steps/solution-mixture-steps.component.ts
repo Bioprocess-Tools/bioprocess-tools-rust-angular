@@ -94,6 +94,7 @@ getSolutionNames() {
             this.solution_names.push(solution.name);
         }
         console.log("God solname", this.solution_names)
+        console.log("God sol", this.solution_mixture_steps)
       }
     }
   );
@@ -229,7 +230,7 @@ form_config_solution_modification_actions = {
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(this.volume_actions,id);
     console.log("God", config.templateRef)
-    this.selectedTemplate= config.templateRef;
+    this.selectedTemplate= this[config.templateRef];
     console.log(this.currentStepForm);
   }
 
@@ -275,9 +276,13 @@ form_config_solution_modification_actions = {
   }
 
   onExecute() {
-    this.solution_mixture_steps.steps.concat(this.steps_list)
+    console.log("God Original Steps", this.solution_mixture_steps.steps)
+    console.log("God New Steps", this.steps_list)
+    this.solution_mixture_steps.addSteps(this.steps_list);
+    console.log("God New Steps after concat", this.solution_mixture_steps.steps)
+  
     this.solutionMixtureService.postStepsAndGetSolutionMixture(this.solution_mixture_steps.steps);
     
-    console.log("God new mixture", this.solution_mixture_steps)
+   
   }
 }
