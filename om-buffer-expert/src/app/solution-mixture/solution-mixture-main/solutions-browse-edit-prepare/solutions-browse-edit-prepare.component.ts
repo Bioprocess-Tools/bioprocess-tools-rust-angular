@@ -59,6 +59,8 @@ export class SolutionsBrowseEditPrepareComponent
   isBufferwithoutSaltSolution = false;
   isStockSolution = false;
   make_solutions_steps = [];
+  actionType: string = 'Add Solution';
+  updateIndex: number = -1;
 
   constructor(
     private solutionMixtureService: SolutionMixtureService,
@@ -189,6 +191,8 @@ export class SolutionsBrowseEditPrepareComponent
 
   onSolutionSelected(solution: Solution) {
     // Populate the form based on the type of solution
+    this.actionType = 'Add Solution';
+    this.updateIndex = -1;
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
@@ -270,6 +274,11 @@ export class SolutionsBrowseEditPrepareComponent
     );
 
     if (!this.isDuplicate) {
+      if (this.updateIndex > -1) {
+        this.removeSolution(this.updateIndex);
+        this.updateIndex = -1;
+        this.actionType = 'Add Solution';
+      }
       this.solution_mixture_steps.push(step_to_add);
       console.log("God - ready to post", this.solution_mixture_steps)
       this.triggerStepPOST();
@@ -314,6 +323,11 @@ export class SolutionsBrowseEditPrepareComponent
     );
 
     if (!this.isDuplicate) {
+      if (this.updateIndex > -1) {
+        this.removeSolution(this.updateIndex);
+        this.updateIndex = -1;
+        this.actionType = 'Add Solution';
+      }
       this.solution_mixture_steps.push(step_to_add);
       console.log("God - ready to post", this.solution_mixture_steps);
       this.triggerStepPOST();
@@ -348,6 +362,13 @@ export class SolutionsBrowseEditPrepareComponent
     );
 
     if (!this.isDuplicate) {
+      if (this.updateIndex > -1) {
+        this.removeSolution(this.updateIndex);
+        this.updateIndex = -1;
+        this.actionType = 'Add Solution';
+      }
+      
+    
       this.solution_mixture_steps.push(step_to_add);
       this.triggerStepPOST();
       this.message = '';
@@ -393,5 +414,7 @@ removeSolution(i: number) {
           compound_conc: this.solution_mixture_steps[i].parameters['compound_conc'],
         });
       }
+      this.actionType = 'Update Solution';
+      this.updateIndex = i;
 }
 }

@@ -97,3 +97,31 @@
     border-bottom: 1px solid #e0e0e0;
     color: #333;
 }
+
+.solution-list-container {
+    max-width:90vw;
+    display: grid;
+    grid-auto-flow:column ; /* Adjust based on your layout preference */
+    grid-template-columns: repeat(3, 1fr); /* Adjust based on your layout preference */
+    margin: 5px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    //background-color: $card-background-cream;
+    box-shadow:none;
+    //background-color: rgb(176, 239, 239);
+    border-width: 3px;
+  border-color: red;
+  gap:5px;
+  }
+  .solution-card {
+    white-space: nowrap;
+    // max-width: 35vw;
+    // min-width:150px;
+    // max-height: 350px;
+    //  margin: 10px;
+    //  scroll-snap-align: start;
+    // //background-color: $card-background;
+     color: black;
+     margin:3px;
+  }

@@ -12,16 +12,22 @@ import { SolutionMixtureService } from 'src/app/solution-mixture.service';
 })
 export class SolutionMixtureStepsComponent implements OnInit {
   @ViewChild('TitrateSpecifiedVolumeofSolution') TitrateSpecifiedVolumeofSolution: TemplateRef<any>;
-  @ViewChild('IncreaseVolumeSolutionTemplate') IncreaseVolumeSolutionTemplate: TemplateRef<any>;
-  @ViewChild('DiluteByVolumeWater') DiluteByVolumeWater: TemplateRef<any>;
-  @ViewChild('DiluteByRatioWater') DiluteByRatioWater: TemplateRef<any>;
+  @ViewChild('AddSpecifiedVolumeofSolution') AddSpecifiedVolumeofSolution: TemplateRef<any>;
+  @ViewChild('AddSpecifiedVolumeofWater') AddSpecifiedVolumeofWater: TemplateRef<any>;
+  @ViewChild('DilutetoRatioWater') DilutetoRatioWater: TemplateRef<any>;
+
+  @ViewChild('AddWaterToTargetCompoundConcentration') AddWaterToTargetCompoundConcentration: TemplateRef<any>;
 
   volumeAdditions = false;
   targetConc_pH = false;
   solutionModification = false;
 
-  solution_mixture_steps: SolutionMixture;
-  solution_names:string[]=[]
+  solution_mixture_steps_edit: SolutionMixture;
+  solution_names:string[]=[];
+  compound_names:string[]=[];
+  ion_names:string[]=[];
+  compound_allZero:boolean;
+  ion_allZero:boolean;
 
   selectedTemplate: TemplateRef<any>;
   steps_list:Step[] = [];
@@ -55,8 +61,8 @@ export class SolutionMixtureStepsComponent implements OnInit {
 volume_actions = [
   {id:"Titrate with Solution Name to Volume",displayName: "Titrate specified volume of solution",parameters: ["solution_name","volume"]},
   {id:"Increase Volume of Solution Name",displayName: "Add specified volume of solution" ,parameters: ["solution_name","volume_to_add"]},
-  {id:"Dilute Solution Mixture with Water",displayName:"Add specified volume of water", parameters:  ["volume_to_add"]},
-  {id:"Dilute Solution Mixture",displayName: "Add water to dilution ratio",parameters: ["dilution_factor"]},
+  {id:"Dilute with Specified Volume of Water",displayName:"Add specified volume of water", parameters:  ["volume_to_add"]},
+  {id:"Dilute Solution Mixture with Water",displayName: "Dilute by a ratio with Water",parameters: ["dilution_ratio"]},
 ]
 
 target_conc_pH_actions = [
@@ -78,20 +84,24 @@ ngOnInit() {
     this.steps_list = steps;
   });
 
-    this.getSolutionNames()
+    this.getSolutionCompoundIonNames()
 
   }
 
 
-getSolutionNames() {
+getSolutionCompoundIonNames() {
   //this.solution_names = this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe()
 
   this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
     (solutionMixture) => {
       if (solutionMixture) {
         // do something with solutionMixture
-        this.solution_mixture_steps = solutionMixture;
-        this.solution_names = Object.keys(this.solution_mixture_steps.solution_indices)
+        this.solution_mixture_steps_edit = solutionMixture;
+        this.solution_names = Object.keys(this.solution_mixture_steps_edit.solution_indices)
+        this.compound_names = Object.keys(this.solution_mixture_steps_edit.compound_concentrations)
+        this.ion_names = Object.keys(this.solution_mixture_steps_edit.ion_concentrations)
+        this.compound_allZero = this.compound_names.every((key) => this.solution_mixture_steps_edit.compound_concentrations[key] === 0)
+        this.ion_allZero = this.ion_names.every((key) => this.solution_mixture_steps_edit.ion_concentrations[key] === 0)  
       }
     }
   );
@@ -157,20 +167,20 @@ getTemplateById(actions: any[], id: string) {
       solution_name: [""],
       volume_to_add: [0,Validators.required]
   },
-  templateRef: 'IncreaseVolumeSolutionTemplate',
+  templateRef: 'AddSpecifiedVolumeofSolution',
 
   },
   "Add specified volume of water": {
     formControls : {
       volume_to_add: [0,Validators.required]
   },
-  templateRef: 'DiluteByVolumeWater',
+  templateRef: 'AddSpecifiedVolumeofWater',
   },
-  "Add water to dilution ratio": {
+  "Dilute by a ratio with Water": {
     formControls : {
-      dilution_factor: [0,Validators.required]
+      dilution_ratio: [0,Validators.required]
   },
-  templateRef: 'DiluteByRatioWater',
+  templateRef: 'DilutetoRatioWater',
   },
 }
 
@@ -180,6 +190,7 @@ form_config_target_conc_pH_actions = {
       compound_name: [""],
       target_conc: [0,Validators.required]
   },  
+  templateRef: 'AddWaterToTargetCompoundConcentration',
   },
   "Add water to target [ion]": {
     formControls : {
@@ -237,11 +248,11 @@ form_config_solution_modification_actions = {
     this.targetConc_pHActionsSelected = true;
     this.solutionModificationActionsSelected = false;
 
-    const config = this.form_config_target_conc_pH_actions[this.target_conc_pH_actions[id].displayName];  
+    const config = this.form_config_target_conc_pH_actions[this.getDisplayNameById(this.target_conc_pH_actions,id)];  
     this.currentStepForm = this.fb.group(config.formControls);
-    this.selected_operations_method = this.target_conc_pH_actions[id].id;
-    this.selected_parameters = this.target_conc_pH_actions[id].parameters;
-
+    this.selected_operations_method = id;
+    this.selected_parameters = this.getParametersById(this.target_conc_pH_actions,id);
+    this.selectedTemplate= this[config.templateRef];
 
   }
 
@@ -291,4 +302,14 @@ form_config_solution_modification_actions = {
     
    
   }
+
+  removeStep(i: number) {
+   // this.steps_list = this.steps_list.filter(s => s !== step);
+  }
+
+  editStep(i: number) {
+    this.currentStepForm = this.fb.group(this.steps_list[i].parameters);
+  }
+
+
 }
