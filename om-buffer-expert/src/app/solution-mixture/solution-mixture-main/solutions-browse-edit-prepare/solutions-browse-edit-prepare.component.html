@@ -224,7 +224,7 @@
         <mat-card class="solution-card" *ngFor="
             let step of solution_mixture_steps;
             let i = index"
-          [attr.data-index]="i">
+          [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
           <mat-card-header>
             <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
           </mat-card-header>

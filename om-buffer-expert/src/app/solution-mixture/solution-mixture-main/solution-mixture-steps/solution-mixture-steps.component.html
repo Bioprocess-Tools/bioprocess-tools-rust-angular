@@ -5,127 +5,52 @@
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <mat-card class="solution-operations-group-choice-card">
-            <mat-card-header>
-                <mat-card-title>
-                    <h2>Choose Solution Operations Group</h2>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                create a mat-chip-list or option
-                <mat-chip-listbox class="group-option-choice">
-                    <mat-chip-option *ngFor="let group of operationGroups"
-                        (click)="onOperationGroupSelect(group.id)">
+        <mat-card >
+
+            <mat-card-content   >
+                <mat-chip-listbox class="category_choice" [formControl]="selectedOperationGroup" >
+                    <mat-chip-option  *ngFor="let group of operationGroups" [value]="group.id"  (selectionChange)="onOperationGroupSelect($event)">
                         {{ group.displayName }}
                     </mat-chip-option>
                 </mat-chip-listbox>
-
             </mat-card-content>
-
         </mat-card>
-
-        <mat-card class="step-editor-card" *ngIf="volumeAdditions || targetConc_pH || solutionModification">
-
-            <mat-card-header>
-                <mat-card-title>
-                    <h2>Edit Solution Mixture Preparation Steps</h2>
-                </mat-card-title>
-
-            </mat-card-header>
-            <mat-card-content>
-                <mat-card class="step-editor-details">
-                    <mat-card-header>
-                        <mat-card-title>
-                            <h3>Step Editor</h3>
-                        </mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content *ngIf="volumeAdditions" class="action_choice_card_content">
-                        <mat-chip-listbox class="group-option-choice">
+        <mat-card  *ngIf="volumeAdditions || targetConc_pH || solutionModification" class="category_choice">
+                    <mat-card-content *ngIf="volumeAdditions" >
+                        <mat-chip-listbox [formControl]="selectedActionItem">
                             <mat-chip-option *ngFor="let action of volume_actions"
-                                (click)="onVolumeActionSelect(action.id)">
+                                (selectionChange)="onVolumeActionSelect($event)" [value]="action.id">
                                 {{ action.displayName }}
                             </mat-chip-option>
                         </mat-chip-listbox>
                     </mat-card-content>
 
-                    <mat-card-content *ngIf="targetConc_pH && !compound_allZero && !ion_allZero" class="action_choice_card_content">
-                        <mat-chip-listbox class="group-option-choice">
+                    <mat-card-content *ngIf="targetConc_pH" >
+                        <mat-chip-listbox [formControl]="selectedActionItem">
                             <mat-chip-option *ngFor="let action of target_conc_pH_actions"
-                                (click)="onTargetConc_pHActionSelect(action.id)">
+                                (selectionChange)="onTargetConc_pHActionSelect($event)" [value]="action.id">
                                 {{ action.displayName }}
                             </mat-chip-option>
                         </mat-chip-listbox>
-
-
                     </mat-card-content>
-
-
-                    <mat-card-content *ngIf="solutionModification" class="action_choice_card_content">
-                            <mat-chip-listbox class="group-option-choice">
+                    <mat-card-content *ngIf="solutionModification" >
+                            <mat-chip-listbox [formControl]="selectedActionItem">
                                 <mat-chip-option *ngFor="let action of solution_modification_actions"
-                                    (click)="onSolutionModificationActionSelect(action.id)">
+                                    (selectionChange)="onSolutionModificationActionSelect($event)" [value]="action.id">
                                     {{ action.displayName }}
                                 </mat-chip-option>
                             </mat-chip-listbox>
-
-
                     </mat-card-content>
-                    <mat-card-content>
-                        <mat-card class="volumeAdditionsCard" *ngIf="volumeAdditions && volumeAdditionsActionsSelected">
-                            <mat-card-header>
-                                <mat-card-title>Volume Additions Actions too
-                                </mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content>
-
-                                
-                                    <ng-container *ngTemplateOutlet="selectedTemplate"></ng-container>
-
-                          
-                            </mat-card-content>
-
-
-                        </mat-card>
-
-                        <mat-card class="targetConc_pHCard" *ngIf="targetConc_pH && targetConc_pHActionsSelected">
-                            <mat-card-header>
-                                <mat-card-title>Target Compound, Ion
-                                    Concentrations or pH Actions
-                                </mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content>
-
-                                <ng-container *ngTemplateOutlet="selectedTemplate"></ng-container>
-                            </mat-card-content>
-
-                            <mat-card-actions>
-                                <button mat-raised-button color="primary">Add Step</button>
-                            </mat-card-actions>
-                        </mat-card>
-
-                        <mat-card class="solutionModificationCard" *ngIf="solutionModification && solutionModificationActionsSelected">
-                            <mat-card-header>
-                                <mat-card-title>Target Ion Concentration and pH
-                                    Actions </mat-card-title>
-                            </mat-card-header>
-                            <mat-card-content>
-
-                                <p> Target Solution Mod Form goes here</p>
-                            </mat-card-content>
-
-                            <mat-card-actions>
-                                <button mat-raised-button color="primary">Add Step</button>
-                            </mat-card-actions>
-                        </mat-card>
-
-                    </mat-card-content>
-
                 </mat-card>
-
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="step-form-card" *ngIf="volumeAdditionsActionsSelected || targetConc_pHActionsSelected || solutionModificationActionsSelected">
+            <mat-card-content  *ngIf="selectedTemplate">
+                <ng-container class="step-form-card-content" *ngTemplateOutlet="selectedTemplate"></ng-container>
             </mat-card-content>
 
         </mat-card>
-    </mat-card-content>
+
 
 
     <mat-card class="solution-list-background" *ngIf="steps_list">
@@ -138,7 +63,7 @@
           <mat-card class="solution-card" *ngFor="
               let step of steps_list;
               let i = index"
-            [attr.data-index]="i">
+            [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
             <mat-card-header>
               <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
             </mat-card-header>
@@ -151,10 +76,17 @@
             <mat-card-actions>
               <button mat-button (click)="removeStep(i)">Remove</button>
               <button mat-button (click)="editStep(i)">Edit</button>
+
+               
+
             </mat-card-actions>
           </mat-card>
         </mat-card>
-      </mat-card>
+        <mat-card-actions *ngIf="steps_list.length>0">
+          
+        <button mat-raised-button color="primary" (click)="onExecute()">God Make my Formulation</button>
+        </mat-card-actions>
+    </mat-card>
 
 
       <mat-card class="solution-mixture-view-card" *ngIf="solution_mixture_steps_edit">
@@ -188,29 +120,6 @@
         </mat-card-content>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="onExecute()">Execute Workflow</button>
-    </mat-card-actions>
 </mat-card>
 
 
@@ -220,7 +129,7 @@
         <mat-card-header>
             <mat-card-title> Titrate with Specified Volume of Solution</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="template-form-fields">
             <mat-form-field appearance="fill">
                 <mat-label>Solution Name</mat-label>
                 <mat-select formControlName="solution_name">
@@ -246,7 +155,7 @@
         <mat-card-header>
             <mat-card-title> Add Specified Volume of Solution</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="template-form-fields">
             <mat-form-field appearance="fill">
                 <mat-label>Solution Name</mat-label>
                 <mat-select formControlName="solution_name">
@@ -272,7 +181,7 @@
         <mat-card-header>
             <mat-card-title> Add Specified Volume of Water</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="template-form-fields">
         <mat-form-field appearance="fill">
             <mat-label>Volume to Add</mat-label>
             <input matInput formControlName="volume_to_add">
@@ -292,7 +201,7 @@
         <mat-card-header>
             <mat-card-title> Dilute by a ratio with Water </mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="template-form-fields">
         <mat-form-field appearance="fill">
             <mat-label>Dilution Ratio</mat-label>
             <input matInput formControlName="dilution_ratio">
@@ -311,7 +220,7 @@
         <mat-card-header>
             <mat-card-title> Add Water to Target Compound Concentration</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="template-form-fields">
             <mat-form-field appearance="fill">
                 <mat-label>Compound Name</mat-label>
                 <mat-select formControlName="compound_name" >
@@ -328,3 +237,120 @@
         </mat-card-actions>
     </mat-card>
     </form>
+</ng-template>
+
+<ng-template #AddWaterToTargetIonConcentration>
+    <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">  
+    <mat-card class="targetConc_pHform">
+        <mat-card-header>
+            <mat-card-title> Add Water to Target Compound Concentration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="template-form-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Ion Name</mat-label>
+                <mat-select formControlName="ion_name" >
+                  <mat-option *ngFor="let name of ion_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Target Ion Concentration</mat-label>
+            <input matInput formControlName="target_conc">
+        </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add Step</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</ng-template>
+
+
+<ng-template #AddSolutionToTargetIonConcentration>
+    <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">  
+    <mat-card class="targetConc_pHform">
+        <mat-card-header>
+            <mat-card-title> Add Water to Target Compound Concentration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="template-form-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Solution Name</mat-label>
+                <mat-select formControlName="solution_name">
+                  <mat-option *ngFor="let name of solution_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Ion Name</mat-label>
+                <mat-select formControlName="ion_name" >
+                  <mat-option *ngFor="let name of ion_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Target Ion Concentration</mat-label>
+            <input matInput formControlName="target_conc">
+        </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add Step</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</ng-template>
+
+<ng-template #AddSolutionToTargetpH>
+    <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">  
+    <mat-card class="targetConc_pHform">
+        <mat-card-header>
+            <mat-card-title> Add Water to Target Compound Concentration</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="template-form-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Solution Name</mat-label>
+                <mat-select formControlName="solution_name">
+                  <mat-option *ngFor="let name of solution_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Target pH</mat-label>
+            <input matInput formControlName="target_pH">
+        </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add Step</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</ng-template>
+
+<ng-template #ModifySolutionToTargetConcpH>
+    <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">  
+    <mat-card class="targetConc_pHform">
+        <mat-card-header>
+            <mat-card-title> Modify Solution to Achieve Target Buffer Concentration and pH</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="template-form-fields">
+            <mat-form-field appearance="fill">
+                <mat-label>Solution Name</mat-label>
+                <mat-select formControlName="solution_name">
+                  <mat-option *ngFor="let name of solution_names" [value]="name">{{ name }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Volume ratio of solution to achieve target</mat-label>
+                <input matInput formControlName="dilution_ratio">
+            </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Target Buffer Concentration</mat-label>
+            <input matInput formControlName="target_conc">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Target pH</mat-label>
+            <input matInput formControlName="target_pH">
+        </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">Add Step</button>
+        </mat-card-actions>
+    </mat-card>
+    </form>
+</ng-template>

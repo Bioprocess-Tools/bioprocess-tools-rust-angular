@@ -61,6 +61,7 @@ export class SolutionsBrowseEditPrepareComponent
   make_solutions_steps = [];
   actionType: string = 'Add Solution';
   updateIndex: number = -1;
+  selectedStepIndex: number | null = null; //stores the selected step index
 
   constructor(
     private solutionMixtureService: SolutionMixtureService,
@@ -94,15 +95,18 @@ export class SolutionsBrowseEditPrepareComponent
       map((value) => this.filterSolutions(value)) // Fixed the method name
     );
     this.solutionMixtureService.Steps$.subscribe((steps) => {
-      this.solution_mixture_steps = steps;
+      this.solution_mixture_steps = steps.filter(step => step.category === "Make");
+      console.log("God -browse-edit-prepare", this.solution_mixture_steps)
     });
 
     this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
       (solutionMixture) => {
         if (solutionMixture) {
+          console.log("God - solutionMixture", solutionMixture)
           // do something with solutionMixture
           for(let [index, solution] of solutionMixture.solutions.entries()){
             this.solution_mixture_steps[index].associated_solution = solution.name;
+            this.solution_mixture_steps[index].category = "Make";
           }
         }
       }
@@ -280,6 +284,8 @@ export class SolutionsBrowseEditPrepareComponent
         this.actionType = 'Add Solution';
       }
       this.solution_mixture_steps.push(step_to_add);
+      this.solution_mixture_steps[this.solution_mixture_steps.length - 1].category="Make";
+      this.selectedStepIndex= this.solution_mixture_steps.length - 1;
       console.log("God - ready to post", this.solution_mixture_steps)
       this.triggerStepPOST();
       this.message = '';
@@ -291,7 +297,7 @@ export class SolutionsBrowseEditPrepareComponent
   }
 
   triggerStepPOST() {
-    this.solutionMixtureService.postStepswithTrigger();
+    this.solutionMixtureService.postStepswithTrigger(this.solution_mixture_steps);
   }
   onSubmitBufferwithoutSalt() {
     this.isDuplicate = false;
@@ -329,6 +335,8 @@ export class SolutionsBrowseEditPrepareComponent
         this.actionType = 'Add Solution';
       }
       this.solution_mixture_steps.push(step_to_add);
+      this.solution_mixture_steps[this.solution_mixture_steps.length - 1].category="Make";
+      this.selectedStepIndex= this.solution_mixture_steps.length - 1;
       console.log("God - ready to post", this.solution_mixture_steps);
       this.triggerStepPOST();
       this.message = '';
@@ -370,6 +378,8 @@ export class SolutionsBrowseEditPrepareComponent
       
     
       this.solution_mixture_steps.push(step_to_add);
+      this.solution_mixture_steps[this.solution_mixture_steps.length - 1].category="Make";
+      this.selectedStepIndex= this.solution_mixture_steps.length - 1;
       this.triggerStepPOST();
       this.message = '';
     } else {
@@ -377,11 +387,19 @@ export class SolutionsBrowseEditPrepareComponent
     }
 }
 
+onSelectItem(i: number) {
+  this.selectedStepIndex = i;
+  this.EditSolution(i);
+}
 
 removeSolution(i: number) {
     this.solution_mixture_steps.splice(i, 1);
 
     this.triggerStepPOST();
+    if (this.solution_mixture_steps.length > 0) {
+      this.selectedStepIndex = this.solution_mixture_steps.length-1;
+      this.EditSolution(this.solution_mixture_steps.length-1);
+    }
   }
 
   EditSolution(i:number) {

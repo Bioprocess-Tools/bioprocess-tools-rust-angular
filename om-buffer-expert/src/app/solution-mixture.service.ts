@@ -143,8 +143,11 @@ getCompoundsProcessed(): Observable<any> {
 // });
 // }
 
-postStepswithTrigger() {
-
+postStepswithTrigger(addedSteps: Step[]) {
+  let steps = this.StepsSubject.value;
+  steps.push(...addedSteps);
+  this.StepsSubject.next(steps);
+  
   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
   .subscribe({
     next: (solutionMixture) => {

@@ -1,127 +1,121 @@
-.solution-mixture-steps-card
-{
-
-    
-    
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 20px;
-        
-        background-color: #bb5050;
-        border-bottom: 1px solid #e0e0e0;
-
-        color: #333;
-    
-
-   
-}
-.solution-operations-group-choice-card 
-{
-
-        
-        
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-         
-            background-color: #7050bb;
-            border-bottom: 1px solid #e0e0e0;
-
-            color: #333;
+@import '../../../../shared-styles.scss';
+.solution-mixture-steps-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: $primary-color;
+  border-bottom: 1px solid $secondary-color;
+  color: #333;
 }
 
-.action_choice_card_content
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #0f730a;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
+.category_choice {
+    flex-direction: row;
+
+
+    margin: 5px;
+  background-color:white;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.selected-card {
+    background-color: #b1d941; /* Change as needed */
+  }
+.step-form-card {
+  display: flex;
+
+  justify-content: space-between;
+  gap:10px;
+  align-items: center;
+  padding: 0 20px;
+  background-color: $primary-color;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.step-form-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: $primary-color;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.template-form-fields {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:15px;
+  padding: 0 20px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
 }
 
 
-.step-editor-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #290baf;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
+
+
+
+.volumeAdditonsCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #0f730a;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
 }
 
-
-.step-editor-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #415745;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
-
-}
-.volumeAdditonsCard
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #0f730a;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
+.targetConc_pHCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #c9bb22;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
 }
 
-.targetConc_pHCard
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #c9bb22;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
-}
-
-.solutionModificationCard 
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #bb5050;
-    border-bottom: 1px solid #e0e0e0;
-    color: #333;
+.solutionModificationCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #bb5050;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
 }
 
 .solution-list-container {
-    max-width:90vw;
-    display: grid;
-    grid-auto-flow:column ; /* Adjust based on your layout preference */
-    grid-template-columns: repeat(3, 1fr); /* Adjust based on your layout preference */
-    margin: 5px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-    //background-color: $card-background-cream;
-    box-shadow:none;
-    //background-color: rgb(176, 239, 239);
-    border-width: 3px;
+  max-width: 90vw;
+  display: grid;
+  grid-auto-flow: column; /* Adjust based on your layout preference */
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Adjust based on your layout preference */
+  margin: 5px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  //background-color: $card-background-cream;
+  box-shadow: none;
+  //background-color: rgb(176, 239, 239);
+  border-width: 3px;
   border-color: red;
-  gap:5px;
-  }
-  .solution-card {
-    white-space: nowrap;
-    // max-width: 35vw;
-    // min-width:150px;
-    // max-height: 350px;
-    //  margin: 10px;
-    //  scroll-snap-align: start;
-    // //background-color: $card-background;
-     color: black;
-     margin:3px;
-  }
+  gap: 5px;
+}
+.solution-card {
+  white-space: nowrap;
+  // max-width: 35vw;
+  // min-width:150px;
+  // max-height: 350px;
+  //  margin: 10px;
+  //  scroll-snap-align: start;
+  // //background-color: $card-background;
+  color: black;
+  margin: 3px;
+}

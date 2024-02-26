@@ -9,6 +9,7 @@ export class Step {
     is_executed: boolean;
     result_flag: { flag: string; comment: string };
     associated_solution: string;
+    category: string;
 
     constructor(id: number, operation_method: string = "", parameters: Record<string, any> = {}, is_modified: boolean = false, is_executed: boolean = false) {
         this.id = id;
