@@ -393,12 +393,13 @@ export class SolutionsBrowseEditPrepareComponent
 
 onSelectItem(i: number) {
   this.selectedStepIndex = i;
-  this.EditSolution(i);
+ // this.EditSolution(i);
 }
 
 removeSolution(i: number) {
   if (this.solution_mixture_steps !== null) {
-    let isInvalidSteps = Step.evaluateEffectOfRemovingSolution(this.solution_mixture_result_object, this.solution_mixture_steps[i], this.solution_mixture_steps);
+    let isInvalidSteps = Step.evaluateEffectOfRemovingSolution(this.solution_mixture_result_object, 
+      this.solution_mixture_steps[i], this.solution_mixture_steps);
     if (isInvalidSteps.length > 0) {
       console.log("God - invalid steps", isInvalidSteps)
     } else {
@@ -410,7 +411,7 @@ removeSolution(i: number) {
     this.triggerStepPOST();
     if (this.solution_mixture_steps.length > 0) {
       this.selectedStepIndex = this.solution_mixture_steps.length-1;
-      this.EditSolution(this.solution_mixture_steps.length-1);
+     // this.EditSolution(this.solution_mixture_steps.length-1);
     }
   }
 
@@ -420,7 +421,8 @@ removeSolution(i: number) {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-    if (this.solution_mixture_steps[i].operation_method === 'Make Solution with Buffer Species with salt to Target Concentration and pH') {
+    if (this.solution_mixture_steps[i].operation_method === 
+      'Make Solution with Buffer Species with salt to Target Concentration and pH') {
       this.isBufferwithSaltSolution = true;
       this.bufferspecieswithSaltForm.patchValue({
         buffer_species: this.solution_mixture_steps[i].parameters['buffer_species'],
@@ -429,7 +431,8 @@ removeSolution(i: number) {
         salt_compound_name: this.solution_mixture_steps[i].parameters['salt_compound_name'],
         salt_conc: this.solution_mixture_steps[i].parameters['salt_conc'],
       });}
-      else if (this.solution_mixture_steps[i].operation_method === 'Make Solution with Buffer Species to Target Concentration and pH') {
+      else if (this.solution_mixture_steps[i].operation_method ===
+         'Make Solution with Buffer Species to Target Concentration and pH') {
         this.isBufferwithoutSaltSolution = true;
         this.bufferspecieswithoutSaltForm.patchValue({
           buffer_species: this.solution_mixture_steps[i].parameters['buffer_species'],

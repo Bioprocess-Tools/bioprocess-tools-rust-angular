@@ -1,20 +1,20 @@
 <mat-card class="browse-edit-prepare-card">
-  <mat-card-header>
+<!--   <mat-card-header>
     <mat-card-title>Solutions Browse, Edit, Prepare</mat-card-title>
-  </mat-card-header>
+  </mat-card-header> -->
   <mat-divider></mat-divider>
   <mat-card-content>
     <mat-card class="solution-select-card">
       <mat-card-header>
         <mat-card-title>Pick Solution from Library</mat-card-title>
         <mat-card-subtitle
-          >Filter solutions by single buffer species, dual buffer species,
-          single species with acid/base, stock solution (single compound)
+          >Filter solutions by single or dual buffer species,
+          single species with acid/base or stock solutions
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <mat-card class="autocomplete-select">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline" class="rounded-input">
             <input
               matInput
               [formControl]="solutions_selection_Control"
@@ -81,10 +81,10 @@
         isStockSolution
       "
     >
-      <mat-card-header>
+<!--       <mat-card-header>
         <mat-card-title>Edit Solution</mat-card-title>
-      </mat-card-header>
-      <mat-divider></mat-divider>
+      </mat-card-header>-->
+      <mat-divider></mat-divider> 
       <!-- Conditional form fields -->
       <form
         [formGroup]="bufferspecieswithSaltForm"
@@ -214,38 +214,42 @@
     </mat-card>
 
 
-    <mat-card class="solution-list-background" *ngIf="solution_mixture_steps">
+    <mat-card class="solution-list-background" *ngIf="solution_mixture_steps.length>0">
       <mat-card-header>
         <mat-card-title>Solution List </mat-card-title>
       </mat-card-header>
       <mat-card class="solution-list-container"  #scrollRef *ngIf="solution_mixture_steps">
+        <ng-container *ngFor="
+        let step of solution_mixture_steps
+        let i = index"
+     >
 
-
-        <mat-card class="solution-card" *ngFor="
-            let step of solution_mixture_steps
-            let i = index"
-          [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
-          <mat-card-header>
+        <mat-card class="solution-card" *ngIf="step.category=='Make'"  [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
+          <mat-card-header >
             <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
           </mat-card-header>
-          <mat-card-content *ngIf="step.category=='Make'">
-            <div *ngFor="let item of step.parameters | keyvalue">
+          <mat-card-content  >
+<!--             <div *ngFor="let item of step.parameters | keyvalue">
               <p>{{item.key}}: {{item.value}}</p>
-            </div>
+            </div> -->
+            <mat-divider></mat-divider>
             <mat-card-actions class="remove_edit_buttons">
               <div *ngIf="step.validation_flag.flag =='Linked'">
-                <button mat-raised-button color='warn' (click)="removeSolution(i)">Confirm Delete</button>
-                <button mat-raised-button color='warn' (click)="EditSolution(i)">Confirm Edit</button>
+                <!-- <mat-icon>link</mat-icon><mat-icon>lock</mat-icon> -->
+                <button mat-icon-button aria-label="Confirm Edit item" (click)="EditSolution(i)"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button color="accent" aria-label="Confirm Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
               </div>
               <div *ngIf="step.validation_flag.flag =='None'">
-                <button mat-raised-button color='accent' (click)="removeSolution(i)">Remove</button>
-                <button mat-raised-button color = 'accent' (click)="EditSolution(i)">Edit</button>
+                <!-- <mat-icon>lock-open</mat-icon> -->
+                <button mat-icon-button aria-label="Edit item" (click)="EditSolution(i)"> <mat-icon>edit</mat-icon></button>
+                <button mat-icon-button color="warn" aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
               </div>
 
             </mat-card-actions>
           </mat-card-content>
           
         </mat-card>
+      </ng-container>
       </mat-card>
     </mat-card>
   </mat-card-content>
