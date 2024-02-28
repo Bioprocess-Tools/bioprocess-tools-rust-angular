@@ -51,6 +51,7 @@ export class SolutionMixtureStepsComponent implements OnInit {
 selectedOperationGroup = new FormControl() ; //stores the selected operation group
 selectedActionItem = new FormControl(); //stores the selected action item
   steps_list: Step[] = []; //stores the steps list
+  steps_list_unfiltered: Step[] = []; //stores the unfiltered steps list
   selected_operations_method = '';
   selected_parameters = {};
   volumeAdditionsActionsSelected = false; //stores if the volume additions actions are selected
@@ -298,7 +299,8 @@ action_structure = {
 
   ngOnInit() {
     this.solutionMixtureService.Steps$.subscribe((steps) => {
-      this.steps_list = steps.filter(step => step.category !== 'Make');
+      this.steps_list = steps;
+      this.steps_list_unfiltered = steps;
     });
 
     this.getSolutionCompoundIonNames();
@@ -576,7 +578,10 @@ action_structure = {
       )
     );
     this.steps_list[this.steps_list.length - 1].category= this.action_structure[this.selected_operations_method].mainCategory;
+    Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.steps_list.length - 1], this.steps_list);
+    console.log('God - add step:', this.steps_list);
     this.selectedStepIndex= this.steps_list.length - 1;
+ 
     // this.steps_list.push(this.currentStepForm.value);
     console.log('God - add step:', this.steps_list);
   }

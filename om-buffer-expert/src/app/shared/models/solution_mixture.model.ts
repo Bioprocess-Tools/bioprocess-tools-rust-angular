@@ -24,7 +24,7 @@ export class SolutionMixture {
 
 //write function to add a step to the steps array
 
-
+constructor () {}
 
     addStep(step: Step) {
       
@@ -70,8 +70,16 @@ export class SolutionMixture {
         return this.steps.find(s => s.id === id);
     }
 
+    //write a function to evaluate the effect of removing a solution on the steps
+    // for this we have to go through each step and check if the solution is used in the step, if a compound from the solution is used in the step or if an ion from the solution is used in the step.  We need check all the steps that are not "Make" steps
+    // if the solution is used in the step, we need to flag the step as invalid
+    // if a compound from the solution is used in the step, we need to flag the step as invalid
+    // if an ion from the solution is used in the step, we need to flag the step as invalid
+    // if the step is invalid, we need to add a comment to the step
+    // if the step is invalid, we need to add a flag to the step
+    omFun() {
+        console.log("OM Function");
+    }
 
 
 }
-
-  

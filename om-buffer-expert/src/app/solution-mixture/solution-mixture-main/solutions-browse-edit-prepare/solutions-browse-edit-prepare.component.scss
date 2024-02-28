@@ -18,6 +18,15 @@
   justify-content: center;
   width:100%;
 }
+.remove_edit_buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Adjust based on your layout preference */
+  padding:10px;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+}
 .less-space{
   margin-bottom:1px;
   margin-top:3px;
@@ -40,6 +49,7 @@
   }
   .solution-card {
     white-space: nowrap;
+    gap:10px;
     // max-width: 35vw;
     // min-width:150px;
     // max-height: 350px;

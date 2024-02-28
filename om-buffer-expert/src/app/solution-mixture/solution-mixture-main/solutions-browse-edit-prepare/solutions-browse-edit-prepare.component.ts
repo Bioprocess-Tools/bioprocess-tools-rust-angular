@@ -62,7 +62,7 @@ export class SolutionsBrowseEditPrepareComponent
   actionType: string = 'Add Solution';
   updateIndex: number = -1;
   selectedStepIndex: number | null = null; //stores the selected step index
-
+  filteredsteps: Step[] = [];
   constructor(
     private solutionMixtureService: SolutionMixtureService,
     private fb: FormBuilder
@@ -95,18 +95,21 @@ export class SolutionsBrowseEditPrepareComponent
       map((value) => this.filterSolutions(value)) // Fixed the method name
     );
     this.solutionMixtureService.Steps$.subscribe((steps) => {
-      this.solution_mixture_steps = steps.filter(step => step.category === "Make");
-      console.log("God -browse-edit-prepare", this.solution_mixture_steps)
+      this.solution_mixture_steps = steps;
+
+      console.log("God -browse-edit-prepare", this.solution_mixture_steps);
     });
 
     this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
       (solutionMixture) => {
         if (solutionMixture) {
           console.log("God - solutionMixture", solutionMixture)
+          this.solution_mixture_result_object = solutionMixture;
           // do something with solutionMixture
           for(let [index, solution] of solutionMixture.solutions.entries()){
             this.solution_mixture_steps[index].associated_solution = solution.name;
             this.solution_mixture_steps[index].category = "Make";
+            console.log("God - solutionMixture - steps", this.solution_mixture_steps)
           }
         }
       }
@@ -297,7 +300,7 @@ export class SolutionsBrowseEditPrepareComponent
   }
 
   triggerStepPOST() {
-    this.solutionMixtureService.postStepswithTrigger(this.solution_mixture_steps);
+    this.solutionMixtureService.postStepswithTrigger([]);
   }
   onSubmitBufferwithoutSalt() {
     this.isDuplicate = false;
@@ -371,6 +374,7 @@ export class SolutionsBrowseEditPrepareComponent
 
     if (!this.isDuplicate) {
       if (this.updateIndex > -1) {
+
         this.removeSolution(this.updateIndex);
         this.updateIndex = -1;
         this.actionType = 'Add Solution';
@@ -393,6 +397,14 @@ onSelectItem(i: number) {
 }
 
 removeSolution(i: number) {
+  if (this.solution_mixture_steps !== null) {
+    let isInvalidSteps = Step.evaluateEffectOfRemovingSolution(this.solution_mixture_result_object, this.solution_mixture_steps[i], this.solution_mixture_steps);
+    if (isInvalidSteps.length > 0) {
+      console.log("God - invalid steps", isInvalidSteps)
+    } else {
+      console.log("God - no invalid steps")
+    }
+  }
     this.solution_mixture_steps.splice(i, 1);
 
     this.triggerStepPOST();
@@ -403,12 +415,11 @@ removeSolution(i: number) {
   }
 
   EditSolution(i:number) {
+    
     this.isDuplicate = false;
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-
-    // We will use this to edit the step
     if (this.solution_mixture_steps[i].operation_method === 'Make Solution with Buffer Species with salt to Target Concentration and pH') {
       this.isBufferwithSaltSolution = true;
       this.bufferspecieswithSaltForm.patchValue({
