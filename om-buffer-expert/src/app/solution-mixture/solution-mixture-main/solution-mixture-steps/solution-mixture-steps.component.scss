@@ -3,12 +3,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 2px;
   background-color: $primary-color;
   border-bottom: 1px solid $secondary-color;
   color: #333;
 }
+.solution-list-background {
 
+  background-color: $card-background-cream;
+  border-width: 3px;
+  box-shadow: none;
+  gap: 5px;
+}
 .card-invalid {
   background-color: red;
   //color: white;
@@ -37,6 +43,12 @@
   border-bottom: 1px solid #e0e0e0;
   color: #333;
 }
+.less-space{
+  margin-bottom:1px;
+  margin-top:3px;
+
+  font-size: x-small;
+}
 
 .step-form-card-content {
   display: flex;
@@ -46,6 +58,11 @@
   background-color: $primary-color;
   border-bottom: 1px solid #e0e0e0;
   color: #333;
+}
+.comp-ion-container {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .template-form-fields {
@@ -59,6 +76,13 @@
   color: #333;
 }
 
+.buffer-name {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  text-wrap:pretty;
+
+}
 
 
 
@@ -94,7 +118,7 @@
 }
 
 .solution-list-container {
-  max-width: 90vw;
+  max-width: 98vw;
   display: grid;
   grid-auto-flow: column; /* Adjust based on your layout preference */
   grid-template-columns: repeat(
@@ -109,11 +133,14 @@
   box-shadow: none;
   //background-color: rgb(176, 239, 239);
   border-width: 3px;
-  border-color: red;
   gap: 5px;
 }
+
+
+
 .solution-card {
   white-space: nowrap;
+  max-width:33vw;
   // max-width: 35vw;
   // min-width:150px;
   // max-height: 350px;

@@ -55,6 +55,7 @@ export class SolutionsBrowseEditPrepareComponent
   };
   solution_mixture_steps: Step[] = []; // Array of Step instances - we will use this to capture the solutions that the user chooses with Make Solution steps
   solution_mixture_result_object: SolutionMixture; // We will use this to capture the returned result from the API call
+  solutions: Solution[] = [];
   isBufferwithSaltSolution = false;
   isBufferwithoutSaltSolution = false;
   isStockSolution = false;
@@ -106,6 +107,7 @@ export class SolutionsBrowseEditPrepareComponent
           console.log("God - solutionMixture", solutionMixture)
           this.solution_mixture_result_object = solutionMixture;
           // do something with solutionMixture
+          this.solutions = solutionMixture.solutions;
           for(let [index, solution] of solutionMixture.solutions.entries()){
             this.solution_mixture_steps[index].associated_solution = solution.name;
             this.solution_mixture_steps[index].category = "Make";
@@ -117,7 +119,7 @@ export class SolutionsBrowseEditPrepareComponent
 
 
 
-  }
+  }   
 
   initForms() {
     this.bufferspecieswithSaltForm = this.fb.group({
@@ -394,6 +396,16 @@ export class SolutionsBrowseEditPrepareComponent
 onSelectItem(i: number) {
   this.selectedStepIndex = i;
  // this.EditSolution(i);
+}
+
+getSolutionbyName(name: string) {
+  let assoc_solution: Solution= null
+  this.solutions.forEach((solution) => {
+    if (solution.name === name) {
+      assoc_solution = solution;
+    }
+  });
+  return assoc_solution;
 }
 
 removeSolution(i: number) {

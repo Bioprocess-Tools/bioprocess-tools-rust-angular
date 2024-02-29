@@ -48,9 +48,10 @@ export class SolutionMixtureStepsComponent implements OnInit {
   isSelectedActionVolume: boolean = false; //stores if the action is selected
   isSelectedActionTargetConc_pH: boolean = false; //stores if the action is selected
   isSelectedActionSolutionModification: boolean = false; //stores if the action is selected
-selectedOperationGroup = new FormControl() ; //stores the selected operation group
-selectedActionItem = new FormControl(); //stores the selected action item
+  selectedOperationGroup = new FormControl() ; //stores the selected operation group
+  selectedActionItem = new FormControl(); //stores the selected action item
   steps_list: Step[] = []; //stores the steps list
+  solutions: Solution[] = []; //stores the solutions
   steps_list_unfiltered: Step[] = []; //stores the unfiltered steps list
   selected_operations_method = '';
   selected_parameters = {};
@@ -315,6 +316,7 @@ action_structure = {
           this.solution_names = Object.keys(
             this.solution_mixture_steps_edit.solution_indices
           );
+          this.solutions = this.solution_mixture_steps_edit.solutions;
           this.compound_names = Object.keys(
             this.solution_mixture_steps_edit.compound_concentrations
           );
@@ -589,6 +591,16 @@ action_structure = {
   onExecute() {
     console.log('God subscribed list', this.steps_list);
     this.solutionMixtureService.postStepswithTrigger(this.steps_list);
+  }
+
+  getSolutionbyName(name: string) {
+    let assoc_solution: Solution= null
+    this.solutions.forEach((solution) => {
+      if (solution.name === name) {
+        assoc_solution = solution;
+      }
+    });
+    return assoc_solution;
   }
 
   removeStep(i: number) {
