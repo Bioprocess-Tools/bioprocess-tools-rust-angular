@@ -239,19 +239,20 @@
           </ng-container> 
           <mat-card-content class="card-buttons" >
 
-            <mat-card-actions class="remove_edit_buttons">
+
               <div *ngIf="step.validation_flag.flag =='Linked'" class = "warn-buttons">
-                <!-- <mat-icon>link</mat-icon><mat-icon>lock</mat-icon> -->
+                
+                <p class="less-space">Linked</p> 
                 <button mat-icon-button aria-label="Confirm Edit item" (click)="EditSolution(i)"><mat-icon>edit</mat-icon></button>
-                <button mat-icon-button color="accent" aria-label="Confirm Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button color="warn" aria-label="Confirm Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
               </div>
               <div *ngIf="step.validation_flag.flag =='None'" class="normal-buttons">
-                <!-- <mat-icon>lock-open</mat-icon> -->
+                
                 <button mat-icon-button aria-label="Edit item" (click)="EditSolution(i)"> <mat-icon>edit</mat-icon></button>
-                <button mat-icon-button color="warn" aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button color="accent" aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
               </div>
 
-            </mat-card-actions>
+
           </mat-card-content>
           
         </mat-card>

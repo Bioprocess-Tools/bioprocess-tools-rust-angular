@@ -108,11 +108,7 @@ export class SolutionsBrowseEditPrepareComponent
           this.solution_mixture_result_object = solutionMixture;
           // do something with solutionMixture
           this.solutions = solutionMixture.solutions;
-          for(let [index, solution] of solutionMixture.solutions.entries()){
-            this.solution_mixture_steps[index].associated_solution = solution.name;
-            this.solution_mixture_steps[index].category = "Make";
-            console.log("God - solutionMixture - steps", this.solution_mixture_steps)
-          }
+
         }
       }
     );
@@ -302,7 +298,7 @@ export class SolutionsBrowseEditPrepareComponent
   }
 
   triggerStepPOST() {
-    this.solutionMixtureService.postStepswithTrigger([]);
+    this.solutionMixtureService.postMake();
   }
   onSubmitBufferwithoutSalt() {
     this.isDuplicate = false;

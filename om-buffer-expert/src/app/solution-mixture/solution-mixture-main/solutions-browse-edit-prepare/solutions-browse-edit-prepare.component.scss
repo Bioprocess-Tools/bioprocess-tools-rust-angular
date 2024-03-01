@@ -27,6 +27,7 @@
 .less-space{
   margin-bottom:1px;
   margin-top:3px;
+  font-size:small;
 }
 // .categories {
 //   display: grid;
@@ -77,7 +78,7 @@
   padding:0px;
   justify-content: space-between;
   align-items: center;
-  width:100%;
+  //width:100%;
 }
 .mat-icon {
   cursor: pointer;
@@ -134,6 +135,20 @@
 
   }
 
+.warn-buttons{
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  justify-content:space-evenly;
+  align-items: center;
+}
+.normal-buttons{
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  justify-content:space-evenly;
+  align-items: center;
+}
 
 
 

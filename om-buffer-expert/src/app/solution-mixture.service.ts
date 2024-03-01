@@ -143,9 +143,8 @@ getCompoundsProcessed(): Observable<any> {
 // });
 // }
 
-postStepswithTrigger(addedSteps: Step[]) {
+postStepswithTrigger() {
   let steps = this.StepsSubject.value;
-  steps.push(...addedSteps);
   this.StepsSubject.next(steps);
   
   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
@@ -158,13 +157,30 @@ postStepswithTrigger(addedSteps: Step[]) {
   
 }
 
-postSingle() {
+postMake() {
   let steps = this.StepsSubject.value;
   this.StepsSubject.next(steps);
-  
-  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
+  let makeSteps = steps.filter(step => step.category === 'Make');
+  console.log("God - your make steps", makeSteps);
+  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps:makeSteps })
   .subscribe({
     next: (solutionMixture) => {
+    //write code to add the associated_solution to steps based on the solution_mixture object's solutions
+    let solutionIndex = 0; // To keep track of the current index in the solutions list
+
+    steps.forEach(step => {
+      console.log("God - iterating through steps", step.category, solutionIndex, step.associated_solution)
+      if (step.category === 'Make') {
+        // Check to prevent index out-of-bound error
+        if (solutionIndex < solutionMixture.solutions.length) {
+          step.associated_solution = solutionMixture.solutions[solutionIndex].name;
+          solutionIndex++; // Move to the next solution for the next 'Make' step
+        } else {
+          console.warn('More Make steps than solutions available.');
+        }
+      }
+    });
+   
     this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
   },
   error: (error) => console.error(error)

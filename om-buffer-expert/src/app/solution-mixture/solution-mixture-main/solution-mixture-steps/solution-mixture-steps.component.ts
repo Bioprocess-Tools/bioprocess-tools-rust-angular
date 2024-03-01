@@ -58,6 +58,8 @@ export class SolutionMixtureStepsComponent implements OnInit {
   volumeAdditionsActionsSelected = false; //stores if the volume additions actions are selected
   targetConc_pHActionsSelected = false; //stores if the target concentration and pH actions are selected
   solutionModificationActionsSelected = false; //stores if the solution modification actions are selected
+  edit_step_index: number | null = null; //stores the edit step index
+  add_edit_label = 'Add'; //stores the add edit label
   // form to be used for the current step
   currentStepForm = this.fb.group({});
   // stores the operations groups
@@ -572,25 +574,46 @@ action_structure = {
     console.log(this.currentStepForm.value);
     this.selected_parameters = this.currentStepForm.value;
     console.log('God param', this.selected_parameters);
-    this.steps_list.push(
-      new Step(
-        this.steps_list.length + 1,
-        this.selected_operations_method,
-        this.selected_parameters,
-      )
-    );
-    this.steps_list[this.steps_list.length - 1].category= this.action_structure[this.selected_operations_method].mainCategory;
-    Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.steps_list.length - 1], this.steps_list);
-    console.log('God - add step:', this.steps_list);
-    this.selectedStepIndex= this.steps_list.length - 1;
- 
-    // this.steps_list.push(this.currentStepForm.value);
-    console.log('God - add step:', this.steps_list);
+    if (this.edit_step_index == null) {
+
+      this.steps_list.push(
+        new Step(
+          this.steps_list.length + 1,
+          this.selected_operations_method,
+          this.selected_parameters,
+        )
+      );
+      this.steps_list[this.steps_list.length - 1].category= this.action_structure[this.selected_operations_method].mainCategory;
+      Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.steps_list.length - 1], this.steps_list);
+      console.log('God - add step:', this.steps_list);
+      this.selectedStepIndex= this.steps_list.length - 1;
+  
+      // this.steps_list.push(this.currentStepForm.value);
+      console.log('God - add step:', this.steps_list);
+        }
+    else {
+      console.log("God - edit step index", this.edit_step_index);
+      this.steps_list[this.edit_step_index].operation_method = this.selected_operations_method;
+      this.steps_list[this.edit_step_index].parameters = this.selected_parameters;
+      Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.edit_step_index], this.steps_list);
+      this.selectedStepIndex= this.steps_list.length - 1;
+      console.log('God - edit step:', this.steps_list);
+      this.edit_step_index = null;
+      this.add_edit_label = 'Add';
+      this.volumeAdditionsActionsSelected = false;
+      this.targetConc_pHActionsSelected = false;
+      this.solutionModificationActionsSelected = false;
+      this.volumeAdditions = false;
+      this.targetConc_pH = false;
+      this.solutionModification = false;
+      this.selectedOperationGroup.setValue(null);
+    }
+
   }
 
   onExecute() {
     console.log('God subscribed list', this.steps_list);
-    this.solutionMixtureService.postStepswithTrigger(this.steps_list);
+    this.solutionMixtureService.postStepswithTrigger();
   }
 
   getSolutionbyName(name: string) {
@@ -616,10 +639,25 @@ action_structure = {
 
   onSelectItem(i: number) {
     this.selectedStepIndex = i;
-    this.editStep(i);
+    
+  }
+
+  onCancelEdit() {
+    this.edit_step_index = null;
+    this.add_edit_label = 'Add';
+    this.volumeAdditionsActionsSelected = false;
+    this.targetConc_pHActionsSelected = false;
+    this.solutionModificationActionsSelected = false;
+    this.volumeAdditions = false;
+    this.targetConc_pH = false;
+    this.solutionModification = false;
+    this.selectedOperationGroup.setValue(null);
   }
 
   editStep(i: number) {
+    this.edit_step_index = i;
+    this.add_edit_label = 'Edit';
+    this.selected_operations_method = this.steps_list[i].operation_method;
     console.log('God edit step:', this.steps_list[i].operation_method);
     this.selectedOperationGroup.setValue(this.action_structure[this.steps_list[i].operation_method].mainCategory);
     this.selectedActionItem.setValue(this.action_structure[this.steps_list[i].operation_method].id);
