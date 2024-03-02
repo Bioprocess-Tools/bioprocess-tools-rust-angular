@@ -40,7 +40,9 @@
 
 }
 .selected-card {
-    background-color: #b1d941; /* Change as needed */
+   
+    border-width: 3px;
+    border-color:$accent-green;
   }
 .step-form-card {
   display: flex;
@@ -58,6 +60,14 @@
   margin-top:3px;
 
   font-size: x-small;
+}
+
+.normal-buttons{
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  justify-content:space-evenly;
+  align-items: center;
 }
 
 .step-form-card-content {

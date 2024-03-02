@@ -151,15 +151,15 @@
       >
         <mat-card-content>
           <mat-card-subtitle class="buffer-name">{{
-            step.associated_solution
+            step.operation_method
           }}</mat-card-subtitle>
           <div *ngFor="let item of step.parameters | keyvalue">
-            <p>{{ item.key }}: {{ item.value }}</p>
+            <p class="less-space">{{ item.key }}: {{ item.value }}</p>
           </div>
           <div *ngIf="step.result_flag['flag'] === 'Invalid'">
             {{ step.result_flag["comment"] }}
           </div>
-          <mat-card-actions>
+          <mat-card-actions class="normal-buttons">
             <button mat-stroked-button color ="warn" (click)="removeStep(i)">Remove</button>
             <button mat-stroked-button color="accent" (click)="editStep(i)">Edit</button>
           </mat-card-actions>
@@ -237,6 +237,22 @@
 </mat-card-content>
 
 </mat-card>
+
+<mat-chip-listbox >
+  <mat-chip-option *ngFor="let measurement of allMeasurements" [value]="measurement" (selectionChange) = "onSelectionChange($event)">{{measurement}}</mat-chip-option>
+</mat-chip-listbox>
+
+<button mat-raised-button color="primary" (click)="onPlotOM()">Plot</button>
+<ngx-charts-bubble-chart
+  *ngIf="selectPlotData"
+  [results]="selectPlotData"
+  [xAxis]="true"
+  [yAxis]="true"
+  [xAxisLabel]="'Volume'"
+  [yAxisLabel]="'God'">
+</ngx-charts-bubble-chart>
+
+
 
 <ng-template #TitrateSpecifiedVolumeofSolution>
   <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">

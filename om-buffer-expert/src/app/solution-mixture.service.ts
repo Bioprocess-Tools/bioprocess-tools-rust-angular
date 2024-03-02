@@ -27,7 +27,7 @@ export class SolutionMixtureService {
   solutionMixtureSolutionsReview$ = this.solutionMixtureSolutionsReviewSubject.asObservable();  
   StepsSubject = new BehaviorSubject<Step[]>([]);
   Steps$ = this.StepsSubject.asObservable();
-
+  allPlotsData: any[] = [];
   constructor(private http: HttpClient) {
     
     
@@ -127,6 +127,8 @@ getCompoundsProcessed(): Observable<any> {
     return processed;
   }
 
+
+
 // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
 // to display the solutions in the mixture
 // solution_mixture object will be a single object
@@ -151,6 +153,9 @@ postStepswithTrigger() {
   .subscribe({
     next: (solutionMixture) => {
     this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+
+
+
   },
   error: (error) => console.error(error)
   });
