@@ -63,6 +63,10 @@ export class SolutionMixtureStepsComponent implements OnInit {
   add_edit_label = 'Add'; //stores the add edit label
   // form to be used for the current step
   currentStepForm = this.fb.group({});
+  xMin: number = 0;
+    xMax: number = 0;
+    yMin: number = 0;
+    yMax: number = 0;
   selectedMeasurement: string = '';
   // stores the operations groups
   selectPlotData: any[] = [];
@@ -2903,7 +2907,27 @@ action_structure = {
 
 
 console.log('God selected plot data', this.selectPlotData);
+this.computeScale();
   }
+  computeScale() {
+    let xValues = [];
+    let yValues = [];
+
+    this.selectPlotData.forEach(series => {
+      series.series.forEach(point => {
+        xValues.push(point.x);
+      yValues.push(point.y);
+    });
+});
+  
+  this.xMin = Math.min(...xValues);
+  this.xMax = Math.max(...xValues);
+  this.yMin = Math.min(...yValues);
+   this.yMax = Math.max(...yValues);
+  
+    
+  }
+
 
 
   getSolutionCompoundIonNames() {
@@ -2966,6 +2990,7 @@ console.log('God selected plot data', this.selectPlotData);
   }
 
   onOperationGroupSelect(event: MatChipSelectionChange) {
+    this.selectedStepIndex = null;
     console.log("god event", event);
     const id = event.source.value;
     if (event.source.selected) {
@@ -3078,7 +3103,7 @@ console.log('God selected plot data', this.selectPlotData);
 
 
   onVolumeActionSelect(event: MatChipSelectionChange) {
-
+    this.selectedStepIndex = null;
     const id = event.source.value;
     console.log(
       'God-parameters',
@@ -3113,6 +3138,7 @@ console.log('God selected plot data', this.selectPlotData);
 }
 
   onTargetConc_pHActionSelect(event: MatChipSelectionChange) {
+    this.selectedStepIndex = null;
     const id = event.source.value;
     if(event.source.selected){
       //this.selectedActionItem.setValue(id);
@@ -3142,6 +3168,7 @@ console.log('God selected plot data', this.selectPlotData);
   }
 
   onSolutionModificationActionSelect(event: MatChipSelectionChange) {
+    this.selectedStepIndex = null;
     const id = event.source.value;
     if(event.source.selected){
      // this.selectedActionItem.setValue(id);
@@ -3239,39 +3266,59 @@ console.log('God selected plot data', this.selectPlotData);
     this.selectedOperationGroup.setValue(null);
     if (this.steps_list.length > 0) {
       this.selectedStepIndex = this.steps_list.length-1;
-      this.editStep(this.steps_list.length-1);
+      //this.editStep(this.steps_list.length-1);
     }
 
   }
 
   onSelectItem(i: number) {
     this.selectedStepIndex = i;
+    //this.edit_step_index = i;
+   // this.add_edit_label = 'Update';
+    this.selected_operations_method = this.steps_list[i].operation_method;
+    console.log('God edit step:', this.steps_list[i].operation_method);
+    console.log('God edit step:', this.steps_list[i].parameters);
+    this.selectedOperationGroup.setValue(this.action_structure[this.steps_list[i].operation_method].mainCategory);
+    this.selectedActionItem.setValue(this.action_structure[this.steps_list[i].operation_method].id);
+    this.selectedTemplate = this[this.action_structure[this.steps_list[i].operation_method].templateRef];
+    console.log('God edit step after template:', this.steps_list[i].parameters);
+    this.volumeAdditionsActionsSelected=true;
+    this.selectedStepIndex=i;
+    this.currentStepForm = this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
+    this.currentStepForm.patchValue(this.steps_list[i].parameters);
+    console.log('God edit step:', this.currentStepForm);
     
   }
 
-  onCancelEdit() {
+  onCancelEdit(i:number) {
+    this.selectedStepIndex=i
+    console.log('God selected step index:', this.selectedStepIndex);
     this.edit_step_index = null;
     this.add_edit_label = 'Add';
-    this.volumeAdditionsActionsSelected = false;
+    this.currentStepForm= this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
+/*     this.volumeAdditionsActionsSelected = false;
     this.targetConc_pHActionsSelected = false;
     this.solutionModificationActionsSelected = false;
     this.volumeAdditions = false;
     this.targetConc_pH = false;
     this.solutionModification = false;
-    this.selectedOperationGroup.setValue(null);
+    this.selectedOperationGroup.setValue(null); */
   }
 
   editStep(i: number) {
     this.edit_step_index = i;
-    this.add_edit_label = 'Edit';
+    this.add_edit_label = 'Update';
     this.selected_operations_method = this.steps_list[i].operation_method;
     console.log('God edit step:', this.steps_list[i].operation_method);
+    console.log('God edit step:', this.steps_list[i].parameters);
     this.selectedOperationGroup.setValue(this.action_structure[this.steps_list[i].operation_method].mainCategory);
     this.selectedActionItem.setValue(this.action_structure[this.steps_list[i].operation_method].id);
     this.selectedTemplate = this[this.action_structure[this.steps_list[i].operation_method].templateRef];
+    console.log('God edit step after template:', this.steps_list[i].parameters);
     this.volumeAdditionsActionsSelected=true;
     this.currentStepForm = this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
     this.currentStepForm.patchValue(this.steps_list[i].parameters);
+    console.log('God edit step:', this.currentStepForm);
     //this.currentStepForm = this.fb.group(this.steps_list[i].parameters);
   }
 
