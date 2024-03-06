@@ -154,7 +154,7 @@ postStepswithTrigger() {
     next: (solutionMixture) => {
     this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
 
-
+      console.log("God just got data back", this.solutionMixtureSolutionsReviewSubject)
 
   },
   error: (error) => console.error(error)

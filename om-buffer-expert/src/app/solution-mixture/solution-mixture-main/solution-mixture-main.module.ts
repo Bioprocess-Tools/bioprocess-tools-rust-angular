@@ -21,6 +21,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist-min';
+
+PlotlyModule.plotlyjs = PlotlyJS;
+
+
 @NgModule({
   declarations: [
     SolutionMixtureMainComponent,
@@ -45,7 +51,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatSelectModule,
     BrowserAnimationsModule,
     BrowserModule,
-    NgxChartsModule
+    NgxChartsModule,
+    PlotlyModule
+
   ]
 })
 export class SolutionMixtureMainModule { }
