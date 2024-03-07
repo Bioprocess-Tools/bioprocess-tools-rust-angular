@@ -4384,7 +4384,7 @@ temp.forEach(series => {
 
 
 
-let phaseDictionary = {"Phase1":100,"Phase2":150};
+let phaseDictionary     = {"Phase1":100,"Phase2":150};
 let phaseData = {};
 let previousVolume = 0;
 
