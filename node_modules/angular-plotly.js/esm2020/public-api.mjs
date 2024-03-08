@@ -1,0 +1,10 @@
+/*
+ * Public API Surface of plotly
+ */
+export * from './lib/plotly.module';
+export * from './lib/plotly-via-cdn.module';
+export * from './lib/plotly-via-window.module';
+export * from './lib/plotly-shared.module';
+export * from './lib/plotly.service';
+export * from './lib/plotly.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL3Bsb3RseS9zcmMvcHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILGNBQWMscUJBQXFCLENBQUM7QUFDcEMsY0FBYyw2QkFBNkIsQ0FBQztBQUM1QyxjQUFjLGdDQUFnQyxDQUFDO0FBQy9DLGNBQWMsNEJBQTRCLENBQUM7QUFFM0MsY0FBYyxzQkFBc0IsQ0FBQztBQUNyQyxjQUFjLHdCQUF3QixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBwbG90bHlcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9wbG90bHkubW9kdWxlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL3Bsb3RseS12aWEtY2RuLm1vZHVsZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9wbG90bHktdmlhLXdpbmRvdy5tb2R1bGUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvcGxvdGx5LXNoYXJlZC5tb2R1bGUnO1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9wbG90bHkuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9wbG90bHkuY29tcG9uZW50JztcbiJdfQ==

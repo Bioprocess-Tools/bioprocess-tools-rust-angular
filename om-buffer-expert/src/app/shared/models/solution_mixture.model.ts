@@ -19,6 +19,7 @@ export class SolutionMixture {
     pH_interval_data:number[];
     volume_interval_data:number[];
     data_dictionary: { [key: string]: any };
+    phase_sliced_data: { [key: string]: any };
     steps: Step[]; // Could be an array of Step instances if using Step class
     result_flag: { flag: string; comment: string };
 

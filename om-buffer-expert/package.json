@@ -25,7 +25,7 @@
     "angular-plotly.js": "^5.2.2",
     "fast-levenshtein": "^3.0.0",
     "node-sass": "^9.0.0",
-    "plotly.js": "^2.29.1",
+    "plotly.js": "^2.30.0",
     "plotly.js-dist-min": "^2.29.1",
     "rxjs": "~7.8.0",
     "sass": "^1.64.1",

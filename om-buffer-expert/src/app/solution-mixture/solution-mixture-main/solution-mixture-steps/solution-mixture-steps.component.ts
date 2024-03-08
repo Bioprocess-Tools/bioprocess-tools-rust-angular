@@ -3030,7 +3030,7 @@ this.computeScale();
     'Titrate specified volume of solution': {
       formControls: {
         solution_name: [''],
-        volume: [0, Validators.required],
+        volume: [100, [Validators.required, Validators.min(1)]],
       },
       templateRef: 'TitrateSpecifiedVolumeofSolution',
     },
@@ -3038,19 +3038,19 @@ this.computeScale();
     'Add specified volume of solution': {
       formControls: {
         solution_name: [''],
-        volume_to_add: [0, Validators.required],
+        volume_to_add:  [100, [Validators.required, Validators.min(1)]],
       },
       templateRef: 'AddSpecifiedVolumeofSolution',
     },
     'Add specified volume of water': {
       formControls: {
-        volume_to_add: [0, Validators.required],
+        volume_to_add:  [100, [Validators.required, Validators.min(1)]],
       },
       templateRef: 'AddSpecifiedVolumeofWater',
     },
     'Dilute by a ratio with Water': {
       formControls: {
-        dilution_ratio: [0, Validators.required],
+        dilution_ratio:  [1, [Validators.required, Validators.min(.001)]],
       },
       templateRef: 'DilutetoRatioWater',
     },
@@ -3060,14 +3060,14 @@ this.computeScale();
     'Add water to target [compound]': {
       formControls: {
         compound_name: [''],
-        target_conc: [0, Validators.required],
+        target_conc: [0.05, [Validators.required, Validators.min(.001)]],
       },
       templateRef: 'AddWaterToTargetCompoundConcentration',
     },
     'Add water to target [ion]': {
       formControls: {
         ion_name: [''],
-        target_conc: [0, Validators.required],
+        target_conc: [0.05, [[Validators.required, Validators.min(.001)]]],
       },
       templateRef: 'AddWaterToTargetIonConcentration',
     },
@@ -3075,14 +3075,14 @@ this.computeScale();
       formControls: {
         solution_name: [''],
         ion_name: [''],
-        target_conc: [0, Validators.required],
+        target_conc: [0.05, [Validators.required, Validators.min(.001)]],
       },
       templateRef: 'AddSolutionToTargetIonConcentration',
     },
     'Add solution to target pH': {
       formControls: {
         solution_name: [''],
-        target_pH: [0, Validators.required],
+        target_pH: [2, [Validators.required, Validators.min(2),Validators.max(12)]],
       },
       templateRef: 'AddSolutionToTargetpH',
     },
@@ -3092,9 +3092,9 @@ this.computeScale();
     'Modify and add solution to target [ion] and pH': {
       formControls: {
         solution_name: [''],
-        target_conc: [0, Validators.required],
-        target_pH: [0, Validators.required],
-        dilution_ratio: [0, Validators.required],
+        target_conc: [0.05, [Validators.required, Validators.min(.001)]],
+        target_pH: [2, [Validators.required, Validators.min(2),Validators.max(12)]],
+        dilution_ratio: [.05, [Validators.required, , Validators.min(.002),Validators.max(1)]],
       },
       templateRef: 'ModifySolutionToTargetConcpH',
     },

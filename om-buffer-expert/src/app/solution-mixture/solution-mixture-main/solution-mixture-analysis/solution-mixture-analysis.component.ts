@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';
+import * as Plotly from 'plotly.js';
 import { Solution } from 'src/app/shared/models/solution.model';
 import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
 import { Step } from 'src/app/shared/models/step.model';
@@ -31,6 +32,8 @@ export class SolutionMixtureAnalysisComponent implements OnInit{
   selectedScatterData = [];
   phase_names = [];
   solution_volumes_bar_chart_data = [];
+  selectedPlotlyData = [];
+  selectedPlotlyLayout = {};
 
 
 view: any[] = [700, 400]; // Dimensions of the chart
@@ -48,6 +51,12 @@ lineChartData = []; // The data for the chart
 bardata =[]
 barlayout = {}
 plotlyData = [];
+selectedPhase: string = '1 - Phase 1';  // User-selected phase
+category: string = 'compound';  // Category selected by the user, e.g., 'compound', 'ion', 'pH'
+specificSelection: string = 'All';  // Specific compound or ion selected, or 'All'
+
+plotData: any[];  // Variable to hold the prepared data for plotting
+
 
   constructor(private solutionMixtureService: SolutionMixtureService) { }
 
@@ -71,7 +80,10 @@ plotlyData = [];
       this.getNames();
       this.make_solution_volumes_bar_chart_data();
       this.createBarChart(this.solutionMixture);
-      this.makeDatabyPhase();}
+      this.makeDatabyPhase2();
+      this.getSelectedData2(["Increase Volume of Solution"],['compounds'],[]);
+    this.plotLineChart();
+    }
      
     });
   }
@@ -111,6 +123,75 @@ plotlyData = [];
     this.selectedLinearData = this.getLinearbyPhaseCategoryKey(["Titrate to volume"], ["compounds"], []);
   }
 
+
+  preparePlotData(slicedData: any, selectedPhase: string, category: string, specificSelection: string): any[] {
+    // Find the data for the selected phase
+    const phaseData = slicedData[selectedPhase];
+  
+    // Initialize the structure for the plot data
+    let plotData: any[] = [];
+  
+    if (!phaseData) {
+      console.error('Selected phase data not found');
+      return plotData;
+    }
+  
+    // Depending on the category, prepare data for plotting
+    if (category === 'compound' || category === 'ion') {
+      phaseData.forEach((dataPoint: any) => {
+        Object.keys(dataPoint).forEach(key => {
+          // Assuming compound names end with 'conc' and ion names are handled similarly
+          if ((category === 'compound' && key.endsWith('conc') && (specificSelection === 'All' || specificSelection === key))
+              || (category === 'ion' && key.endsWith('conc') && (specificSelection === 'All' || specificSelection === key))) {
+            let entry = plotData.find(entry => entry.name === key);
+            if (!entry) {
+              entry = { name: key, series: [] };
+              plotData.push(entry);
+            }
+            entry.series.push({ x: dataPoint.volume, y: dataPoint[key] });
+          }
+        });
+      });
+    } else if (category === 'pH') {
+      // Handling pH as a special case
+      const pHData = phaseData.map((dataPoint: any) => ({ x: dataPoint.volume, y: dataPoint.pH }));
+      plotData.push({ name: 'pH', series: pHData });
+    }
+  
+    return plotData;
+  }
+  
+  plotWithPlotly(): void {
+    const layout = {
+      title: 'Your Plot Title',
+      xaxis: { title: 'Volume' },
+      yaxis: { title: 'Concentration' },
+      margin: { t: 40 }, // Adjust top margin to make room for the title
+    };
+  
+    const traces: any[] = this.plotData.map(dataItem => {
+      return {
+        x: dataItem.series.map((point: any) => point.x),
+        y: dataItem.series.map((point: any) => point.y),
+        mode: 'lines+markers',
+        type: 'scatter',
+        name: dataItem.name,
+      };
+    });
+  
+   // Plotly.newPlot('plotDiv', traces, layout);
+  }
+  
+
+
+  updatePlot(): void {
+    this.plotData = this.preparePlotData(this.solutionMixture.phase_sliced_data, this.selectedPhase, this.category, this.specificSelection);
+    // Further steps to actually plot this data with Plotly or similar would go here
+  }
+
+
+
+
   makeDatabyPhase2() {
     this.phaseData = {};
     let previousVolume = 0;
@@ -136,7 +217,8 @@ plotlyData = [];
       previousVolume = endVolume;
     }
   
-    this.plotlyData = plotlyData;  // Save the Plotly data for use in the template
+    this.plotlyData = plotlyData; 
+    console.log("God plotly",this.plotlyData) // Save the Plotly data for use in the template
   }
 
   createBarChart(solutionMixture: SolutionMixture) {
@@ -158,9 +240,26 @@ plotlyData = [];
       width:900,
       height:700
     };
-  
-   // Plotly.newPlot('myDiv', this.bardata as any, this.barlayout);
+  //this has a polyfill issue
+ // Plotly.newPlot('myDiv', this.bardata as any, this.barlayout);
   }
+
+  plotLineChart() {
+    this.selectedPlotlyData = this.plotlyData;
+  
+    this.selectedPlotlyLayout = {
+      title: 'Line Chart',
+      xaxis: {
+        title: 'X Axis Title'
+      },
+      yaxis: {
+        title: 'Y Axis Title'
+      }
+    };
+  
+   
+  }
+
 
   getSelectedData(selectedPhases, selectedCategories, selectedKeys) {
     let selectedData = {};
@@ -219,7 +318,7 @@ plotlyData = [];
         }
       }
     }
-  
+   console.log("God selectedData",selectedData);
     return selectedData;
   }
 
@@ -231,7 +330,7 @@ plotlyData = [];
 
   getLinearbyPhaseCategoryKey(selectedPhases, selectedCategories, selectedKeys) {
     console.log("God get linear", this.phaseData)
-    let selectedData = this.getSelectedData(selectedPhases, selectedCategories, selectedKeys);
+    let selectedData = this.getSelectedData2(selectedPhases, selectedCategories, selectedKeys);
     return this.transformDataForLineChart(selectedData);
   }
   

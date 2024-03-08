@@ -1,46 +1,9 @@
-<mat-card *ngIf="selectedLinearData">
-    <ngx-charts-line-chart
-    [view]= '[700, 400]'
-    [results]="selectedLinearData"
 
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    [autoScale]="autoScale"
-   >
-  </ngx-charts-line-chart>
 
-<!-- <mat-chip-listbox >
-  <mat-chip-option  *ngFor="let name of compound_names" [value]="name" (selectionChange)="onCompoundName($event)"></mat-chip-option>
-</mat-chip-listbox> -->
+<mat-card>
 
-    
+<!-- <plotly-plot [data]="bardata" [layout]="barlayout" ></plotly-plot> -->
+<plotly-plot [data]="selectedPlotlyData" [layout]="selectedPlotlyLayout" ></plotly-plot>
 </mat-card>
- <mat-card *ngIf="solutionMixture && solutionMixture.solutions[0].volume>0">
-  <ngx-charts-bar-vertical
-  [view]='[900, 700]'
-
-  [results]="solution_volumes_bar_chart_data"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel">
-</ngx-charts-bar-vertical>
-</mat-card> 
-
-<plotly-plot class="omplot" *ngIf="solutionMixture && solutionMixture.solutions[0].volume>0" [data]="bardata" [layout]="barlayout" ></plotly-plot>
-```
-
-```typescript
-
-
 
 
