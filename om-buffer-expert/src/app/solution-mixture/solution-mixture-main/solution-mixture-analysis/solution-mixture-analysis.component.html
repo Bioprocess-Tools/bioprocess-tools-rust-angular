@@ -1,58 +1,64 @@
 
-<mat-card *ngIf="solutionMixture.phase_sliced_data">
-<mat-card >
+<mat-card *ngIf="solutionMixture">
+    <mat-card>
+        <mat-chip-listbox multiple >
+            <mat-chip-option *ngFor="let phase of phaseOptions" [value]="phase.id" 
+                [selected]="selectedPhases.includes(phase.id)"
+                (selectionChange)="onChangePhase($event)">
+              {{ phase.name }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+    </mat-card>
 
-    <mat-chip-listbox *ngIf="phase_names">
-        <mat-chip-option *ngFor="let phase of phase_names" [value]="phase" (selectionChange)="onChangePhase($event)">
-            {{phase}}
-        </mat-chip-option>
-    </mat-chip-listbox>
-</mat-card>
-
-
-<mat-card>
+   
     <mat-card>
 
-        <mat-chip-listbox *ngIf="phase_names">
-            <mat-chip-option *ngFor="let category of categories" [value]="category" (selectionChange)="onChangeCategory($event)">
+        <mat-chip-listbox *ngIf="phaseOptions">
+            <mat-chip-option *ngFor="let category of categories"
+                [value]="category"
+                (selectionChange)="onChangeCategory($event)">
                 {{category}}
             </mat-chip-option>
         </mat-chip-listbox>
     </mat-card>
-    
-    
+
+        
+
+           
     <mat-card>
 
-        <mat-card>
-            <mat-card>
-        
-                <mat-chip-listbox *ngIf="compound_names">
-                    <mat-chip-option *ngFor="let compound of compound_names" [value]="compound" (selectionChange)="onChangeSpecificSelection($event)">
-                        {{compound}}
-                    </mat-chip-option>
-                </mat-chip-listbox>
-            </mat-card>
-            
-            
-            <mat-card>
+        <mat-chip-listbox *ngIf="compound_names">
+            <mat-chip-option *ngFor="let compound of compound_names"
+                [value]="compound"
+                (selectionChange)="onChangeSpecificSelection($event)">
+                {{compound}}
+            </mat-chip-option>
+        </mat-chip-listbox>
+    </mat-card>
 
-                <mat-card>
+              
 
-                    <mat-card>
-                        <mat-card>
                     
-                            <mat-chip-listbox *ngIf="ion_names">
-                                <mat-chip-option *ngFor="let ion of ion_names" [value]="ion" (selectionChange)="onChangeSpecificSelection($event)">
-                                    {{ion}}
-                                </mat-chip-option>
-                            </mat-chip-listbox>
-                        </mat-card>
-                        
-                        
-                        <mat-card>
-<!-- <plotly-plot [data]="bardata" [layout]="barlayout" ></plotly-plot> -->
-<plotly-plot [data]="traces" [layout]="selectedPlotlyLayout" ></plotly-plot>
 
-</mat-card>
-</mat-card>
+                      
+    <mat-card>
 
+        <mat-chip-listbox *ngIf="ion_names">
+            <mat-chip-option
+                *ngFor="let ion of ion_names"
+                [value]="ion"
+                (selectionChange)="onChangeSpecificSelection($event)">
+                {{ion}}
+            </mat-chip-option>
+        </mat-chip-listbox>
+    </mat-card>
+
+    <mat-card>
+            <!-- <plotly-plot [data]="bardata" [layout]="barlayout" ></plotly-plot> -->
+            <plotly-plot [data]="traces"
+                [layout]="selectedPlotlyLayout"></plotly-plot>
+
+        
+    </mat-card>
+                    
+</mat-card>

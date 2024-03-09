@@ -24,13 +24,13 @@ export class SolutionMixtureAnalysisComponent implements OnInit{
   compound_names: string[];
   ion_names: string[];
 
-  selectedPhases = ['all'];
+
   selectedCategories = ['all'];
   selectedKeys = [];
   selectedData = [];
   selectedLinearData = [];  
   selectedScatterData = [];
-  phase_names = [];
+  phaseOptions = [];
   solution_volumes_bar_chart_data = [];
   selectedPlotlyData = [];
   selectedPlotlyLayout = {};
@@ -51,7 +51,7 @@ lineChartData = []; // The data for the chart
 bardata =[]
 barlayout = {}
 plotlyData = [];
-selectedPhase: string = "";  // User-selected phase
+selectedPhases: string[] = [];  // User-selected phase
 category: string = 'compound';  // Category selected by the user, e.g., 'compound', 'ion', 'pH'
 specificSelection: string = 'All';  // Specific compound or ion selected, or 'All'
 
@@ -59,7 +59,7 @@ plotData: any[];  // Variable to hold the prepared data for plotting
 layout: any;  // Variable to hold the layout for the plot
 traces: any[];  // Variable to hold the traces for the plot
 categories: string[] = ['compound', 'ion', 'pH'];  // Categories for the dropdown
-
+allPhasesSelected: boolean = false;  // Whether all phases are selected
 
   constructor(private solutionMixtureService: SolutionMixtureService) { }
 
@@ -75,7 +75,7 @@ categories: string[] = ['compound', 'ion', 'pH'];  // Categories for the dropdow
       if(this.solutionMixture && this.solutionMixture.phase_sliced_data){
         //this.phaseData = this.solutionMixture.phase_data;
       this.getNames();
-      this.preparePlotData(this.solutionMixture.phase_sliced_data, this.selectedPhase, this.category, this.specificSelection);
+      this.preparePlotData(this.solutionMixture.phase_sliced_data, this.selectedPhases, this.category, this.specificSelection);
      this.plotWithPlotly();
       // this.make_solution_volumes_bar_chart_data();
      // this.createBarChart(this.solutionMixture);
@@ -122,8 +122,71 @@ categories: string[] = ['compound', 'ion', 'pH'];  // Categories for the dropdow
   //   this.selectedLinearData = this.getLinearbyPhaseCategoryKey(["Titrate to volume"], ["compounds"], []);
   // }
 
+  preparePlotData(
+    slicedData: any, 
+    selectedPhases: string[], 
+    category: string, 
+    specificSelection: string, 
+  ): any[] {
 
-  preparePlotData(slicedData: any, selectedPhase: string, category: string, specificSelection: string): any[] {
+    console.log("God slected phases, category, specific selection", selectedPhases, category, specificSelection)
+    let plotData: any[] = [];
+  
+    // Define relevant names based on category
+    const relevantNames = category === 'compound' ? this.compound_names : category === 'ion' ? this.ion_names : [];
+    if (selectedPhases.includes('All') ){
+      selectedPhases = Object.keys(slicedData);
+    }
+    selectedPhases.forEach(selectedPhase => {
+      const phaseData = slicedData[selectedPhase];
+  
+      if (!phaseData) {
+        console.error('Selected phase data not found for phase', selectedPhase);
+        return;
+      }
+  
+      // Depending on the category, prepare data for plotting
+      phaseData.forEach((dataPoint: any) => {
+        relevantNames.forEach(key => {
+          // Check if we should include the current key based on specificSelection
+          if (specificSelection === 'All' || specificSelection === key) {
+            let entry = plotData.find(entry => entry.name === key);
+            if (!entry) {
+              entry = { name: key, series: [] };
+              plotData.push(entry);
+            }
+            entry.series.push({ x: dataPoint.volume, y: dataPoint[key] });
+          }
+        });
+      });
+    });
+  
+    // Special handling for pH if selected
+    if (category === 'pH') {
+      selectedPhases.forEach(selectedPhase => {
+        const phaseData = slicedData[selectedPhase];
+        if (!phaseData) return;
+  
+        const pHData = phaseData.map((dataPoint: any) => ({ x: dataPoint.volume, y: dataPoint.pH }));
+        let pHEntry = plotData.find(entry => entry.name === 'pH');
+        if (!pHEntry) {
+          pHEntry = { name: 'pH', series: [] };
+          plotData.push(pHEntry);
+        }
+        pHEntry.series = pHEntry.series.concat(pHData);
+      });
+    }
+  
+    return plotData;
+  }
+  
+
+
+
+
+
+
+  preparePlotData2(slicedData: any, selectedPhase: string, category: string, specificSelection: string): any[] {
     // Find the data for the selected phase
     const phaseData = slicedData[selectedPhase];
 
@@ -169,6 +232,10 @@ categories: string[] = ['compound', 'ion', 'pH'];  // Categories for the dropdow
 
   
   plotWithPlotly(): void {
+
+    if (this.plotData) {
+
+
 this.layout = {
       title: 'Your Plot Title',
       xaxis: { title: 'Volume' },
@@ -185,6 +252,8 @@ this.layout = {
         name: dataItem.name,
       };
     });
+
+  }
   
    // Plotly.newPlot('plotDiv', traces, layout);
   }
@@ -192,15 +261,67 @@ this.layout = {
 
 
   updatePlot(): void {
-    this.plotData = this.preparePlotData(this.solutionMixture.phase_sliced_data, this.selectedPhase, this.category, this.specificSelection);
+    this.plotData = this.preparePlotData(this.solutionMixture.phase_sliced_data, this.selectedPhases, this.category, this.specificSelection);
     this.plotWithPlotly();
     // Further steps to actually plot this data with Plotly or similar would go here
   }
 
-onChangePhase(event: any): void {
-  this.selectedPhase = event.source.value;
-  this.updatePlot();
-}
+
+  onChangePhase(event:MatChipSelectionChange): void {
+    const phaseId = event.source.value;
+    const isSelected = event.source.selected;
+  
+    if (phaseId === 'all') {
+      if (isSelected) {
+        // Select all phases including 'all'
+        this.selectedPhases = [...this.phaseOptions.map(p => p.id), 'all'];
+      } else {
+        // Clear the selection
+        this.selectedPhases = [];
+      }
+    } else {
+      if (isSelected) {
+        // Add the selected phase, ensuring no duplicates
+        if (!this.selectedPhases.includes(phaseId)) {
+          this.selectedPhases.push(phaseId);
+        }
+      } else {
+        // Remove the deselected phase
+        this.selectedPhases = this.selectedPhases.filter(id => id !== phaseId);
+      }
+  
+      // Remove 'all' if it's there and not all phases are selected
+      if (this.selectedPhases.length === this.phaseOptions.length) {
+        this.selectedPhases.push('all');
+      } else if (this.selectedPhases.includes('all')) {
+        // If not all phases are selected and 'all' is in the array, remove it
+        this.selectedPhases = this.selectedPhases.filter(id => id !== 'all');
+      }
+    }
+  
+    // Sort selectedPhases based on the order in this.phases
+    this.selectedPhases = this.selectedPhases.filter(id => id !== 'all').sort((a, b) => {
+      const indexA = this.phaseOptions.findIndex(phase => phase.id === a);
+      const indexB = this.phaseOptions.findIndex(phase => phase.id === b);
+      return indexA - indexB;
+    });
+  
+    // If after sorting and modification, all phases are selected, add 'all' to the selection
+    if (this.selectedPhases.length === this.phaseOptions.length) {
+      this.selectedPhases.push('all');
+    }
+    console.log("God selected phases",this.selectedPhases);
+    this.updatePlot();
+  }
+
+ 
+  
+  
+   
+    isPhaseSelected(phase: string): boolean {
+      return this.selectedPhases.includes(phase);
+    }
+
 
 onChangeCategory(event: any): void {
   this.category = event.source.value;
@@ -447,9 +568,28 @@ onChangeSpecificSelection(event: any): void {
       this.solutionMixture.ion_concentrations
     );
 
-    this.phase_names = Object.keys(this.solutionMixture.phase_sliced_data);
-    console.log("God phase names",this.phase_names);
+   this.generatePhaseOptions(Object.keys(this.solutionMixture.phase_sliced_data));
+   
 
+  }
+
+  generatePhaseOptions(phase_names): void {
+    // Assuming this.phase_names is an array of strings containing phase names
+    const phaseOptions = phase_names.map(phaseName => {
+      return {
+        id: phaseName, // Use the phase name as the id for simplicity, or generate a unique id as needed
+        name: phaseName // The display name of the phase
+      };
+    });
+  
+    // Add the "All" option at the end
+    phaseOptions.push({
+      id: 'all', // A unique identifier for the "All" option
+      name: 'All' // The display name for the "All" option
+    });
+  
+    // Now phaseOptions is ready to use, e.g., assign it to a component property
+    this.phaseOptions = phaseOptions;
   }
 
 
