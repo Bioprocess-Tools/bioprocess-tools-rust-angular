@@ -238,24 +238,9 @@
 
 </mat-card>
 
-<mat-chip-listbox >
-  <mat-chip-option *ngFor="let measurement of allMeasurements" [value]="measurement" (selectionChange) = "onSelectionChange($event)">{{measurement}}</mat-chip-option>
-</mat-chip-listbox>
 
-<button mat-raised-button color="primary" (click)="onPlotOM()">Plot</button>
-<ngx-charts-bubble-chart
-  *ngIf="selectPlotData"
-  [results]="selectPlotData"
-  [view]="[700, 400]"
-  [xAxis]="true"
-  [yAxis]="true"
-  [xAxisLabel]="'Volume'"
-  [yAxisLabel]="'God'"
-  [xScaleMin]="xMin"  
-  [xScaleMax]="xMax"  
-  [yScaleMin]="yMin"  
-  [yScaleMax]="yMax"  >
-</ngx-charts-bubble-chart>
+
+
 
 
 

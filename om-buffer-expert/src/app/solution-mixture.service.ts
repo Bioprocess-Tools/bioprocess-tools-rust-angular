@@ -148,13 +148,13 @@ getCompoundsProcessed(): Observable<any> {
 postStepswithTrigger() {
   let steps = this.StepsSubject.value;
   this.StepsSubject.next(steps);
-  
+  console.log("God this is what is going out", this.StepsSubject.value)
   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
   .subscribe({
     next: (solutionMixture) => {
     this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
 
-      console.log("God just got data back", this.solutionMixtureSolutionsReviewSubject)
+      console.log("God just got data back",solutionMixture)
 
   },
   error: (error) => console.error(error)

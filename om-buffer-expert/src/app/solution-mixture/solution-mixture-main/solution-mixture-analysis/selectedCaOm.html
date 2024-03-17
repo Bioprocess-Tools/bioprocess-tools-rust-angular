@@ -1,0 +1,158 @@
+selectedCategories = [];
+specificSelections = [];
+
+onChangeCategory(event) {
+  if (event.isUserInput) {
+    if (event.source.selected) {
+      this.selectedCategories.push(event.source.value);
+    } else {
+      const index = this.selectedCategories.indexOf(event.source.value);
+      if (index >= 0) {
+        this.selectedCategories.splice(index, 1);
+      }
+    }
+  }
+}
+
+onSelectAllCategories(event) {
+  if (event.isUserInput) {
+    if (event.source.selected) {
+      this.selectedCategories = this.categories.slice();
+    } else {
+      this.selectedCategories = [];
+    }
+  }
+}
+
+onChangeSpecificSelection(event) {
+  if (event.isUserInput) {
+    if (event.source.selected) {
+      this.specificSelections.push(event.source.value);
+    } else {
+      const index = this.specificSelections.indexOf(event.source.value);
+      if (index >= 0) {
+        this.specificSelections.splice(index, 1);
+      }
+    }
+  }
+}
+
+onSelectAllSpecificSelections(event) {
+  if (event.isUserInput) {
+    if (event.source.selected) {
+      this.specificSelections = this.compound_names.slice();
+    } else {
+      this.specificSelections = [];
+    }
+  }
+}
+
+<mat-card *ngIf="solutionMixture">
+  <mat-card>
+    <mat-chip-listbox multiple>
+      <mat-chip-option *ngFor="let phase of phaseOptions" [value]="phase.id" 
+          [selected]="selectedPhases.includes(phase.id)"
+          (selectionChange)="onChangePhase($event)">
+        {{ phase.name }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-card>
+
+  <mat-card>
+    <mat-chip-listbox *ngIf="phaseOptions" multiple>
+      <mat-chip-option *ngFor="let selcategory of categories"
+          [value]="selcategory"
+          [selected]="selectedCategories.includes(selcategory)"
+          [disabled]="selectedPhases.length==0"
+          (selectionChange)="onChangeCategory($event)">
+        {{selcategory}}
+      </mat-chip-option>
+      <mat-chip-option value="all" (selectionChange)="onSelectAllCategories($event)">
+        All
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-card>
+
+  <mat-card *ngIf="selectedCategories.includes('compound') || selectedCategories.includes('ion')">
+    <mat-chip-listbox *ngIf="compound_names" multiple>
+      <mat-chip-option *ngFor="let compound of compound_names"
+          [value]="compound" 
+          [selected]="specificSelections.includes(compound)"
+          [disabled]="selectedPhases.length==0"
+          (selectionChange)="onChangeSpecificSelection($event)">
+        {{compound}}
+      </mat-chip-option>
+      <mat-chip-option value="all" (selectionChange)="onSelectAllSpecificSelections($event)">
+        All
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </mat-card>
+</mat-card>
+
+Certainly! To implement the cascade of selections involving phases, categories (compound, ion, or pH), and then specific compounds or ions (including an "All" option), you'll need to update both your component's TypeScript logic and the template HTML. Let's break it down into parts:
+
+Step 1: Category Selection
+TypeScript (Component)
+First, define the variable to hold the selected category and initialize it:
+
+typescript
+Copy code
+selectedCategory: string = ''; // 'compound', 'ion', or 'pH'
+Then, define the method to update this selection:
+
+typescript
+Copy code
+onChangeCategory(category: string): void {
+  this.selectedCategory = category;
+  // Reset specific selection when category changes
+  this.selectedSpecific = '';
+}
+HTML (Template)
+Add a selection mechanism for the category (can be a set of radio buttons, a select dropdown, etc.):
+
+html
+Copy code
+<mat-radio-group [(ngModel)]="selectedCategory" (change)="onChangeCategory($event.value)">
+  <mat-radio-button value="compound">Compound</mat-radio-button>
+  <mat-radio-button value="ion">Ion</mat-radio-button>
+  <mat-radio-button value="pH">pH</mat-radio-button>
+</mat-radio-group>
+Step 2: Specific Compound or Ion Selection
+TypeScript (Component)
+You need to prepare the lists for compounds and ions, an array to hold the specific selection, and initialize them:
+
+typescript
+Copy code
+compounds = [...]; // Array of compounds
+ions = [...]; // Array of ions
+selectedSpecific: string | null = null; // Holds the specific selection or 'All'
+When the category changes to compound or ion, you can filter the respective arrays. If you have an "All" option, include it in the arrays or handle it separately in your logic.
+
+Add the method to update the specific selection:
+
+typescript
+Copy code
+onChangeSpecific(selection: string): void {
+  this.selectedSpecific = selection;
+}
+HTML (Template)
+Depending on the selected category, display the selection options for compounds or ions:
+
+html
+Copy code
+<div *ngIf="selectedCategory === 'compound' || selectedCategory === 'ion'">
+  <mat-form-field appearance="fill">
+    <mat-label>Select one</mat-label>
+    <mat-select [(value)]="selectedSpecific" (selectionChange)="onChangeSpecific($event.value)">
+      <mat-option value="">All</mat-option>
+      <mat-option *ngFor="let item of selectedCategory === 'compound' ? compounds : ions" [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+This setup handles the cascade of selections through binding and event handling. The user selects a category, which then determines what specific options (compounds or ions) are available. The "All" option is treated as an empty string for simplicity, but you can adjust this based on your requirements.
+
+For handling the "All" option programmatically (e.g., enabling/disabling specific options based on "All" being selected), you may need to adjust your onChangeSpecific method or introduce additional logic in your component.
+
+This approach assumes that you have predefined arrays for compounds and ions. You'll need to populate these arrays based on your application's data source. The examples provided here are simplified for demonstration purposes, so you may need to adjust them to fit the exact structure and requirements of your application, including integrating with forms for data submission or further actions based on the selections.
