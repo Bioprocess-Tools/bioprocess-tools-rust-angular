@@ -113,7 +113,17 @@ export class SolutionsBrowseEditPrepareComponent
       }
     );
 
-
+    // this.solutions_selection_Control.valueChanges.subscribe(value => {
+    //   if (typeof value === 'string') {
+    //     // The value is a string, so the user has edited the input
+    //     // You can now process the string as needed
+    //     console.log('User input:', value);
+    //   } else if (value instanceof Solution) {
+    //     // The value is a Solution object, so the user has selected an option from the dropdown
+    //     // You can now process the Solution object as needed
+    //     console.log('Selected solution:', value);
+    //   }
+    // });
 
   }   
 
@@ -193,6 +203,9 @@ export class SolutionsBrowseEditPrepareComponent
     this.selectedSubCategory = subCategory;
     this.solutions_selection_Control.setValue('');
   }
+
+
+
 
   onSolutionSelected(solution: Solution) {
     // Populate the form based on the type of solution
