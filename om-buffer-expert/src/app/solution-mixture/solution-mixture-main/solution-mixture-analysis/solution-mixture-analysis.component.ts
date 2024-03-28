@@ -1,15 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  MatChipListboxChange,
-  MatChipSelectionChange,
-} from '@angular/material/chips';
-import * as Plotly from 'plotly.js';
+import {FormBuilder,FormControl,FormGroup, Validators} from '@angular/forms';
+import {MatChipListboxChange, MatChipSelectionChange} from '@angular/material/chips';
 import { Solution } from 'src/app/shared/models/solution.model';
 import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
 import { Step } from 'src/app/shared/models/step.model';
@@ -29,12 +20,21 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   compound_names: string[];
   ion_names: string[];
 
-  selectedCategories = ['all'];
-  selectedKeys = [];
-  selectedData = [];
-  selectedLinearData = [];
-  selectedScatterData = [];
+  // selectedKeys = [];
+  // selectedData = [];
+  // selectedLinearData = [];
+  // selectedScatterData = [];
+  //these options are for the chips options, to include individual phases and "all"
   phaseOptions = [];
+  compoundOptions = [];
+  ionOptions = [];
+
+  selectedCategories = ['all'];
+  selectedPhases: string[] = []; // User-selected phase
+  selectedCompounds: string[] = []; // User-selected compounds
+  selectedIons: string[] = []; // User-selected ions
+
+
   solution_volumes_bar_chart_data = [];
   selectedPlotlyData = [];
   selectedPlotlyLayout = {};
@@ -66,43 +66,36 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     tickfont: {
       family: 'Old Standard TT, serif',
       size: 14,
-      color: 'b}ack',
+      color: 'black',
     },
     tickmode: 'linear',
     tick0: 0.0,
     dtick: 0.25,
   };
 
-  //view: any[] = [700, 400]; // Dimensions of the chart
-  //colorScheme = { domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'] }; // Colors for the chart
-  //gradient: boolean = false; // Whether to show gradient
-  //showXAxis = true; // Whether to show the x-axis
-  //showYAxis = true; // Whether to show the y-axis
-  // showLegend = true; // Whether to show the legend
-  // showXAxisLabel = true; // Whether to show the x-axis label
-  // showYAxisLabel = true; // Whether to show the y-axis label
-  // xAxisLabel = 'Volume'; // Label for the x-axis
-  // yAxisLabel = 'Value'; // Label for the y-axis
-  // autoScale = true; // Whether to auto-scale the y-axis
-  // lineChartData = []; // The data for the chart
   solution_volumes_data = [];
   solution_volumes_layout = {};
   plotlyData = [];
-  selectedPhases: string[] = []; // User-selected phase
+
+
   category: string = ''; // Category selected by the user, e.g., 'compound', 'ion', 'pH'
   specificSelection: string = ''; // Specific compound or ion selected, or 'All'
 
   plotData: any[]; // Variable to hold the prepared data for plotting
+  plot2data: any[]; // Variable to hold the prepared data for the line plot
+  plotSingleData: any[]; // Variable to hold the prepared data for the single plot
   layout: any; // Variable to hold the layout for the plot
   traces: any[]; // Variable to hold the traces for the plot
   categories: string[] = ['compound', 'ion', 'pH']; // Categories for the dropdown
   allPhasesSelected: boolean = false; // Whether all phases are selected
+  allCompoundsSelected: boolean = false; // Whether all compounds are selected
+  allIonsSelected: boolean = false; // Whether all ions are selected
+
 
   constructor(private solutionMixtureService: SolutionMixtureService) {}
 
   ngOnInit(): void {
     this.subscribeSolutionMixtureSolutionsReview();
-
     this.subscribeSolutionMixtureSteps();
   }
 
@@ -112,13 +105,16 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         this.solutionMixture = solutionMixture;
         if (this.solutionMixture && this.solutionMixture.phase_sliced_data) {
           //this.phaseData = this.solutionMixture.phase_data;
-          this.getNames();
-          this.plotData = this.preparePlotData(
-            this.solutionMixture.phase_sliced_data,
-            this.selectedPhases,
-            this.category,
-            this.specificSelection
-          );
+          this.getNames(); //also generates phase options, compound options, and ion options
+          // this.plotData = this.preparePlotData(
+          //   this.solutionMixture.phase_sliced_data,
+          //   this.selectedPhases,
+          //   this.category,
+          //   this.specificSelection
+          // );
+
+          this.plot2data = this.prepareLinePlotData();
+          this.plotSingleData = this.prepareSinglePlotData();
           if (this.plotData) {
             this.plotWithPlotly();
             this.createCompoundConcsBarChart(solutionMixture);
@@ -136,85 +132,187 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     });
   }
 
-  preparePlotData(
-    slicedData: any,
-    selectedPhases: string[],
-    category: string,
-    specificSelection: string
-  ): any[] {
-    let plotData: any[] = [];
-    if (slicedData) {
-      console.log(
-        'God slected phases, category, specific selection',
-        selectedPhases,
-        category,
-        specificSelection
-      );
-
-      if (this.selectedPhases.length != 0) {
-        // Define relevant names based on category
-        const relevantNames =
-          category === 'compound'
-            ? this.compound_names
-            : category === 'ion'
-            ? this.ion_names
-            : [];
-        if (selectedPhases.includes('all')) {
-          selectedPhases = Object.keys(slicedData);
-        }
-        selectedPhases.forEach((selectedPhase) => {
-          const phaseData = slicedData[selectedPhase];
-
-          if (!phaseData) {
-            console.error(
-              'Selected phase data not found for phase',
-              selectedPhase
-            );
-            return;
-          }
-
-          // Depending on the category, prepare data for plotting
-          phaseData.forEach((dataPoint: any) => {
-            relevantNames.forEach((key) => {
-              // Check if we should include the current key based on specificSelection
-              if (specificSelection === 'All' || specificSelection === key) {
-                let entry = plotData.find((entry) => entry.name === key);
-                if (!entry) {
-                  entry = { name: key, series: [] };
-                  plotData.push(entry);
-                }
-                entry.series.push({ x: dataPoint.volume, y: dataPoint[key] });
-              }
-            });
-          });
-        });
-
-        // Special handling for pH if selected
-        if (category === 'pH') {
-          selectedPhases.forEach((selectedPhase) => {
-            const phaseData = slicedData[selectedPhase];
-            if (!phaseData) return;
-
-            const pHData = phaseData.map((dataPoint: any) => ({
-              x: dataPoint.volume,
-              y: dataPoint.pH,
-            }));
-            let pHEntry = plotData.find((entry) => entry.name === 'pH');
-            if (!pHEntry) {
-              pHEntry = { name: 'pH', series: [] };
-              plotData.push(pHEntry);
-            }
-            pHEntry.series = pHEntry.series.concat(pHData);
-          });
-        }
-      }
+  prepareSinglePlotData(): any[] {
+    let linePlotData = [];
+    let traces = [];
+    if (this.category === 'compound') {
+      traces = this.selectedCompounds.map(compound => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.compounds.find(compoundobj => compoundobj.name === compound).compound_conc_interval_data,  
+          mode: 'lines',
+          name: `${compound}`,
+        };
+      });
     }
-    return plotData;
+    else if (this.category === 'ion') {
+      traces = this.selectedIons.map(ion => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.unique_ions.find(ionobj => ionobj.name === ion).ion_conc_interval_data,  
+          mode: 'lines',
+          name: `${ion}`,
+        };
+      });
+    }
+
+    else if (this.category === 'pH') {
+      traces = [{          
+        x: this.solutionMixture.volume_interval_data, 
+        y: this.solutionMixture.pH_interval_data,
+        mode: 'lines',
+        name: `pH`,
+      }];
+    }
+    console.log("God traces", traces)
+    linePlotData.push(...traces);
+    console.log("God line plot data", linePlotData)
+
+    return linePlotData;
   }
+  
+
+
+
+
+
+  // preparePlotData(
+  //   slicedData: any,
+  //   selectedPhases: string[],
+  //   category: string,
+  //   specificSelection: string
+  // ): any[] {
+  //   let plotData: any[] = [];
+  //   if (slicedData) {
+  //     console.log(
+  //       'God slected phases, category, specific selection',
+  //       selectedPhases,
+  //       category,
+  //       specificSelection
+  //     );
+
+  //     if (this.selectedPhases.length != 0) {
+  //       // Define relevant names based on category
+  //       let relevantNames: string[] = [];
+  //       if (category === 'compound') {
+  //         relevantNames = this.selectedCompounds;
+  //       } else if (category === 'ion') {
+  //         relevantNames = this.selectedIons;
+  //       }
+  //       if (selectedPhases.includes('all')) {
+  //         selectedPhases = Object.keys(slicedData);
+  //       }
+  //       selectedPhases.forEach((selectedPhase) => {
+  //         const phaseData = slicedData[selectedPhase];
+  //         console.log("God phase data udpaed", phaseData)
+  //         if (!phaseData) {
+  //           console.error(
+  //             'Selected phase data not found for phase',
+  //             selectedPhase
+  //           );
+  //           return;
+  //         }
+
+  //         // Depending on the category, prepare data for plotting
+  //         phaseData.forEach((dataPoint: any) => {
+  //           relevantNames.forEach((key) => {
+  //             // Check if we should include the current key based on specificSelection
+  //             if (specificSelection === 'all' || specificSelection === key) {
+  //               console.log("God key", key)
+  //               let entry = plotData.find((entry) => entry.name === key);
+  //               if (!entry) {
+  //                 entry = { name: key, series: [] };
+  //                 plotData.push(entry);
+  //               }
+  //               entry.series.push({ x: dataPoint.volume, y: dataPoint[key] });
+  //               console.log("God entry", entry)
+  //             }
+  //             //console.log("God not if", plotData)
+  //           });
+  //         });
+  //       });
+
+  //       // Special handling for pH if selected
+  //       if (category === 'pH') {
+  //         selectedPhases.forEach((selectedPhase) => {
+  //           const phaseData = slicedData[selectedPhase];
+  //           if (!phaseData) return;
+
+  //           const pHData = phaseData.map((dataPoint: any) => ({
+  //             x: dataPoint.volume,
+  //             y: dataPoint.pH,
+  //           }));
+  //           let pHEntry = plotData.find((entry) => entry.name === 'pH');
+  //           if (!pHEntry) {
+  //             pHEntry = { name: 'pH', series: [] };
+  //             plotData.push(pHEntry);
+  //           }
+  //           pHEntry.series = pHEntry.series.concat(pHData);
+  //         });
+  //       }
+  //     }
+  //   }
+  //   console.log("God plot data renewed", plotData)
+  //   return plotData;
+  // }
+
+  prepareLinePlotData(): any[] {
+    let linePlotData = [];
+    let traces = [];
+    console.log("God selected phases", this.selectedPhases);
+    console.log("God selected compounds", this.selectedCompounds);
+    console.log("God selected ions", this.selectedIons);
+    console.log("God category", this.category);
+
+    for (let phase of this.selectedPhases.filter((phase) => phase != 'all')){
+      console.log("God phase", phase);
+      console.log("God phase data", this.solutionMixture.phase_sliced_data[phase]);
+      traces = [];
+      if (this.category === 'compound') {
+        traces = this.selectedCompounds.map(compound => {
+          return {
+            x: this.solutionMixture.phase_sliced_data[phase].map(obj => obj.volume),
+            y: this.solutionMixture.phase_sliced_data[phase].map(obj => obj[compound]),
+            mode: 'lines',
+            name: `${compound} - ${phase}`,
+          };
+        });
+      }
+      else if (this.category === 'ion') {
+        traces = this.selectedIons.map(ion => {
+          return {
+            x: this.solutionMixture.phase_sliced_data[phase].map(obj => obj.volume),
+            y: this.solutionMixture.phase_sliced_data[phase].map(obj => obj[ion]),
+            mode: 'lines',
+            name: `${ion} - ${phase}`,
+          };
+        });
+      }
+
+      else if (this.category === 'pH') {
+        traces = [{          
+          x: this.solutionMixture.phase_sliced_data[phase].map(obj => obj.volume),
+          y: this.solutionMixture.phase_sliced_data[phase].map(obj => obj.pH),
+          mode: 'lines',
+          name: `pH - ${phase}`,
+        }];
+      }
+      console.log("God traces", traces)
+      linePlotData.push(...traces);
+      console.log("God line plot data", linePlotData)
+
+
+    }
+    
+  
+  return linePlotData;
+}
+
+
 
   plotWithPlotly(): void {
-    if (this.plotData) {
-      this.layout = {
+    if(this.plot2data) {
+    this.selectedPlotlyLayout = {
         title: 'Your Plot Title',
         xaxis: { title: 'Volume' },
         yaxis: { title: 'Concentioio',
@@ -226,7 +324,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         zerolinecolor: '#969696',
         zerolinewidth: 2,
         linecolor: '#636363',
-        linewidth: 6,
+        linewidth: 2,
         
         titlefont: {
           family: 'Arial, sans-serif',
@@ -234,42 +332,127 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           color: 'lightgrey',
         },
         showticklabels: true,
-        tickangle: 45,
+        tickangle: 90,
         tickfont: {
-          family: 'Old Standard TT, serif',
+          family: 'Arial, sans-serif',
           size: 14,
-          color: 'b}ack',
+          color: 'blue',
         },
         tickmode: 'linear',
-        tick0: 0.0,
-        dtick: 0.25,
+       // tick0: 0.0,
+       // dtick: 0.01,
         margin: { t: 40 }, // Adjust top margin to make room for the title
-      }};
+      
+    }};
+  }
 
-      this.traces = this.plotData.map((dataItem) => {
-        return {
-          x: dataItem.series.map((point: any) => point.x),
-          y: dataItem.series.map((point: any) => point.y),
-          mode: 'lines',
-          type: 'scatter',
-          name: dataItem.name,
-        };
-      });
+      // this.traces = this.plotData.map((dataItem) => {
+      //   return {
+      //     x: dataItem.series.map((point: any) => point.x),
+      //     y: dataItem.series.map((point: any) => point.y),
+      //     mode: 'lines',
+      //     type: 'scatter',
+      //     name: dataItem.name,
+      //   };
+      // }
+      
+      // );
+
+      this.traces = this.plot2data
     }
 
     // Plotly.newPlot('plotDiv', traces, layout);
-  }
+  
 
   updatePlot(): void {
-    this.plotData = this.preparePlotData(
-      this.solutionMixture.phase_sliced_data,
-      this.selectedPhases,
-      this.category,
-      this.specificSelection
-    );
+    // this.plotData = this.preparePlotData(
+    //   this.solutionMixture.phase_sliced_data,
+    //   this.selectedPhases,
+    //   this.category,
+    //   this.specificSelection
+    // );
+
+    this.plot2data = this.prepareLinePlotData();
+    this.plotSingleData = this.prepareSinglePlotData();
     this.plotWithPlotly();
     // Further steps to actually plot this data with Plotly or similar would go here
   }
+
+
+  onChangeCompoundSelection(event: MatChipSelectionChange): void {
+    const compound = event.source.value;
+    const isSelected = event.source.selected;
+
+
+    if (compound === 'all') {
+      if (isSelected) {
+        // Select all phases including 'all'
+        this.selectedCompounds = this.compoundOptions.map((p) => p.id);
+      } else {
+        // Clear the selection
+        if (this.selectedCompounds.length === this.compoundOptions.length) {
+          this.selectedCompounds = [];
+
+        } else {
+          this.selectedCompounds.filter((id) => id !== 'all');
+        }
+        //
+      }
+    } else {
+      if (isSelected) {
+        // Add the selected phase, ensuring no duplicates
+        if (!this.selectedCompounds.includes(compound)) {
+          this.selectedCompounds.push(compound);
+          console.log('God added phase if not duplicate', this.selectedCompounds);
+          if (this.selectedCompounds.length === this.compoundOptions.length - 1) {
+            this.selectedCompounds.push('all');
+            console.log('God added all', this.selectedCompounds);
+          }
+        }
+      } else {
+        // Remove the deselected phase
+        this.selectedCompounds = this.selectedCompounds.filter(
+          (id) => id !== compound
+        );
+        console.log('God: removed phase', this.selectedCompounds);
+        this.selectedCompounds = this.selectedCompounds.filter((id) => id !== 'all');
+        console.log('God: removed phase and all', this.selectedCompounds);
+      }
+
+      //   // Remove 'all' if it's there and not all phases are selected
+      //  if ((this.selectedPhases.length === this.phaseOptions.length) ) {
+      //     this.selectedPhases.push('all');
+      //   } else if (this.selectedPhases.length < this.phaseOptions.length && this.selectedPhases.includes('all')) {
+      //     // If not all phases are selected and 'all' is in the array, remove it
+      //     this.selectedPhases = this.selectedPhases.filter(id => id !== 'all');
+      //   }
+      //  }
+
+      // Sort selectedPhases based on the order in this.phases
+
+
+      // If after sorting and modification, all phases are selected, add 'all' to the selection
+      // if (this.selectedPhases.length === this.phaseOptions.length) {
+      //   this.selectedPhases.push('all');
+      // }
+      console.log('God selected compounds', this.selectedCompounds);
+      this.updatePlot();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   onChangePhase(event: MatChipSelectionChange): void {
     const phaseId = event.source.value;
@@ -346,11 +529,67 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
   onChangeCategory(event: any): void {
     this.category = event.source.value;
+    if (this.category === 'compound') {
+      this.selectedIons = [];
+    } else if (this.category === 'ion') {
+      this.selectedCompounds = [];
+    } else if (this.category === 'pH') {
+      this.selectedIons = [];
+      this.selectedCompounds = [];
+    }
+    console.log('God selected category', this.category);
     this.updatePlot();
   }
 
-  onChangeSpecificSelection(event: any): void {
-    this.specificSelection = event.source.value;
+  onChangeIonSelection(event: any): void {
+    const ion = event.source.value;
+    if (event.source.selected) {
+      this.selectedIons.push(ion) ;
+    } else {
+      const index = this.selectedIons.indexOf(ion);
+      if (index > -1) {
+        this.selectedIons.splice(index, 1);
+      }
+    }
+    console.log('God selected ions', this.selectedIons);
+    this.updatePlot();
+  }
+
+  deselectAllCompounds(): void {
+   
+    this.selectedCompounds = [];
+
+    console.log('God deselected all compounds', this.selectedCompounds);
+    //this.updatePlot();
+  }
+
+  deselectAllIons(): void {
+   
+    this.selectedIons = [];
+
+    console.log('God deselected all ions', this.selectedIons);
+    this.updatePlot();
+  }
+
+  onChangeCompoundSelectionv2(event: any): void {
+    const compound = event.source.value;
+
+    if (event.source.selected) {
+      
+      
+      
+      
+      
+      
+      this.selectedCompounds.push(compound) ;
+
+    } else {
+      const index = this.selectedCompounds.indexOf(compound);
+      if (index > -1) {
+        this.selectedCompounds.splice(index, 1);
+      }
+    }
+    console.log('God selected compounds', this.selectedCompounds);
     this.updatePlot();
   }
 
@@ -475,6 +714,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     this.generatePhaseOptions(
       Object.keys(this.solutionMixture.phase_sliced_data)
     );
+    this.generateCompoundOptions(this.compound_names);
+    this.generateIonOptions(this.ion_names);
+
   }
 
   generatePhaseOptions(phase_names): void {
@@ -495,4 +737,43 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     // Now phaseOptions is ready to use, e.g., assign it to a component property
     this.phaseOptions = phaseOptions;
   }
+
+generateCompoundOptions(compound_names): void {
+    // Assuming this.phase_names is an array of strings containing phase names
+    const compoundOptions = compound_names.map((compoundName) => {
+      return {
+        id: compoundName, // Use the phase name as the id for simplicity, or generate a unique id as needed
+        name: compoundName, // The display name of the phase
+      };
+    });
+
+    // Add the "All" option at the end
+    compoundOptions.push({
+      id: 'all', // A unique identifier for the "All" option
+      name: 'All', // The display name for the "All" option
+    });
+
+    // Now phaseOptions is ready to use, e.g., assign it to a component property
+    this.compoundOptions = compoundOptions;
+  }
+
+generateIonOptions(ion_names): void {
+    // Assuming this.phase_names is an array of strings containing phase names
+    const ionOptions = ion_names.map((ionName) => {
+      return {
+        id: ionName, // Use the phase name as the id for simplicity, or generate a unique id as needed
+        name: ionName, // The display name of the phase
+      };
+    });
+
+    // Add the "All" option at the end
+    ionOptions.push({
+      id: 'all', // A unique identifier for the "All" option
+      name: 'All', // The display name for the "All" option
+    });
+
+    // Now phaseOptions is ready to use, e.g., assign it to a component property
+    this.ionOptions = ionOptions;
+  }
+
 }

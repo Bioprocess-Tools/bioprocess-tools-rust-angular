@@ -18,7 +18,7 @@
                 [value]="selcategory"
                 [selected]="category === selcategory"
                 [disabled]="selectedPhases.length==0"
-                (selectionChange)="onChangeCategory($event)">
+                (selectionChange)="onChangeCategory($event); deselectAllCompounds;deselectAllIons">
                 {{selcategory}}
             </mat-chip-option>
         </mat-chip-listbox>
@@ -29,13 +29,13 @@
            
     <mat-card>
 
-        <mat-chip-listbox *ngIf="compound_names" >
-            <mat-chip-option *ngFor="let compound of compound_names"
-                [value]="compound" 
-                [selected]="selectedKeys.includes(compound)"
+        <mat-chip-listbox *ngIf="compound_names" multiple >
+            <mat-chip-option *ngFor="let compound of compoundOptions"
+                [value]="compound.id" 
+                [selected]="selectedCompounds.includes(compound.id)"
                 [disabled]="selectedPhases.length==0 ||category=='pH' || category == 'ion' "
-                (selectionChange)="onChangeSpecificSelection($event)">
-                {{compound}}
+                (selectionChange)="onChangeCompoundSelection($event)">
+                {{compound.name}}
             </mat-chip-option>
         </mat-chip-listbox>
     </mat-card>
@@ -47,26 +47,34 @@
                       
     <mat-card>
 
-        <mat-chip-listbox *ngIf="ion_names">
+        <mat-chip-listbox *ngIf="ion_names" multiple>
             <mat-chip-option
-                *ngFor="let ion of ion_names"
-                [value]="ion"
+                *ngFor="let ion of ionOptions"
+                [value]="ion.id"
                 [disabled]="selectedPhases.length==0 ||category=='pH' || category == 'compound' "
-                [selected]="selectedKeys.includes(ion)"
-                (selectionChange)="onChangeSpecificSelection($event)">
-                {{ion}}
+                [selected]="selectedIons.includes(ion.id)"
+                (selectionChange)="onChangeIonSelection($event)">
+                {{ion.name}}
             </mat-chip-option>
         </mat-chip-listbox>
     </mat-card>
+    <mat-card *ngIf="plot2data">
+        <!-- <plotly-plot [data]="bardata" [layout]="barlayout" ></plotly-plot> -->
+        <plotly-plot [data]="traces"
+            [layout]="selectedPlotlyLayout"></plotly-plot>
 
-    <mat-card *ngIf="selectedPhases.length>0">
+    
+</mat-card>
+    <mat-card *ngIf="plotSingleData">
             <!-- <plotly-plot [data]="bardata" [layout]="barlayout" ></plotly-plot> -->
-            <plotly-plot [data]="traces"
+            <plotly-plot [data]="plotSingleData"
                 [layout]="selectedPlotlyLayout"></plotly-plot>
 
         
     </mat-card>
- <mat-card *ngIf="plotData">
+
+
+ <mat-card *ngIf="plot2data">
 
 
     <mat-card>
