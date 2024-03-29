@@ -112,14 +112,16 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           //   this.category,
           //   this.specificSelection
           // );
-
+          this.createCompoundConcsBarChart(solutionMixture);
+          this.createIonConcsBarChart(solutionMixture);
+          this.createSolutionVolumesBarChart(solutionMixture);
           this.plot2data = this.prepareLinePlotData();
+          if(this.plot2data) {console.log("God got plot2data", this.plot2data)}
           this.plotSingleData = this.prepareSinglePlotData();
-          if (this.plotData) {
+          if (this.plot2data) {
+            console.log("God got inside plot2data", this.plot2data)
             this.plotWithPlotly();
-            this.createCompoundConcsBarChart(solutionMixture);
-            this.createIonConcsBarChart(solutionMixture);
-            this.createSolutionVolumesBarChart(solutionMixture);
+
           }
         }
       }
@@ -594,13 +596,23 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   }
 
   createSolutionVolumesBarChart(solutionMixture: SolutionMixture) {
-    if (this.plotData) {
+    let colors = ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+   // let colorArray = [];
+    if (this.plot2data) {
       this.solution_volumes_data = [
         {
           type: 'bar',
           y: solutionMixture.solutions.map((solution) => solution.volume),
-          x: solutionMixture.solutions.map((solution) => solution.name),
+          x: solutionMixture.solutions.map((solution) => 
+          
+          {
+          let name = solution.name;
+
+          name = name.replace(/,/g, ',<br>');
+          return name;
+          }),
           orientation: 'v', // This makes the chart horizontal
+          marker: {color:colors}
         },
       ];
 
@@ -608,10 +620,13 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
       this.solution_volumes_layout = {
         title: 'Solution Volumes',
-        xaxis: { title: 'Volume', tickfont: { size: 14 } },
-        yaxis: { title: 'Solution' },
-        width: this.small_graph_width,
-        height: this.small_graph_height,
+        xaxis: { tickfont: { size: 12 } ,tickangle:0,automargin: true},
+        yaxis: { title: 'Volume (mL)' },
+       // width: this.small_graph_width,
+       // height: this.small_graph_height,
+        autosize: true, 
+       // paper_bgcolor: 'rgba(0,0,0,0)', // This will make the paper (the entire plot area including the labels) background transparent
+       // plot_bgcolor: 'rgba(0,0,0,0)', //
       };
 
       //this has a polyfill issue
@@ -620,15 +635,18 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   }
 
   createIonConcsBarChart(solutionMixture: SolutionMixture) {
-    if (this.plotData) {
+    if (this.plot2data) {
       let xdata = [];
       let ydata = [];
+      let colors = ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'];
+      let colorArray = [];
       for (let ion of Object.keys(solutionMixture.ion_concentrations)) {
         //console.log("God ion ", ion)
         if (ion != 'H' && ion != 'OH') {
           //console.log ("God came here", ion)
           xdata.push(ion);
           ydata.push(solutionMixture.ion_concentrations[ion]);
+          colorArray.push(colors[colorArray.length % colors.length]);
         }
       }
       this.ion_concs_data = [
@@ -637,6 +655,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           y: ydata,
           x: xdata,
           orientation: 'v', // This makes the chart horizontal
+          marker: {color:colorArray}
         },
       ];
 
@@ -644,10 +663,11 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
       this.ion_concs_layout = {
         title: 'Ion Concentrations',
-        xaxis: { title: 'Ions', tickfont: { size: 14 } },
-        yaxis: { title: 'Concentration' },
-        width: this.small_graph_width,
-        height: this.small_graph_height,
+        xaxis: {  tickfont: { size: 12 } },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true, 
+      //  width: this.small_graph_width,
+       // height: this.small_graph_height,
       };
       //this has a polyfill issue
       // Plotly.newPlot('myDiv', this.bardata as any, this.barlayout);
@@ -655,14 +675,17 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   }
 
   createCompoundConcsBarChart(solutionMixture: SolutionMixture) {
-    if (this.plotData) {
+    if (this.plot2data) {
       let xdata = [];
       let ydata = [];
+      let colors = ['#ffd1dc', '#ffabab', '#ffcbc1', '#ffe5d9', '#d5aaff', '#cfcfcf', '#a6beff', '#ace7ff', '#9effdf', '#a7ffd2'];
+      let colorArray = [];
       for (let compound of Object.keys(
         solutionMixture.compound_concentrations
       ).filter((comp) => comp != 'Water')) {
-        xdata.push(compound);
+        xdata.push(compound.replace(/ /g, '<br>'));
         ydata.push(solutionMixture.compound_concentrations[compound]);
+        colorArray.push(colors[colorArray.length % colors.length]); 
       }
       this.compound_concs_data = [
         {
@@ -670,6 +693,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           y: ydata,
           x: xdata,
           orientation: 'v', // This makes the chart horizontal
+          marker: {color:colorArray}
         },
       ];
 
@@ -677,10 +701,11 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
       this.compound_concs_layout = {
         title: 'Compound Concentrations',
-        xaxis: { title: 'Compounds', tickfont: { size: 14 } },
-        yaxis: { title: 'Concentration' },
-        width: this.small_graph_width,
-        height: this.small_graph_height,
+        xaxis: { tickfont: { size: 12 } },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true, 
+       // width: this.small_graph_width,
+       // height: this.small_graph_height,
       };
       //this has a polyfill issue
       // Plotly.newPlot('myDiv', this.bardata as any, this.barlayout);

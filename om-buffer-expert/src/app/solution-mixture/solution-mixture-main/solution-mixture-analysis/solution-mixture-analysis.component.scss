@@ -1,3 +1,19 @@
+@import "src/shared-styles.scss";
+
 .omplot {
     width:500px;
+}
+
+.bar-chart {
+    background-color: $card-background-cream;
+    flex:1;
+}   
+.bar-chart-container {
+    display:flex;
+    flex-direction: row;
+    background-color: $card-background-cream;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }

@@ -74,16 +74,16 @@
     </mat-card>
 
 
- <mat-card *ngIf="plot2data">
+ <mat-card *ngIf="plot2data" class="bar-chart-container">
 
 
-    <mat-card>
+    <mat-card class = "bar-chart">
         <plotly-plot [data]="solution_volumes_data" [layout]="solution_volumes_layout"></plotly-plot>
     </mat-card>
-    <mat-card>
+    <mat-card class = "bar-chart">
         <plotly-plot [data]="ion_concs_data" [layout]="ion_concs_layout"></plotly-plot>
     </mat-card>
-    <mat-card>
+    <mat-card class = "bar-chart">
         <plotly-plot [data]="compound_concs_data" [layout]="compound_concs_layout"></plotly-plot>
     </mat-card>
 </mat-card>              
