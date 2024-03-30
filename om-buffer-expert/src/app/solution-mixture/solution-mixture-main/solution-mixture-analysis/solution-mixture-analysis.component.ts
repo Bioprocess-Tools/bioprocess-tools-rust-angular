@@ -38,10 +38,51 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   solution_volumes_bar_chart_data = [];
   selectedPlotlyData = [];
   selectedPlotlyLayout = {};
+
   ion_concs_data = [];
-  ion_concs_layout = {};
   compound_concs_data = [];
+  ion_concs_layout = {};
   compound_concs_layout = {};
+  solution_volumes_data = [];
+  solution_volumes_layout = {};
+
+  compound_interval_data_phase = [];
+  ion_interval_data_phase = [];
+  pH_interval_data_phase = [];
+  compound_interval_data_phase_layout = {};
+  ion_interval_data_phase_layout = {};
+  pH_interval_data_phase_layout = {};
+  bartrace = [];
+  barlayout = {};
+  ion_colors = [
+    '#9e0142',  // dark purple
+    '#d53e4f',  // red
+    '#f46d43',  // orange
+    '#fdae61',  // light orange
+    '#fee08b',  // yellow
+    '#ffffbf',  // light yellow
+    '#e6f598',  // light green
+    '#abdda4',  // green
+    '#66c2a5',  // turquoise
+    '#3288bd',  // blue
+    '#5e4fa2'   // dark blue
+  ];
+  compound_colors =  [
+    '#1B9E77',  // dark green
+    '#D95F02',  // dark orange
+    '#7570B3',  // dark purple
+    '#E7298A',  // dark pink
+    '#66A61E',  // light green
+    '#E6AB02',  // gold
+    '#A6761D',  // brown
+    '#666666'   // dark gray
+  ];
+  solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+  pH_color = '#1f77b4';
+
+
+
+
   small_graph_height = 300;
   small_graph_width = 500;
 
@@ -73,8 +114,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     dtick: 0.25,
   };
 
-  solution_volumes_data = [];
-  solution_volumes_layout = {};
+
   plotlyData = [];
 
 
@@ -112,9 +152,12 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           //   this.category,
           //   this.specificSelection
           // );
+          this.barHeightplot();
           this.createCompoundConcsBarChart(solutionMixture);
           this.createIonConcsBarChart(solutionMixture);
           this.createSolutionVolumesBarChart(solutionMixture);
+          this.createDataLayoutselCompoundIonpHDataAllPhases();
+
           this.plot2data = this.prepareLinePlotData();
           if(this.plot2data) {console.log("God got plot2data", this.plot2data)}
           this.plotSingleData = this.prepareSinglePlotData();
@@ -173,9 +216,135 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     return linePlotData;
   }
   
+  createDataLayoutselCompoundIonpHDataAllPhases() {
+    let linePlotData = [];
+    let traces = [];
+
+      this.compound_interval_data_phase = this.compound_names.map((compound,index) => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.compounds.find(compoundobj => compoundobj.name === compound).compound_conc_interval_data,  
+          mode: 'lines',
+          name: `${compound}`,
+          line: {
+            color: this.compound_colors[index % this.compound_colors.length], width:2 // Use the index to get a color from the array
+          },
+        };
+      });
+  
+      this.compound_interval_data_phase_layout = {
+        title: 'Compound Concentrations vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true,
+     //   paper_bgcolor: 'rgb(0,0,0)',
+     //   plot_bgcolor: 'rgb(0,0,0)',
+      };
 
 
+ 
+      this.ion_interval_data_phase = this.ion_names.map((ion,index) => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.unique_ions.find(ionobj => ionobj.name === ion).ion_conc_interval_data,  
+          mode: 'lines',
+          name: `${ion}`,
+          line: {
+            color: this.ion_colors[index % this.ion_colors.length],
+            width:2  // Use the index to get a color from the array
+          },
+        };
+      });
+      this.ion_interval_data_phase_layout = {
+        title: 'Ion Concentrations vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true,
+      //  paper_bgcolor: 'rgb(0,0,0)',
+       // plot_bgcolor: 'rgb(0,0,0)',
+      };
 
+      this.pH_interval_data_phase = [{          
+        x: this.solutionMixture.volume_interval_data, 
+        y: this.solutionMixture.pH_interval_data,
+        mode: 'lines',
+        name: `pH`,
+      }];
+      this.pH_interval_data_phase_layout = {
+        title: 'pH vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'pH' },
+        autosize: true,
+     //   paper_bgcolor: 'rgb(0,0,0)',
+     //   plot_bgcolor: 'rgb(0,0,0)',
+      };
+
+  
+ 
+  }
+
+barHeightplot() {
+// Define the x-axis values
+const xValues = [0, 1, 2, 3, 4, 5];
+
+// Define the labels for the points
+const labels = ['Label 0', 'Label 1', 'Label 2', 'Label 3', 'Label 4', 'Label 5'];
+
+// Create the trace for the line chart
+this.bartrace = [{
+  x: xValues,
+  y: Array(xValues.length).fill(1), // Create an array of 1s for the y-axis
+  mode: 'lines+text',
+  
+  name: 'Line',
+  text: labels,
+  textposition: 'bottom left',
+  line: {
+    width: 2,
+  },
+},
+
+];
+
+const verticalLines = {
+  x: xValues.flatMap(x => [x, x, null]), // Add null to create separate lines
+  y: Array(xValues.length * 3).flatMap((_, i) => (i + 1) % 3 === 0 ? [null] : [0, 1]), // Add null to create separate lines
+  mode: 'lines',
+  line: {
+    color: 'black',
+    width: 2,
+  },
+  showlegend: false,
+};
+
+const annotations = xValues.slice(0, -1).map((x, i) => ({
+  x: x + 0.5,
+  y: 1.2,
+  xref: 'x',
+  yref: 'y',
+  text: 'god',
+  showarrow: true,
+  arrowhead: 5,
+  arrowsize: 5,
+  arrowwidth: 6,
+ // arrowcolor: '#636363',
+  ax: xValues[i + 1] - x - 0.5,
+  ay: -15,
+}));
+
+
+this.bartrace.push(verticalLines);
+
+// Define the layout for the chart
+this.barlayout = {
+  title: 'Line Chart with Constant Y-Axis',
+  xaxis: { title: 'X-Axis', range: [0, Math.max(...xValues) + 1] },
+  yaxis: { title: 'Y-Axis', range: [0, 2] },
+  autosize: true,
+  annotations: annotations,
+};
+
+}
 
 
   // preparePlotData(
@@ -612,7 +781,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           return name;
           }),
           orientation: 'v', // This makes the chart horizontal
-          marker: {color:colors}
+          marker: {color:this.solution_colors}
         },
       ];
 
@@ -655,7 +824,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           y: ydata,
           x: xdata,
           orientation: 'v', // This makes the chart horizontal
-          marker: {color:colorArray}
+          marker: {color:this.ion_colors}
         },
       ];
 
@@ -693,7 +862,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           y: ydata,
           x: xdata,
           orientation: 'v', // This makes the chart horizontal
-          marker: {color:colorArray}
+          marker: {color:this.compound_colors}
         },
       ];
 

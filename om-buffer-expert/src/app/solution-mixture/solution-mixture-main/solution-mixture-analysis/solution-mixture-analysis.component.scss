@@ -6,11 +6,13 @@
 
 .bar-chart {
     background-color: $card-background-cream;
-    flex:1;
+    min-width: 500px;
 }   
 .bar-chart-container {
-    display:flex;
-    flex-direction: row;
+    display: grid;
+    grid-auto-flow: column; // This will make the grid items flow horizontally
+    grid-gap: 10px; // This will add a gap between the grid items
+    overflow-x: auto; // This will add a horizontal scrollbar when necessary
     background-color: $card-background-cream;
     padding: 10px;
     margin: 10px;
