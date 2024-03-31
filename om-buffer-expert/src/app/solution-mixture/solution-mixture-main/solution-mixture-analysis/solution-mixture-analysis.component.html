@@ -94,6 +94,28 @@
   </mat-card>
 </mat-card>
 
+
+<mat-card class = "bar-chart-container" *ngIf="solutionMixture.phase_sliced_data">
+    <mat-card class = "bar-chart" *ngIf="pH_interval_data_phase">
+      <plotly-plot
+        [data]="pH_interval_data_phase"
+        [layout]="pHBarLayout"
+      ></plotly-plot>
+    </mat-card>
+    <mat-card class = "bar-chart"  *ngIf="ion_interval_data_phase_layout">
+      <plotly-plot
+        [data]="ion_interval_data_phase"
+        [layout]="ionBarLayout"
+      ></plotly-plot>
+    </mat-card>
+    <mat-card  class = "bar-chart"  *ngIf="compound_interval_data_phase">
+    <plotly-plot
+      [data]="compound_interval_data_phase"
+      [layout]="compBarLayout"
+    ></plotly-plot>
+  </mat-card>
+</mat-card>
+
 <mat-card *ngIf="plot2data" class="bar-chart-container">
   <mat-card class="bar-chart">
     <plotly-plot
@@ -115,10 +137,12 @@
   </mat-card>
 </mat-card>
 
-<mat-card>
-    <plotly-plot
-      [data]="bartrace"
-      [layout]="barlayout">   </plotly-plot>
-</mat-card>
+
+
+
+
+
+
+
 
 </mat-card>

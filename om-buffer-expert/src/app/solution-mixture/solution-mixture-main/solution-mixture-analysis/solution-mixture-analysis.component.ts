@@ -52,6 +52,10 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   compound_interval_data_phase_layout = {};
   ion_interval_data_phase_layout = {};
   pH_interval_data_phase_layout = {};
+  max_compound_conc: number;
+  max_ion_conc: number;
+  max_pH: number;
+
   bartrace = [];
   barlayout = {};
   ion_colors = [
@@ -79,7 +83,18 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   ];
   solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
   pH_color = '#1f77b4';
-
+  phase_colors_dark  = ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'];
+ //phase_colors = ['#d9f0e6', '#fee6d5', '#e5eaf3', '#f9e4f1', '#f2fae4', '#fff8d6', '#f8f0e5', '#e5e5e5'];
+phase_colors: string[] = [
+  'rgba(216, 240, 229, 0.5)',
+  'rgba(253, 229, 212, 0.5)',
+  'rgba(229, 234, 243, 0.5)',
+  'rgba(249, 228, 240, 0.5)',
+  'rgba(242, 249, 228, 0.5)',
+  'rgba(255, 248, 214, 0.5)',
+  'rgba(248, 240, 229, 0.5)',
+  'rgba(229, 229, 229, 0.5)'
+];
 
 
 
@@ -130,7 +145,10 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   allPhasesSelected: boolean = false; // Whether all phases are selected
   allCompoundsSelected: boolean = false; // Whether all compounds are selected
   allIonsSelected: boolean = false; // Whether all ions are selected
-
+  pHBarLayout: any;
+  compBarLayout: any;
+  ionBarLayout: any;
+  
 
   constructor(private solutionMixtureService: SolutionMixtureService) {}
 
@@ -152,7 +170,11 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           //   this.category,
           //   this.specificSelection
           // );
-          this.barHeightplot();
+          this.getMaxValues();
+          this.pHBarLayout = this.omtryphase('pH');
+          this.compBarLayout = this.omtryphase('compound');
+          this.ionBarLayout = this.omtryphase('ion');
+
           this.createCompoundConcsBarChart(solutionMixture);
           this.createIonConcsBarChart(solutionMixture);
           this.createSolutionVolumesBarChart(solutionMixture);
@@ -176,6 +198,19 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       this.steps = steps;
     });
   }
+
+ getMaxValues() {
+this.max_compound_conc = Math.max(...this.solutionMixture.compounds.map(compound => {
+    return Math.max(...compound.compound_conc_interval_data);
+  }));
+
+  this.max_ion_conc = Math.max(...this.solutionMixture.unique_ions.map(compound => {
+    return Math.max(...compound.ion_conc_interval_data);
+  }));
+
+  this.max_pH = Math.max(...this.solutionMixture.pH_interval_data);
+
+ }
 
   prepareSinglePlotData(): any[] {
     let linePlotData = [];
@@ -477,6 +512,91 @@ this.barlayout = {
     
   
   return linePlotData;
+}
+
+omtryphase(plottype: string = 'pH'): any {
+ let phaseData = this.solutionMixture.phase_data;
+  if (phaseData) {
+  let maxValue = 0;
+  const phaseDataTyped = phaseData as { [key: string]: { end_volume: number, name: string } };
+  const phaseBoundaries = Object.values(phaseDataTyped).map(phase => phase.end_volume);
+  const phaseNames = Object.values(phaseDataTyped).map(phase => phase.name);
+  const volumes = this.solutionMixture.volume_interval_data; // Volumes
+//  const yValues = this.solutionMixture.pH_interval_data; // Corresponding y-values
+ // const phaseBoundaries = [20, 40, 60, 80]; // Volume values where phases change
+ // const phaseNames = ["Phase 1", "Phase 2", "Phase 3", "Phase 4"];
+
+ if (plottype === 'pH') {
+  maxValue = this.max_pH;
+}
+else if (plottype === 'compound') {
+  maxValue = this.max_compound_conc;
+}
+else if (plottype === 'ion') {
+  maxValue = this.max_ion_conc;
+}
+
+  
+  // Initialize shapes and annotations arrays
+  const shapes = [];
+  const annotations = [];
+  
+  // Generate shapes for phase boundaries and rectangles for phases
+  phaseBoundaries.forEach((boundary, i) => {
+    const x0 = i === 0 ? 0 : phaseBoundaries[i-1];
+    const x1 = boundary;
+    
+    // Rectangle for each phase
+    shapes.push({
+      type: 'rect',
+      x0: x0,
+      y0: maxValue,
+      x1: x1,
+      y1: maxValue*1.2,
+     fillcolor: this.phase_colors[i],
+      line: {
+        width: 0
+       // dash: 'dash'
+      }
+    });
+    
+    // Annotation for phase names
+    annotations.push({
+      x: (Number(x0) + Number(x1)) / 2,
+      y:maxValue*1.1,
+      text: phaseNames[i],
+      showarrow: false,
+     yshift: 10
+    });
+  });
+  
+  // Add vertical lines for phase boundaries
+  phaseBoundaries.forEach(boundary => {
+    shapes.push({
+      type: 'line',
+      x0: boundary,
+      x1: boundary,
+      y0: 0,
+      y1: 1,
+      xref: 'x',
+      yref: 'paper',
+      line: {color: 'Black', width: .5,dash: 'dash'}
+    });
+  });
+  
+this.barlayout= {
+    title: "Y Values by Volume Across Different Phases",
+    xaxis: {title: "Volume"},
+    yaxis: {title: "Y Value"},
+    shapes: shapes,
+    annotations: annotations,
+    autosize: true,
+  };
+return this.barlayout;
+}
+  
+return null;
+
 }
 
 

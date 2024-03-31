@@ -15,7 +15,7 @@ export class SolutionMixture {
     unique_ion_names: string[];
     compound_concentrations: { [key: string]: number };
     ion_concentrations: { [key: string]: number };
-    phase_data: { [key: string]: any };
+    phase_data: { [key: string]: { end_volume: number, name: string } };
     pH_interval_data:number[];
     volume_interval_data:number[];
     data_dictionary: { [key: string]: any };
