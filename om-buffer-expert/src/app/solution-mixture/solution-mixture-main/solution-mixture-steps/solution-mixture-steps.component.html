@@ -12,7 +12,7 @@
       <mat-card class="solution-list-container" #scrollRef *ngIf="steps_list">
         <ng-container *ngFor="let step of steps_list; let i = index">
           <mat-card
-            class="solution-card"
+            class="solution-card" [ngStyle]="{'background-color':solution_colors[i]}"
             *ngIf="step.category == 'Make'"
             [attr.data-index]="i"
           >
@@ -140,7 +140,7 @@
   <mat-card class="solution-list-container" #scrollRef *ngIf="steps_list">
     <ng-container *ngFor="let step of steps_list; let i = index">
       <mat-card
-        class="solution-card"
+        class="solution-card" [ngStyle]="{'background-color':phase_colors_dark[i]}"
         *ngIf="step.category != 'Make'"
         [attr.data-index]="i"
         (click)="onSelectItem(i)"
@@ -149,12 +149,12 @@
           'card-invalid': step.result_flag.flag === 'Invalid'
         }"
       >
-        <mat-card-content>
+        <mat-card-content class="step-card">
           <mat-card-subtitle class="buffer-name">{{
             step.operation_method
           }}</mat-card-subtitle>
           <div *ngFor="let item of step.parameters | keyvalue">
-            <p class="less-space">{{ item.key }}: {{ item.value }}</p>
+            <p class="less-space">{{ formatKey(item.key) }}: {{ item.value }}</p>
           </div>
           <div *ngIf="step.result_flag['flag'] === 'Invalid'">
             {{ step.result_flag["comment"] }}

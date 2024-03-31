@@ -68,6 +68,19 @@ export class SolutionMixtureStepsComponent implements OnInit {
     yMin: number = 0;
     yMax: number = 0;
   selectedMeasurement: string = '';
+  solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+  phase_colors: string[] = [
+    'rgba(216, 240, 229)',
+    'rgba(253, 229, 212)',
+    'rgba(229, 234, 243)',
+    'rgba(249, 228, 240)',
+    'rgba(242, 249, 228)',
+    'rgba(255, 248, 214)',
+    'rgba(248, 240, 229)',
+    'rgba(229, 229, 229)'
+  ];
+  phase_colors_dark  = ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'];
+
   // stores the operations groups
   selectPlotData: any[] = [];
   operationGroups = [
@@ -323,7 +336,17 @@ action_structure = {
     this.allMeasurements = data.map(d => d.name);
   }
 
-
+  formatKey(key: string): string {
+    // Replace underscores with spaces
+    let newKey = key.replace(/_/g, ' ');
+  
+    // Capitalize the first letter of each word
+    newKey = newKey.replace(/\b\w/g, function (letter) {
+      return letter.toUpperCase();
+    });
+  
+    return newKey;
+  }
  
   
 

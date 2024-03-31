@@ -47,6 +47,7 @@
             *ngFor="let category of categories"
             (click)="selectCategory(category)"
             [selected]="selectedCategory === category"
+            (selectionChange)="onCategoryChange(category, $event.selected)"
           >
             {{ categoryDisplayNames[category] }}
           </mat-chip-option>
@@ -55,7 +56,7 @@
 
       <mat-card-content class="chip-subcategories">
         <!-- Assuming you want to allow subcategory selection -->
-        <mat-chip-listbox *ngIf="selectedCategory">
+        <mat-chip-listbox >
           <mat-chip-option
             (click)="selectSubCategory('withSalt')"
             [selected]="selectedSubCategory === 'withSalt'"
@@ -220,13 +221,13 @@
 <!--       <mat-card-header>
         <mat-card-title>Solution List </mat-card-title>
       </mat-card-header> -->
-      <mat-card class="solution-list-container"  #scrollRef *ngIf="solution_mixture_steps">
+      <mat-card #scrollRef  class="solution-list-container"   *ngIf="solution_mixture_steps">
         <ng-container *ngFor="
         let step of solution_mixture_steps
         let i = index"
      >
 
-        <mat-card class="solution-card" *ngIf="step.category=='Make'"  [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
+        <mat-card class="solution-card"  [ngStyle]="{'background-color':solution_colors[i]}" *ngIf="step.category=='Make'"  [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
           <mat-card-header >
             <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
           </mat-card-header>

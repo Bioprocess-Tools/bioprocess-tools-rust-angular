@@ -4,7 +4,9 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { SolutionMixtureService } from '../../../solution-mixture.service';
 import {
@@ -31,7 +33,7 @@ export class SolutionsBrowseEditPrepareComponent
   implements OnInit, AfterViewInit
 {
   //get solutionmixture service
-  @ViewChild('scrollRef') private solutionlistcontainer: ElementRef;
+  // @ViewChildren('scrollRef') scrollRefs!: QueryList<ElementRef>;
 
   solutions_selection_Control = new FormControl();
   bufferspecieswithSaltForm: FormGroup;
@@ -39,6 +41,7 @@ export class SolutionsBrowseEditPrepareComponent
   stockSolutionForm: FormGroup;
   stockSolutionsSelected = false;
   filteredSolutions: Observable<Solution[]>;
+
   solutionsLibrary: {
     [category: string]: { [subCategory: string]: Solution[] };
   };
@@ -56,9 +59,12 @@ export class SolutionsBrowseEditPrepareComponent
   solution_mixture_steps: Step[] = []; // Array of Step instances - we will use this to capture the solutions that the user chooses with Make Solution steps
   solution_mixture_result_object: SolutionMixture; // We will use this to capture the returned result from the API call
   solutions: Solution[] = [];
+  solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+
   isBufferwithSaltSolution = false;
   isBufferwithoutSaltSolution = false;
   isStockSolution = false;
+  lastsolution: Solution;
   make_solutions_steps = [];
   actionType: string = 'Add Solution';
   updateIndex: number = -1;
@@ -72,20 +78,25 @@ export class SolutionsBrowseEditPrepareComponent
   }
 
   ngAfterViewInit(): void {
-    //this.scrollToLastItem(); TODO
+    // this.scrollRefs.changes.subscribe(_ => {
+    //   this.scrollToLastItem(this.lastsolution);
+    // });
   }
 
-  scrollToLastItem() {
-    const scrollElement = this.solutionlistcontainer.nativeElement;
-    // Option 1: Instant scroll
-    scrollElement.scrollLeft = scrollElement.scrollWidth;
+  // scrollToLastItem(solution,index?: number) {
+  //  if (index === undefined) {
+  //     index = this.solutions.indexOf(solution);
+  //   } 
 
-    // Option 2: Smooth scroll (if you prefer a smooth scrolling effect)
-    scrollElement.scrollTo({
-      left: scrollElement.scrollWidth,
-      behavior: 'smooth',
-    });
-  }
+  //   const scrollElementArray = this.scrollRefs.toArray();
+  //   if (scrollElementArray[index]) {
+  //     scrollElementArray[index].nativeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  //   }
+
+
+  // }
+
+  
 
   ngOnInit() {
     this.solutions_selection_Control = new FormControl();
@@ -108,7 +119,8 @@ export class SolutionsBrowseEditPrepareComponent
           this.solution_mixture_result_object = solutionMixture;
           // do something with solutionMixture
           this.solutions = solutionMixture.solutions;
-
+          // this.lastsolution = this.solutions[this.solutions.length - 1];
+          // this.scrollToLastItem((this.lastsolution), this.solutions.length - 1);
         }
       }
     );
@@ -125,7 +137,15 @@ export class SolutionsBrowseEditPrepareComponent
     //   }
     // });
 
+    // this.scrollRefs.changes.subscribe((queryList: QueryList<ElementRef>) => {
+    //   if (queryList.length) {
+    //     this.scrollToLastItem(this.lastsolution, this.solutions.length - 1);
+    //   }
+    // });
+
   }   
+
+  
 
   initForms() {
     this.bufferspecieswithSaltForm = this.fb.group({
@@ -148,7 +168,16 @@ export class SolutionsBrowseEditPrepareComponent
     });
   }
 
+onCategoryChange(category: string, event: any) {
+    this.isBufferwithSaltSolution = false;
+    this.isBufferwithoutSaltSolution = false;
+    this.isStockSolution = false;
+}
+
   onChipSelection(category: string, selected: boolean) {
+
+    
+    
     if (category === 'Stock Solutions') {
       this.stockSolutionsSelected = true;
     } else {
@@ -312,6 +341,8 @@ export class SolutionsBrowseEditPrepareComponent
 
   triggerStepPOST() {
     this.solutionMixtureService.postMake();
+    //this.scrollToLastItem(this.lastsolution, this.solutions.length - 1);
+   
   }
   onSubmitBufferwithoutSalt() {
     this.isDuplicate = false;

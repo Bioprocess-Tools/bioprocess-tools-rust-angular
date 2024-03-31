@@ -42,7 +42,7 @@
 .selected-card {
    
     border-width: 3px;
-    border-color:$accent-green;
+    border-color:black;
   }
 .step-form-card {
   display: flex;
@@ -58,7 +58,12 @@
 .less-space{
   margin-bottom:1px;
   margin-top:3px;
-
+  //i want the text to wrap if it is too long
+word-wrap: break-word;
+overflow-wrap: break-word;
+white-space: normal;
+overflow: hidden;
+ width:100%;
   font-size: x-small;
 }
 
@@ -156,7 +161,9 @@
   gap: 5px;
 }
 
-
+.step-card{
+  padding-bottom:2px;
+}
 
 .solution-card {
   white-space: nowrap;
@@ -169,5 +176,7 @@
   //  scroll-snap-align: start;
   // //background-color: $card-background;
   color: black;
+  background-color: none;
   margin: 3px;
+
 }

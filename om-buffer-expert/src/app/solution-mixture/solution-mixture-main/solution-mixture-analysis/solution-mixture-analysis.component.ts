@@ -515,6 +515,9 @@ this.barlayout = {
 }
 
 omtryphase(plottype: string = 'pH'): any {
+  let title ='';
+  let ylabel = '';
+
  let phaseData = this.solutionMixture.phase_data;
   if (phaseData) {
   let maxValue = 0;
@@ -528,12 +531,18 @@ omtryphase(plottype: string = 'pH'): any {
 
  if (plottype === 'pH') {
   maxValue = this.max_pH;
+title = 'pH vs Volume';
+ylabel = 'pH';
 }
 else if (plottype === 'compound') {
   maxValue = this.max_compound_conc;
+ title = 'Compound Concentrations vs Volume';
+ ylabel = 'Compound Concentration (M)';
 }
 else if (plottype === 'ion') {
   maxValue = this.max_ion_conc;
+  title = 'Ion Concentrations vs Volume';
+  ylabel = 'Ion Concentration (M)';
 }
 
   
@@ -547,24 +556,51 @@ else if (plottype === 'ion') {
     const x1 = boundary;
     
     // Rectangle for each phase
+    // shapes.push({
+    //   type: 'rect',
+    //   x0: x0,
+    //   y0: maxValue,
+    //   x1: x1,
+    //   y1: maxValue*1.2,
+    //  fillcolor: this.phase_colors[i],
+    //   line: {
+    //     width: 0
+    //    // dash: 'dash'
+    //   }
+    // });
+
+    let constantHeightFraction = 0.3;  // Set the height to 10% of the plot's height
+
     shapes.push({
       type: 'rect',
+      xref: 'x',
+      yref: 'paper',  // Use 'paper' coordinates for the y dimension
       x0: x0,
-      y0: maxValue,
+      y0: 1 - constantHeightFraction,  // Position the bottom of the shape
       x1: x1,
-      y1: maxValue*1.2,
-     fillcolor: this.phase_colors[i],
+      y1: 1,  // Position the top of the shape
+      fillcolor: this.phase_colors[i],
       line: {
         width: 0
-       // dash: 'dash'
-      }
+        // dash: 'dash'
+      },
+      layer: 'above traces'  // Draw the shape above the traces
     });
+
+
+
+
+
+
+
+
+
     
     // Annotation for phase names
     annotations.push({
       x: (Number(x0) + Number(x1)) / 2,
-      y:maxValue*1.1,
-      text: phaseNames[i],
+      y:maxValue*1.2,
+      text: this.wrapText(phaseNames[i],12),
       showarrow: false,
      yshift: 10
     });
@@ -585,12 +621,18 @@ else if (plottype === 'ion') {
   });
   
 this.barlayout= {
-    title: "Y Values by Volume Across Different Phases",
-    xaxis: {title: "Volume"},
-    yaxis: {title: "Y Value"},
+    title: {text: title, font: {size: 20,style: 'bold'}},
+    xaxis: {title: 'Volume'},
+    yaxis: {title: ylabel},
     shapes: shapes,
     annotations: annotations,
     autosize: true,
+    legend: {
+      orientation: 'h',  // Horizontal orientation
+      x: 0.5,  // Centered horizontally
+      y: -.2,  // Positioned slightly above the top of the chart
+      xanchor: 'center',  // Anchor the legend at its center
+    },
   };
 return this.barlayout;
 }
@@ -599,7 +641,24 @@ return null;
 
 }
 
+wrapText(text: string, n: number): string {
+  let words = text.split(' ');
+  let lines = [];
+  let currentLine = words[0];
 
+  for (let i = 1; i < words.length; i++) {
+    if ((currentLine + ' ' + words[i]).length > n) {
+      lines.push(currentLine);
+      currentLine = words[i];
+    } else {
+      currentLine += ' ' + words[i];
+    }
+  }
+
+  lines.push(currentLine);
+
+  return lines.join('<br>');
+}
 
   plotWithPlotly(): void {
     if(this.plot2data) {
