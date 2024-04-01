@@ -23,6 +23,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist-min';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -52,7 +54,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     BrowserAnimationsModule,
     BrowserModule,
     NgxChartsModule,
-    PlotlyModule
+    PlotlyModule,
+    MatExpansionModule
 
   ]
 })

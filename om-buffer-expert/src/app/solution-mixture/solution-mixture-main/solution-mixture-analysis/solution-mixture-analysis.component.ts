@@ -20,11 +20,6 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   compound_names: string[];
   ion_names: string[];
 
-  // selectedKeys = [];
-  // selectedData = [];
-  // selectedLinearData = [];
-  // selectedScatterData = [];
-  //these options are for the chips options, to include individual phases and "all"
   phaseOptions = [];
   compoundOptions = [];
   ionOptions = [];
@@ -47,6 +42,8 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   solution_volumes_layout = {};
 
   compound_interval_data_phase = [];
+  sel_compound_interval_data_phase = [];
+  sel_ion_interval_data_phase = [];
   ion_interval_data_phase = [];
   pH_interval_data_phase = [];
   compound_interval_data_phase_layout = {};
@@ -55,7 +52,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   max_compound_conc: number;
   max_ion_conc: number;
   max_pH: number;
-
+  phaseBasedDataByCategory = [];
   bartrace = [];
   barlayout = {};
   ion_colors = [
@@ -83,9 +80,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   ];
   solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
   pH_color = '#1f77b4';
-  phase_colors_dark  = ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'];
+  phase_colors  = ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'];
  //phase_colors = ['#d9f0e6', '#fee6d5', '#e5eaf3', '#f9e4f1', '#f2fae4', '#fff8d6', '#f8f0e5', '#e5e5e5'];
-phase_colors: string[] = [
+phase_colors_light: string[] = [
   'rgba(216, 240, 229, 0.5)',
   'rgba(253, 229, 212, 0.5)',
   'rgba(229, 234, 243, 0.5)',
@@ -133,7 +130,7 @@ phase_colors: string[] = [
   plotlyData = [];
 
 
-  category: string = ''; // Category selected by the user, e.g., 'compound', 'ion', 'pH'
+  category: string = 'pH'; // Category selected by the user, e.g., 'compound', 'ion', 'pH'
   specificSelection: string = ''; // Specific compound or ion selected, or 'All'
 
   plotData: any[]; // Variable to hold the prepared data for plotting
@@ -142,7 +139,7 @@ phase_colors: string[] = [
   layout: any; // Variable to hold the layout for the plot
   traces: any[]; // Variable to hold the traces for the plot
   categories: string[] = ['compound', 'ion', 'pH']; // Categories for the dropdown
-  allPhasesSelected: boolean = false; // Whether all phases are selected
+  allPhasesSelected: boolean = true; // Whether all phases are selected
   allCompoundsSelected: boolean = false; // Whether all compounds are selected
   allIonsSelected: boolean = false; // Whether all ions are selected
   pHBarLayout: any;
@@ -178,16 +175,15 @@ phase_colors: string[] = [
           this.createCompoundConcsBarChart(solutionMixture);
           this.createIonConcsBarChart(solutionMixture);
           this.createSolutionVolumesBarChart(solutionMixture);
+
           this.createDataLayoutselCompoundIonpHDataAllPhases();
+          this.createDataLayoutallCompoundIonpHDataAllPhases();
 
           this.plot2data = this.prepareLinePlotData();
-          if(this.plot2data) {console.log("God got plot2data", this.plot2data)}
-          this.plotSingleData = this.prepareSinglePlotData();
-          if (this.plot2data) {
-            console.log("God got inside plot2data", this.plot2data)
-            this.plotWithPlotly();
+          this.phaseBasedDataByCategory= this.prepareLinePlotDatav2();
 
-          }
+          this.plotSingleData = this.prepareSinglePlotData();
+
         }
       }
     );
@@ -251,7 +247,7 @@ this.max_compound_conc = Math.max(...this.solutionMixture.compounds.map(compound
     return linePlotData;
   }
   
-  createDataLayoutselCompoundIonpHDataAllPhases() {
+  createDataLayoutallCompoundIonpHDataAllPhases() {
     let linePlotData = [];
     let traces = [];
 
@@ -317,6 +313,77 @@ this.max_compound_conc = Math.max(...this.solutionMixture.compounds.map(compound
   
  
   }
+
+  createDataLayoutselCompoundIonpHDataAllPhases() {
+    let linePlotData = [];
+    let traces = [];
+
+      this.sel_compound_interval_data_phase = this.selectedCompounds.map((compound,index) => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.compounds.find(compoundobj => compoundobj.name === compound).compound_conc_interval_data,  
+          mode: 'lines',
+          name: `${compound}`,
+          line: {
+            color: this.compound_colors[index % this.compound_colors.length], width:2 // Use the index to get a color from the array
+          },
+        };
+      });
+  
+      this.compound_interval_data_phase_layout = {
+        title: 'Compound Concentrations vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true,
+     //   paper_bgcolor: 'rgb(0,0,0)',
+     //   plot_bgcolor: 'rgb(0,0,0)',
+      };
+
+
+ 
+      this.sel_ion_interval_data_phase = this.selectedIons.map((ion,index) => {
+        return {
+          x: this.solutionMixture.volume_interval_data,  
+          y: this.solutionMixture.unique_ions.find(ionobj => ionobj.name === ion).ion_conc_interval_data,  
+          mode: 'lines',
+          name: `${ion}`,
+          line: {
+            color: this.ion_colors[index % this.ion_colors.length],
+            width:2  // Use the index to get a color from the array
+          },
+        };
+      });
+      this.ion_interval_data_phase_layout = {
+        title: 'Ion Concentrations vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'Concentration (M)' },
+        autosize: true,
+      //  paper_bgcolor: 'rgb(0,0,0)',
+       // plot_bgcolor: 'rgb(0,0,0)',
+      };
+
+      this.pH_interval_data_phase = [{          
+        x: this.solutionMixture.volume_interval_data, 
+        y: this.solutionMixture.pH_interval_data,
+        mode: 'lines',
+        name: `pH`,
+      }];
+      this.pH_interval_data_phase_layout = {
+        title: 'pH vs Volume',
+        xaxis: { title: 'Volume' },
+        yaxis: { title: 'pH' },
+        autosize: true,
+     //   paper_bgcolor: 'rgb(0,0,0)',
+     //   plot_bgcolor: 'rgb(0,0,0)',
+      };
+
+  
+ 
+  }
+
+
+
+
 
 barHeightplot() {
 // Define the x-axis values
@@ -483,6 +550,7 @@ this.barlayout = {
             name: `${compound} - ${phase}`,
           };
         });
+        console.log("God compound traces", traces)
       }
       else if (this.category === 'ion') {
         traces = this.selectedIons.map(ion => {
@@ -514,7 +582,257 @@ this.barlayout = {
   return linePlotData;
 }
 
+prepareLinePlotDatav2(): any[] {
+  let linePlotData = [];
+
+  // Initialize a map or object to hold the traces for each compound/ion/pH
+  let tracesMap = {};
+  console.log("God selected phases in lineplotdatav2", this.selectedPhases)
+  for (let phase of this.selectedPhases.filter(phase => phase != 'all')) {
+    console.log("God phase iterating", phase)
+    if (this.category === 'compound') {
+      this.selectedCompounds.forEach(compound => {
+        // Initialize the trace for the compound if it doesn't exist
+        if (!tracesMap[compound]) {
+          tracesMap[compound] = {
+            x: [],
+            y: [],
+            mode: 'lines',
+            name: compound,
+          };
+        }
+
+        // Append phase data to the compound's trace
+        const phaseData = this.solutionMixture.phase_sliced_data[phase];
+        tracesMap[compound].x.push(...phaseData.map(obj => obj.volume));
+        tracesMap[compound].y.push(...phaseData.map(obj => obj[compound]));
+      });
+    } else if (this.category === 'ion') {
+      this.selectedIons.forEach(ion => {
+        // Initialize the trace for the ion if it doesn't exist
+        if (!tracesMap[ion]) {
+          tracesMap[ion] = {
+            x: [],
+            y: [],
+            mode: 'lines',
+            name: ion,
+          };
+        }
+
+        // Append phase data to the ion's trace
+        const phaseData = this.solutionMixture.phase_sliced_data[phase];
+        tracesMap[ion].x.push(...phaseData.map(obj => obj.volume));
+        tracesMap[ion].y.push(...phaseData.map(obj => obj[ion]));
+      });
+    } else if (this.category === 'pH') {
+      // Assuming pH is a single trace across all phases
+      // Only initialize once if pH is the category
+     if (!tracesMap['pH']) {
+      tracesMap['pH'] = {
+        x: [],
+        y: [],
+        mode: 'lines',
+        name: 'pH',
+      };
+    }
+      const phaseData = this.solutionMixture.phase_sliced_data[phase];
+      tracesMap['pH'].x.push(...phaseData.map(obj => obj.volume));
+      tracesMap['pH'].y.push(...phaseData.map(obj => obj.pH));
+    }
+  }
+
+  // Convert the tracesMap object to an array of traces
+  linePlotData = Object.values(tracesMap);
+  console.log("God line plot data v2", linePlotData)
+
+  return linePlotData;
+}
+
+
 omtryphase(plottype: string = 'pH'): any {
+  let title ='';
+  let ylabel = '';
+
+//Initialize empty arrays for names and end volumes
+// let names = [];
+// let endVolumes = [];
+// let beginVolume;
+// console.log("God selected phases", this.selectedPhases)
+// let stepNumbers = this.selectedPhases
+// .filter(name => name !== 'all')  // Filter out 'all'
+// .map(name =>name.charAt(0));
+
+// // // If the first selected phase is "1", begin_volume is 0
+// // // Otherwise, it's the end_volume of the phase immediately preceding the first selected phase
+// const firstSelectedPhaseKey = stepNumbers[0];
+// if(stepNumbers.length > 0)
+// { beginVolume = firstSelectedPhaseKey === "1" ? 0 : this.solutionMixture.phase_data[firstSelectedPhaseKey].end_volume;}
+// stepNumbers.forEach(key => {
+//   if (this.solutionMixture.phase_data.hasOwnProperty(key)) {
+//     names.push(this.solutionMixture.phase_data[key].name);
+//     endVolumes.push(this.solutionMixture.phase_data[key].end_volume);
+//   }
+// });
+
+// console.log("God names", names)
+// console.log("God end volumes", endVolumes)
+// console.log("God begin volume", beginVolume)
+// console.log("God step numbers", stepNumbers)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.log("God phase data", this.solutionMixture.phase_data)
+// let filteredPhaseData = Object.keys(this.solutionMixture.phase_data).filter(id => stepNumbers.includes(id));
+// console.log("God filtered phase data", filteredPhaseData)
+ let phaseData = this.solutionMixture.phase_data;
+  if (phaseData) {
+  let maxValue = 0;
+  const phaseDataTyped = phaseData as { [key: string]: { end_volume: number, name: string } };
+
+let phaseBoundaries = Object.values(phaseDataTyped).map(phase => phase.end_volume);
+let phaseNames = Object.values(phaseDataTyped).map(phase => phase.name);
+  console.log("God phase boundaries", phaseBoundaries)
+  console.log("God phase names", phaseNames)
+
+// phaseBoundaries= endVolumes;
+//   phaseNames = names;
+//   console.log("God phase boundaries after", phaseBoundaries)
+//   console.log("God phase names after", phaseNames)
+
+
+  const volumes = this.solutionMixture.volume_interval_data; // Volumes
+//  const yValues = this.solutionMixture.pH_interval_data; // Corresponding y-values
+ // const phaseBoundaries = [20, 40, 60, 80]; // Volume values where phases change
+ // const phaseNames = ["Phase 1", "Phase 2", "Phase 3", "Phase 4"];
+
+ if (plottype === 'pH') {
+  maxValue = this.max_pH;
+title = 'pH vs Volume';
+ylabel = 'pH';
+}
+else if (plottype === 'compound') {
+  maxValue = this.max_compound_conc;
+ title = 'Compound Concentrations vs Volume';
+ ylabel = 'Compound Concentration (M)';
+}
+else if (plottype === 'ion') {
+  maxValue = this.max_ion_conc;
+  title = 'Ion Concentrations vs Volume';
+  ylabel = 'Ion Concentration (M)';
+}
+
+  
+  // Initialize shapes and annotations arrays
+  const shapes = [];
+  const annotations = [];
+  
+  // Generate shapes for phase boundaries and rectangles for phases
+  phaseBoundaries.forEach((boundary, i) => {
+    const x0 = i === 0 ? 0 : phaseBoundaries[i-1];
+    const x1 = boundary;
+    
+    // Rectangle for each phase
+    // shapes.push({
+    //   type: 'rect',
+    //   x0: x0,
+    //   y0: maxValue,
+    //   x1: x1,
+    //   y1: maxValue*1.2,
+    //  fillcolor: this.phase_colors[i],
+    //   line: {
+    //     width: 0
+    //    // dash: 'dash'
+    //   }
+    // });
+
+    let constantHeightFraction = 0.3;  // Set the height to 10% of the plot's height
+
+    shapes.push({
+      type: 'rect',
+      xref: 'x',
+      yref: 'paper',  // Use 'paper' coordinates for the y dimension
+      x0: x0,
+      y0: 1 - constantHeightFraction,  // Position the bottom of the shape
+      x1: x1,
+      y1: 1,  // Position the top of the shape
+      fillcolor: this.phase_colors[i],
+      line: {
+        width: 0
+        // dash: 'dash'
+      },
+      layer: 'above traces'  // Draw the shape above the traces
+    });
+
+
+
+
+
+
+
+
+
+    
+    // Annotation for phase names
+    annotations.push({
+      x: (Number(x0) + Number(x1)) / 2,
+      y:maxValue*1.3,
+      text: this.wrapText(phaseNames[i],12),
+      showarrow: false,
+     yshift: 10
+    });
+  });
+  
+  // Add vertical lines for phase boundaries
+  phaseBoundaries.forEach(boundary => {
+    shapes.push({
+      type: 'line',
+      x0: boundary,
+      x1: boundary,
+      y0: 0,
+      y1: 1,
+      xref: 'x',
+      yref: 'paper',
+      line: {color: 'Black', width: .5,dash: 'dash'}
+    });
+  });
+  
+this.barlayout= {
+    title: {text: title, font: {size: 20,style: 'bold'}},
+    xaxis: {title: 'Volume'},
+    yaxis: {title: ylabel, range: [0, maxValue*1.6]},
+    shapes: shapes,
+    annotations: annotations,
+    autosize: true,
+    legend: {
+      orientation: 'h',  // Horizontal orientation
+      x: 0.5,  // Centered horizontally
+      y: -.2,  // Positioned slightly above the top of the chart
+      xanchor: 'center',  // Anchor the legend at its center
+    },
+  };
+return this.barlayout;
+}
+  
+return null;
+
+}
+
+
+omtryphasev2(plottype: string = 'pH'): any {
   let title ='';
   let ylabel = '';
 
@@ -522,6 +840,8 @@ omtryphase(plottype: string = 'pH'): any {
   if (phaseData) {
   let maxValue = 0;
   const phaseDataTyped = phaseData as { [key: string]: { end_volume: number, name: string } };
+  let filteredPhaseData = Object.keys(phaseDataTyped).filter(phase => this.selectedPhases.includes(phase));
+
   const phaseBoundaries = Object.values(phaseDataTyped).map(phase => phase.end_volume);
   const phaseNames = Object.values(phaseDataTyped).map(phase => phase.name);
   const volumes = this.solutionMixture.volume_interval_data; // Volumes
@@ -599,7 +919,7 @@ else if (plottype === 'ion') {
     // Annotation for phase names
     annotations.push({
       x: (Number(x0) + Number(x1)) / 2,
-      y:maxValue*1.2,
+      y:maxValue*1.3,
       text: this.wrapText(phaseNames[i],12),
       showarrow: false,
      yshift: 10
@@ -623,7 +943,7 @@ else if (plottype === 'ion') {
 this.barlayout= {
     title: {text: title, font: {size: 20,style: 'bold'}},
     xaxis: {title: 'Volume'},
-    yaxis: {title: ylabel},
+    yaxis: {title: ylabel, range: [0, maxValue*1.6]},
     shapes: shapes,
     annotations: annotations,
     autosize: true,
@@ -640,6 +960,11 @@ return this.barlayout;
 return null;
 
 }
+
+
+
+
+
 
 wrapText(text: string, n: number): string {
   let words = text.split(' ');
@@ -724,6 +1049,11 @@ wrapText(text: string, n: number): string {
 
     this.plot2data = this.prepareLinePlotData();
     this.plotSingleData = this.prepareSinglePlotData();
+    this.phaseBasedDataByCategory = this.prepareLinePlotDatav2();
+    console.log("God phase based data by category", this.phaseBasedDataByCategory)
+    this.pHBarLayout = this.omtryphase('pH');
+    this.compBarLayout = this.omtryphase('compound');
+    this.ionBarLayout = this.omtryphase('ion');
     this.plotWithPlotly();
     // Further steps to actually plot this data with Plotly or similar would go here
   }
@@ -796,8 +1126,19 @@ wrapText(text: string, n: number): string {
 
 
 
+  isContiguous(selectedPhases: string[]): boolean {
 
-
+    
+    let stepNumbers = selectedPhases.filter(name => name !== 'all').map(name => parseInt(name.charAt(0)));
+    stepNumbers.sort((a, b) => a - b);  // Sort the step numbers in ascending order
+   console.log("God step numbers", stepNumbers)
+    for (let i = 1; i < stepNumbers.length; i++) {
+      if (stepNumbers[i] !== stepNumbers[i - 1] + 1) {
+        return false;
+      }
+    }
+    return true;
+  }
 
 
 
@@ -869,6 +1210,11 @@ wrapText(text: string, n: number): string {
       //   this.selectedPhases.push('all');
       // }
       console.log('God selected phases', this.selectedPhases);
+      console.log ('God selected phase numbers', this.selectedPhases.map(name => parseInt(name.charAt(0))));
+      if (!this.isContiguous(this.selectedPhases)) {
+        this.selectedPhases= this.selectedPhases.filter((id) => id !== phaseId);
+        console.log('God selected phases new', this.selectedPhases);
+      }
       this.updatePlot();
     }
   }
