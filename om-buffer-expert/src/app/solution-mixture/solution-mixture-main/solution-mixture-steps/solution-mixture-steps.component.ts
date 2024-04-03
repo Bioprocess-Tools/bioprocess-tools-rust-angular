@@ -68,7 +68,9 @@ export class SolutionMixtureStepsComponent implements OnInit {
     yMin: number = 0;
     yMax: number = 0;
   selectedMeasurement: string = '';
-  solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+  //solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+  solution_colors:string[] = ['#ff8fab', '#a7bed3', '#ffcaaf', '#e5c2e4', '#eebab2', '#b8e0d2', '#ff9770', '#ccd4bf', '#e8d1c5', '#98aab3','#ecdc93', '#a1e7e8'];  
+
   phase_colors: string[] = [
     'rgba(216, 240, 229)',
     'rgba(253, 229, 212)',

@@ -28,9 +28,9 @@ export class SolutionMixtureService {
   StepsSubject = new BehaviorSubject<Step[]>([]);
   Steps$ = this.StepsSubject.asObservable();
   allPlotsData: any[] = [];
-  //phase_colors: string[] = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#4B0082', '#EE82EE', '#000000', '#A9A9A9', '#FFFFFF'];
+  phase_colors: string[] = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#4B0082', '#EE82EE', '#000000', '#A9A9A9', '#FFFFFF'];
   //solution_colors:string[] = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#4B0082', '#EE82EE', '#000000', '#A9A9A9', '#FFFFFF'];
-  compound_colors:string[] = ['#ff8fab', '#a7bed3', '#ffcaaf', '#e5c2e4', '#eebab2', '#b8e0d2', '#ff9770', '#ccd4bf', '#e8d1c5', '#98aab3','#ecdc93', '#a1e7e8'];  
+  
   
   
   

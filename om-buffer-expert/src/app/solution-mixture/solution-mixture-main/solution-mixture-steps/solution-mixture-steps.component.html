@@ -23,10 +23,10 @@
             </mat-card-header>
             <mat-card-content
               *ngIf="getSolutionbyName(step.associated_solution)"
-              class="comp-ion-container"
+              class="comp-ion-container" [ngStyle]="{'background-color':solution_colors[i]}"
             >
-              <mat-card class="compound-container">
-                <mat-card-content
+              <mat-card class="compound-container" [ngStyle]="{'background-color':solution_colors[i]}">
+                <mat-card-content class="less-space-container"
                   *ngFor="
                     let compound of getSolutionbyName(step.associated_solution)
                       .compound_concentrations | keyvalue
@@ -38,12 +38,12 @@
                   <mat-divider></mat-divider>
                 </mat-card-content>
               </mat-card>
-              <mat-card class="ion-container">
+              <mat-card class="ion-container" [ngStyle]="{'background-color':solution_colors[i]}">
                 <mat-card-content
                   *ngFor="
                     let ion of getSolutionbyName(step.associated_solution)
                       .ion_concentrations | keyvalue
-                  "
+                  "  class="less-space-container"
                 >
                   <p class="less-space">
                     {{ ion.key }}: {{ ion.value | number : "1.3-3" }}M

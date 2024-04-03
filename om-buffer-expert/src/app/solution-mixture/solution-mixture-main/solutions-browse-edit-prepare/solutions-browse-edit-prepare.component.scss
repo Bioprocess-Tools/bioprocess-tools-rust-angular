@@ -3,32 +3,38 @@
 .browse-edit-prepare-card { //main card that hold all the content
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust based on your layout preference */
-  background-color: $primary-color;
+  //gap: 10px; /* Adjust based on your layout preference */
+  //background-color: aqua;
   justify-content: center;
-  width:93vw;
+  width:calc(100vw - 2*24px - 2*10px);
+  align-items: center;
+ padding:0px;
+  
  }
-
+.browse-edit-content{
+  padding:0px;
+  gap:0px;
+  
+}
  .solution-select-card {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Adjust based on your layout preference */
-  background-color:white;
+  gap: 0px; /* Adjust based on your layout preference */
+  //background-color:red;
   justify-content: center;
-  width:100%;
+  width:calc(100vw - 2*24px - 2*10px);
+  padding:0px;
+  box-shadow:none;
 }
 
 .autocomplete-select {
   //background-color:$primary-color;
   width: 100%;
   box-shadow: none;
+
 }
 
-.less-space{
-  margin-bottom:1px;
-  margin-top:3px;
-  font-size:small;
-}
+
 // .categories {
 //   display: grid;
 //   grid-template-columns: 1fr .2fr; /* Adjust based on your layout preference */
@@ -41,7 +47,7 @@
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
-  gap: 10px; /* Adjust based on your layout preference */
+  gap: 0px; /* Adjust based on your layout preference */
   box-shadow: none;
 }
 .chip-subcategories {
@@ -50,7 +56,7 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
-  gap: 10px; /* Adjust based on your layout preference */
+  gap: 0px; /* Adjust based on your layout preference */
   padding:0px;
 }
 
@@ -97,14 +103,17 @@
 
 }
 .less-space{
+  font-size:.5em;
   margin-bottom:1px;
   margin-top:3px;
 }
+
+
   .solution-list-container {
-    max-width:90vw;
+    width:calc(100vw - 2*24px - 2*10px);
     display: grid;
     grid-auto-flow:column ; /* Adjust based on your layout preference */
-    grid-template-columns: repeat(2, 1fr); /* Adjust based on your layout preference */
+    grid-template-columns: repeat(3, 1fr); /* Adjust based on your layout preference */
     margin: 5px;
     overflow-x: auto;
     overscroll-behavior-x: contain;
@@ -114,26 +123,32 @@
     //background-color: rgb(176, 239, 239);
     border-width: 3px;
     //border-color: $border-color;
+
+   
+    justify-items:center;
+    align-items: center ;
   gap:5px;
   }
   .solution-card {
     white-space: nowrap;
-    min-width: 40vw;  
+    width:26vw;
+    
     // max-width: 35vw;
     // min-width:150px;
     // max-height: 350px;
     //  margin: 10px;
     //  scroll-snap-align: start;
     // //background-color: $card-background;
-     
+     border:none;
      margin:3px;
+     
   }
   .buffer-name {
-    font-size: 1em;
+    font-size: .8em;
     font-weight: bold;
     text-align: center;
     text-wrap:pretty;
-
+    color: black;
   }
 
 .warn-buttons{
@@ -157,7 +172,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px; /* Adjust based on your layout preference */
-    background-color: $primary-color;
+
     justify-content: center;
     width:100%;
     align-items: center;
@@ -166,19 +181,29 @@
   .solution-edits {
     width:100%;
     display: grid;
+   // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
     grid-template-columns: 1fr 1fr; /* Adjust based on your layout preference */
-    gap: 15px; /* Adjust based on your layout preference */
+    //gap: 5px; /* Adjust based on your layout preference */
        // flex-direction: row;
-    
-    justify-content: space-around;
+    border-width: 1px;
+    border-color:$card-background-cream;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 15px; /* Adjust based on your layout preference */
-    padding:15px;
+    gap: 5px; /* Adjust based on your layout preference */
+    padding:5px;
   }
+  //.solution-edits > :nth-child(6) {
+   // grid-column: 1 / -1;
+  //}
   .input-fields {
     display: flex;
-    flex-direction: column;
-    
+   // flex-direction: column;
+    justify-self: center;
     //flex:1;
     gap: 10px; /* Adjust based on your layout preference */
+    margin-left:8px;
+  }
+
+  .button-class {
+    //width:100%;
   }

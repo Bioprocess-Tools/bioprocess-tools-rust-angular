@@ -65,8 +65,12 @@ white-space: normal;
 overflow: hidden;
  width:100%;
   font-size: x-small;
+  //background-color: blue;
+  padding:none;
 }
-
+.less-space-container{
+  padding:5px;
+}
 .normal-buttons{
   display:flex;
   flex-direction:row;
@@ -88,6 +92,26 @@ overflow: hidden;
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  color:black;
+ // background-color: #F3F2EC
+}
+
+.compound-container {
+  border-color:black;
+  border-width: 2px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-evenly;
+  
+}
+
+.ion-container {
+  border-color:rgb(250, 247, 247);
+  border-width: 1px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-evenly;
+  
 }
 
 .template-form-fields {
@@ -106,7 +130,8 @@ overflow: hidden;
   font-weight: bold;
   text-align: center;
   text-wrap:pretty;
-
+  color: black;
+  padding-bottom:5px;
 }
 
 

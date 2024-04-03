@@ -59,8 +59,9 @@ export class SolutionsBrowseEditPrepareComponent
   solution_mixture_steps: Step[] = []; // Array of Step instances - we will use this to capture the solutions that the user chooses with Make Solution steps
   solution_mixture_result_object: SolutionMixture; // We will use this to capture the returned result from the API call
   solutions: Solution[] = [];
-  solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
-
+  //solution_colors= ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'];
+  compound_colors:string[]=['#3e94e5','#c54b6c','#37667e', '#dc828f','#d29f8c', '#a15d98', '#8c7386', '#218b82', '#f27348', '#9c9359', '#874741', '#40393e', '#f4c815', '#2cced2']
+  solution_colors:string[] = ['#f4a4b8', '#a7bed3', '#ffcaaf', '#e5c2e4', '#eebab2', '#b8e0d2', '#ff9770', '#ccd4bf', '#e8d1c5', '#98aab3','#ecdc93', '#a1e7e8'];  
   isBufferwithSaltSolution = false;
   isBufferwithoutSaltSolution = false;
   isStockSolution = false;

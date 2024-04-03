@@ -3,7 +3,7 @@
     <mat-card-title>Solutions Browse, Edit, Prepare</mat-card-title>
   </mat-card-header> -->
   <mat-divider></mat-divider>
-  <mat-card-content>
+  <mat-card-content class="browse-edit-content">
     <mat-card class="solution-select-card">
       <mat-card-header>
         <mat-card-title>Pick Solution from Library</mat-card-title>
@@ -12,7 +12,7 @@
           single species with acid/base or stock solutions
         </mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
+      <mat-card-content class="autocom-card-content">
         <mat-card class="autocomplete-select">
           <mat-form-field appearance="outline" class="rounded-input">
             <input
@@ -129,7 +129,7 @@
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="input-fields">
-            <mat-label>Salt Compound Name</mat-label>
+            <mat-label>Salt Compound</mat-label>
             <input matInput formControlName="salt_compound_name" />
           </mat-form-field>
           <mat-form-field appearance="fill" class="input-fields">
@@ -140,7 +140,7 @@
             <mat-label>Target pH</mat-label>
             <input matInput formControlName="target_pH" type="number" />
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">
+          <button mat-raised-button class="button-class" color="primary" type="submit">
            {{actionType}}
           </button>
         </mat-card>
@@ -181,7 +181,7 @@
             <mat-label>Target pH</mat-label>
             <input matInput formControlName="target_pH" type="number" />
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">
+          <button mat-raised-button color="primary" class="button-class" type="submit">
             {{actionType}}
           </button>
         </mat-card>
@@ -250,7 +250,7 @@
               <div *ngIf="step.validation_flag.flag =='None'" class="normal-buttons">
                 
                 <button mat-icon-button aria-label="Edit item" (click)="EditSolution(i)"> <mat-icon>edit</mat-icon></button>
-                <button mat-icon-button color="accent" aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
+                <button mat-icon-button aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
               </div>
 
 
