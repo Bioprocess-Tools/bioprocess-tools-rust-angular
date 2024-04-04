@@ -40,14 +40,15 @@
           </mat-form-field>
         </mat-card>
       </mat-card-content>
+
       <mat-card-content class="categories">
       <mat-card-content class="chip-categories">
         <mat-chip-listbox>
           <mat-chip-option
             *ngFor="let category of categories"
-            (click)="selectCategory(category)"
+            [value]="category"
             [selected]="selectedCategory === category"
-            (selectionChange)="onCategoryChange(category, $event.selected)"
+            (selectionChange)="onCategoryChange(category, $event)"
           >
             {{ categoryDisplayNames[category] }}
           </mat-chip-option>
@@ -58,14 +59,14 @@
         <!-- Assuming you want to allow subcategory selection -->
         <mat-chip-listbox >
           <mat-chip-option
-            (click)="selectSubCategory('withSalt')"
+           
             [selected]="selectedSubCategory === 'withSalt'"
             [disabled]="stockSolutionsSelected"
             (selectionChange)="onChipSelection('withSalt', $event.selected)"
             >With Salt</mat-chip-option
           >
           <mat-chip-option
-            (click)="selectSubCategory('withoutSalt')"
+            
             [selected]="selectedSubCategory === 'withoutSalt'"
             [disabled]="stockSolutionsSelected"
             (selectionChange)="onChipSelection('withoutSalt', $event.selected)"

@@ -20,6 +20,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Solution } from 'src/app/shared/models/solution.model';
 import { Step } from 'src/app/shared/models/step.model';
 import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
+import { MatChip, MatChipSelectionChange } from '@angular/material/chips';
 
 @Component({
   selector: 'app-solutions-browse-edit-prepare',
@@ -169,23 +170,51 @@ export class SolutionsBrowseEditPrepareComponent
     });
   }
 
-onCategoryChange(category: string, event: any) {
+onCategoryChange(category: string, event: MatChipSelectionChange) {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
+    //console.log("God - category", event.source.value, "God - event", event.selected)
+    if (event.selected == false)
+    {
+      //console.log("God - false category", event.source.value, "God false event", event.selected);
+      this.selectedCategory = null;
+      this.selectedSubCategory = null;
+      //console.log("God filtered false",this.filterSolutions('').length);
+      this.solutions_selection_Control.setValue(this.filterSolutions(''));  ;
+    }
+    else {
+      console.log("God - true category", event.source.value, "God true event", event.selected);
+      this.selectedCategory = event.source.value;
+      this.selectedSubCategory = null; // Reset subCategory selection
+      this.solutions_selection_Control.setValue('');
+      //console.log("God filtered true",this.filterSolutions('').length);
+      this.solutions_selection_Control.setValue(this.filterSolutions(''));  ;
+    }
+
+    if (this.selectedCategory === 'stock') {
+      this.stockSolutionsSelected = true;
+    }
+    else {
+      this.stockSolutionsSelected = false;
+    }
 }
 
   onChipSelection(category: string, selected: boolean) {
-
-    
-    
-    if (category === 'Stock Solutions') {
-      this.stockSolutionsSelected = true;
-    } else {
-      this.stockSolutionsSelected = false;
+    if (selected && (category == 'With Salt')) {
+      this.selectedSubCategory = category;
+    } else if (selected && (category == 'Without Salt')) {
+      this.selectedSubCategory = category;
+    } else if (!selected) {
+      this.selectedSubCategory = null;
     }
-    // Rest of your method here
+    this.solutions_selection_Control.setValue(this.filterSolutions('')); 
   }
+  
+
+  
+    // Rest of your method here
+  
   filterSolutions(value: string): Solution[] {
     let valueString = typeof value === 'string' ? value : '';
 
@@ -223,16 +252,13 @@ onCategoryChange(category: string, event: any) {
     );
   }
 
-  selectCategory(category: string | null) {
-    this.selectedCategory = category;
-    this.selectedSubCategory = null; // Reset subCategory selection
-    this.solutions_selection_Control.setValue('');
-  }
+  // selectCategory(category: string | null) {
+  //   this.selectedCategory = category;
+  //   this.selectedSubCategory = null; // Reset subCategory selection
+  //   this.solutions_selection_Control.setValue('');
+  // }
 
-  selectSubCategory(subCategory: string | null) {
-    this.selectedSubCategory = subCategory;
-    this.solutions_selection_Control.setValue('');
-  }
+
 
 
 

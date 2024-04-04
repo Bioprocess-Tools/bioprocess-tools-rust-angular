@@ -64,12 +64,18 @@ overflow-wrap: break-word;
 white-space: normal;
 overflow: hidden;
  width:100%;
-  font-size: x-small;
-  //background-color: blue;
+  font-size: 12px;
+  background-color: transparent;
   padding:none;
 }
 .less-space-container{
   padding:5px;
+  box-shadow: red;
+}
+
+.boxy {
+  background-color: transparent;
+  box-shadow: none;
 }
 .normal-buttons{
   display:flex;
@@ -90,28 +96,38 @@ overflow: hidden;
 }
 .comp-ion-container {
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 13vw 12vw;
+  gap: 2px;
   color:black;
  // background-color: #F3F2EC
+ padding:2px;
+ width:25vw;
 }
 
 .compound-container {
-  border-color:black;
-  border-width: 2px;
+ display:flex;
+ // border-color:black;
+  //border-width: 2px;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-evenly;
-  
+  //gap:2px;
+  box-shadow: none;
+  background-color:transparent;
 }
 
 .ion-container {
-  border-color:rgb(250, 247, 247);
-  border-width: 1px;
+  display:flex;
+  //border-color:rgb(250, 247, 247);
+ // border-width: 1px;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-evenly;
-  
+  //height:100%;
+  box-shadow: none;
+
+ 
+
 }
 
 .template-form-fields {
@@ -168,7 +184,7 @@ overflow: hidden;
 }
 
 .solution-list-container {
-  max-width: 98vw;
+  width:calc(100vw - 2*24px - 2*10px);
   display: grid;
   grid-auto-flow: column; /* Adjust based on your layout preference */
   grid-template-columns: repeat(
@@ -184,6 +200,8 @@ overflow: hidden;
   //background-color: rgb(176, 239, 239);
   border-width: 3px;
   gap: 5px;
+  justify-items:center;
+  align-items: center ;
 }
 
 .step-card{
@@ -192,8 +210,7 @@ overflow: hidden;
 
 .solution-card {
   white-space: nowrap;
-  max-width:33vw;
-  min-width:300px;
+  width: 27vw;
   // max-width: 35vw;
   // min-width:150px;
   // max-height: 350px;
@@ -203,5 +220,6 @@ overflow: hidden;
   color: black;
   background-color: none;
   margin: 3px;
+  height:100%;
 
 }

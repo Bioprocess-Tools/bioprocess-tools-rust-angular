@@ -11,7 +11,7 @@ lets start with the stepper
 we will use css-grid to layout the stepper and the forms -->
 
 <mat-card class="container">
-  <mat-horizontal-stepper>
+  <mat-horizontal-stepper labelPosition="bottom" class="stepOn">
     <mat-step label="Prepare Solutions">
       <app-solutions-browse-edit-prepare></app-solutions-browse-edit-prepare>
     </mat-step>
@@ -25,4 +25,5 @@ we will use css-grid to layout the stepper and the forms -->
       <app-solution-mixture-analysis></app-solution-mixture-analysis>
     </mat-step>
   </mat-horizontal-stepper>
+
 </mat-card>

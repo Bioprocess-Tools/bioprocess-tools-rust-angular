@@ -3,5 +3,20 @@
     width:98vw;
     padding:0px;
     gap:0px;
+    font-size:x-small;
+   
 }
 
+
+
+// ::ng-deep .mat-step-header {
+//     font-size: 12px;
+//     font-weight: bold;
+//     color: black;
+//     padding:5px;
+// }
+
+:host ::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
+    padding: 8px; /* Example */
+    
+  }

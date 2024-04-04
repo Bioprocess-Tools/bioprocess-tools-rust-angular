@@ -9,7 +9,7 @@
   width:calc(100vw - 2*24px - 2*10px);
   align-items: center;
  padding:0px;
-  
+ border-top: 1px solid black;
  }
 .browse-edit-content{
   padding:0px;
@@ -41,23 +41,37 @@
 //   justify-content: space-evenly;
 //   align-items: center;
 // }
+
+.categories {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  //gap: 10px; /* Adjust based on your layout preference */
+  //padding:0px;
+ 
+}
 .chip-categories {
   display: flex;
   //i want the chips to be centered on the card
-  justify-content: space-evenly;
+  //justify-content: space-around;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
   gap: 0px; /* Adjust based on your layout preference */
   box-shadow: none;
+  padding-right:15px;
+  width:50vw;
 }
 .chip-subcategories {
   display: flex;
   //i want the chips to be centered on the card
   justify-content: space-around;
-  align-items: center;
+  align-items: right;
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
-  gap: 0px; /* Adjust based on your layout preference */
-  padding:0px;
+  //gap: 10px; /* Adjust based on your layout preference */
+  padding-left:15px;
+  //margin-left:25px;
+  border-left: 1px solid $divider-green;
 }
 
 .card-buttons {
@@ -103,11 +117,16 @@
 
 }
 .less-space{
-  font-size:.5em;
+  font-size:12px;
   margin-bottom:1px;
   margin-top:3px;
 }
 
+::ng-deep mat-chip-list.mat-chip-list-stacked {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
   .solution-list-container {
     width:calc(100vw - 2*24px - 2*10px);
@@ -141,10 +160,37 @@
     // //background-color: $card-background;
      border:none;
      margin:3px;
-     
+     @media (max-width: 600px) {
+      width: 50vw; // Adjust based on your layout preference
+      // Add any other styles you want to apply on mobile devices here
+    }
   }
+  @media (max-width: 600px) {
+    ::ng-deep .mat-horizontal-content-container {
+      padding: 0 !important; // Change '0' to your desired padding
+      padding-right: 5px !important;
+    }
+
+    .browse-edit-prepare-card {
+      width: calc(100vw - 10px);
+    }
+
+    .solution-select-card {
+      width: calc(100vw - 10px);
+    }
+
+    .solution-edit-card {
+      width: calc(98vw - 10px);
+    }
+  }
+  
+
+
+
+
   .buffer-name {
-    font-size: .8em;
+    //font-size: .8em;
+    font-size:14px;
     font-weight: bold;
     text-align: center;
     text-wrap:pretty;
@@ -174,12 +220,13 @@
     gap: 10px; /* Adjust based on your layout preference */
 
     justify-content: center;
-    width:100%;
+    width: calc(98vw - 10px);
+   
     align-items: center;
   }
 
   .solution-edits {
-    width:100%;
+    width: calc(95vw - 10px);
     display: grid;
    // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
     grid-template-columns: 1fr 1fr; /* Adjust based on your layout preference */
@@ -197,6 +244,7 @@
   //}
   .input-fields {
     display: flex;
+    width: 40vw;
    // flex-direction: column;
     justify-self: center;
     //flex:1;
@@ -207,3 +255,4 @@
   .button-class {
     //width:100%;
   }
+
