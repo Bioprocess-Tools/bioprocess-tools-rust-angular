@@ -7,17 +7,41 @@
   background-color: $primary-color;
   border-bottom: 1px solid $secondary-color;
   color: #333;
+  box-shadow: none  ;
+}
+.wrapper-solution-list {
+  padding:10px;
+  //media query for padding to be 5px for mobile
+  box-shadow: none;
+  @media (max-width: 600px) {
+    padding: 5px;
+    
+}
+}
+mat-card-content {
+  padding: 0;
+  box-shadow: none  ;
+  align-items:center
 }
 .solution-list-background {
 
-  background-color: $card-background-cream;
-  border-width: 3px;
+  border:solid 1px $card-background-cream;
+
   box-shadow: none;
   gap: 5px;
 }
 .card-invalid {
   background-color: red;
   //color: white;
+}
+.choice-cards {
+  box-shadow:none;  
+}
+.category-card-content {
+  padding:3px;
+}
+.secondary-choice-content {
+  padding:3px;
 }
 .category_choice {
     flex-direction: row;
@@ -39,6 +63,23 @@
   color: #333;
 
 }
+
+.volumeActionForm {
+  padding:0;
+}
+
+.template-header {
+  padding:0px;
+}
+
+.selected-template-content {
+padding:5px;
+}
+
+mat-card-header {
+  padding: 0;
+  box-shadow: none;
+}
 .selected-card {
    
     border-width: 3px;
@@ -58,6 +99,7 @@
 .less-space{
   margin-bottom:1px;
   margin-top:3px;
+  margin-left:5px;
   //i want the text to wrap if it is too long
 word-wrap: break-word;
 overflow-wrap: break-word;
@@ -66,7 +108,8 @@ overflow: hidden;
  width:100%;
   font-size: 12px;
   background-color: transparent;
-  padding:none;
+
+ 
 }
 .less-space-container{
   padding:5px;
@@ -96,12 +139,13 @@ overflow: hidden;
 }
 .comp-ion-container {
   display:grid;
-  grid-template-columns: 13vw 12vw;
-  gap: 2px;
+  grid-template-columns: 3fr 2fr;
+  gap: 8px;
   color:black;
  // background-color: #F3F2EC
  padding:2px;
- width:25vw;
+ width:95%;
+ align-self:center;
 }
 
 .compound-container {
@@ -109,11 +153,13 @@ overflow: hidden;
  // border-color:black;
   //border-width: 2px;
   flex-direction: column;
-  align-items: center;
+  
+  align-items: left;
   justify-content: space-evenly;
   //gap:2px;
   box-shadow: none;
   background-color:transparent;
+  padding:8px;
 }
 
 .ion-container {
@@ -121,11 +167,11 @@ overflow: hidden;
   //border-color:rgb(250, 247, 247);
  // border-width: 1px;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   justify-content: space-evenly;
   //height:100%;
   box-shadow: none;
-
+padding:8px;
  
 
 }
@@ -184,7 +230,8 @@ overflow: hidden;
 }
 
 .solution-list-container {
-  width:calc(100vw - 2*24px - 2*10px);
+  //width:calc(100vw - 2*24px - 2*10px);
+  width:100%;
   display: grid;
   grid-auto-flow: column; /* Adjust based on your layout preference */
   grid-template-columns: repeat(
@@ -202,6 +249,11 @@ overflow: hidden;
   gap: 5px;
   justify-items:center;
   align-items: center ;
+  align-self: center;
+  //write media query for grid-template-columns to be 2,1fr
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr); // Adjust based on your layout preference
+  }
 }
 
 .step-card{
@@ -210,7 +262,7 @@ overflow: hidden;
 
 .solution-card {
   white-space: nowrap;
-  width: 27vw;
+  //width: 27vw;
   // max-width: 35vw;
   // min-width:150px;
   // max-height: 350px;

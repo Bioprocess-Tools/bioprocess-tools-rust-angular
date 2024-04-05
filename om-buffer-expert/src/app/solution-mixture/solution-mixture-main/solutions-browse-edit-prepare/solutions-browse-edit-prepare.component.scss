@@ -6,25 +6,32 @@
   //gap: 10px; /* Adjust based on your layout preference */
   //background-color: aqua;
   justify-content: center;
-  width:calc(100vw - 2*24px - 2*10px);
+  width:100%;
   align-items: center;
- padding:0px;
+  align-self:center;
+ padding-left:4px;
  border-top: 1px solid black;
+ box-shadow: none;
  }
-.browse-edit-content{
-  padding:0px;
-  gap:0px;
-  
-}
+
  .solution-select-card {
   display: flex;
   flex-direction: column;
   gap: 0px; /* Adjust based on your layout preference */
-  //background-color:red;
+//background-color:red;
   justify-content: center;
-  width:calc(100vw - 2*24px - 2*10px);
+  width:100%;
+  //width:calc(100vw - 2*24px - 2*10px);
   padding:0px;
   box-shadow:none;
+}
+.title-header {
+
+  @media (max-width: 600px) {
+    padding:5px;
+    padding-left:10px;
+  
+}
 }
 
 .autocomplete-select {
@@ -33,14 +40,28 @@
   box-shadow: none;
 
 }
+.rounded-input {
+  border-radius: 50px;
 
+}
+@media (max-width: 600px) {
+  .hint-text {
+    display:none;
+  }
+}
 
-// .categories {
-//   display: grid;
-//   grid-template-columns: 1fr .2fr; /* Adjust based on your layout preference */
-//   justify-content: space-evenly;
-//   align-items: center;
-// }
+.rounded-input .mat-form-field-infix {
+  border-radius: 25px;
+  /* Applies rounded corners to the input area */
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  padding: 0 5px;
+}
+
+.mat-card-header{
+  box-shadow:none;
+}
 
 .categories {
   display: flex;
@@ -48,7 +69,11 @@
   align-items: center;
   //gap: 10px; /* Adjust based on your layout preference */
   //padding:0px;
- 
+ box-shadow:none;
+ padding-top:5px;
+  @media (max-width: 600px) {
+      padding-bottom: 5px;
+    }
 }
 .chip-categories {
   display: flex;
@@ -59,38 +84,86 @@
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
   gap: 0px; /* Adjust based on your layout preference */
   box-shadow: none;
+  padding:0px;
   padding-right:15px;
   width:50vw;
+
 }
 .chip-subcategories {
   display: flex;
   //i want the chips to be centered on the card
-  justify-content: space-around;
-  align-items: right;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap; /* Allow chips to wrap to the next line */
   //gap: 10px; /* Adjust based on your layout preference */
+  padding:0px;
   padding-left:15px;
   //margin-left:25px;
   border-left: 1px solid $divider-green;
+  box-shadow:none;
 }
 
 .card-buttons {
   padding:0px;
 }
 
- .selected-card {
+.solution-edit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Adjust based on your layout preference */
 
-  border-width: 2px;
-  border-color: $divider-green;
+  justify-content: center;
+  width: 100%;
+  box-shadow: none;
+  align-items: center;
+    @media (max-width: 600px) {
+        gap: 2px;
+      }
+
 }
 
-.rounded-input {
-  border-radius: 50px;
+.solution-edits {
+ 
+  display: grid;
+  // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  /* Adjust based on your layout preference */
+  //gap: 5px; /* Adjust based on your layout preference */
+  // flex-direction: row;
+  border-width: 1px;
+  border-color: $card-background-cream;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5px;
+  /* Adjust based on your layout preference */
+  padding: 5px;
+  box-shadow: none;
 }
 
-.rounded-input .mat-form-field-infix {
-  border-radius: 25px; /* Applies rounded corners to the input area */
+//.solution-edits > :nth-child(6) {
+// grid-column: 1 / -1;
+//}
+.input-fields {
+  display: flex;
+  width: 40vw;
+  // flex-direction: column;
+  justify-self: center;
+  //flex:1;
+  gap: 10px;
+  /* Adjust based on your layout preference */
+  margin-left: 8px;
+    @media (max-width: 600px) {
+        gap:0px;
+      }
 }
+
+.button-class {
+  //width:100%;
+}
+
+
 
 .remove_edit_buttons{
   display: flex;
@@ -101,6 +174,25 @@
   align-items: center;
   //width:100%;
 }
+
+.warn-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.normal-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+
 .mat-icon {
   cursor: pointer;
   
@@ -128,26 +220,55 @@
   flex-wrap: wrap;
 }
 
+.solution-list-background {
+  display: flex;
+  //flex-direction: column;
+  //gap: 10px; /* Adjust based on your layout preference */
+
+  justify-content: center;
+  //width: calc(98vw - 10px);
+  box-shadow: none;
+  align-items: center;
+
+
+
+
+
+
+  align-self:center;
+  box-shadow:none;
+  
+width:100%;
+}
   .solution-list-container {
-    width:calc(100vw - 2*24px - 2*10px);
-    display: grid;
+   width:96%;
+   
+   display: grid;
     grid-auto-flow:column ; /* Adjust based on your layout preference */
-    grid-template-columns: repeat(3, 1fr); /* Adjust based on your layout preference */
+    grid-template-columns: auto; /* Adjust based on your layout preference */
     margin: 5px;
     overflow-x: auto;
+    //width:25vw;
     overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
     //background-color: $card-background-cream;
     box-shadow:none;
     //background-color: rgb(176, 239, 239);
-    border-width: 3px;
+    //border-width: 3px;
     //border-color: $border-color;
 
-   
+  border: solid 1px $card-background-cream;
     justify-items:center;
     align-items: center ;
   gap:5px;
+  padding-top:16px;
+  padding-bottom:16px;
+@media (max-width: 600px) {
+  padding-bottom:3px;
+  padding-top:3px;
+
   }
+}
   .solution-card {
     white-space: nowrap;
     width:26vw;
@@ -160,29 +281,16 @@
     // //background-color: $card-background;
      border:none;
      margin:3px;
-     @media (max-width: 600px) {
-      width: 50vw; // Adjust based on your layout preference
-      // Add any other styles you want to apply on mobile devices here
-    }
+     height:100%;
+      @media (max-width: 600px) {
+
+      width:50vw;
+      height:97%;
+      
+        }
+
   }
-  @media (max-width: 600px) {
-    ::ng-deep .mat-horizontal-content-container {
-      padding: 0 !important; // Change '0' to your desired padding
-      padding-right: 5px !important;
-    }
-
-    .browse-edit-prepare-card {
-      width: calc(100vw - 10px);
-    }
-
-    .solution-select-card {
-      width: calc(100vw - 10px);
-    }
-
-    .solution-edit-card {
-      width: calc(98vw - 10px);
-    }
-  }
+ 
   
 
 
@@ -197,62 +305,8 @@
     color: black;
   }
 
-.warn-buttons{
-  display:flex;
-  flex-direction:row;
-  width:100%;
-  justify-content:space-evenly;
-  align-items: center;
-}
-.normal-buttons{
-  display:flex;
-  flex-direction:row;
-  width:100%;
-  justify-content:space-evenly;
-  align-items: center;
-}
 
 
 
-  .solution-edit-card {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Adjust based on your layout preference */
 
-    justify-content: center;
-    width: calc(98vw - 10px);
-   
-    align-items: center;
-  }
-
-  .solution-edits {
-    width: calc(95vw - 10px);
-    display: grid;
-   // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
-    grid-template-columns: 1fr 1fr; /* Adjust based on your layout preference */
-    //gap: 5px; /* Adjust based on your layout preference */
-       // flex-direction: row;
-    border-width: 1px;
-    border-color:$card-background-cream;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 5px; /* Adjust based on your layout preference */
-    padding:5px;
-  }
-  //.solution-edits > :nth-child(6) {
-   // grid-column: 1 / -1;
-  //}
-  .input-fields {
-    display: flex;
-    width: 40vw;
-   // flex-direction: column;
-    justify-self: center;
-    //flex:1;
-    gap: 10px; /* Adjust based on your layout preference */
-    margin-left:8px;
-  }
-
-  .button-class {
-    //width:100%;
-  }
 

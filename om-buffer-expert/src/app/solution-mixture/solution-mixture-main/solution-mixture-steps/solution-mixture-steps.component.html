@@ -4,7 +4,7 @@
       Select, Edit and Execute Solution Mixture Preparation Workflow
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="wrapper-solution-list">
     <mat-card class="solution-list-background" *ngIf="steps_list.length > 0">
       <!--       <mat-card-header>
                     <mat-card-title>Solution List </mat-card-title>
@@ -57,8 +57,8 @@
       </mat-card>
     </mat-card>
 
-    <mat-card>
-      <mat-card-content>
+    <mat-card class="choice-cards">
+      <mat-card-content class="category-card-content">
         <mat-chip-listbox
           class="category_choice"
           [formControl]="selectedOperationGroup"
@@ -77,7 +77,7 @@
       *ngIf="volumeAdditions || targetConc_pH || solutionModification"
       class="category_choice"
     >
-      <mat-card-content *ngIf="volumeAdditions">
+      <mat-card-content class="secondary-choice-content" *ngIf="volumeAdditions">
         <mat-chip-listbox [formControl]="selectedActionItem">
           <mat-chip-option
             *ngFor="let action of volume_actions"
@@ -89,7 +89,7 @@
         </mat-chip-listbox>
       </mat-card-content>
 
-      <mat-card-content *ngIf="targetConc_pH">
+      <mat-card-content class="secondary-choice-content" *ngIf="targetConc_pH">
         <mat-chip-listbox [formControl]="selectedActionItem">
           <mat-chip-option
             *ngFor="let action of target_conc_pH_actions"
@@ -100,7 +100,7 @@
           </mat-chip-option>
         </mat-chip-listbox>
       </mat-card-content>
-      <mat-card-content *ngIf="solutionModification">
+      <mat-card-content class="secondary-choice-content" *ngIf="solutionModification">
         <mat-chip-listbox [formControl]="selectedActionItem">
           <mat-chip-option
             *ngFor="let action of solution_modification_actions"
@@ -122,7 +122,7 @@
     solutionModificationActionsSelected
   "
 >
-  <mat-card-content *ngIf="selectedTemplate">
+  <mat-card-content class="selected-template-content" *ngIf="selectedTemplate">
     <ng-container
       class="step-form-card-content"
       *ngTemplateOutlet="selectedTemplate"
@@ -315,7 +315,7 @@
 <ng-template #AddSpecifiedVolumeofWater>
   <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">
     <mat-card class="VolumeActionForm">
-      <mat-card-header>
+      <mat-card-header class="template-header">
         <mat-card-title> Add Specified Volume of Water</mat-card-title>
       </mat-card-header>
       <mat-card-content class="template-form-fields">

@@ -1,87 +1,33 @@
 @use '@angular/material' as mat;
 @import '../../../shared-styles.scss';
 
-.header-toolbar {
-  //width:1vw;
- //padding:2px;
-}
-.spacer {
-  flex: 1 1 auto;
-}
 
-.toolbar-items {display:none;}
+.header-card {
+  width: 100%;
+  box-shadow: none;
+}
 
 .men_button {
   font-size: x-large;
-  
 }
 
- 
-
-.toolbar-row {
-  margin:15px;
+.toolbar-items {
+  display: none;
 }
-.button-row {
-display: flex;
-flex-direction: row;
-
-}
-
-.menu-spacer {
-  flex: 1 1 auto;
-}
-
 
 .mat-headline-4 {
   margin-bottom: 2px;
-  margin-left:10px;
-  //font-family:'Roboto';
+  margin-left: 10px;
   font-weight: 800;
   font-stretch: expanded;
   font-size: xx-large;
-  color:whitesmoke;
-  
-}
+  color: whitesmoke;
+  white-space: nowrap;
 
-@media (max-width: 1500px) {
-  .toolbar-items {display:none;}
-
-}
-
-  
-@media (max-width: 480px) {
-.toolbar-items {display:none;}
-// .header-card {
-//   background-color: mat.get-color-from-palette(mat.$indigo-palette,900);
-//  // height:150px;
-//   width:100%;
-//   box-shadow: none;
-//   height: 60px;
-// }
-.toolbar-row {
-  margin:0px;
- // width:95%;
-  
-}
-
-
-.toolbar-items {
- // margin-right: 15px;
-}
-
-.men_button {
-  font-size: x-large;
-  
-}
-
- 
-
-
-
-.header-toolbar{
- //width:95%;
-}
-.mat-headline-4 {
-  font-size:large;
-}
+  @media (max-width: 650px) {
+    font-size: large;
+  }
+  @media (max-width: 400px) {
+      font-size: x-small;
+  }
 }

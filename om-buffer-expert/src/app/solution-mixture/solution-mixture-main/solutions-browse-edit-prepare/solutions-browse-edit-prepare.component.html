@@ -1,18 +1,16 @@
-<mat-card class="browse-edit-prepare-card">
-<!--   <mat-card-header>
-    <mat-card-title>Solutions Browse, Edit, Prepare</mat-card-title>
-  </mat-card-header> -->
-  <mat-divider></mat-divider>
-  <mat-card-content class="browse-edit-content">
+<mat-card class="browse-edit-prepare-card"> 
+  <!--   <mat-card-header>     <mat-card-title>Solutions Browse, Edit, Prepare</mat-card-title>   </mat-card-header> -->
+ <!-- <mat-divider></mat-divider> -->
+
     <mat-card class="solution-select-card">
-      <mat-card-header>
+      <mat-card-header class="title">
         <mat-card-title>Pick Solution from Library</mat-card-title>
         <mat-card-subtitle
-          >Filter solutions by single or dual buffer species,
-          single species with acid/base or stock solutions
+          >Filter solutions by single or dual buffer species, single species
+          with acid/base or stock solutions
         </mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content class="autocom-card-content">
+      <mat-card-content>
         <mat-card class="autocomplete-select">
           <mat-form-field appearance="outline" class="rounded-input">
             <input
@@ -21,7 +19,7 @@
               [matAutocomplete]="auto"
             />
             <mat-label>Select Solution from Library</mat-label>
-            <mat-hint
+            <mat-hint class="hint-text"
               >Start typing to filter solutions, choose categories to narrow
               your results</mat-hint
             >
@@ -40,61 +38,55 @@
           </mat-form-field>
         </mat-card>
       </mat-card-content>
-
       <mat-card-content class="categories">
-      <mat-card-content class="chip-categories">
-        <mat-chip-listbox>
-          <mat-chip-option
-            *ngFor="let category of categories"
-            [value]="category"
-            [selected]="selectedCategory === category"
-            (selectionChange)="onCategoryChange(category, $event)"
-          >
-            {{ categoryDisplayNames[category] }}
-          </mat-chip-option>
-        </mat-chip-listbox>
+        <mat-card-content class="chip-categories">
+          <mat-chip-listbox>
+            <mat-chip-option
+              *ngFor="let category of categories"
+              [value]="category"
+              [selected]="selectedCategory === category"
+              (selectionChange)="onCategoryChange(category, $event)"
+            >
+              {{ categoryDisplayNames[category] }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </mat-card-content>
+        <mat-card-content class="chip-subcategories">
+          <!-- Assuming you want to allow subcategory selection -->
+          <mat-chip-listbox>
+            <mat-chip-option
+              [selected]="selectedSubCategory === 'withSalt'"
+              [disabled]="stockSolutionsSelected"
+              (selectionChange)="onChipSelection('withSalt', $event.selected)"
+              >With Salt</mat-chip-option
+            >
+            <mat-chip-option
+              [selected]="selectedSubCategory === 'withoutSalt'"
+              [disabled]="stockSolutionsSelected"
+              (selectionChange)="
+                onChipSelection('withoutSalt', $event.selected)
+              "
+              >Without Salt</mat-chip-option
+            >
+          </mat-chip-listbox>
+        </mat-card-content>
       </mat-card-content>
-
-      <mat-card-content class="chip-subcategories">
-        <!-- Assuming you want to allow subcategory selection -->
-        <mat-chip-listbox >
-          <mat-chip-option
-           
-            [selected]="selectedSubCategory === 'withSalt'"
-            [disabled]="stockSolutionsSelected"
-            (selectionChange)="onChipSelection('withSalt', $event.selected)"
-            >With Salt</mat-chip-option
-          >
-          <mat-chip-option
-            
-            [selected]="selectedSubCategory === 'withoutSalt'"
-            [disabled]="stockSolutionsSelected"
-            (selectionChange)="onChipSelection('withoutSalt', $event.selected)"
-            >Without Salt</mat-chip-option
-          >
-        </mat-chip-listbox>
-      </mat-card-content>
-    </mat-card-content>
     </mat-card>
-
-    <mat-card
+    <!-- <mat-card
       class="solution-edit-card"
       *ngIf="
         isBufferwithSaltSolution ||
         isBufferwithoutSaltSolution ||
         isStockSolution
       "
-    >
-<!--       <mat-card-header>
-        <mat-card-title>Edit Solution</mat-card-title>
-      </mat-card-header>-->
-      <mat-divider></mat-divider> 
-      <!-- Conditional form fields -->
+    >  -->
+    
+      <mat-card class="solution-edit-card"> 
       <form
         [formGroup]="bufferspecieswithSaltForm"
         (ngSubmit)="onSubmitBufferwithSalt()"
       >
-        <!-- Fields for buffer species solutions -->
+        
         <mat-card *ngIf="isBufferwithSaltSolution" class="solution-edits">
           <mat-form-field appearance="fill" class="input-fields">
             <mat-label>Buffer Species</mat-label>
@@ -120,15 +112,10 @@
             >
               Target concentration must be between 0.01 and 10.
             </mat-error>
-
-            <mat-error
-              *ngIf="isDuplicate">
+            <mat-error *ngIf="isDuplicate">
               You have already added this solution
-              </mat-error>
-
-
+            </mat-error>
           </mat-form-field>
-
           <mat-form-field appearance="fill" class="input-fields">
             <mat-label>Salt Compound</mat-label>
             <input matInput formControlName="salt_compound_name" />
@@ -141,17 +128,21 @@
             <mat-label>Target pH</mat-label>
             <input matInput formControlName="target_pH" type="number" />
           </mat-form-field>
-          <button mat-raised-button class="button-class" color="primary" type="submit">
-           {{actionType}}
+          <button
+            mat-raised-button
+            class="button-class"
+            color="primary"
+            type="submit"
+          >
+            {{ actionType }}
           </button>
         </mat-card>
       </form>
-
       <form
         [formGroup]="bufferspecieswithoutSaltForm"
         (ngSubmit)="onSubmitBufferwithoutSalt()"
       >
-        <!-- Fields for buffer species solutions -->
+         
         <mat-card *ngIf="isBufferwithoutSaltSolution" class="solution-edits">
           <mat-form-field appearance="fill" class="input-fields">
             <mat-label>Buffer Species</mat-label>
@@ -182,17 +173,21 @@
             <mat-label>Target pH</mat-label>
             <input matInput formControlName="target_pH" type="number" />
           </mat-form-field>
-          <button mat-raised-button color="primary" class="button-class" type="submit">
-            {{actionType}}
+          <button
+            mat-raised-button
+            color="primary"
+            class="button-class"
+            type="submit"
+          >
+            {{ actionType }}
           </button>
         </mat-card>
       </form>
-
       <form
         [formGroup]="stockSolutionForm"
         (ngSubmit)="onSubmitStockSolution()"
       >
-        <!-- Fields for stock solutions -->
+     
         <mat-card *ngIf="isStockSolution" class="solution-edits">
           <mat-form-field appearance="fill" class="input-fields">
             <mat-label>Compound Name</mat-label>
@@ -202,64 +197,90 @@
             <mat-label>Compound Concentration</mat-label>
             <input matInput formControlName="compound_conc" type="number" />
           </mat-form-field>
-
           <button
             mat-raised-button
             class="input-fields"
             color="primary"
             type="submit"
           >
-          {{actionType}}
+            {{ actionType }}
           </button>
         </mat-card>
-
-        <!-- Submit Button -->
+        
       </form>
-    </mat-card>
-
-
-    <mat-card class="solution-list-background" *ngIf="solution_mixture_steps.length>0">
-<!--       <mat-card-header>
-        <mat-card-title>Solution List </mat-card-title>
-      </mat-card-header> -->
-      <mat-card #scrollRef  class="solution-list-container"   *ngIf="solution_mixture_steps">
-        <ng-container *ngFor="
-        let step of solution_mixture_steps
-        let i = index"
-     >
-
-        <mat-card class="solution-card"  [ngStyle]="{'background-color':solution_colors[i]}" *ngIf="step.category=='Make'"  [attr.data-index]="i" (click)="onSelectItem(i)" [ngClass]="{'selected-card': i === selectedStepIndex}">
-          <mat-card-header >
-            <mat-card-subtitle class="buffer-name">{{ step.associated_solution }}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-           <ng-container *ngIf="getSolutionbyName(step.associated_solution)">
-          <mat-card-content *ngFor="let compound of getSolutionbyName(step.associated_solution).compound_concentrations | keyvalue">
-            <p class="less-space">{{ compound.key }}: {{ compound.value | number: '1.3-3' }}M</p>
+    </mat-card> 
+    <mat-card
+      class="solution-list-background"
+      *ngIf="solution_mixture_steps.length > 0">
+      <mat-card
+        #scrollRef
+        class="solution-list-container"
+        *ngIf="solution_mixture_steps">
+        <ng-container
+          *ngFor="let step of solution_mixture_steps; let i = index">
+          <mat-card
+            class="solution-card"
+            [ngStyle]="{ 'background-color': solution_colors[i] }"
+            *ngIf="step.category == 'Make'"
+            [attr.data-index]="i"
+            (click)="onSelectItem(i)"
+            [ngClass]="{ 'selected-card': i === selectedStepIndex }">
+            <mat-card-header>
+              <mat-card-subtitle class="buffer-name">{{
+                step.associated_solution
+              }}</mat-card-subtitle>
+            </mat-card-header>
             <mat-divider></mat-divider>
-          </mat-card-content>
-          </ng-container> 
-          <mat-card-content class="card-buttons" >
-
-
-              <div *ngIf="step.validation_flag.flag =='Linked'" class = "warn-buttons">
-                
-                <p class="less-space">Linked</p> 
-                <button mat-icon-button aria-label="Confirm Edit item" (click)="EditSolution(i)"><mat-icon>edit</mat-icon></button>
-                <button mat-icon-button color="warn" aria-label="Confirm Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
+            <ng-container *ngIf="getSolutionbyName(step.associated_solution)">
+              <mat-card-content
+                *ngFor="
+                  let compound of getSolutionbyName(step.associated_solution)
+                    .compound_concentrations | keyvalue " >
+                <p class="less-space">
+                  {{ compound.key }}: {{ compound.value | number : "1.3-3" }}M
+                </p>
+                <mat-divider></mat-divider>
+              </mat-card-content>
+            </ng-container>
+            <mat-card-content class="card-buttons">
+              <div
+                *ngIf="step.validation_flag.flag == 'Linked'"
+                class="warn-buttons">
+                <p class="less-space">Linked</p>
+                <button
+                  mat-icon-button
+                  aria-label="Confirm Edit item"
+                  (click)="EditSolution(i)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  aria-label="Confirm Delete item"
+                  (click)="removeSolution(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
-              <div *ngIf="step.validation_flag.flag =='None'" class="normal-buttons">
-                
-                <button mat-icon-button aria-label="Edit item" (click)="EditSolution(i)"> <mat-icon>edit</mat-icon></button>
-                <button mat-icon-button aria-label="Delete item"  (click)="removeSolution(i)"><mat-icon>delete</mat-icon></button>
+              <div
+                *ngIf="step.validation_flag.flag == 'None'"
+                class="normal-buttons">
+                <button
+                  mat-icon-button
+                  aria-label="Edit item"
+                  (click)="EditSolution(i)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  aria-label="Delete item"
+                  (click)="removeSolution(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
-
-
-          </mat-card-content>
-          
-        </mat-card>
-      </ng-container>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
       </mat-card>
-    </mat-card>
-  </mat-card-content>
-  </mat-card>
+    </mat-card>  
+
+</mat-card>

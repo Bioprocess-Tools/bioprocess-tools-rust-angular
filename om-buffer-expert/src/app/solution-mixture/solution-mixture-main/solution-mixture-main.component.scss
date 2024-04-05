@@ -1,9 +1,12 @@
 .container{
    //background-color: aqua;
-    width:98vw;
+    display:flex;
+   width:100%;
     padding:0px;
     gap:0px;
     font-size:x-small;
+   box-shadow:none;
+   height:100%;
    
 }
 
@@ -17,6 +20,21 @@
 // }
 
 :host ::ng-deep .mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
-    padding: 8px; /* Example */
-    
+    padding: 5px; /* Example */
+   
+  }
+
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+    padding: 0; /* Example */
+    //width:80vw;
+  }
+  :host ::ng-deep .mat-horizontal-content-container {
+    width:97vw;
+    padding: 0 !important; /* Change '0' to your desired padding */
+    padding-right: 5px !important;
+
+  }
+
+  .mat-card {
+    box-shadow: none;
   }
