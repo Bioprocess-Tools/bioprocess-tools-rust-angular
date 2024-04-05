@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipListboxChange, MatChipSelectionChange } from '@angular/material/chips';
+import { MatOptionSelectionChange } from '@angular/material/core';
 import { Solution } from 'src/app/shared/models/solution.model';
 import { SolutionMixture } from 'src/app/shared/models/solution_mixture.model';
 import { Step } from 'src/app/shared/models/step.model';
@@ -61,6 +62,7 @@ export class SolutionMixtureStepsComponent implements OnInit {
   solutionModificationActionsSelected = false; //stores if the solution modification actions are selected
   edit_step_index: number | null = null; //stores the edit step index
   add_edit_label = 'Add'; //stores the add edit label
+  IsFormulationSubmitted = false; //stores if the formulation is submitted
   // form to be used for the current step
   currentStepForm = this.fb.group({});
   xMin: number = 0;
@@ -584,6 +586,7 @@ this.computeScale();
     console.log('God', config.templateRef);
     this.selectedTemplate = this[config.templateRef];
     console.log(this.currentStepForm);
+        console.log("God - template" ,this.selectedTemplate);
   }
   else{
     //this.selectedActionItem.setValue(null);
@@ -593,6 +596,46 @@ this.computeScale();
 
   }
 }
+
+  onVolumeActionSelectDD(event: MatOptionSelectionChange) {
+    this.selectedStepIndex = null;
+    const id = event.source.value;
+    console.log("God - got here with", event.source.value, event.source.selected);
+    console.log(
+      'God-parameters',
+      this.getParametersById(this.volume_actions, id)
+    );
+    console.log ("God - selected:",event);
+    // console.log("God-id",this.volume_actions[id].id);
+    // console.log("God-parameters",this.volume_actions[id].parameters);
+    if(event.source.selected){
+     // this.selectedActionItem.setValue(id);
+    this.volumeAdditionsActionsSelected = true;
+    this.targetConc_pHActionsSelected = false;
+    this.solutionModificationActionsSelected = false;
+
+    const config =
+      this.form_config_volume_actions[
+        this.getDisplayNameById(this.volume_actions, id)
+      ];
+    this.currentStepForm = this.fb.group(config.formControls);
+    this.selected_operations_method = id;
+    this.selected_parameters = this.getParametersById(this.volume_actions, id);
+    console.log('God', config.templateRef);
+    this.selectedTemplate = this[config.templateRef];
+    console.log("God - template" ,this.selectedTemplate);
+  }
+  else{
+    //this.selectedActionItem.setValue(null);
+    // this.volumeAdditionsActionsSelected = false;
+    // this.targetConc_pHActionsSelected = false;
+    // this.solutionModificationActionsSelected = false;
+
+  }
+}
+
+
+
 
   onTargetConc_pHActionSelect(event: MatChipSelectionChange) {
     this.selectedStepIndex = null;
@@ -624,7 +667,68 @@ this.computeScale();
     }
   }
 
+    onTargetConc_pHActionSelectDD(event: MatOptionSelectionChange) {
+    this.selectedStepIndex = null;
+    const id = event.source.value;
+    if(event.source.selected){
+      //this.selectedActionItem.setValue(id);
+    this.volumeAdditionsActionsSelected = false;
+    this.targetConc_pHActionsSelected = true;
+    this.solutionModificationActionsSelected = false;
+
+    const config =
+      this.form_config_target_conc_pH_actions[
+        this.getDisplayNameById(this.target_conc_pH_actions, id)
+      ];
+    this.currentStepForm = this.fb.group(config.formControls);
+    this.selected_operations_method = id;
+    this.selected_parameters = this.getParametersById(
+      this.target_conc_pH_actions,
+      id
+    );
+    this.selectedTemplate = this[config.templateRef];
+    }
+    else{
+      //this.selectedActionItem.setValue(null);
+      this.volumeAdditionsActionsSelected = false;
+      this.targetConc_pHActionsSelected = false;
+      this.solutionModificationActionsSelected = false;
+ 
+    }
+  }
+
   onSolutionModificationActionSelect(event: MatChipSelectionChange) {
+    this.selectedStepIndex = null;
+    const id = event.source.value;
+    if(event.source.selected){
+     // this.selectedActionItem.setValue(id);
+    this.solutionModificationActionsSelected = true;
+    this.volumeAdditionsActionsSelected = false;
+    this.targetConc_pHActionsSelected = false;
+    const config =
+      this.form_config_solution_modification_actions[
+        this.getDisplayNameById(this.solution_modification_actions, id)
+      ];
+    this.currentStepForm = this.fb.group(config.formControls);
+    this.selected_operations_method = id;
+    this.selected_parameters = this.getParametersById(
+      this.solution_modification_actions,
+      id
+    );
+    this.selectedTemplate = this[config.templateRef];
+
+    console.log(id);
+    }
+    else{
+     // this.selectedActionItem.setValue(null);
+      this.volumeAdditionsActionsSelected = false;
+      this.targetConc_pHActionsSelected = false;
+      this.solutionModificationActionsSelected = false;
+      
+    }
+  }
+
+    onSolutionModificationActionSelectDD(event: MatOptionSelectionChange) {
     this.selectedStepIndex = null;
     const id = event.source.value;
     if(event.source.selected){
@@ -705,6 +809,9 @@ this.computeScale();
   onExecute() {
     console.log('God subscribed list', this.steps_list);
     this.solutionMixtureService.postStepswithTrigger();
+    this.IsFormulationSubmitted = true;
+this.selectedActionItem.setValue(null);
+this.selectedOperationGroup.setValue(null);
   }
 
   getSolutionbyName(name: string) {
@@ -766,6 +873,7 @@ this.computeScale();
   }
 
   editStep(i: number) {
+    this.IsFormulationSubmitted = false;
     this.edit_step_index = i;
     this.add_edit_label = 'Update';
     this.selected_operations_method = this.steps_list[i].operation_method;

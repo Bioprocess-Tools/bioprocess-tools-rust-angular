@@ -1,18 +1,17 @@
+
+<!-- Provides a list of the previously prepared solutions -->
 <mat-card class="solution-mixture-steps-card">
   <mat-card-header>
-    <mat-card-title>
-      Select, Edit and Execute Solution Mixture Preparation Workflow
-    </mat-card-title>
+    <mat-card-title> Multi-Step Solution Designer </mat-card-title>
   </mat-card-header>
+  <!-- Holds the solution list from previous step -->
   <mat-card-content class="wrapper-solution-list">
     <mat-card class="solution-list-background" *ngIf="steps_list.length > 0">
-      <!--       <mat-card-header>
-                    <mat-card-title>Solution List </mat-card-title>
-                  </mat-card-header> -->
       <mat-card class="solution-list-container" #scrollRef *ngIf="steps_list">
         <ng-container *ngFor="let step of steps_list; let i = index">
           <mat-card
-            class="solution-card" [ngStyle]="{'background-color':solution_colors[i]}"
+            class="solution-card"
+            [ngStyle]="{ 'background-color': solution_colors[i] }"
             *ngIf="step.category == 'Make'"
             [attr.data-index]="i"
           >
@@ -23,10 +22,11 @@
             </mat-card-header>
             <mat-card-content
               *ngIf="getSolutionbyName(step.associated_solution)"
-              class="comp-ion-container" 
+              class="comp-ion-container"
             >
-             <div class="compound-container " >
-                <mat-card class="boxy"
+              <div class="compound-container">
+                <mat-card
+                  class="boxy"
                   *ngFor="
                     let compound of getSolutionbyName(step.associated_solution)
                       .compound_concentrations | keyvalue
@@ -35,20 +35,19 @@
                   <p class="less-space">
                     {{ compound.key }}: {{ compound.value | number : "1.3-3" }}M
                   </p>
-                
                 </mat-card>
               </div>
-             <div class="ion-container" >
-                <mat-card class="boxy"
+              <div class="ion-container">
+                <mat-card
+                  class="boxy"
                   *ngFor="
                     let ion of getSolutionbyName(step.associated_solution)
                       .ion_concentrations | keyvalue
-                  "  
+                  "
                 >
                   <p class="less-space">
                     {{ ion.key }}: {{ ion.value | number : "1.3-3" }}M
                   </p>
-                  
                 </mat-card>
               </div>
             </mat-card-content>
@@ -56,193 +55,216 @@
         </ng-container>
       </mat-card>
     </mat-card>
-
-    <mat-card class="choice-cards">
-      <mat-card-content class="category-card-content">
-        <mat-chip-listbox
-          class="category_choice"
-          [formControl]="selectedOperationGroup"
-        >
-          <mat-chip-option
-            *ngFor="let group of operationGroups"
-            [value]="group.id"
-            (selectionChange)="onOperationGroupSelect($event)"
+    <!-- Create and Edit Steps for Solution Design -->
+    <mat-card class="grid-container" *ngIf="!IsFormulationSubmitted">
+      <mat-card class="choice-cards">
+        <mat-card-header>
+          <mat-card-title>Create a Step</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="category-card-content">
+          <mat-chip-listbox
+            class="category_choice"
+            [formControl]="selectedOperationGroup"
+            class="mat-mdc-chip-set-stacked"
           >
-            {{ group.displayName }}
-          </mat-chip-option>
-        </mat-chip-listbox>
-      </mat-card-content>
-    </mat-card>
-    <mat-card
-      *ngIf="volumeAdditions || targetConc_pH || solutionModification"
-      class="category_choice"
-    >
-      <mat-card-content class="secondary-choice-content" *ngIf="volumeAdditions">
-        <mat-chip-listbox [formControl]="selectedActionItem">
-          <mat-chip-option
-            *ngFor="let action of volume_actions"
-            (selectionChange)="onVolumeActionSelect($event)"
-            [value]="action.id"
-          >
-            {{ action.displayName }}
-          </mat-chip-option>
-        </mat-chip-listbox>
-      </mat-card-content>
-
-      <mat-card-content class="secondary-choice-content" *ngIf="targetConc_pH">
-        <mat-chip-listbox [formControl]="selectedActionItem">
-          <mat-chip-option
-            *ngFor="let action of target_conc_pH_actions"
-            (selectionChange)="onTargetConc_pHActionSelect($event)"
-            [value]="action.id"
-          >
-            {{ action.displayName }}
-          </mat-chip-option>
-        </mat-chip-listbox>
-      </mat-card-content>
-      <mat-card-content class="secondary-choice-content" *ngIf="solutionModification">
-        <mat-chip-listbox [formControl]="selectedActionItem">
-          <mat-chip-option
-            *ngFor="let action of solution_modification_actions"
-            (selectionChange)="onSolutionModificationActionSelect($event)"
-            [value]="action.id"
-          >
-            {{ action.displayName }}
-          </mat-chip-option>
-        </mat-chip-listbox>
-      </mat-card-content>
-    </mat-card>
-  </mat-card-content>
-</mat-card>
-<mat-card
-  class="step-form-card"
-  *ngIf="
-    volumeAdditionsActionsSelected ||
-    targetConc_pHActionsSelected ||
-    solutionModificationActionsSelected
-  "
->
-  <mat-card-content class="selected-template-content" *ngIf="selectedTemplate">
-    <ng-container
-      class="step-form-card-content"
-      *ngTemplateOutlet="selectedTemplate"
-    ></ng-container>
-  </mat-card-content>
-</mat-card>
-
-<mat-card
-  class="solution-list-background"
-  *ngIf="steps_list.length - solution_names.length > 0"
->
-  <mat-card-header>
-    <mat-card-title>Step List </mat-card-title>
-  </mat-card-header>
-  <mat-card class="solution-list-container" #scrollRef *ngIf="steps_list">
-    <ng-container *ngFor="let step of steps_list; let i = index">
-      <mat-card
-        class="solution-card" [ngStyle]="{'background-color':phase_colors_dark[i]}"
-        *ngIf="step.category != 'Make'"
-        [attr.data-index]="i"
-        (click)="onSelectItem(i)"
-        [ngClass]="{
-          'selected-card': i === selectedStepIndex,
-          'card-invalid': step.result_flag.flag === 'Invalid'
-        }"
-      >
-        <mat-card-content class="step-card">
-          <mat-card-subtitle class="buffer-name">{{
-            step.operation_method
-          }}</mat-card-subtitle>
-          <div *ngFor="let item of step.parameters | keyvalue">
-            <p class="less-space">{{ formatKey(item.key) }}: {{ item.value }}</p>
-          </div>
-          <div *ngIf="step.result_flag['flag'] === 'Invalid'">
-            {{ step.result_flag["comment"] }}
-          </div>
-          <mat-card-actions class="normal-buttons">
-            <button mat-stroked-button color ="warn" (click)="removeStep(i)">Remove</button>
-            <button mat-stroked-button color="accent" (click)="editStep(i)">Edit</button>
-          </mat-card-actions>
+            <mat-chip-option
+              *ngFor="let group of operationGroups"
+              [value]="group.id"
+              (selectionChange)="onOperationGroupSelect($event)"
+            >
+              {{ group.displayName }}
+            </mat-chip-option>
+          </mat-chip-listbox>
         </mat-card-content>
       </mat-card>
-    </ng-container>
-  </mat-card>
-  <mat-card-actions *ngIf="solution_mixture_steps_edit">
-    <button mat-raised-button color="primary" (click)="onExecute()">
-      God Make my Formulation
-    </button>
-  </mat-card-actions>
-</mat-card>
+      <mat-card
+        *ngIf="volumeAdditions || targetConc_pH || solutionModification"
+        class="category_choice"
+      >
+        <mat-card-content
+          class="secondary-choice-content"
+          *ngIf="volumeAdditions"
+        >
+          <mat-chip-listbox
+            [formControl]="selectedActionItem"
+            class="mat-mdc-chip-set-stacked"
+          >
+            <mat-chip-option
+              *ngFor="let action of volume_actions"
+              (selectionChange)="onVolumeActionSelect($event)"
+              [value]="action.id"
+            >
+              {{ action.displayName }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </mat-card-content>
 
-<mat-card
-  class="solution-mixture-view-card"
-  *ngIf="
-    solution_mixture_steps_edit && steps_list.length - solution_names.length > 0">
+        <mat-card-content
+          class="secondary-choice-content"
+          *ngIf="targetConc_pH"
+        >
+          <mat-chip-listbox [formControl]="selectedActionItem">
+            <mat-chip-option
+              *ngFor="let action of target_conc_pH_actions"
+              (selectionChange)="onTargetConc_pHActionSelect($event)"
+              [value]="action.id"
+            >
+              {{ action.displayName }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </mat-card-content>
+        <mat-card-content
+          class="secondary-choice-content"
+          *ngIf="solutionModification"
+        >
+          <mat-chip-listbox [formControl]="selectedActionItem">
+            <mat-chip-option
+              *ngFor="let action of solution_modification_actions"
+              (selectionChange)="onSolutionModificationActionSelect($event)"
+              [value]="action.id"
+            >
+              {{ action.displayName }}
+            </mat-chip-option>
+          </mat-chip-listbox>
+        </mat-card-content>
+      </mat-card>
 
+      <mat-card
+        class="step-form-card"
+        *ngIf="
+          volumeAdditionsActionsSelected ||
+          targetConc_pHActionsSelected ||
+          solutionModificationActionsSelected
+        "
+      >
+        <mat-card-content
+          class="selected-template-content"
+          *ngIf="selectedTemplate"
+        >
+          <ng-container
+            class="step-form-card-content"
+            *ngTemplateOutlet="selectedTemplate"
+          ></ng-container>
+        </mat-card-content>
+      </mat-card>
+    </mat-card>
 
-
+    <!-- Display and Edit the Steps for Solution Design -->
+    <mat-card
+      class="solution-list-background"
+      *ngIf="steps_list.length - solution_names.length > 0 "
+    >
+      <mat-card-header
+        *ngIf="solution_mixture_steps_edit"
+        class="header-button"
+      >
+        <mat-card-title>Step List </mat-card-title>
+         <button *ngIf="IsFormulationSubmitted" color="primary" (click)="IsFormulationSubmitted=false">
+          Add more...
+        </button>
+        <button mat-raised-button color="primary" (click)="onExecute()">
+          God Make my Formulation
+        </button>
+      </mat-card-header>
+      <mat-card class="solution-list-container" #scrollRef *ngIf="steps_list">
+        <ng-container *ngFor="let step of steps_list; let i = index">
+          <mat-card
+            class="solution-card"
+            [ngStyle]="{ 'background-color': phase_colors_dark[i] }"
+            *ngIf="step.category != 'Make'"
+            [attr.data-index]="i"
+            (click)="onSelectItem(i)"
+            [ngClass]="{
+              'selected-card': i === selectedStepIndex,
+              'card-invalid': step.result_flag.flag === 'Invalid'
+            }"
+          >
+            <mat-card-content class="step-card">
+              <mat-card-subtitle class="buffer-name">{{
+                step.operation_method
+              }}</mat-card-subtitle>
+              <div *ngFor="let item of step.parameters | keyvalue">
+                <p class="less-space">
+                  {{ formatKey(item.key) }}: {{ item.value }}
+                </p>
+              </div>
+              <div *ngIf="step.result_flag['flag'] === 'Invalid'">
+                {{ step.result_flag["comment"] }}
+              </div>
+              <mat-card-actions class="normal-buttons">
+                <button mat-stroked-button color="warn" (click)="removeStep(i)">
+                  Remove
+                </button>
+                <button mat-stroked-button color="accent" (click)="editStep(i)">
+                  Edit
+                </button>
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+      </mat-card>
+    </mat-card>
+    <!-- View the Solution Mixture after the formulation -->
+    <mat-card
+      class="solution-mixture-view-card"
+      *ngIf="
+        solution_mixture_steps_edit &&
+        steps_list.length - solution_names.length > 0
+     && IsFormulationSubmitted "
+    >
       <mat-card-content class="solution-volume-pH-card">
         <p class="less-space">
-          Total Volume: {{ solution_mixture_steps_edit.volume | number : "1.1-1" }} L
+          Total Volume:
+          {{ solution_mixture_steps_edit.volume | number : "1.1-1" }} L
         </p>
 
-      <mat-divider></mat-divider>
-      <p class="less-space">pH : {{ solution_mixture_steps_edit.pH | number : "1.3-3"}}</p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-    <mat-card-content
-    *ngFor="
-      let solution of solution_mixture_steps_edit
-        .solutions 
-    "
-  >
-    <p class="less-space">
-      {{ solution.name }}: {{ solution.volume | number : "1.1-1" }}L
-    </p>
-    <mat-divider></mat-divider>
+        <mat-divider></mat-divider>
+        <p class="less-space">
+          pH : {{ solution_mixture_steps_edit.pH | number : "1.3-3" }}
+        </p>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-content
+        *ngFor="let solution of solution_mixture_steps_edit.solutions"
+      >
+        <p class="less-space">
+          {{ solution.name }}: {{ solution.volume | number : "1.1-1" }}L
+        </p>
+        <mat-divider></mat-divider>
+      </mat-card-content>
+      <mat-card-content class="comp-ion-container">
+        <mat-card class="compound-container">
+          <mat-card-content
+            *ngFor="
+              let compound of solution_mixture_steps_edit.compound_concentrations
+                | keyvalue
+            "
+          >
+            <p class="less-space">
+              {{ compound.key }}: {{ compound.value | number : "1.3-3" }}M
+            </p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="ion-container">
+          <mat-card-content
+            *ngFor="
+              let ion of solution_mixture_steps_edit.ion_concentrations
+                | keyvalue
+            "
+          >
+            <p class="less-space">
+              {{ ion.key }}: {{ ion.value | number : "1.3-3" }}M
+            </p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
+    </mat-card>
   </mat-card-content>
-
-
-
-
-  <mat-card-content
-  class="comp-ion-container"
->
-  <mat-card class="compound-container">
-    <mat-card-content
-      *ngFor="
-        let compound of solution_mixture_steps_edit
-          .compound_concentrations | keyvalue
-      "
-    >
-      <p class="less-space">
-        {{ compound.key }}: {{ compound.value | number : "1.3-3" }}M
-      </p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-  </mat-card>
-  <mat-card class="ion-container">
-    <mat-card-content
-      *ngFor="
-        let ion of solution_mixture_steps_edit
-          .ion_concentrations | keyvalue
-      "
-    >
-      <p class="less-space">
-        {{ ion.key }}: {{ ion.value | number : "1.3-3" }}M
-      </p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-  </mat-card>
-</mat-card-content>
-
 </mat-card>
 
-
-
-
-
-
+<!-- Templates to Dynamically Create all the Steps forms for Solution Design -->
 
 <ng-template #TitrateSpecifiedVolumeofSolution>
   <form [formGroup]="currentStepForm" (ngSubmit)="onSubmit()">
@@ -269,7 +291,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -302,7 +328,11 @@
       <mat-card-actions class="template_buttons">
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -327,7 +357,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -352,7 +386,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -387,7 +425,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -422,7 +464,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -465,7 +511,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -500,7 +550,11 @@
       <mat-card-actions>
         <button mat-raised-button color="primary">{{ add_edit_label }}</button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -547,7 +601,11 @@
           <mat-icon>edit</mat-icon>{{ add_edit_label }}
         </button>
         <div *ngIf="edit_step_index !== null">
-          <button mat-raised-button color="primary" (click)="onCancelEdit(edit_step_index)">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onCancelEdit(edit_step_index)"
+          >
             <mat-icon>cancel</mat-icon>
             Cancel
           </button>
@@ -556,3 +614,48 @@
     </mat-card>
   </form>
 </ng-template>
+
+<!-- 
+ <mat-card class="optionb"   >
+<mat-card-content class="optionb-content">
+ <mat-form-field>
+      <mat-label>Select an action</mat-label>
+      <mat-select [formControl]="selectedActionItem">
+        <mat-optgroup label="Volume Additions">
+          <mat-option
+            *ngFor="let action of volume_actions"
+            (onSelectionChange)="onVolumeActionSelectDD($event)"
+            [value]="action.id"
+          >
+            Volume Additions: {{ action.displayName }}
+          </mat-option>
+        </mat-optgroup>
+
+        <mat-optgroup label="Target Conc pH">
+          <mat-option
+            *ngFor="let action of target_conc_pH_actions"
+            (onSelectionChange)="onTargetConc_pHActionSelectDD($event)"
+            [value]="action.id"
+          >
+            Target Conc or pH: {{ action.displayName }}
+          </mat-option>
+        </mat-optgroup>
+
+        <mat-optgroup label="Solution Modification">
+          <mat-option
+            *ngFor="let action of solution_modification_actions"
+            (onSelectionChange)="onSolutionModificationActionSelectDD($event)"
+            [value]="action.id"
+          >
+            Solution Modification : {{ action.displayName }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+
+
+  </mat-card-content>
+ </mat-card>
+
+ -->
