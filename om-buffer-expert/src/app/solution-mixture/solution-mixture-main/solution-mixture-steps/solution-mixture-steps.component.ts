@@ -148,7 +148,7 @@ export class SolutionMixtureStepsComponent implements OnInit {
 
 action_structure = {
   'Titrate with Solution Name to Volume': {
-    displayName: 'Titrate specified volume of solution',
+    displayName: 'Titrate specified volume',
     id: 'Titrate with Solution Name to Volume',
     parameters: ['solution_name', 'volume'],
     templateRef: 'TitrateSpecifiedVolumeofSolution',
@@ -160,7 +160,7 @@ action_structure = {
     mainCategory: 'volumeAdditions',
   },
   'Increase Volume of Solution Name': {
-    displayName: 'Add specified volume of solution',
+    displayName: 'Add/Increase specified volume',
     id: 'Increase Volume of Solution Name',
     parameters: ['solution_name', 'volume_to_add'],
     templateRef: 'AddSpecifiedVolumeofSolution',
@@ -172,7 +172,7 @@ action_structure = {
     mainCategory: 'volumeAdditions',
   },
   'Dilute with Specified Volume of Water': {
-    displayName: 'Add specified volume of water',
+    displayName: 'Add/Increase volume of water',
     id: 'Dilute with Specified Volume of Water',
     parameters: ['volume_to_add'],
     templateRef: 'AddSpecifiedVolumeofWater',
@@ -261,19 +261,20 @@ action_structure = {
 
 
   volume_actions = [
-    {
-      id: 'Titrate with Solution Name to Volume',
-      displayName: 'Titrate specified volume of solution',
-      parameters: ['solution_name', 'volume'],
-    },
-    {
+        {
       id: 'Increase Volume of Solution Name',
-      displayName: 'Add specified volume of solution',
+      displayName: 'Add/Increase specified volume',
       parameters: ['solution_name', 'volume_to_add'],
     },
     {
+      id: 'Titrate with Solution Name to Volume',
+      displayName: 'Titrate specified volume',
+      parameters: ['solution_name', 'volume'],
+    },
+
+    {
       id: 'Dilute with Specified Volume of Water',
-      displayName: 'Add specified volume of water',
+      displayName: 'Add/Increase volume of water',
       parameters: ['volume_to_add'],
     },
     {
@@ -333,12 +334,6 @@ action_structure = {
     this.getSolutionCompoundIonNames();
   }
 
-  generateAllMeasurements(data) {
-    // Assuming 'volume' and 'pH' are keys you want to exclude
-    const excludedKeys = ['volume', 'pH'];
-    
-    this.allMeasurements = data.map(d => d.name);
-  }
 
   formatKey(key: string): string {
     // Replace underscores with spaces
@@ -352,41 +347,6 @@ action_structure = {
     return newKey;
   }
  
-  
-
-
-  onSelectionChange(event: MatChipSelectionChange) {
-    let temp =[];
-    this.selectedMeasurement = event.source.value;
-    console.log('God selected measurement', this.selectedMeasurement);
-    this.selectPlotData = [this.allPlotsData.find(plot => plot.name === this.selectedMeasurement)];
-   // this.selectPlotData = [temp]
-   //console.log('God selected plot data', this.selectPlotData);
-   
-
-
-console.log('God selected plot data', this.selectPlotData);
-this.computeScale();
-  }
-  computeScale() {
-    let xValues = [];
-    let yValues = [];
-
-    this.selectPlotData.forEach(series => {
-      series.series.forEach(point => {
-        xValues.push(point.x);
-      yValues.push(point.y);
-    });
-});
-  
-  this.xMin = Math.min(...xValues);
-  this.xMax = Math.max(...xValues);
-  this.yMin = Math.min(...yValues);
-   this.yMax = Math.max(...yValues);
-  
-    
-  }
-
 
 
   getSolutionCompoundIonNames() {
@@ -486,7 +446,7 @@ this.computeScale();
   }
 
   form_config_volume_actions = {
-    'Titrate specified volume of solution': {
+    'Titrate with Solution Name to Volume': {
       formControls: {
         solution_name: [''],
         volume: [100, [Validators.required, Validators.min(1)]],
@@ -494,20 +454,20 @@ this.computeScale();
       templateRef: 'TitrateSpecifiedVolumeofSolution',
     },
 
-    'Add specified volume of solution': {
+    'Increase Volume of Solution Name': {
       formControls: {
         solution_name: [''],
         volume_to_add:  [100, [Validators.required, Validators.min(1)]],
       },
       templateRef: 'AddSpecifiedVolumeofSolution',
     },
-    'Add specified volume of water': {
+    'Dilute with Specified Volume of Water': {
       formControls: {
         volume_to_add:  [100, [Validators.required, Validators.min(1)]],
       },
       templateRef: 'AddSpecifiedVolumeofWater',
     },
-    'Dilute by a ratio with Water': {
+    'Dilute Solution Mixture with Water': {
       formControls: {
         dilution_ratio:  [1, [Validators.required, Validators.min(.001)]],
       },
@@ -516,21 +476,21 @@ this.computeScale();
   };
 
   form_config_target_conc_pH_actions = {
-    'Add water to target [compound]': {
+    'Dilute Solution Mixture with Water to Target Compound Concentration': {
       formControls: {
         compound_name: [''],
         target_conc: [0.05, [Validators.required, Validators.min(.001)]],
       },
       templateRef: 'AddWaterToTargetCompoundConcentration',
     },
-    'Add water to target [ion]': {
+    'Dilute Solution Mixture with Water to Target Ion Concentration': {
       formControls: {
         ion_name: [''],
-        target_conc: [0.05, [[Validators.required, Validators.min(.001)]]],
+        target_conc: [0.05, [Validators.required, Validators.min(.001)]],
       },
       templateRef: 'AddWaterToTargetIonConcentration',
     },
-    'Add solution to target [ion]': {
+    'Add Solution to Solution Mixture to Target Ion Concentration': {
       formControls: {
         solution_name: [''],
         ion_name: [''],
@@ -538,7 +498,7 @@ this.computeScale();
       },
       templateRef: 'AddSolutionToTargetIonConcentration',
     },
-    'Add solution to target pH': {
+    'Titrate with Specified Solution Name to pH': {
       formControls: {
         solution_name: [''],
         target_pH: [2, [Validators.required, Validators.min(2),Validators.max(12)]],
@@ -548,7 +508,7 @@ this.computeScale();
   };
 
   form_config_solution_modification_actions = {
-    'Modify and add solution to target [ion] and pH': {
+    'Modify and Add Solution to achieve Target buffer species concentration, pH and dilution ratio': {
       formControls: {
         solution_name: [''],
         target_conc: [0.05, [Validators.required, Validators.min(.001)]],
@@ -576,10 +536,8 @@ this.computeScale();
     this.targetConc_pHActionsSelected = false;
     this.solutionModificationActionsSelected = false;
 
-    const config =
-      this.form_config_volume_actions[
-        this.getDisplayNameById(this.volume_actions, id)
-      ];
+    const config = this.form_config_volume_actions[id];
+    console.log('God config formcontrols', config, config.formControls);
     this.currentStepForm = this.fb.group(config.formControls);
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(this.volume_actions, id);
@@ -589,7 +547,7 @@ this.computeScale();
         console.log("God - template" ,this.selectedTemplate);
   }
   else{
-    //this.selectedActionItem.setValue(null);
+    this.selectedActionItem.setValue(null);
     this.volumeAdditionsActionsSelected = false;
     this.targetConc_pHActionsSelected = false;
     this.solutionModificationActionsSelected = false;
@@ -597,43 +555,7 @@ this.computeScale();
   }
 }
 
-  onVolumeActionSelectDD(event: MatOptionSelectionChange) {
-    this.selectedStepIndex = null;
-    const id = event.source.value;
-    console.log("God - got here with", event.source.value, event.source.selected);
-    console.log(
-      'God-parameters',
-      this.getParametersById(this.volume_actions, id)
-    );
-    console.log ("God - selected:",event);
-    // console.log("God-id",this.volume_actions[id].id);
-    // console.log("God-parameters",this.volume_actions[id].parameters);
-    if(event.source.selected){
-     // this.selectedActionItem.setValue(id);
-    this.volumeAdditionsActionsSelected = true;
-    this.targetConc_pHActionsSelected = false;
-    this.solutionModificationActionsSelected = false;
-
-    const config =
-      this.form_config_volume_actions[
-        this.getDisplayNameById(this.volume_actions, id)
-      ];
-    this.currentStepForm = this.fb.group(config.formControls);
-    this.selected_operations_method = id;
-    this.selected_parameters = this.getParametersById(this.volume_actions, id);
-    console.log('God', config.templateRef);
-    this.selectedTemplate = this[config.templateRef];
-    console.log("God - template" ,this.selectedTemplate);
-  }
-  else{
-    //this.selectedActionItem.setValue(null);
-    // this.volumeAdditionsActionsSelected = false;
-    // this.targetConc_pHActionsSelected = false;
-    // this.solutionModificationActionsSelected = false;
-
-  }
-}
-
+ 
 
 
 
@@ -645,11 +567,13 @@ this.computeScale();
     this.volumeAdditionsActionsSelected = false;
     this.targetConc_pHActionsSelected = true;
     this.solutionModificationActionsSelected = false;
-
+      console.log('God', id);
+      console.log('God', this.form_config_target_conc_pH_actions[id]);
     const config =
       this.form_config_target_conc_pH_actions[
-        this.getDisplayNameById(this.target_conc_pH_actions, id)
+        id
       ];
+      console.log('God config formcontrols', config, config.formControls);
     this.currentStepForm = this.fb.group(config.formControls);
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(
@@ -667,35 +591,7 @@ this.computeScale();
     }
   }
 
-    onTargetConc_pHActionSelectDD(event: MatOptionSelectionChange) {
-    this.selectedStepIndex = null;
-    const id = event.source.value;
-    if(event.source.selected){
-      //this.selectedActionItem.setValue(id);
-    this.volumeAdditionsActionsSelected = false;
-    this.targetConc_pHActionsSelected = true;
-    this.solutionModificationActionsSelected = false;
 
-    const config =
-      this.form_config_target_conc_pH_actions[
-        this.getDisplayNameById(this.target_conc_pH_actions, id)
-      ];
-    this.currentStepForm = this.fb.group(config.formControls);
-    this.selected_operations_method = id;
-    this.selected_parameters = this.getParametersById(
-      this.target_conc_pH_actions,
-      id
-    );
-    this.selectedTemplate = this[config.templateRef];
-    }
-    else{
-      //this.selectedActionItem.setValue(null);
-      this.volumeAdditionsActionsSelected = false;
-      this.targetConc_pHActionsSelected = false;
-      this.solutionModificationActionsSelected = false;
- 
-    }
-  }
 
   onSolutionModificationActionSelect(event: MatChipSelectionChange) {
     this.selectedStepIndex = null;
@@ -706,15 +602,11 @@ this.computeScale();
     this.volumeAdditionsActionsSelected = false;
     this.targetConc_pHActionsSelected = false;
     const config =
-      this.form_config_solution_modification_actions[
-        this.getDisplayNameById(this.solution_modification_actions, id)
-      ];
+      this.form_config_solution_modification_actions[id];
     this.currentStepForm = this.fb.group(config.formControls);
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(
-      this.solution_modification_actions,
-      id
-    );
+      this.solution_modification_actions,id);
     this.selectedTemplate = this[config.templateRef];
 
     console.log(id);
@@ -728,36 +620,7 @@ this.computeScale();
     }
   }
 
-    onSolutionModificationActionSelectDD(event: MatOptionSelectionChange) {
-    this.selectedStepIndex = null;
-    const id = event.source.value;
-    if(event.source.selected){
-     // this.selectedActionItem.setValue(id);
-    this.solutionModificationActionsSelected = true;
-    this.volumeAdditionsActionsSelected = false;
-    this.targetConc_pHActionsSelected = false;
-    const config =
-      this.form_config_solution_modification_actions[
-        this.getDisplayNameById(this.solution_modification_actions, id)
-      ];
-    this.currentStepForm = this.fb.group(config.formControls);
-    this.selected_operations_method = id;
-    this.selected_parameters = this.getParametersById(
-      this.solution_modification_actions,
-      id
-    );
-    this.selectedTemplate = this[config.templateRef];
 
-    console.log(id);
-    }
-    else{
-     // this.selectedActionItem.setValue(null);
-      this.volumeAdditionsActionsSelected = false;
-      this.targetConc_pHActionsSelected = false;
-      this.solutionModificationActionsSelected = false;
-      
-    }
-  }
 
   getFormControls(): string[] {
     return this.currentStepForm
