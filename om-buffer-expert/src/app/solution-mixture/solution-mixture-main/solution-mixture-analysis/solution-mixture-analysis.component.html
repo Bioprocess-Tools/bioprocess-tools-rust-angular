@@ -46,7 +46,7 @@
             </mat-chip-listbox>
           </mat-card>
 
-          <mat-card>
+          <!-- <mat-card>
             <mat-chip-listbox *ngIf="phaseOptions">
               <mat-chip-option
                 *ngFor="let selcategory of categories"
@@ -60,7 +60,7 @@
                 {{ selcategory }}
               </mat-chip-option>
             </mat-chip-listbox>
-          </mat-card>
+          </mat-card> -->
 
           <mat-card>
             <mat-chip-listbox *ngIf="compound_names" multiple>
@@ -69,7 +69,7 @@
                 [value]="compound.id"
                 [selected]="selectedCompounds.includes(compound.id)"
                 [disabled]="
-                  selectedPhases.length == 0 || category == 'pH' || category == 'ion'
+                  selectedPhases.length == 0 
                 "
                 (selectionChange)="onChangeCompoundSelection($event)"
               >
@@ -84,9 +84,8 @@
                 *ngFor="let ion of ionOptions"
                 [value]="ion.id"
                 [disabled]="
-                  selectedPhases.length == 0 ||
-                  category == 'pH' ||
-                  category == 'compound'
+                  selectedPhases.length == 0 
+                  
                 "
                 [selected]="selectedIons.includes(ion.id)"
                 (selectionChange)="onChangeIonSelection($event)"
@@ -104,26 +103,26 @@
 
 
 
-    <mat-card class = "bar-chart-container" *ngIf="solutionMixture.phase_sliced_data">
-      <mat-card class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="category == 'pH'">
+ <mat-card class = "bar-chart-container3" *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0">
+      <mat-card class = "bar-chart2">
         <plotly-plot
-          [data]="phaseBasedDataByCategory"
+          [data]="pHbyPhase"
           [layout]="pHBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="category == 'ion'">
+      <mat-card class = "bar-chart2" >
         <plotly-plot
-          [data]="phaseBasedDataByCategory"
+          [data]="ionbyPhase"
           [layout]="ionBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card  class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="category == 'compound'">
+      <mat-card  class = "bar-chart2" >
       <plotly-plot
-        [data]="phaseBasedDataByCategory"
+        [data]="compoundbyPhase"
         [layout]="compBarLayout"
       ></plotly-plot>
     </mat-card>
-    </mat-card>
+    </mat-card> 
 
 
 
@@ -132,20 +131,20 @@
 
 
 
-  <mat-card class = "bar-chart-container" *ngIf="solutionMixture.phase_sliced_data">
-      <mat-card class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="pH_interval_data_phase">
+  <mat-card class = "bar-chart-container3" *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0">
+      <mat-card class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="pH_interval_data_phase">
         <plotly-plot
           [data]="pH_interval_data_phase"
           [layout]="pHBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="ion_interval_data_phase_layout">
+      <mat-card class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="ion_interval_data_phase_layout">
         <plotly-plot
           [data]="ion_interval_data_phase"
           [layout]="ionBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card  class = "bar-chart" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="compound_interval_data_phase">
+      <mat-card  class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="compound_interval_data_phase">
       <plotly-plot
         [data]="compound_interval_data_phase"
         [layout]="compBarLayout"
@@ -155,21 +154,21 @@
 
 
 
-
-  <mat-card *ngIf="plot2data" class="bar-chart-container">
-    <mat-card class="bar-chart">
+<!-- This is for the bar charts for the solution mixture analysis -->
+  <mat-card *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0" class="bar-chart-container3">
+    <mat-card class="bar-chart1">
       <plotly-plot
         [data]="solution_volumes_data"
         [layout]="solution_volumes_layout"
       ></plotly-plot>
     </mat-card>
-    <mat-card class="bar-chart">
+    <mat-card class="bar-chart1">
       <plotly-plot
         [data]="ion_concs_data"
         [layout]="ion_concs_layout"
       ></plotly-plot>
     </mat-card>
-    <mat-card class="bar-chart">
+    <mat-card class="bar-chart1">
       <plotly-plot
         [data]="compound_concs_data"
         [layout]="compound_concs_layout"

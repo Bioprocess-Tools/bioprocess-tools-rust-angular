@@ -23,7 +23,7 @@
 }
 .solution-list-container {
   //width:calc(100vw - 2*24px - 2*10px);
-  width: 100%;
+  width: 97%;
   display: grid;
   grid-auto-flow: column; /* Adjust based on your layout preference */
   grid-template-columns: repeat(
@@ -37,6 +37,7 @@
   //background-color: $card-background-cream;
   box-shadow: none;
   //background-color: rgb(176, 239, 239);
+  border: 3px solid $card-background-cream;
   border-width: 3px;
   gap: 5px;
   justify-items: center;
@@ -63,15 +64,23 @@
   //color: black;
   //background-color: none;
   margin: 3px;
-  height: 100%;
+  height: 95%;
+  border:3px solid $card-background-cream;
 }
 .buffer-name {
+  display:flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1em;
   font-weight: bold;
   text-align: center;
   text-wrap: pretty;
   color: black;
-  padding-bottom: 5px;
+  //padding-bottom: 5px;
+  margin:5px;
+  height:50px;
+  overflow: normal;
+  box-shadow:0px 0px 1px 1px rgba(112, 103, 103, 0.5);;
 }
 .compound-container {
   display: flex;
@@ -211,6 +220,7 @@ mat-card-title {
 }
 
 .step-card {
+  padding:0px;
   padding-bottom: 2px;
 }
 
@@ -241,9 +251,11 @@ mat-card-header {
 }
 
 .less-space {
+  display:flex;
+  flex-direction: row;
   margin-bottom: 1px;
   margin-top: 3px;
-  margin-left: 5px;
+  margin-left: 15px;
   //i want the text to wrap if it is too long
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -252,7 +264,24 @@ mat-card-header {
   width: 100%;
   font-size: 12px;
   background-color: transparent;
+  gap:5px;
+  //justify-content: space-between;
 }
+
+.keyp {
+  width: 100px;
+  flex:1;
+}
+
+.valuep {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  overflow: hidden;
+  flex:3;
+  margin-right:10px;
+}
+
 .less-space-container {
   padding: 5px;
   box-shadow: red;
@@ -268,8 +297,27 @@ mat-card-header {
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
+
+  height:30px;
 }
 
+.stroked_btn {
+  border: 3px solid $card-background-cream;
+  background-color: transparent;
+  //color: #333;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  height:25px;
+
+}
+.stocked_btn:focus {
+  //outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
 .title_vol_pH {
   display: flex;
   justify-content: space-between;
@@ -281,26 +329,17 @@ mat-card-header {
   width:100%;
 
 }
-.solution-volume-pH-card {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  padding: 0 20px;
-  background-color: #0f730a;
-  border-bottom: 1px solid #e0e0e0;
-  color: #333;
-}
+// .solution-volume-pH-card {
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   padding: 0 20px;
+//   background-color: #0f730a;
+//   border-bottom: 1px solid #e0e0e0;
+//   color: #333;
+// }
 
-.solution-mixture-view-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  background-color: #0f730a;
-  border-bottom: 1px solid #e0e0e0;
-  color: #333;
 
-}
 
 .comp-ion-container {
   display: grid;
@@ -367,7 +406,17 @@ mat-card-content {
   color: #333;
 }
 
-
+.solution-mixture-view-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  //padding: 0 20px;
+  //background-color: #0f730a;
+ border: 1px solid $card-background-cream;
+  //color: #333;
+ max-width:500px;
+}
 .grid-contain {
   display: grid;
   grid-template-columns: 3fr 1fr; /* Three parts of the space for the main content, one part for the sidebar */
@@ -378,72 +427,159 @@ mat-card-content {
   margin: auto; /* For centering the grid container if needed */
   width:100%;
 }
-.grid-contain2 {
-  display: grid;
-  grid-template-columns: 3fr 1fr; /* Three parts of the space for the main content, one part for the sidebar */
-  //grid-auto-rows: auto; /* Auto for title and headers, remaining space for the content and footer */
-  grid-template-areas:
-  "compound_list ion_list";
-  gap: 10px; /* Adjust the gap between grid items */
-  padding: 10px; /* Padding around the grid container */
-  max-width: 1000px; /* Adjust the width as necessary */
-  margin: auto; /* For centering the grid container if needed */
-  width:100%;
+// .grid-contain2 {
+//   display: grid;
+//   grid-template-columns: 3fr 1fr; /* Three parts of the space for the main content, one part for the sidebar */
+//   grid-auto-rows: auto; /* Auto for title and headers, remaining space for the content and footer */
+//   grid-template-areas:
+//   "compound_list ion_list";
+//   gap: 10px; /* Adjust the gap between grid items */
+//   padding: 10px; /* Padding around the grid container */
+//   max-width: 1000px; /* Adjust the width as necessary */
+//   margin: auto; /* For centering the grid container if needed */
+//   width:100%;
+// }
+
+// .grid-item {
+//   padding: 10px; /* Padding within each grid item */
+// }
+
+// .title {
+//   background-color: #555; /* Example color for the title, adjust as needed */
+//   color: white;
+//   grid-column: 1 / -1; /* Title spans both columns */
+//   grid-row:1;
+//   text-align: center;
+// }
+
+// .solution_list{
+//   background-color: #64B5F6; /* Example color for headers, adjust as needed */
+//   color: white;
+//   grid-column: 1; /* Header spans both columns */
+//   grid-row:2 span auto;
+// }
+
+// .compound_list {
+//   grid-area:compound_list;
+//   display:flex;
+//   flex-direction: column;
+//   background-color: #ECEFF1; /* Example color for main content, adjust as needed */
+
+ 
+// }
+.vol_pH_solution {
+display:grid;
+grid-template-columns: 1fr;
+grid-template-rows: auto;
+grid-template-areas: 
+"solution-volume-pH-card";
+//gap: 10px;
+//padding: 10px;
+//background-color: #309ee8; /* Example color for main content, adjust as needed */
+
+ 
 }
 
-.grid-item {
-  padding: 10px; /* Padding within each grid item */
-}
-
-.title {
-  background-color: #555; /* Example color for the title, adjust as needed */
-  color: white;
-  grid-column: 1 / -1; /* Title spans both columns */
-  grid-row:1;
-  text-align: center;
-}
-
-.solution_list{
-  background-color: #64B5F6; /* Example color for headers, adjust as needed */
-  color: white;
-  grid-column: 1; /* Header spans both columns */
-  grid-row:2 span auto;
-}
-
-.compound_list {
-  grid-area:compound_list;
+.volume_pH_content {
+  grid-area:volume_pH_content;
   display:flex;
   flex-direction: column;
-  background-color: #ECEFF1; /* Example color for main content, adjust as needed */
+  //background-color: #91c066; /* Example color for main content, adjust as needed */
 
  
 }
+.solution-volume-pH-card {
+  grid-area:solution-volume-pH-card;
+  display:flex;
+  flex-direction:column;
+  //justify-content: space-between;
+  align-items: left;
+  //padding: 0 20px;
+  //background-color: #d3bc0c;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+  padding:0;
+  padding-left: 15px;
+  padding-right:15px;
 
-.Vol {
-  background-color: #F44336; /* Example color for sidebar, adjust as needed */
-  grid-column: 2; /* Occupies the second column */
-  grid-row:3;
-
-
-  justify-content: space-between;
 }
+
+.solution-name-vol {
+  display:flex;
+flex-direction: row;  //background-color: #333;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  font-weight: 400;
+  gap:10px;
+  //font-stretch: expanded;
+  font-size: 1em;
+  //color: whitesmoke;
+  white-space: normal;
+  align-self:center;
+  align-items: left ;
+padding:0px;
+}
+.Volume {
+  grid-area:Volume;
+
+  display:flex;
+  //background-color: #0a2362; /* Example color for sidebar, adjust as needed */
+  //grid-column: 2; /* Occupies the second column */
+  //grid-row:3;
+//background-color: #333;
+  margin-bottom: 2px;
+  margin-right: 20px;
+  font-weight: 400;
+  //font-stretch: expanded;
+  font-size: medium;
+  //color: whitesmoke;
+  white-space: nowrap;
+  justify-content: right;
+}
+
+.titles {
+  display:grid;
+  grid-template-columns:auto auto;
+  grid-template-areas:
+  "pH Volume";
+
+  //background-color: #333;
+  margin-bottom: 2px;
+  margin-left: 10px;
+  font-weight: 200;
+  //font-stretch: expanded;
+  font-size: medium;
+  //color: whitesmoke;
+  white-space: nowrap;
+ //justify-content: space-between;
+  width:95%;
+
+}
+
 .pH {
-  background-color: #F44336; /* Example color for sidebar, adjust as needed */
-  grid-column: 2; /* Occupies the second column */
-  grid-row:2 ;
+ grid-area:pH;
+  display:flex;
+//background-color: #333;
+  margin-bottom: 2px;
+  margin-left: 20px;
+  font-weight: 400;
+  //font-stretch: expanded;
+  font-size: medium;
+  //color: whitesmoke;
+  white-space: nowrap;
+justify-content: left ;
 
 
-  justify-content: space-between;
 }
 
-.ion_list{
-grid-area:ion_list;
-   display:flex;
-  flex-direction: column;
-  background-color: #CDDC39; /* Example color for footer, adjust as needed */
-  /* Occupies the first column */
+// .ion_list{
+// grid-area:ion_list;
+//    display:flex;
+//   flex-direction: column;
+//   //background-color: #CDDC39; /* Example color for footer, adjust as needed */
+//   /* Occupies the first column */
  
-}
+// }
 
 /* Adjust the responsive design as needed */
 
