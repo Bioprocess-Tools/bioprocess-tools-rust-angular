@@ -1,6 +1,4 @@
 <mat-card *ngIf="solutionMixture">
- 
-
   <mat-card>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
@@ -10,7 +8,7 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <p> This is interactive plot</p>
+          <p>This is interactive plot</p>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
@@ -22,31 +20,28 @@
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
-          <p> This is static plot</p>
+          <p>This is static plot</p>
         </mat-card-content>
       </mat-card>
     </mat-expansion-panel>
   </mat-card>
 
-
-
-
+  <mat-card>
+    <mat-card-content>
       <mat-card>
-        <mat-card-content>
-          <mat-card>
-            <mat-chip-listbox multiple>
-              <mat-chip-option
-                *ngFor="let phase of phaseOptions"
-                [value]="phase.id"
-                [selected]="selectedPhases.includes(phase.id)"
-                (selectionChange)="onChangePhase($event)"
-              >
-                {{ phase.name }}
-              </mat-chip-option>
-            </mat-chip-listbox>
-          </mat-card>
+        <mat-chip-listbox multiple>
+          <mat-chip-option
+            *ngFor="let phase of phaseOptions"
+            [value]="phase.id"
+            [selected]="selectedPhases.includes(phase.id)"
+            (selectionChange)="onChangePhase($event)"
+          >
+            {{ phase.name }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </mat-card>
 
-          <!-- <mat-card>
+      <!-- <mat-card>
             <mat-chip-listbox *ngIf="phaseOptions">
               <mat-chip-option
                 *ngFor="let selcategory of categories"
@@ -62,126 +57,118 @@
             </mat-chip-listbox>
           </mat-card> -->
 
-          <mat-card>
-            <mat-chip-listbox *ngIf="compound_names" multiple>
-              <mat-chip-option
-                *ngFor="let compound of compoundOptions"
-                [value]="compound.id"
-                [selected]="selectedCompounds.includes(compound.id)"
-                [disabled]="
-                  selectedPhases.length == 0 
-                "
-                (selectionChange)="onChangeCompoundSelection($event)"
-              >
-                {{ compound.name }}
-              </mat-chip-option>
-            </mat-chip-listbox>
-          </mat-card>
+      <mat-card>
+        <mat-chip-listbox *ngIf="compound_names" multiple>
+          <mat-chip-option
+            *ngFor="let compound of compoundOptions"
+            [value]="compound.id"
+            [selected]="selectedCompounds.includes(compound.id)"
+            [disabled]="selectedPhases.length == 0"
+            (selectionChange)="onChangeCompoundSelection($event)"
+          >
+            {{ compound.name }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </mat-card>
 
-          <mat-card>
-            <mat-chip-listbox *ngIf="ion_names" multiple>
-              <mat-chip-option
-                *ngFor="let ion of ionOptions"
-                [value]="ion.id"
-                [disabled]="
-                  selectedPhases.length == 0 
-                  
-                "
-                [selected]="selectedIons.includes(ion.id)"
-                (selectionChange)="onChangeIonSelection($event)"
-              >
-                {{ ion.name }}
-              </mat-chip-option>
-            </mat-chip-listbox>
-          </mat-card>
-        </mat-card-content>
- 
- 
+      <mat-card>
+        <mat-chip-listbox *ngIf="ion_names" multiple>
+          <mat-chip-option
+            *ngFor="let ion of ionOptions"
+            [value]="ion.id"
+            [disabled]="selectedPhases.length == 0"
+            [selected]="selectedIons.includes(ion.id)"
+            (selectionChange)="onChangeIonSelection($event)"
+          >
+            {{ ion.name }}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </mat-card>
+    </mat-card-content>
 
-
-
-
-
-
- <mat-card class = "bar-chart-container3" *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0">
-      <mat-card class = "bar-chart2">
+    <mat-card
+      class="bar-chart-container3"
+      *ngIf="
+        solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0
+      "
+    >
+      <mat-card class="bar-chart2">
+        <plotly-plot [data]="pHbyPhase" [layout]="pHBarLayout"></plotly-plot>
+      </mat-card>
+      <mat-card class="bar-chart2">
+        <plotly-plot [data]="ionbyPhase" [layout]="ionBarLayout"></plotly-plot>
+      </mat-card>
+      <mat-card class="bar-chart2">
         <plotly-plot
-          [data]="pHbyPhase"
-          [layout]="pHBarLayout"
+          [data]="compoundbyPhase"
+          [layout]="compBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card class = "bar-chart2" >
-        <plotly-plot
-          [data]="ionbyPhase"
-          [layout]="ionBarLayout"
-        ></plotly-plot>
-      </mat-card>
-      <mat-card  class = "bar-chart2" >
-      <plotly-plot
-        [data]="compoundbyPhase"
-        [layout]="compBarLayout"
-      ></plotly-plot>
     </mat-card>
-    </mat-card> 
 
-
-
-
-
-
-
-
-  <mat-card class = "bar-chart-container3" *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0">
-      <mat-card class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="pH_interval_data_phase">
+    <mat-card
+      class="bar-chart-container3"
+      *ngIf="
+        solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0
+      "
+    >
+      <mat-card
+        class="bar-chart2"
+        [ngStyle]="{ width: solutionMixture.steps.length * 200 }"
+        *ngIf="pH_interval_data_phase"
+      >
         <plotly-plot
           [data]="pH_interval_data_phase"
           [layout]="pHBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="ion_interval_data_phase_layout">
+      <mat-card
+        class="bar-chart2"
+        [ngStyle]="{ width: solutionMixture.steps.length * 200 }"
+        *ngIf="ion_interval_data_phase_layout"
+      >
         <plotly-plot
           [data]="ion_interval_data_phase"
           [layout]="ionBarLayout"
         ></plotly-plot>
       </mat-card>
-      <mat-card  class = "bar-chart2" [ngStyle]="{'width': solutionMixture.steps.length*200}" *ngIf="compound_interval_data_phase">
-      <plotly-plot
-        [data]="compound_interval_data_phase"
-        [layout]="compBarLayout"
-      ></plotly-plot>
+      <mat-card
+        class="bar-chart2"
+        [ngStyle]="{ width: solutionMixture.steps.length * 200 }"
+        *ngIf="compound_interval_data_phase"
+      >
+        <plotly-plot
+          [data]="compound_interval_data_phase"
+          [layout]="compBarLayout"
+        ></plotly-plot>
+      </mat-card>
+    </mat-card>
+
+    <!-- This is for the bar charts for the solution mixture analysis -->
+    <mat-card
+      *ngIf="
+        solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0
+      "
+      class="bar-chart-container3"
+    >
+      <mat-card class="bar-chart1">
+        <plotly-plot
+          [data]="solution_volumes_data"
+          [layout]="solution_volumes_layout"
+        ></plotly-plot>
+      </mat-card>
+      <mat-card class="bar-chart1">
+        <plotly-plot
+          [data]="ion_concs_data"
+          [layout]="ion_concs_layout"
+        ></plotly-plot>
+      </mat-card>
+      <mat-card class="bar-chart1">
+        <plotly-plot
+          [data]="compound_concs_data"
+          [layout]="compound_concs_layout"
+        ></plotly-plot>
+      </mat-card>
     </mat-card>
   </mat-card>
-
-
-
-<!-- This is for the bar charts for the solution mixture analysis -->
-  <mat-card *ngIf="solutionMixture.phase_sliced_data && solutionMixture.steps.length > 0" class="bar-chart-container3">
-    <mat-card class="bar-chart1">
-      <plotly-plot
-        [data]="solution_volumes_data"
-        [layout]="solution_volumes_layout"
-      ></plotly-plot>
-    </mat-card>
-    <mat-card class="bar-chart1">
-      <plotly-plot
-        [data]="ion_concs_data"
-        [layout]="ion_concs_layout"
-      ></plotly-plot>
-    </mat-card>
-    <mat-card class="bar-chart1">
-      <plotly-plot
-        [data]="compound_concs_data"
-        [layout]="compound_concs_layout"
-      ></plotly-plot>
-    </mat-card>
-  </mat-card>
-
-
-
-
-
-
-
-
-
 </mat-card>

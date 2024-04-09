@@ -10,18 +10,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class SolutionService {
-
-
-
-
-
-
-
-
-
-
-
-  
   omSolutions: Solution[] = [];
 
   compoundFunDict$: BehaviorSubject<{ [name: string]: string }> =
@@ -35,17 +23,18 @@ export class SolutionService {
   example_solution$: BehaviorSubject<Solution> = new BehaviorSubject<Solution>(
     null
   );
- 
+
   private solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
 
   private solution_list_Source = new BehaviorSubject<Solution[]>([]);
   solutions_list = this.solution_list_Source.asObservable();
 
-
   ion_names: string[] = [];
 
-  buffer_species_names$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  buffer_species_names$: BehaviorSubject<string[]> = new BehaviorSubject<
+    string[]
+  >([]);
   buffer_species_names: string[] = [];
 
   acidCompounds: string[] = [];
@@ -60,9 +49,7 @@ export class SolutionService {
   buffer_compound_names: string[] = [];
   compoundFunDict2: { [name: string]: string } = {};
 
-
-
- private apiUrl = environment.apiUrl; // Replace with your Flask API URL
+  private apiUrl = environment.apiUrl; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) {
     //console.log("God: in construction", this.acidCompounds);
@@ -177,9 +164,6 @@ export class SolutionService {
       .subscribe();
   }
 
-
-
-
   get_example_solution(): void {
     const endpoint = `${this.apiUrl}/get_example_solution`;
     this.http.get<Solution>(endpoint).subscribe(
@@ -188,6 +172,7 @@ export class SolutionService {
         this.example_solution$.next(this.example_solution);
         //console.log("God : example", this.example_solution);
         this.add_Solution(this.example_solution);
+        console.log('God added example solution', this.example_solution);
         this.changeSolution(this.example_solution);
       },
 
@@ -222,23 +207,20 @@ export class SolutionService {
     );
   }
 
-
-  sendUserInput(userInput:string): void{
-    const requestBody = {text:userInput};
+  sendUserInput(userInput: string): void {
+    const requestBody = { text: userInput };
 
     const endpoint = `${this.apiUrl}/chat`;
-   this.http.post<Solution>(endpoint,userInput).subscribe(
-      (response:Solution) => {
-        const solution = Object.assign(new Solution("God"),response);
-        
+    this.http
+      .post<Solution>(endpoint, userInput)
+      .subscribe((response: Solution) => {
+        const solution = Object.assign(new Solution('God'), response);
+
         //console.log("God returned", response)
         this.add_Solution(solution);
         this.changeSolution(solution);
       });
-
   }
-
-
 
   solution_calculate_total_Conc_target_pH(
     solution: Solution

@@ -17,6 +17,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
@@ -61,7 +62,9 @@ BufferDesignerComponent
     BufferDesignerRoutingModule,
     RouterModule,
      MatExpansionModule,
-     MatTooltipModule
+     MatTooltipModule,
+     MatAutocompleteModule
+
   ],
   exports: [
     BufferDesignerComponent  // <- This is important

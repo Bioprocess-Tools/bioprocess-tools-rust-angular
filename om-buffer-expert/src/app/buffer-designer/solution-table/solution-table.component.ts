@@ -5,6 +5,7 @@ import { Compound } from '../../shared/models/compound.model';
 import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { Ion } from 'src/app/shared/models/ion.model';
 @Component({
   selector: 'app-solution-table',
   templateUrl: './solution-table.component.html',
@@ -87,7 +88,8 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
   }
   return truncConcs;
 }
-  ngOnInit() {
+
+ngOnInit() {
 
     this.solutionService.solutions_list.subscribe(solutions => {
       this.solutions = solutions;
@@ -99,12 +101,19 @@ getIonicConcs(Ionic_Concs:number[]):number[] {
        
          this.selectedSolution = solution;
          this.solution = this.selectedSolution;
+         let ion = new Ion('test',true,[1,2,3],4,[1,2,3],4,[1,2,3]);
+         ion = this.solution.unique_ions[0];
+         console.log(
+           'ion',
+           ion.unionized_conc        );
+
         
       }
     }
   }
     );
 
+    
    
   }
  

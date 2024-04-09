@@ -1,77 +1,114 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
-import { map, tap,shareReplay, share } from 'rxjs/operators';
+import { map, tap, shareReplay, share } from 'rxjs/operators';
 import { Solution } from './shared/models/solution.model';
 import { Compound } from './shared/models/compound.model';
 import { environment } from 'src/environments/environment';
 import { SolutionMixture } from './shared/models/solution_mixture.model';
 import { Step } from './shared/models/step.model';
 
-
-//1. solutions_library a dictionary which contains a solution name and the solution object, 
-//which contains all the solutions with solution_type "single, single-strong, dual, stock.  
-//these are of the type "Solution" (already created ts model for it).  
-//dictionary of buffer_species (both single and dual, and single-strong) 
-//and the compounds associated with it, a dictionary of compounds and its type (A, B, S).  
+//1. solutions_library a dictionary which contains a solution name and the solution object,
+//which contains all the solutions with solution_type "single, single-strong, dual, stock.
+//these are of the type "Solution" (already created ts model for it).
+//dictionary of buffer_species (both single and dual, and single-strong)
+//and the compounds associated with it, a dictionary of compounds and its type (A, B, S).
 // We need to process each of these by category after we get it.
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SolutionMixtureService {
   private apiUrl = environment.apiUrl;
-  solutionsLibrary: {[category: string]: {[subCategory: string]: Solution[]}} = {};
-  bufferSpecies: {[key: string]: any} = {};
-  compounds: {[key: string]: any} = {};
-  solutionMixtureSolutionsReviewSubject = new BehaviorSubject<SolutionMixture>(null);  
-  solutionMixtureSolutionsReview$ = this.solutionMixtureSolutionsReviewSubject.asObservable();  
+  solutionsLibrary: {
+    [category: string]: { [subCategory: string]: Solution[] };
+  } = {};
+  bufferSpecies: { [key: string]: any } = {};
+  compounds: { [key: string]: any } = {};
+  solutionMixtureSolutionsReviewSubject = new BehaviorSubject<SolutionMixture>(
+    null
+  );
+  solutionMixtureSolutionsReview$ =
+    this.solutionMixtureSolutionsReviewSubject.asObservable();
   StepsSubject = new BehaviorSubject<Step[]>([]);
   Steps$ = this.StepsSubject.asObservable();
   allPlotsData: any[] = [];
-  phase_colors: string[] = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#4B0082', '#EE82EE', '#000000', '#A9A9A9', '#FFFFFF'];
+  phase_colors: string[] = [
+    '#FF0000',
+    '#FFA500',
+    '#FFFF00',
+    '#008000',
+    '#0000FF',
+    '#4B0082',
+    '#EE82EE',
+    '#000000',
+    '#A9A9A9',
+    '#FFFFFF',
+  ];
   //solution_colors:string[] = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#4B0082', '#EE82EE', '#000000', '#A9A9A9', '#FFFFFF'];
-  
-  
-  
-  
-  ion_colors:string[] = ['#832c76', '#4F3F84', '#BB3630', '#d0b285', '#00a1d3', '#929580', '#3d5859', '#769f52']; 
-  solution_colors:string[]=['#3e94e5','#c54b6c','#37667e', '#dc828f','#d29f8c', '#a15d98', '#8c7386', '#218b82', '#f27348', '#9c9359', '#874741', '#40393e', '#f4c815', '#2cced2']
 
-  
-  constructor(private http: HttpClient) {
-    
-    
-   }
+  ion_colors: string[] = [
+    '#832c76',
+    '#4F3F84',
+    '#BB3630',
+    '#d0b285',
+    '#00a1d3',
+    '#929580',
+    '#3d5859',
+    '#769f52',
+  ];
+  solution_colors: string[] = [
+    '#3e94e5',
+    '#c54b6c',
+    '#37667e',
+    '#dc828f',
+    '#d29f8c',
+    '#a15d98',
+    '#8c7386',
+    '#218b82',
+    '#f27348',
+    '#9c9359',
+    '#874741',
+    '#40393e',
+    '#f4c815',
+    '#2cced2',
+  ];
 
+  constructor(private http: HttpClient) {}
 
-
-   getSolutionsLibraryProcessed(): Observable<any> {
-    return this.http.get<{[key: string]: any}>(`${this.apiUrl}/get_all_solutions`).pipe(
-      map(data => {
-        const solutions: {[key: string]: Solution} = {};
-        for (const key in data) {
-          solutions[key] = Object.assign(new Solution(""), data[key]);
-        }
-        return this.processSolutions(solutions);
-      }),
-      
-    );
+  getSolutionsLibraryProcessed(): Observable<any> {
+    return this.http
+      .get<{ [key: string]: any }>(`${this.apiUrl}/get_all_solutions`)
+      .pipe(
+        map((data) => {
+          const solutions: { [key: string]: Solution } = {};
+          for (const key in data) {
+            solutions[key] = Object.assign(new Solution(''), data[key]);
+          }
+          return this.processSolutions(solutions);
+        })
+      );
   }
 
-  private processSolutions(solutions: {[key: string]: Solution}): any {
+  private processSolutions(solutions: { [key: string]: Solution }): any {
     const categorized = {
-      'single': { withSalt: [], withoutSalt: [] },
+      single: { withSalt: [], withoutSalt: [] },
       'single-strong': { withSalt: [], withoutSalt: [] },
-      'dual': { withSalt: [], withoutSalt: [] },
-      'stock': { withSalt: [], withoutSalt: [] }
+      dual: { withSalt: [], withoutSalt: [] },
+      stock: { withSalt: [], withoutSalt: [] },
     };
-     //console.log(solutions);
-     for (let key in solutions) {
+    //console.log(solutions);
+    for (let key in solutions) {
       let solution = solutions[key];
       if (solution.solution_type in categorized) {
-        if ('withSalt' in categorized[solution.solution_type] && solution.salt_compound !== null) {
+        if (
+          'withSalt' in categorized[solution.solution_type] &&
+          solution.salt_compound !== null
+        ) {
           categorized[solution.solution_type].withSalt.push(solution);
-        } else if ('withoutSalt' in categorized[solution.solution_type] && solution.salt_compound === null) {
+        } else if (
+          'withoutSalt' in categorized[solution.solution_type] &&
+          solution.salt_compound === null
+        ) {
           categorized[solution.solution_type].withoutSalt.push(solution);
         } else if (solution.solution_type === 'stock') {
           categorized['stock'].withoutSalt.push(solution);
@@ -84,20 +121,20 @@ export class SolutionMixtureService {
   }
 
   getBufferSpeciesProcessed(): Observable<any> {
-    return this.http.get<{[key: string]: any}>(`${this.apiUrl}/get_buffer_species_compound_list_map`).pipe(
-      map(data => this.processBufferSpecies(data))
-    );
+    return this.http
+      .get<{ [key: string]: any }>(
+        `${this.apiUrl}/get_buffer_species_compound_list_map`
+      )
+      .pipe(map((data) => this.processBufferSpecies(data)));
   }
 
-getCompoundsProcessed(): Observable<any> {
-  return this.http.get<{[key: string]: any}>(`${this.apiUrl}/compound-fun-dict`).pipe(
+  getCompoundsProcessed(): Observable<any> {
+    return this.http
+      .get<{ [key: string]: any }>(`${this.apiUrl}/compound-fun-dict`)
+      .pipe(map((data) => this.processCompounds(data))); // replace with your actual endpoint
+  }
 
-
-    map(data => this.processCompounds(data))
-  ); // replace with your actual endpoint
-}
-
-  processBufferSpecies(bufferSpecies: {[key: string]: any}): any {
+  processBufferSpecies(bufferSpecies: { [key: string]: any }): any {
     const processed = {};
 
     for (let name in bufferSpecies) {
@@ -119,15 +156,13 @@ getCompoundsProcessed(): Observable<any> {
     return processed;
   }
 
-
-
-  processCompounds(compounds: {[key: string]: any}): any {
+  processCompounds(compounds: { [key: string]: any }): any {
     //console.log(compounds);
     const processed = { A: [], B: [], S: [] };
 
     for (let name in compounds) {
       let compoundType = compounds[name];
-  
+
       if (['A', 'B', 'S', 'N'].includes(compoundType)) {
         processed[compoundType].push(name);
       }
@@ -137,83 +172,84 @@ getCompoundsProcessed(): Observable<any> {
     return processed;
   }
 
+  // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
+  // to display the solutions in the mixture
+  // solution_mixture object will be a single object
+  // postStepsAndGetSolutionMixture(steps: any[]) {
 
+  //   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
+  //   .subscribe({
+  //   next: (solutionMixture) => {
+  //   this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+  // },
+  // error: (error) => console.error(error)
+  // });
+  // }
 
-// create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
-// to display the solutions in the mixture
-// solution_mixture object will be a single object
-// postStepsAndGetSolutionMixture(steps: any[]) {
- 
+  postStepswithTrigger() {
+    let steps = this.StepsSubject.value;
+    this.StepsSubject.next(steps);
+    console.log('God this is what is going out', this.StepsSubject.value);
+    this.http
+      .post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, {
+        steps: this.StepsSubject.value,
+      })
+      .subscribe({
+        next: (solutionMixture) => {
+          this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
 
+          console.log('God just got data back', solutionMixture);
+        },
+        error: (error) => console.error(error),
+      });
+  }
 
-//   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
-//   .subscribe({
-//   next: (solutionMixture) => {
-//   this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
-// },
-// error: (error) => console.error(error)
-// });
-// }
+  postMake() {
+    let steps = this.StepsSubject.value;
+    this.StepsSubject.next(steps);
+    let makeSteps = steps.filter((step) => step.category === 'Make');
+    console.log('God - your make steps', makeSteps);
+    this.http
+      .post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, {
+        steps: makeSteps,
+      })
+      .subscribe({
+        next: (solutionMixture) => {
+          //write code to add the associated_solution to steps based on the solution_mixture object's solutions
+          let solutionIndex = 0; // To keep track of the current index in the solutions list
 
-postStepswithTrigger() {
-  let steps = this.StepsSubject.value;
-  this.StepsSubject.next(steps);
-  console.log("God this is what is going out", this.StepsSubject.value)
-  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps: this.StepsSubject.value })
-  .subscribe({
-    next: (solutionMixture) => {
-    this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+          steps.forEach((step) => {
+            console.log(
+              'God - iterating through steps',
+              step.category,
+              solutionIndex,
+              step.associated_solution
+            );
+            if (step.category === 'Make') {
+              // Check to prevent index out-of-bound error
+              if (solutionIndex < solutionMixture.solutions.length) {
+                step.associated_solution =
+                  solutionMixture.solutions[solutionIndex].name;
+                solutionIndex++; // Move to the next solution for the next 'Make' step
+              } else {
+                console.warn('More Make steps than solutions available.');
+              }
+            }
+          });
 
-      console.log("God just got data back",solutionMixture)
+          this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
+        },
+        error: (error) => console.error(error),
+      });
+  }
 
-  },
-  error: (error) => console.error(error)
-  });
-  
-}
-
-postMake() {
-  let steps = this.StepsSubject.value;
-  this.StepsSubject.next(steps);
-  let makeSteps = steps.filter(step => step.category === 'Make');
-  console.log("God - your make steps", makeSteps);
-  this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps:makeSteps })
-  .subscribe({
-    next: (solutionMixture) => {
-    //write code to add the associated_solution to steps based on the solution_mixture object's solutions
-    let solutionIndex = 0; // To keep track of the current index in the solutions list
-
-    steps.forEach(step => {
-      console.log("God - iterating through steps", step.category, solutionIndex, step.associated_solution)
-      if (step.category === 'Make') {
-        // Check to prevent index out-of-bound error
-        if (solutionIndex < solutionMixture.solutions.length) {
-          step.associated_solution = solutionMixture.solutions[solutionIndex].name;
-          solutionIndex++; // Move to the next solution for the next 'Make' step
-        } else {
-          console.warn('More Make steps than solutions available.');
-        }
-      }
-    });
-   
-    this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
-  },
-  error: (error) => console.error(error)
-  });
-  
-}
-
-
-
-
-
-      initData() {
-        return (): Promise<any> => {
+  initData() {
+    return (): Promise<any> => {
       return new Promise((resolve, reject) => {
         forkJoin({
           solutionsLibrary: this.getSolutionsLibraryProcessed(),
           compounds: this.getCompoundsProcessed(),
-          bufferSpecies: this.getBufferSpeciesProcessed()
+          bufferSpecies: this.getBufferSpeciesProcessed(),
         }).subscribe({
           next: (data) => {
             this.solutionsLibrary = data.solutionsLibrary;
@@ -221,10 +257,9 @@ postMake() {
             this.bufferSpecies = data.bufferSpecies; // Assuming data.bufferS
             resolve(data);
           },
-          error: (error) => reject(error)
+          error: (error) => reject(error),
         });
       });
     };
   }
-
 }

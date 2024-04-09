@@ -2,7 +2,14 @@
 <mat-card class="main-card-container">
   <form [formGroup]="bufferForm" (ngSubmit)="onSubmit()" class="formf">
     <mat-card class="calculator">
-
+      <mat-form-field class="option1-full-width" appearance="fill">
+        <input type="text" placeholder="Select buffer species" aria-label="Number" matInput formControlName="bufferspeckey" [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onBufferSpeciesSelected($event)">
+    <mat-option *ngFor="let option of bufferSpeciesKeys" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+      </mat-form-field>
       <div class="col1">
 
         <mat-form-field class="option1-full-width_Left" appearance="fill">
