@@ -1,39 +1,52 @@
 
 <mat-card class="main-card-container">
   <form [formGroup]="bufferForm" (ngSubmit)="onSubmit()" class="formf">
-    <mat-card class="calculator">
-      <mat-form-field class="option1-full-width" appearance="fill">
-        <input type="text" placeholder="Select buffer species" aria-label="Number" matInput formControlName="bufferspeckey" [matAutocomplete]="auto">
+          <div class="input">
+            <mat-card class="autocomplete_input">
+       <mat-form-field  appearance="fill">
+        <input matInput type="text" placeholder="Select buffer species by typing first few letters" aria-label="Number" formControlName = "bufferSpeciesControl" [matAutocomplete]="auto">
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onBufferSpeciesSelected($event)">
-    <mat-option *ngFor="let option of bufferSpeciesKeys" [value]="option">
+    <mat-option *ngFor="let option of filteredBufferSpecies |async " [value]="option">
       {{option}}
     </mat-option>
   </mat-autocomplete>
-      </mat-form-field>
-      <div class="col1">
+      </mat-form-field> 
+      </mat-card>
+        <mat-form-field class="option1-full-width" appearance="fill">
+          <mat-label>Total buffer conc. (M) </mat-label>
+          <mat-hint *ngIf="bufferForm.get('totalConcentration').errors?.['max'] ">Conc should be less than 0.4 </mat-hint>
+          <input matInput type="number" formControlName="totalConcentration" placeholder="total conc. of buffer species (M)"
+            required>
+        
+        </mat-form-field>
+          <mat-form-field class="option1-full-width" appearance="fill">
+          <mat-label>Target pH</mat-label>
+          <mat-hint *ngIf="bufferForm.get('target_pH').errors?.['max'] || bufferForm.get('target_pH').errors?.['min'] ">Conc should be between 3 and 10 </mat-hint>
+          <input matInput type="number" formControlName="target_pH" required>
+       
+        </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+        <mat-form-field class="option1-full-width" appearance="fill">
           <mat-label for="acidicCompound">Acidic Compound</mat-label>
           <mat-select id="acidicCompound" name="acidicCompound"
             ngDefaultControl
             formControlName="acidicCompound"    required>
-            <mat-option *ngFor="let compound of acidCompounds"
+            <mat-option *ngFor="let compound of selectedAcidCompounds"
               [value]="compound" >
               {{ compound }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+                <mat-form-field class="option1-full-width" appearance="fill">
           <mat-label>Basic Compound</mat-label>
           <mat-select formControlName="basicCompound"   required>
-            <mat-option *ngFor="let compound of basicCompounds"
+            <mat-option *ngFor="let compound of selectedBasicCompounds"
               [value]="compound">
               {{ compound }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+                <mat-form-field class="option1-full-width" appearance="fill">
           <mat-label>Salt Compound</mat-label>
           <mat-select formControlName="saltCompound" >
             <mat-option *ngFor="let compound of saltCompounds"
@@ -42,37 +55,39 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-      </div>
-
-      <div class="col2">
-
-        <mat-form-field class="option1-full-width_Right" appearance="fill">
-          <mat-label>Total buffer conc. (M) </mat-label>
-          <mat-hint *ngIf="bufferForm.get('totalConcentration').errors?.['max'] ">Conc should be less than 0.4 </mat-hint>
-          <input matInput type="number" formControlName="totalConcentration" placeholder="total conc. of buffer species (M)"
-            required>
-        
-        </mat-form-field>
-
-        <mat-form-field class="option1-full-width_Right" appearance="fill">
+                <mat-form-field class="option1-full-width" appearance="fill">
           <mat-label>Salt Conc. (M) </mat-label>
           <mat-hint *ngIf="bufferForm.get('saltConcentration').errors?.['max']">Conc should be less than 1 </mat-hint>
           <input matInput type="number" formControlName="saltConcentration" placeholder="salt concentration">
         
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right" appearance="fill">
-          <mat-label>Target pH</mat-label>
-          <mat-hint *ngIf="bufferForm.get('target_pH').errors?.['max'] || bufferForm.get('target_pH').errors?.['min'] ">Conc should be between 3 and 10 </mat-hint>
-          <input matInput type="number" formControlName="target_pH" required>
-       
-        </mat-form-field>
+              <button class="wide-button"  mat-raised-button color="accent"
+      type="submit"[disabled]="bufferForm.invalid">Get Buffer Design</button>
+              <div *ngIf="bufferForm.hasError('invalidBufferSelection')"><p class="red_flag">Choose atleast one buffer species containing compound</p></div>
+
+    </div>
+    <mat-card class="calculator">
+
+
+      <div class="col1">
+
+
+
+
 
       </div>
-      <div *ngIf="bufferForm.hasError('invalidBufferSelection')"><p class="red_flag">Choose atleast one buffer species containing compound</p></div>
-      <button class="wide-button"  mat-raised-button color="accent"
-      type="submit"[disabled]="bufferForm.invalid">Get Buffer Design</button>
+
+      <div class="col2">
+
+
+
+
+
+
+
+      </div>
+
     </mat-card>
   </form>
   <mat-card class="summary">

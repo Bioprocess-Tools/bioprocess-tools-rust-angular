@@ -3,8 +3,8 @@ import { SolutionService } from '../../solution.service';
 import { Compound } from '../../shared/models/compound.model';
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { startWith, map, buffer } from 'rxjs/operators';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Solution } from '../../shared/models/solution.model';
 import { SolutionMixtureService } from 'src/app/solution-mixture.service';
@@ -21,6 +21,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   acidCompounds: string[] = [];
   basicCompounds: string[] = [];
   saltCompounds: string[] = [];
+  selectedAcidCompounds: string[] = [];
+  selectedBasicCompounds: string[] = [];
+
   example_solution: Solution;
   buffer_compound_names: string[] = [];
   bufferSpecies: { [key: string]: any } = {};
@@ -28,6 +31,8 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   keyed_compounds: { [key: string]: any } = {};
   public godSolution = new Solution('God solution'); //solution to hold the user input
   public returnedSolution: Solution; //solution to hold the return from api
+
+  filteredBufferSpecies: Observable<string[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +46,11 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.bufferSpecies = this.solutionMixtureService.bufferSpecies;
     this.bufferSpeciesKeys = Object.keys(this.bufferSpecies);
     this.keyed_compounds = this.solutionMixtureService.compounds;
+    //we will monitor value changes on the autocomplete field of bufferSpeciesControl and filter the bufferSpeciesKeys accordingly
+    this.filteredBufferSpecies = this.bufferForm.get('bufferSpeciesControl').valueChanges.pipe(
+      startWith(''),
+      map((value: string) => this._filterBufferSpecies(value))
+    );
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution) {
@@ -51,6 +61,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
           this.saltCompounds = this.solutionService.getAppSaltCompounds();
           this.buffer_compound_names =
             this.solutionService.getAppBufferCompounds();
+          this.selectedAcidCompounds = this.acidCompounds;
+          this.selectedBasicCompounds = this.basicCompounds;
+
           //  console.log("God: got buffer compounds", this.buffer_compound_names);
           //  console.log("God: current solution",solution )
           // Assuming you have a method to handle the form population
@@ -70,6 +83,28 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     // console.log("God: done populating after subscribe", this.bufferForm.value);
   }
 
+  private _filterBufferSpecies(value: string): string[] {
+    const filterValue = value.replace(/-/g, ' ').toLowerCase();
+    const filteredOptions =  this.bufferSpeciesKeys.filter((bufferSpecies) =>
+      bufferSpecies.replace(/-/g, ' ').toLowerCase().includes(filterValue)
+    );
+
+      const sortedFilteredOptions = filteredOptions.sort((a, b) => {
+        // Check if either option starts with the filter value
+        const startsWithA = a.toLowerCase().startsWith(filterValue) ? -1 : 1;
+        const startsWithB = b.toLowerCase().startsWith(filterValue) ? -1 : 1;
+
+        // If both or neither start with the filter value, preserve original order
+        if (startsWithA === startsWithB) {
+          return 0;
+        }
+
+        // Otherwise, sort by whether an option starts with the filter value
+        return startsWithA < startsWithB ? -1 : 1;
+      });
+
+      return sortedFilteredOptions;
+  }
   bufferSelectionValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let isValid = true;
@@ -96,7 +131,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       // console.log("God in populate form option 2 ", solution)
       let saltname: string = 'None';
       let saltconc = 0;
-      this.bufferForm.controls['bufferspeckey'].setValue('');
+
       this.bufferForm.controls['acidicCompound'].setValue(acidname);
       //  console.log("God: getvalue", this.bufferForm.controls['acidicCompound'].getRawValue());
       if (acidname in this.acidCompounds) {
@@ -120,6 +155,10 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
         this.bufferForm.controls['saltCompound'].setValue(saltname);
         this.bufferForm.controls['saltConcentration'].setValue(saltconc);
       }
+
+      this.bufferForm.controls['bufferSpeciesControl'].setValue(
+        ''
+      );
       //console.log("God: populating", this.bufferForm.value);
 
       this.bufferForm.updateValueAndValidity({
@@ -131,13 +170,74 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   }
 
   onBufferSpeciesSelected($event) {
-
+    
+    
     let bufferSpeciesSelected = $event.option.value;
-    let compounds = this.bufferSpecies[bufferSpeciesSelected];
-    this.bufferForm.controls['acidicCompound'].setValue(compounds[0]);
-    this.bufferForm.controls['basicCompound'].setValue(compounds[1]);
+    console.log('God: buffer species selected', bufferSpeciesSelected);
+
+    console.log('God; acidic compounds', this.acidCompounds);
+    console.log('God: basic compounds', this.basicCompounds);
+
+    const results: string[][] = [];
+   let acids = new Set<string>();
+   let bases = new Set<string>();
+
+    // Iterate over each key in the object
+    for (const [key, value] of Object.entries(this.bufferSpecies)) {
+      // Check if the key starts with the given prefix, ignoring case
+      if (key.toLowerCase().startsWith(bufferSpeciesSelected.toLowerCase())) {
+        // If it matches, add its compounds to the results
+        console.log('God: value', value.compounds);
+        value.compounds.forEach(compound => {
+          if(this.acidCompounds.includes(compound)){
+            acids.add(compound);
+          }
+          else if(this.basicCompounds.includes(compound)){
+            bases.add(compound);
+          }
+      });
+
+    }
+  }
+
+  console.log('God: acids', acids);
+  console.log('God: bases', bases);
+this.selectedAcidCompounds = Array.from(acids);
+this.selectedBasicCompounds = Array.from(bases);
+this.bufferForm.controls['acidicCompound'].setValue(
+  this.selectedAcidCompounds[0]
+);
+this.bufferForm.controls['basicCompound'].setValue(
+  this.selectedBasicCompounds[0]
+);
+
+
+    console.log('God: results', results);
+    let compoundobj = this.bufferSpecies[bufferSpeciesSelected];
+    let compounds = compoundobj.compounds;
+    console.log('God: buffer species selected', compoundobj.compounds, compounds  );
+    // //write code to check which list compounds belong to
+    // if (this.acidCompounds.includes(compounds[0])) {
+    //   console.log('God: acid compound selected', compounds[0]);
+    //   this.bufferForm.controls['acidicCompound'].setValue(compounds[0]);
+    // } else if (this.basicCompounds.includes(compounds[0])) {
+    //   console.log('God: basic compound selected', compounds[0]);
+    //   this.bufferForm.controls['basicCompound'].setValue(compounds[0]);
+    // }
+    // if (this.acidCompounds.includes(compounds[1])) {
+    //   console.log('God: acid compound selected', compounds[1]);
+    //   this.bufferForm.controls['acidicCompound'].setValue(compounds[1]);
+    // } else if (this.basicCompounds.includes(compounds[1])) {
+    //   console.log('God: basic compound selected', compounds[1]);
+    //   this.bufferForm.controls['basicCompound'].setValue(compounds[1]);
+    // }
+
+  //console.log("God: buffer species selected", this.bufferForm.value);
+
+ 
+
+
     //console.log("God: buffer species selected", this.bufferForm.value);
-  
   }
 
   ngOnDestroy() {
@@ -148,6 +248,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   initializeForm() {
     this.bufferForm = this.formBuilder.group(
       {
+        bufferSpeciesControl: [''],
         acidicCompound: ['Sodium Phosphate Monobasic', Validators.required],
         basicCompound: ['Sodium Phosphate Dibasic', Validators.required],
         saltCompound: 'Sodium Chloride',
@@ -189,7 +290,8 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     }
 
     this.godSolution.pH = target_pH;
-
+    this.godSolution.buffer_species=this.bufferForm.get('bufferSpeciesControl').value;
+    console.log("God: god buffer species", this.bufferForm.get('bufferSpeciesControl').value);
     this.calculatepH();
     this.bufferForm.markAsUntouched();
   }

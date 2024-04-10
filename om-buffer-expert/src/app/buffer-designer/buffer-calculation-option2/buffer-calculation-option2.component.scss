@@ -3,26 +3,39 @@
 .main-card-container {
   display: grid;
   //margin-top: 15px;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
   grid-template-areas:
+  "input"
     "calculator"
     "summary";
   gap: 5px;
   padding:5px;
   background-color:transparent;
-  grid-area: 1/1;
+
   box-shadow: none;
   align-items: center;
 }
 .formf{
   background-color: transparent;
 }
+.option1-full-width {
+display:flex;
+  width: 95%;
+  margin-bottom: 8px;
+  margin-right:8px;
+  //border:1px solid black;
+  align-self:center;
+}
+
 .calculator {
+  grid-area:calculator;
   display: grid;
 
   grid-template-columns: 1.25fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas:
+
     "col1" "col2";
   width: 98%;
   border-color: $primary-color;
@@ -33,6 +46,60 @@
   justify-items: center;
   box-shadow: none;
 }
+.input {
+  grid-area: input;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+
+  width: 98%;
+  margin-left: 0.5vw;
+  box-shadow: none;
+  justify-content: center ;
+  align-items: center;
+  justify-items: center;
+}
+
+.autocomplete_input  {
+  display:flex;
+  grid-column:span 2;
+  width: 70%;
+  margin-bottom: 8px;
+
+
+  align-self:center;
+  background-color: whitesmoke;
+  
+  box-shadow:none;
+
+}
+
+
+// .autocomplete_input .mat-input-element {
+//   border-radius: 25px;
+//   padding:10px;
+//   /* Applies rounded corners to the input area */
+// } 
+
+// .autocomplete_input .mat-form-field-label {
+//    transform: translate(10px, -6px) scale(0.75);
+
+// }
+
+// .autocomplete_input .mat-form-field-appearance-outline .mat-form-field-outline-start {
+//   border-radius: 20px 0 0 20px;
+// }
+
+// .autocomplete_input .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//   border-radius: 0 20px 20px 0;
+// }
+
+// /* If using the fill appearance, adjust the background and border radius of the container */
+// .autocomplete_input .mat-form-field-appearance-fill .mat-form-field-flex {
+//   border-radius: 20px;
+//   background-color: #f5f5f5; /* Light grey background, adjust as desired */
+// }
+
+
 
 .option1-full-width_Left {
   width: 98%;
@@ -54,14 +121,16 @@
 }
 
 .summary {
+  grid-area: summary;
   width: 97%;
   margin-left: 0.5vw;
   box-shadow: none;
 }
 .wide-button {
-  grid-column: span 2;
+ // grid-column: span 2;
   width: 90%;
   margin-left: 0.5vw;
+
 }
 
 .solution-card {
@@ -71,7 +140,7 @@
   border-color: $primary-color;
   width:99%;
   align-self:center;
- 
+ box-shadow:none;
 }
 
 .example-card-holder {
@@ -95,11 +164,15 @@
 .red_flag {
   color:red;
   margin-left:20px;
+  margin-top:5px;
+  margin-bottom:5px;
 }
 
 .green_flag {
   color:rgb(18, 121, 7);
   margin-left:20px;
+    margin-top:5px;
+  margin-bottom:5px;
 }
 
 .message-card{
