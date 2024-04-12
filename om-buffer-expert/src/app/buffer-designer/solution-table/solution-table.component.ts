@@ -20,7 +20,7 @@ export class SolutionTableComponent implements OnInit, AfterViewInit,OnDestroy {
   imageUrl:string;
   example_solution:Solution;
   solutionSubscription?:Subscription;
-  trace:any;
+  trace:any[];
   layout:any;
 
 constructor(
@@ -124,51 +124,57 @@ ngOnInit() {
     // Assuming you have a method to handle the heatmap generation
 
 
-    let dataPoints1 = this.solution.heat_map_data['data_points'];
-    const dataPoints = [
-      { x: 0.95, y: 0.95, pH: 7.0 },
-      { x: 0.95, y: 1.0, pH: 7.1 },
-      { x: 1.0, y: 0.95, pH: 7.2 },
-      { x: 1.05, y: 1.05, pH: 7.3 },
-    ];
+    let dataPoints = this.solution.heat_map_data['data_points'];
+    // const dataPoints = [
+    //   { x: 0.95, y: 0.95, pH: 7.0 },
+    //   { x: 0.95, y: 1.0, pH: 7.1 },
+    //   { x: 1.0, y: 0.95, pH: 7.2 },
+    //   { x: 1.05, y: 1.05, pH: 7.3 },
+    // ];
 
 
-const xValues = dataPoints.map((dp) => dp.x * 100);
-const yValues = dataPoints.map((dp) => dp.y * 100);
-const zValues = dataPoints.map((dp) => dp.pH);
-this.trace = {
-  x: xValues,
-  y: yValues,
-  z: zValues,
-  type: 'heatmap',
-  colorscale: [
-    [0, 'green'],
-    [0.5, 'yellow'],
-    [1, 'red'],
-  ],
-  showscale: true,
-};
+const xValues = dataPoints.map((dp) => dp.x * 100-100);
+const yValues = dataPoints.map((dp) => dp.y * 100-100);
+const zValues = dataPoints.map((dp) => dp.deviation);
+this.trace = [
+  {
+    x: xValues,
+    y: yValues,
+    z: zValues,
+    type: 'heatmap',
+    colorscale: [
+      [0, '#4daf4a'],
+
+      [0.099, '#4daf4a'],
+      [0.1, 'orange'],
+      [0.299, 'orange'],
+      [0.3, '#e41a1b'],
+      [1, '#e41a1b'],
+    ],
+    showscale: true,
+  },
+];
 
 this.layout = {
   title: 'pH Deviations Heatmap',
-  //annotations: [],
+  annotations: [],
 };
 
-// dataPoints.forEach((dp) => {
-//   layout.annotations.push({
-//     x: dp.x * 100,
-//     y: dp.y * 100,
-//     xref: 'x',
-//     yref: 'y',
-//     text: dp.pH.toFixed(2),
-//     showarrow: false,
-//     font: {
-//       family: 'Arial',
-//       size: 12,
-//       color: 'black',
-//     },
-//   });
-// });
+dataPoints.forEach((dp) => {
+  this.layout.annotations.push({
+    x: dp.x * 100-100,
+    y: dp.y * 100-100,
+    xref: 'x',
+    yref: 'y',
+    text: dp.pH.toFixed(2),
+    showarrow: false,
+    font: {
+      family: 'Arial',
+      size: 12,
+      color: 'black',
+    },
+  });
+});
 
 console.log("God trace", this.trace);
 console.log("God layout", this.layout);
