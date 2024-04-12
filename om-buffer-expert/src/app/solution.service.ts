@@ -64,6 +64,17 @@ export class SolutionService {
     this.solutionSource.next(solution);
     //console.log("God: changing solution", solution);
   }
+  deleteSolution(solution: Solution) {
+    // Get the current list of solutions
+    const currentSolutions = this.solution_list_Source.value;
+    // Remove the selected solution from the list
+    const updatedSolutions = currentSolutions.filter(
+      (s) => s !== solution
+    );
+    // Update the BehaviorSubject with the new list
+    this.solution_list_Source.next(updatedSolutions);
+    //console.log("God: deleting solution", solution);
+  }
 
   api_get_buffer_compound_names(): Observable<string[]> {
     return this.http.get<string[]>(this.apiUrl + '/get_buffer_compound_names');

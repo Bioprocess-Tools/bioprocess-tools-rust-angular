@@ -16,6 +16,7 @@ export class Solution {
   buffer_species: string;
   volume: number;
   solution_type: string;
+  heat_map_data: {};
  
 
   constructor(name: string) {

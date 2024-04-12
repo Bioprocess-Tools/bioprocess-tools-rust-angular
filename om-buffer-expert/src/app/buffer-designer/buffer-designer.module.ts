@@ -18,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist-min';
 
 
 import {MatCardModule} from '@angular/material/card';
@@ -32,7 +33,7 @@ import { BufferDesignerRoutingModule } from './buffer-designer-routing.module';
 import { RouterModule } from '@angular/router';
 import {MatExpansionModule} from '@angular/material/expansion'
 
-
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ BufferDesignerComponent
     RouterModule,
      MatExpansionModule,
      MatTooltipModule,
-     MatAutocompleteModule
+     MatAutocompleteModule,
+     PlotlyModule,
 
   ],
   exports: [

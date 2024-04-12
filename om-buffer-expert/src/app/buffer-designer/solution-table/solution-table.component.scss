@@ -1,7 +1,7 @@
 @import '../../../shared-styles.scss';
 
 .card-background {
- //background-color: rgb(201, 28, 28);
+ background-color: rgb(201, 28, 28);
   color:black;
   margin: 5px;
 }
@@ -9,13 +9,14 @@
 ///////This is for the solutions scroll list///////////////
 .grid-container {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: column;
-  grid-auto-columns: auto;
+  //grid-auto-columns: auto;
   margin: 5px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  //background-color: $card-background-cream;
+  background-color: $card-background-cream;
   box-shadow:none;
   //background-color: rgb(176, 239, 239);
   border-width: 3px;
@@ -24,30 +25,69 @@ gap:5px;
 }
 
 .grid-item {
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  align-items: flex-start;
   //gap:20px;
-  max-width: 35vw;
- max-height: 350px;
+  //max-width: 35vw;
+ //max-height: 350px;
+  height:150px;
   margin: 10px;
   scroll-snap-align: start;
- //background-color: $card-background;
+ background-color: $card-background;
   color: black;
   margin:3px;
-
-
+width:30vw;
+@media (max-width:450px){
+  width:150px;
+ height: 60px;
   //background-color: rgb(184, 178, 178);
 }
+}
+.solution_num {
+  font-size:x-small;
+  font-style:bold;
+  //align-self:left;
+  //margin: 0px;
+  margin:10px;
+  //justify-self:left;
+  align-self:center;
+  //height:100%;
+}
 
+.bottom-line {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+//align-self:flex-end;
+justify-content: right;
+width:100%;
+}
 .solution_summary {
 box-shadow:inset;
-//background-color: aqua;
+background-color: aqua;
 margin:3px;
 border-width: 3px;
 border-color: $primary-color;
 }
 
+.delete-button {
+
+  color: rgb(183, 8, 8);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  margin-top:auto;
+ justify-self: right;
+ //align-self:center;
+}
+
 .solution_title {
   margin-top:5px;
   margin-bottom: 5px;
+  align-self:flex-end;
 }
 
 ///////This is for the solutions scroll list///////////////

@@ -23,7 +23,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   saltCompounds: string[] = [];
   selectedAcidCompounds: string[] = [];
   selectedBasicCompounds: string[] = [];
-
+  buffer_label: string = 'Total Buffer Conc. (M)';
   example_solution: Solution;
   buffer_compound_names: string[] = [];
   bufferSpecies: { [key: string]: any } = {};
@@ -140,9 +140,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
       this.bufferForm.controls['basicCompound'].setValue(basename);
       this.bufferForm.controls['totalConcentration'].setValue(
-        solution.target_buffer_concentration
+        parseFloat(solution.target_buffer_concentration.toFixed(4))
       );
-      this.bufferForm.controls['target_pH'].setValue(solution.pH);
+      this.bufferForm.controls['target_pH'].setValue(parseFloat(solution.pH.toFixed(3)));
       //console.log("God here in salt", solution.non_salt_compounds[0].name);
       if (solution.compounds.length == 3) {
         //console.log("God: came here because there is salt",solution.salt_compound.name );
@@ -211,6 +211,7 @@ this.bufferForm.controls['basicCompound'].setValue(
   this.selectedBasicCompounds[0]
 );
 
+this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
 
     console.log('God: results', results);
     let compoundobj = this.bufferSpecies[bufferSpeciesSelected];

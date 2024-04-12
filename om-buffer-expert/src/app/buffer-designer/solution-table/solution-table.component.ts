@@ -6,6 +6,7 @@ import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Ion } from 'src/app/shared/models/ion.model';
+
 @Component({
   selector: 'app-solution-table',
   templateUrl: './solution-table.component.html',
@@ -19,6 +20,9 @@ export class SolutionTableComponent implements OnInit, AfterViewInit,OnDestroy {
   imageUrl:string;
   example_solution:Solution;
   solutionSubscription?:Subscription;
+  trace:any;
+  layout:any;
+
 constructor(
   private solutionService: SolutionService, 
   private omRoute:Router,
@@ -64,7 +68,9 @@ viewDetails(solution:Solution, index:number,event: MouseEvent) {
   this.scrollToSolution(solution, index)
 
 }
-
+deleteSolution(solution: Solution) {
+  this.solutionService.deleteSolution(solution);
+}
 
 editSolution(solution: Solution) {
   // Assuming 'solution' is the data you want to pass to the forms
@@ -101,13 +107,10 @@ ngOnInit() {
        
          this.selectedSolution = solution;
          this.solution = this.selectedSolution;
-         let ion = new Ion('test',true,[1,2,3],4,[1,2,3],4,[1,2,3]);
-         ion = this.solution.unique_ions[0];
-         console.log(
-           'ion',
-           ion.unionized_conc        );
-
-        
+         if (Object.keys(this.solution.heat_map_data).length > 0) {
+         console.log("God heatmap", this.solution.heat_map_data);
+        this.generateHeatMap();
+         }
       }
     }
   }
@@ -116,5 +119,59 @@ ngOnInit() {
     
    
   }
+
+  generateHeatMap() {
+    // Assuming you have a method to handle the heatmap generation
+
+
+    let dataPoints1 = this.solution.heat_map_data['data_points'];
+    const dataPoints = [
+      { x: 0.95, y: 0.95, pH: 7.0 },
+      { x: 0.95, y: 1.0, pH: 7.1 },
+      { x: 1.0, y: 0.95, pH: 7.2 },
+      { x: 1.05, y: 1.05, pH: 7.3 },
+    ];
+
+
+const xValues = dataPoints.map((dp) => dp.x * 100);
+const yValues = dataPoints.map((dp) => dp.y * 100);
+const zValues = dataPoints.map((dp) => dp.pH);
+this.trace = {
+  x: xValues,
+  y: yValues,
+  z: zValues,
+  type: 'heatmap',
+  colorscale: [
+    [0, 'green'],
+    [0.5, 'yellow'],
+    [1, 'red'],
+  ],
+  showscale: true,
+};
+
+this.layout = {
+  title: 'pH Deviations Heatmap',
+  //annotations: [],
+};
+
+// dataPoints.forEach((dp) => {
+//   layout.annotations.push({
+//     x: dp.x * 100,
+//     y: dp.y * 100,
+//     xref: 'x',
+//     yref: 'y',
+//     text: dp.pH.toFixed(2),
+//     showarrow: false,
+//     font: {
+//       family: 'Arial',
+//       size: 12,
+//       color: 'black',
+//     },
+//   });
+// });
+
+console.log("God trace", this.trace);
+console.log("God layout", this.layout);
  
   }
+}
