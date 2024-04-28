@@ -1,8 +1,8 @@
-@import '../../../shared-styles.scss';
+@import "../../../shared-styles.scss";
 
 .card-background {
- background-color: rgb(201, 28, 28);
-  color:black;
+  background-color: $card-background-cream;
+  color: black;
   margin: 5px;
 }
 
@@ -11,83 +11,86 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: column;
-  //grid-auto-columns: auto;
   margin: 5px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  background-color: $card-background-cream;
-  box-shadow:none;
-  //background-color: rgb(176, 239, 239);
+  box-shadow: none;
   border-width: 3px;
-border-color: $primary-color;
-gap:5px;
+  border-color: $primary-color;
+  gap: 5px;
 }
 
 .grid-item {
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  //gap:20px;
-  //max-width: 35vw;
- //max-height: 350px;
-  height:150px;
+  height: 90%;
   margin: 10px;
   scroll-snap-align: start;
- background-color: $card-background;
+  background-color: whitesmoke;
   color: black;
-  margin:3px;
-width:30vw;
-@media (max-width:450px){
-  width:150px;
- height: 60px;
-  //background-color: rgb(184, 178, 178);
-}
+  margin: 3px;
+  width: 30vw;
+  @media (max-width: 450px) {
+
+  }
 }
 .solution_num {
-  font-size:x-small;
-  font-style:bold;
-  //align-self:left;
-  //margin: 0px;
-  margin:10px;
-  //justify-self:left;
-  align-self:center;
-  //height:100%;
+  font-size: x-small;
+  font-style: bold;
+
+  margin: 10px;
+
+  align-self: center;
+
+  @media (max-width: 450px) {
+    font-size: xx-small;
+  }
 }
 
 .bottom-line {
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
-//align-self:flex-end;
-justify-content: right;
-width:100%;
+  justify-content: right;
+  width: 100%;
 }
 .solution_summary {
-box-shadow:inset;
-background-color: aqua;
-margin:3px;
-border-width: 3px;
-border-color: $primary-color;
+  box-shadow: inset;
+  background-color: whitesmoke;
+  margin: 3px;
+  border-width: 3px;
+  border-color: $primary-color;
 }
-
+.heatmap {
+  width: 800px;
+  @media screen and (max-width: 450px) {
+    width: 90vw;
+  }
+}
 .delete-button {
-
   color: rgb(183, 8, 8);
   border: none;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
   cursor: pointer;
-  margin-top:auto;
- justify-self: right;
- //align-self:center;
+  margin-top: auto;
+  justify-self: right;
+  //align-self:center;
+}
+.d_icon {
+  font-size: 20px;
+  @media screen and (max-width: 450px) {
+    font-size: 18px;
+  }
 }
 
 .solution_title {
-  margin-top:5px;
+  margin-top: 5px;
   margin-bottom: 5px;
-  align-self:flex-end;
+  align-self: flex-end;
 }
 
 ///////This is for the solutions scroll list///////////////
@@ -95,25 +98,23 @@ border-color: $primary-color;
   border: 3px solid $accent-green; /* Change color as per your requirement */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
 .unhighlighted-card {
-  border:$primary-color;
+  border: $primary-color;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.less-space{
-  margin-bottom:1px;
-  margin-top:3px;
+.less-space {
+  margin-bottom: 1px;
+  margin-top: 3px;
 }
 
 .pH {
-  margin-bottom:1px;
-  margin-top:3px;
- // padding-left:5px;
+  margin-bottom: 1px;
+  margin-top: 3px;
+  // padding-left:5px;
 }
 .thick {
   border-top-width: 2px;
   border-color: $headtext-color;
-
 }
 .thick-color {
   border-top-width: 2px;
@@ -122,23 +123,22 @@ border-color: $primary-color;
 .solution-compunds {
   display: grid;
   grid-template-columns: 1fr;
-
   background-color: transparent;
 }
 
 .compound-card {
-  background-color: transparent;
+  background: none;
   padding: 4px;
   margin-left: 5px;
   margin-right: 5px;
-  margin-top:1px;
-  margin-bottom:1px;
-
+  margin-top: 1px;
+  margin-bottom: 1px;
   box-shadow: none;
 }
 
 .compound-sub {
-  background-color: whitesmoke;
+
+  border: 1px solid $card-background-cream;
   box-shadow: none;
 }
 
@@ -146,18 +146,14 @@ border-color: $primary-color;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-left: 15px;
-
 }
-
-
 
 mat-card-title {
   margin-left: 8px;
   font-size: medium;
- 
 }
 .utext {
-  color:black;
+  color: black;
 }
 
 .ion-card {
@@ -169,102 +165,152 @@ mat-card-title {
   box-shadow: none;
 }
 .ion-sub {
-  //background-color: $card-background;
-
-  margin: 5px;
-  //border-color: rgb(5, 13, 91);
-  //border-width: .1px;
-  // margin-bottom:0px;
+  //background-color: rgb(229, 237, 230);
+  //margin: 5px;
+  box-shadow: none;
 }
+.ion-name {
+  font-size: small;
+  font-style:italic;
+ // margin: 5px;
+  //margin-left: 10px;
+}
+  .pka-names {
+    font-size: small;
+    margin: 0px;
+    //margin-left: 3px;
+  }
+      .ion-names {
+    font-size: small;
+    margin: 0px;
+   // margin-left: 3px;
+  }
 .unique-ions {
   background-color: whitesmoke;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr 1fr;
   margin: 5px;
-  padding: 0px;
+  padding-bottom: 10px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
   box-shadow: none;
+  gap:5px;
+}
+.species-grid-container {
+  display: grid;
+  grid-template-columns: 100px 65px 65px 65px 65px;
+  & > div {
+    text-align: end;
+  }
+  & > div:nth-child(5n+1) {
+    text-align: start;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 40px 30px 30px 30px 30px;
+    
+  }
+}
+
+.pka-grid-container {
+  display: grid;
+  grid-template-columns: 100px 65px 65px 65px;
+  & > div {
+    text-align: end;
+  }
+  & > div:nth-child(5n+1) {
+    text-align: start;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 40px 40px 40px 40px;
+    
+  }
 }
 
 .unique-sub {
- // box-shadow: inset;
-  //background-color: $card-background;
-  
-  margin: 5px;
+background-color: whitesmoke;
+ //width:50%;
+  //margin: 5px;
 }
 
 .scroll-title {
- font-size: larger;
- //text-transform: capitalize;
- margin:10px;
-}
-/* .mat-headline-5 {
-  margin-top: .2em;
-  text-align: center;
-  font-weight: 600;
+  font-size: larger;
+
+  margin: 10px;
 }
 
+.compound-name {
+  font-size: small;
+  font-weight: bold;
 
-mat-icon {
-  font-size: 24px;
+  padding: 0px;
 }
 
-.highlighted-card {
-  border: 2px solid #ff2a00;
- 
-} 
-*/
 
-@media (max-width:450px){
-.scroll-title {
+@media (max-width: 450px) {
+  .scroll-title {
+  }
+  .unique-sub {
+    width: 45vw;
+    border: 1px solid $card-background-cream;
+  }
 
-}
-.unique-sub{
-  width:38vw;
-}
+  .less-space {
+    font-size: xx-small;
+  }
+  .compound-name {
+    font-size: x-small;
+  }
+  .ion-name {
+    font-size: xx-small;
+    margin: 0px;
+    margin-left: 3px;
+  }
+    .ion-names {
+    font-size: xx-small;
+    margin: 0px;
+   // margin-left: 3px;
+  }
+  .pka-names {
+    font-size: xx-small;
+    margin: 0px;
+    //margin-left: 3px;
+  }
+  .utext {
+    font-size: xx-small;
+    font-style: bold;
+  }
+  .uion-card-content {
+    padding: 2px;
+  }
 
-.less-space {font-size: smaller;}
 
-// .grid-container {
-//   display: grid;
-//   grid-auto-flow: row; /* Adjust to allow content to flow in rows */
-//   grid-auto-rows: 25%; /* Define the size for the auto-generated grid rows */
-//   margin: 5px;
-//   overflow-y: auto; /* Allow vertical scrolling */
-//   overscroll-behavior-y: contain; /* Contain overscroll to the current container */
-//   scroll-snap-type: y proximity; /* Snap scrolling to the closest element edge */
-  
-//   /* Your other styles remain unchanged */
-//   box-shadow: none;
-//   /* Other style properties you need */
-// }
-.grid-container{
-  grid-auto-columns: auto;
-}
-.grid-item {
-  //gap:20px;
-  width: 30vw;
-  //width:auto;
- max-height: 25vw;
-  //max-height: auto;
- // margin: 10px;
- // padding:5px;
- //gap:15px;
-  scroll-snap-align: start;
- background-color: whitesmoke;
-  color: black;
+  .grid-container {
+    grid-auto-columns: auto;
+  }
+  .grid-item {
+    //gap:20px;
+    width: 30vw;
+    //width:auto;
+    //max-height: 25vw;
+    //max-height: auto;
+    // margin: 10px;
+    // padding:5px;
+    //gap:15px;
+    scroll-snap-align: start;
+    background-color: whitesmoke;
+    color: black;
 
-  //background-color: rgb(184, 178, 178);
-}
+    //background-color: rgb(184, 178, 178);
+  }
 
-.scroll-title {
-  padding:3px;
-  margin:1vw;
-  font-size: 13px;
- // text-transform: capitalize;
-}
-
+  .scroll-title {
+    padding: 3px;
+    margin: 1vw;
+    font-size: 13px;
+    // text-transform: capitalize;
+  }
 }

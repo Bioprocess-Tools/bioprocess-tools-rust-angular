@@ -6,6 +6,7 @@ import { ApiService } from '../../api-service.service';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Ion } from 'src/app/shared/models/ion.model';
+import * as Plotly from 'plotly.js';
 
 @Component({
   selector: 'app-solution-table',
@@ -23,6 +24,7 @@ export class SolutionTableComponent implements OnInit, AfterViewInit,OnDestroy {
   trace:any[];
   layout:any;
 
+  annotation_font: 12;
 constructor(
   private solutionService: SolutionService, 
   private omRoute:Router,
@@ -87,10 +89,10 @@ getIonConcentration(compound:Compound, ionIndex:number): number {
 }
 getIonicConcs(Ionic_Concs:number[]):number[] {
   let truncConcs = [];
-  let numb = 0;
-  for (let i = 0; i<Ionic_Concs.length;i++) {
-    
-    truncConcs.push (Ionic_Concs[i].toFixed(2));
+  for (let i = 0; i < Ionic_Concs.length; i++) {
+    truncConcs.push(
+      Ionic_Concs[i] === 0 ? 0 : parseFloat(Ionic_Concs[i].toFixed(2))
+    );
   }
   return truncConcs;
 }
@@ -116,13 +118,33 @@ ngOnInit() {
   }
     );
 
-    
+    window.addEventListener('resize', () => {
+      this.generateHeatMap();
+    }
+  
+  );
    
   }
 
   generateHeatMap() {
-    // Assuming you have a method to handle the heatmap generation
 
+  let fontSize;
+  if (window.innerWidth <= 480) {
+    fontSize = 8; // Small font size for small screens
+  } else if (window.innerWidth <= 768) {
+    fontSize = 10; // Medium font size for medium screens
+  } else {
+    fontSize = 12; // Large font size for large screens
+  }
+let title_font = fontSize + 10;
+let axis_font = fontSize + 2;
+
+    // Assuming you have a method to handle the heatmap generation
+let centerConcentrations = this.solution.heat_map_data['center_concentrations'];
+
+// Assuming centerConcentrations is an array of objects like [{name: 'compound1', value: 0.95}, {name: 'compound2', value: 1.0}]
+let compoundNames = Object.keys(centerConcentrations);
+console.log("god center",centerConcentrations);
 
     let dataPoints = this.solution.heat_map_data['data_points'];
     // const dataPoints = [
@@ -136,6 +158,11 @@ ngOnInit() {
 const xValues = dataPoints.map((dp) => dp.x * 100-100);
 const yValues = dataPoints.map((dp) => dp.y * 100-100);
 const zValues = dataPoints.map((dp) => dp.deviation);
+const maxZValue = 0.3;
+
+const greenBreakpoint = 0.1 / maxZValue;
+const orangeBreakpoint = 0.2 / maxZValue;
+console.log("god dev",zValues)
 this.trace = [
   {
     x: xValues,
@@ -143,24 +170,107 @@ this.trace = [
     z: zValues,
     type: 'heatmap',
     colorscale: [
-      [0, '#4daf4a'],
-
-      [0.099, '#4daf4a'],
-      [0.1, 'orange'],
-      [0.299, 'orange'],
-      [0.3, '#e41a1b'],
+      [0.0, 'green'],
+      [greenBreakpoint, 'green'],
+      [greenBreakpoint + 0.00001, 'orange'],
+      [orangeBreakpoint, 'orange'],
+      [orangeBreakpoint + 0.00001, '#e41a1b'],
       [1, '#e41a1b'],
     ],
+    zmin: 0,
+    zmax: maxZValue,
     showscale: true,
+    colorbar: {
+      x: 0.5,
+      xpad: 10,
+      y: 1,
+      ypad: 10,
+      len: 0.75,
+      thicknessmode: 'fraction',
+      thickness: 0.05,
+      orientation: 'h',
+    },
   },
 ];
+const xTickVals = xValues;
+const xTickText = xValues.map((val) => `${Math.round(val)}%`);
 
+const yTickVals = yValues;
+const yTickText = yValues.map((val) => `${Math.round(val)}%`);
 this.layout = {
-  title: 'pH Deviations Heatmap',
+  autosize: true,
+  width: window.innerWidth,
+  margin: {
+    l: 75, // Adjust left margin
+    r: 25, // Reduce right margin
+    b: 100, // Adjust bottom margin
+    t: 100, // Adjust top margin
+    pad: 0,
+  },
+  title: 'Composition variability heatmap',
+  titlefont: {
+    size: title_font,
+    color: 'black',
+    family: 'Roboto, bold',
+  },
+
   annotations: [],
+  xaxis: {
+    title: {
+      text: compoundNames[0] + '<br>(% change)',
+      standoff: 30,
+      font: {
+        size: axis_font,
+        color: 'black',
+      },
+    },
+    tickvals: xTickVals,
+    ticktext: xTickText,
+    tickfont: {
+      size: fontSize,
+      color: 'black',
+    },
+  },
+  yaxis: {
+    title: {
+      text: compoundNames[1] + '<br>(% change)',
+      standoff: 0,
+      font: {
+        size: axis_font,
+        color: 'black',
+      },
+    },
+
+    tickvals: yTickVals,
+    ticktext: yTickText,
+    tickfont: {
+      size: fontSize,
+      color: 'black',
+    },
+  },
+  shapes: [], // add this line to initialize the shapes array
 };
 
+for (let i = 1; i <= Math.max(...xTickVals, ...yTickVals); i += 2) {
+  this.layout.shapes.push({
+    type: 'rect',
+    x0: -i,
+    y0: -i,
+    x1: i,
+    y1: i,
+    line: {
+      color: 'rgb(159, 159, 159)',
+      width: 1,
+    },
+  });
+}
+
 dataPoints.forEach((dp) => {
+
+
+
+
+
   this.layout.annotations.push({
     x: dp.x * 100-100,
     y: dp.y * 100-100,
@@ -169,8 +279,8 @@ dataPoints.forEach((dp) => {
     text: dp.pH.toFixed(2),
     showarrow: false,
     font: {
-      family: 'Arial',
-      size: 12,
+      family: 'Roboto, bold',
+      size: fontSize,
       color: 'black',
     },
   });
