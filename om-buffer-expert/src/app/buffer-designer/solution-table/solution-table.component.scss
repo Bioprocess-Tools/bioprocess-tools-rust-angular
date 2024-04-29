@@ -1,9 +1,10 @@
 @import "../../../shared-styles.scss";
 
 .card-background {
-  background-color: $card-background-cream;
+  //background-color: $card-background-cream;
   color: black;
   margin: 5px;
+  box-shadow: none;
 }
 
 ///////This is for the solutions scroll list///////////////
@@ -17,7 +18,7 @@
   scroll-snap-type: x proximity;
   box-shadow: none;
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: $border-color;
   gap: 5px;
 }
 
@@ -25,14 +26,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   height: 90%;
   margin: 10px;
   scroll-snap-align: start;
   background-color: whitesmoke;
   color: black;
-  margin: 3px;
+  //margin: 3px;
   width: 30vw;
+  border: 1px solid $card-background-cream;
   @media (max-width: 450px) {
 
   }
@@ -42,6 +44,7 @@
   font-style: bold;
 
   margin: 10px;
+  margin-top:3px;
 
   align-self: center;
 
@@ -57,14 +60,17 @@
   width: 100%;
 }
 .solution_summary {
-  box-shadow: inset;
-  background-color: whitesmoke;
+  box-shadow: none;
+  //background-color: rgb(184, 220, 174);
   margin: 3px;
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: $border-color;
 }
 .heatmap {
-  width: 800px;
+  //align-self: center;
+  //align-items: center;
+  justify-content: center;
+  width: 90vw;
   @media screen and (max-width: 450px) {
     width: 90vw;
   }
@@ -73,8 +79,7 @@
   color: rgb(183, 8, 8);
   border: none;
   border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
+
   cursor: pointer;
   margin-top: auto;
   justify-self: right;
@@ -89,7 +94,7 @@
 
 .solution_title {
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
   align-self: flex-end;
 }
 
@@ -99,7 +104,8 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .unhighlighted-card {
-  border: $primary-color;
+  border: $border-color;
+  border-width:3px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .less-space {
@@ -126,15 +132,15 @@
   background-color: transparent;
 }
 
-.compound-card {
-  background: none;
-  padding: 4px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  box-shadow: none;
-}
+// .compound-card {
+//   background: none;
+//   padding: 4px;
+//   margin-left: 5px;
+//   margin-right: 5px;
+//   margin-top: 1px;
+//   margin-bottom: 1px;
+//   box-shadow: none;
+// }
 
 .compound-sub {
 
@@ -175,16 +181,8 @@ mat-card-title {
  // margin: 5px;
   //margin-left: 10px;
 }
-  .pka-names {
-    font-size: small;
-    margin: 0px;
-    //margin-left: 3px;
-  }
-      .ion-names {
-    font-size: small;
-    margin: 0px;
-   // margin-left: 3px;
-  }
+
+
 .unique-ions {
   background-color: whitesmoke;
   display: grid;
@@ -198,37 +196,7 @@ mat-card-title {
   box-shadow: none;
   gap:5px;
 }
-.species-grid-container {
-  display: grid;
-  grid-template-columns: 100px 65px 65px 65px 65px;
-  & > div {
-    text-align: end;
-  }
-  & > div:nth-child(5n+1) {
-    text-align: start;
-  }
 
-  @media screen and (max-width: 450px) {
-    grid-template-columns: 40px 30px 30px 30px 30px;
-    
-  }
-}
-
-.pka-grid-container {
-  display: grid;
-  grid-template-columns: 100px 65px 65px 65px;
-  & > div {
-    text-align: end;
-  }
-  & > div:nth-child(5n+1) {
-    text-align: start;
-  }
-
-  @media screen and (max-width: 450px) {
-    grid-template-columns: 40px 40px 40px 40px;
-    
-  }
-}
 
 .unique-sub {
 background-color: whitesmoke;
@@ -237,7 +205,7 @@ background-color: whitesmoke;
 }
 
 .scroll-title {
-  font-size: larger;
+  font-size: medium;
 
   margin: 10px;
 }
@@ -252,6 +220,7 @@ background-color: whitesmoke;
 
 @media (max-width: 450px) {
   .scroll-title {
+    font-size:small;
   }
   .unique-sub {
     width: 45vw;
@@ -269,16 +238,7 @@ background-color: whitesmoke;
     margin: 0px;
     margin-left: 3px;
   }
-    .ion-names {
-    font-size: xx-small;
-    margin: 0px;
-   // margin-left: 3px;
-  }
-  .pka-names {
-    font-size: xx-small;
-    margin: 0px;
-    //margin-left: 3px;
-  }
+
   .utext {
     font-size: xx-small;
     font-style: bold;
@@ -313,4 +273,304 @@ background-color: whitesmoke;
     font-size: 13px;
     // text-transform: capitalize;
   }
+}
+
+
+
+/////////////////COMPOUND CARDS/////////////////////
+.compound-cards {
+  display: grid;
+  grid-template-columns:max-content max-content max-content;
+  
+box-shadow:none;
+border:1px solid $card-background-cream;
+background-color: $card-background;
+gap:2px;
+padding:5px;
+width:100%;
+justify-content: space-evenly;
+overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+.compound-card {
+background-color: whitesmoke;
+width:31vw;
+border:1px solid $card-background-cream;
+padding:5px;
+@media (max-width: 450px) {
+  width: 50vw;
+}
+
+
+}
+.compound_name {
+    font-size: x-small;
+    font-weight: bold;
+    margin: 0px;
+    margin-left: 3px;
+      box-sizing:border-box;
+      width:100%;
+    @media (max-width: 450px) {
+      font-size: xx-small;
+      font-weight: bold;
+    }
+}
+.compound-mw {
+  font-size: xx-small;
+  //font-weight: bold;
+  padding: 0px;
+  margin:0px;
+    box-sizing:border-box;
+    width:100%;
+}
+.compound-concs {
+  font-size: xx-small;
+  //font-weight: bold;
+  padding: 0px;
+    margin:0px;
+      box-sizing:border-box;
+      width:100%;
+}
+
+.ions-info {
+    font-size: xx-small;
+  //font-weight: bold;
+  padding: 0px;
+    margin:0px;
+      box-sizing:border-box;
+      width:100%;
+}
+
+/////////////////ION CARDS/////////////////////
+
+.ion-cards {
+  //background-color: lightgreen;
+  display: grid;
+  grid-template-columns: max-content max-content max-content;
+box-shadow:none;
+border:1px solid $card-background-cream;
+background-color:  $card-background;
+margin-top:5px;
+gap:2px;
+padding:5px;
+width:100%;
+justify-content: space-evenly;
+align-items: center;
+overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+
+.ion-card-instance {
+background-color: whitesmoke;
+width:31vw;
+border:1px solid $card-background-cream;
+align-self:center;
+//margin-left:5px;
+//margin-right:5px;
+padding:3px;
+//margin-top:1px;
+//margin-bottom:1px;
+//box-shadow:none;
+@media (max-width: 450px) {
+  width: 50vw;
+}
+}
+//padding:5px;
+
+
+.species-grid-container {
+  display: grid;
+  width:100%;
+  grid-template-columns: 50px 1fr 1fr 1fr 1fr;
+  gap:1px;
+  padding:0px;
+  margin-top:2px;
+  & > div {
+    text-align: center;
+  }
+  & > div:nth-child(5n+1) {
+    text-align: start;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 40px  1fr 1fr 1fr 1fr;
+    
+  }
+}
+
+.pka-grid-container {
+  display: grid;
+  width:100%;
+  grid-template-columns: 50px 1fr 1fr 1fr;
+  gap:1px;
+  & > div {
+    text-align: center;
+  }
+  & > div:nth-child(5n+1) {
+    text-align: start;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 40px 1fr 1fr 1fr;
+    
+  }
+}
+
+.conc-grid-container {
+  display: grid;
+  width:100%;
+  grid-template-columns: 50px 1fr ;
+  margin-top:2px;
+  & > div {
+    text-align: center;
+  }
+  & > div:nth-child(5n+1) {
+    text-align: start;
+  }
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: 30px 1fr;
+    
+  }
+}
+.ion-card-content {
+  padding:5px;
+}
+
+
+
+.ion_names-title {
+    font-size: x-small;
+    font-weight: bold;
+    margin: 0px;
+    margin-left: 3px;
+  }
+.pka-names {
+    font-size: xx-small;
+    margin: 0px;
+    width:100%;
+    //margin-left: 3px;
+  }
+
+.pka-names, .ion-names {
+  font-size:xx-small;
+ border: 1px solid rgb(224, 222, 222);
+  //padding: 5px;
+  box-sizing:border-box;
+}
+
+.pka-names-label, .ion-names-label {
+  font-size: xx-small;
+  //font-weight: bold;
+  padding: 0px;
+  margin:0px;
+}
+
+
+
+
+
+.grid-table {
+  display: grid;
+  grid-template-columns: auto auto ;
+  grid-gap: 2px;
+  align-items: center;
+}
+
+.header {
+  font-size:x-small;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  padding: 8px;
+  text-align: center;
+}
+
+.cell {
+  font-size: x-small;
+  padding: 8px;
+  //border: 1px solid #ddd;
+  text-align: center;
+  //background-color: green;
+}
+.line_grid {
+
+  border: 1px solid #ddd;
+}
+
+// .compound_name {
+//  grid-column: span 2; /* Compound name spans across two rows */
+//  grid-row: 1 / span 2; 
+//  //height:65px;
+// }
+
+
+.conc_molar {
+  grid-column: 2; /* Concentration spans across the sixth column */
+//grid-row: span 2; 
+//height:65px;
+text-align: center;
+
+}
+
+
+.ion_name {
+  //grid-column: 3; /* Ion name spans across the first four columns */
+  //height:25px;
+}
+.cell2 {
+  font-size:x-small;
+  padding:1px;
+}
+
+.ion-info {
+
+  grid-column: 2; /* Each ion spans across two columns (ions and ion concentrations) */
+ 
+ display:grid;
+  grid-template-columns: auto auto;
+  //height:25px;
+}
+
+.uion_name {
+  grid-column: 1; /* Ion name spans across the first four columns */
+  //height:100px;
+}
+
+.uion_total_conc {
+  grid-column: 2; /* Each ion spans across two columns (ions and ion concentrations) */
+  height:25px;
+}
+
+.uion_pka {
+  grid-column: 3; /* Each ion spans across two columns (ions and ion concentrations) */
+  //height:25px;
+}
+
+.uion-card {
+  display : grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: yellowgreen;
+}
+.uion_charge {
+  grid-column: 3; /* Each ion spans across two columns (ions and ion concentrations) */
+  height:25px;
+}
+.uion_conc {
+  grid-column: 4; /* Each ion spans across two columns (ions and ion concentrations) */
+  height:25px;
+}
+
+.grid-table2 {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 2px;
+  align-items: center;
+}
+.grid-table3 {
+  display: grid;
+  grid-template-rows:auto;
+  grid-gap: 2px;
+  align-items: center;
 }

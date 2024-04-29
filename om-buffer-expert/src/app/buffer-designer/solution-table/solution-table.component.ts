@@ -199,7 +199,7 @@ const yTickVals = yValues;
 const yTickText = yValues.map((val) => `${Math.round(val)}%`);
 this.layout = {
   autosize: true,
-  width: window.innerWidth,
+  width: window.innerWidth*.95,
   margin: {
     l: 75, // Adjust left margin
     r: 25, // Reduce right margin
