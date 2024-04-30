@@ -302,7 +302,7 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
   };
 
   // We can get the first letter of the name like this
-  avatarLetter = this.user.name.charAt(0).toUpperCase();
+
 
   calculatepH() {
     this.solutionService
@@ -310,9 +310,7 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
       .subscribe((response: Solution) => {
         //  Update the returnedSolution property with the response
         this.returnedSolution = response;
-        this.avatarLetter = this.returnedSolution.buffer_species
-          .charAt(0)
-          .toUpperCase();
+     
       });
   }
 }

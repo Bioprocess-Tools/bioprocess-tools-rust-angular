@@ -70,8 +70,16 @@ viewDetails(solution:Solution, index:number,event: MouseEvent) {
   this.scrollToSolution(solution, index)
 
 }
-deleteSolution(solution: Solution) {
+deleteSolution(solution: Solution, i:number) {
   this.solutionService.deleteSolution(solution);
+  if (this.solutions.length > 0) {  
+  this.selectedSolution = this.solutions[i-1];
+  this.solution = this.selectedSolution;
+}
+else {
+  this.solution = null;
+  this.selectedSolution = null;
+}
 }
 
 editSolution(solution: Solution) {
@@ -170,12 +178,12 @@ this.trace = [
     z: zValues,
     type: 'heatmap',
     colorscale: [
-      [0.0, 'green'],
-      [greenBreakpoint, 'green'],
-      [greenBreakpoint + 0.00001, 'orange'],
-      [orangeBreakpoint, 'orange'],
-      [orangeBreakpoint + 0.00001, '#e41a1b'],
-      [1, '#e41a1b'],
+      [0.0, '#B1C381'],
+      [greenBreakpoint, '#B1C381'],
+      [greenBreakpoint + 0.00001, '#EEC759'],
+      [orangeBreakpoint, '#EEC759'],
+      [orangeBreakpoint + 0.00001, '#FF8080'],
+      [1, '#FF8080'],
     ],
     zmin: 0,
     zmax: maxZValue,

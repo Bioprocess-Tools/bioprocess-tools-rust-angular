@@ -10,9 +10,9 @@
 ///////This is for the solutions scroll list///////////////
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  //grid-template-columns: 1fr 1fr 1fr;
   grid-auto-flow: column;
-  margin: 5px;
+  //margin: 5px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
@@ -28,15 +28,18 @@
   justify-content: space-between;
   align-items: center;
   height: 90%;
-  margin: 10px;
+  margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:5px;
   scroll-snap-align: start;
   background-color: whitesmoke;
   color: black;
   //margin: 3px;
   width: 30vw;
+
   border: 1px solid $card-background-cream;
   @media (max-width: 450px) {
-
+ width: 35vw;
   }
 }
 .solution_num {
@@ -208,6 +211,15 @@ background-color: whitesmoke;
   font-size: medium;
 
   margin: 10px;
+
+    @media screen and (max-width: 800px)
+  {
+   font-size:small;
+  }
+  @media screen and (max-width: 450px)
+  {
+   font-size:x-small;
+  }
 }
 
 .compound-name {
@@ -219,9 +231,7 @@ background-color: whitesmoke;
 
 
 @media (max-width: 450px) {
-  .scroll-title {
-    font-size:small;
-  }
+
   .unique-sub {
     width: 45vw;
     border: 1px solid $card-background-cream;
@@ -251,28 +261,9 @@ background-color: whitesmoke;
   .grid-container {
     grid-auto-columns: auto;
   }
-  .grid-item {
-    //gap:20px;
-    width: 30vw;
-    //width:auto;
-    //max-height: 25vw;
-    //max-height: auto;
-    // margin: 10px;
-    // padding:5px;
-    //gap:15px;
-    scroll-snap-align: start;
-    background-color: whitesmoke;
-    color: black;
 
-    //background-color: rgb(184, 178, 178);
-  }
 
-  .scroll-title {
-    padding: 3px;
-    margin: 1vw;
-    font-size: 13px;
-    // text-transform: capitalize;
-  }
+
 }
 
 
@@ -280,11 +271,12 @@ background-color: whitesmoke;
 /////////////////COMPOUND CARDS/////////////////////
 .compound-cards {
   display: grid;
-  grid-template-columns:max-content max-content max-content;
+  //grid-template-columns:1fr 1fr 1fr;
+  grid-auto-flow: column;
   
 box-shadow:none;
 border:1px solid $card-background-cream;
-background-color: $card-background;
+//background-color: #03DAC5;
 gap:2px;
 padding:5px;
 width:100%;
@@ -347,10 +339,11 @@ padding:5px;
 .ion-cards {
   //background-color: lightgreen;
   display: grid;
-  grid-template-columns: max-content max-content max-content;
+  grid-auto-flow: column;
 box-shadow:none;
 border:1px solid $card-background-cream;
-background-color:  $card-background;
+//background-color:  #03DAC5;
+//background-color:  #018786;
 margin-top:5px;
 gap:2px;
 padding:5px;
