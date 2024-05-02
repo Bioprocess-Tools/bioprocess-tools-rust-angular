@@ -218,6 +218,27 @@ export class SolutionService {
     );
   }
 
+
+
+  super_calculate_pH(data: any): Observable<Solution> {
+    console.log('God got here');
+    const endpoint = `${this.apiUrl}/supercalculatorpH`;
+    console.log('God end point', endpoint,data);
+    return this.http.post<Solution>(endpoint, data).pipe(
+      map((response) => {
+        // Update the original solution object with the response data
+       
+        console.log("God returned", response)
+        this.add_Solution(response);
+        this.changeSolution(response);
+
+        return response;
+      })
+    );
+  }
+
+
+
   sendUserInput(userInput: string): void {
     const requestBody = { text: userInput };
 

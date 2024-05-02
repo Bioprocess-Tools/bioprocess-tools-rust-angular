@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist-min';
 
@@ -31,7 +32,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BufferDesignerRoutingModule } from './buffer-designer-routing.module';
 import { RouterModule } from '@angular/router';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
+import { SuperCalculatorComponent } from './super-calculator/super-calculator.component'
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -41,7 +43,8 @@ ChatbufferomComponent,
 BufferCalculationOption1Component,
 BufferCalculationOption2Component,
 SolutionTableComponent,
-BufferDesignerComponent
+BufferDesignerComponent,
+SuperCalculatorComponent
 
   ],
   imports: [
@@ -65,6 +68,7 @@ BufferDesignerComponent
      MatExpansionModule,
      MatTooltipModule,
      MatAutocompleteModule,
+      MatCheckboxModule,
      PlotlyModule,
 
   ],

@@ -1,0 +1,28 @@
+.super-calculator-card {
+  display:grid;
+    grid-auto-flow: row;
+    margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+
+  @media (min-width: 450px) {
+    grid-template-columns: 1fr 1fr;
+    
+  }
+}
+.super-calculator-col3 {
+    grid-column: 1/ span 2;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background-color: #f9f9f9;
+  @media (min-width: 450px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.super-calculator-button {
+    grid-column: 1/span 2 ;
+    //width: 300px;
+}

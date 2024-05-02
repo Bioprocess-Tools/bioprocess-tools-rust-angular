@@ -125,6 +125,13 @@
             [active]="thirdTab.isActive">
             Calculator
           </a>
+          <a mat-tab-link
+            [routerLink]="['super-calculator']"
+            routerLinkActive
+            #fourthTab="routerLinkActive"
+            [active]="fourthTab.isActive">
+            Super Calculator
+          </a>
         </nav>
         <mat-tab-nav-panel #tabPanel>
           <router-outlet></router-outlet>
