@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 import { PlotlyModule } from 'angular-plotly.js';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -53,7 +53,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatSelectModule,
     BrowserAnimationsModule,
     BrowserModule,
-    NgxChartsModule,
+
     PlotlyModule,
     MatExpansionModule
 

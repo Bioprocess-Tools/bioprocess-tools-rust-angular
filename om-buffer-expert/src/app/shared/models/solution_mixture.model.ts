@@ -2,7 +2,7 @@ import { Compound } from "./compound.model";
 import { Ion } from "./ion.model";
 import { Solution } from "./solution.model";
 import { Step } from "./step.model";
-import { isEqual } from 'lodash/isEqual';
+
 
 export class SolutionMixture {
     name: string;
