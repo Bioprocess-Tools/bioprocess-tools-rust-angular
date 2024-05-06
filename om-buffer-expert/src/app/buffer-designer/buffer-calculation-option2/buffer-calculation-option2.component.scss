@@ -42,7 +42,9 @@
     grid-template-columns: 1fr;
   }
 }
-
+.red-text {
+  color: red;
+}
 .autocomplete_input {
   display: flex;
   grid-column: span 2;
@@ -77,45 +79,64 @@
     grid-column: span 1;
   }
 }
+
 .rounded_input_om {
-  border: 2px solid $accent-green;
-  border-radius: 15px;
-  padding: 3px;
-    font-size:small;
-  @media (max-width: 550px) {
-    font-size:x-small;
-  }
+padding-bottom: 15px;
+}
+// .rounded_input_om {
+//   //border: 2px solid $accent-green;
+//   border-radius: 15px;
+//   padding: 3px;
+//     font-size:small;
+//   @media (max-width: 550px) {
+//     font-size:x-small;
+//   }
 
   /* Applies rounded corners to the input area */
-}
 
-::ng-deep .mat-form-field-outline-start {
-  border-radius: 20px 0 0 20px !important;
-  min-width: 20px !important;
-}
+
+
+// ::ng-deep .mat-form-field-outline-start {
+//   border:2px solid $accent-green !important;
+//   border-radius: 20px 0 0 20px !important;
+//   min-width: 20px !important;
+// }
 
 .bold-label {
   font-size: medium;
   font-weight: bold;
 }
-
-::ng-deep .mat-form-field-outline-end {
-  border-radius: 0 15px 15px 0 !important;
-  min-width: 15px !important;
+.right-align {
+  text-align: right;
+} 
+:host ::ng-deep .rounded_input_om .mdc-text-field--outlined {
+ // border:3px solid rgb(195, 203, 197);
+  //border-radius: 25px;
+  --mdc-outlined-text-field-container-shape: 20px;
+  --mdc-outlined-text-field-outline-width: 2px;
+  --mdc-outlined-text-field-focus-outline-width: 4px;
 }
 
-/* Add padding to move the label and input into the center to prevent overlapping the rounded border */
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-  padding: 0 15px !important;
-}
+// ::ng-deep .mat-form-field-outline-end {
+//   border:2px solid $accent-green !important;
+//   border-radius: 0 25px 25px 0 !important;
+//   min-width: 15px !important;
+// }
 
-::ng-deep .mat-form-field-underline {
-  display: none !important;
-}
+// /* Add padding to move the label and input into the center to prevent overlapping the rounded border */
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+//   padding: 0 15px !important;
+//     border:2px solid $accent-green !important;
+// }
 
-::ng-deep .mat-form-field-ripple {
-  display: none !important;
-}
+// ::ng-deep .mat-form-field-underline {
+//   display: none !important;
+// }
+
+// ::ng-deep .mat-form-field-ripple {
+//   display: none !important;
+//    border:2px solid $accent-green !important;
+// }
 
 .solution-card {
   display: none;
@@ -160,7 +181,8 @@
 }
 
 .message-card {
-  //margin:5px;
+box-shadow:none;
+border: 1px solid $card-background-cream;
   padding: 0px;
   width: 99%;
   align-self: center;

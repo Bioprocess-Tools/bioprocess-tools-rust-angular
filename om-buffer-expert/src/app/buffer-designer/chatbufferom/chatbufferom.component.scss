@@ -25,7 +25,9 @@
 
 .green_flag {
   color:rgb(18, 121, 7);
+  margin:4px;
   margin-left:20px;
+  padding:0px;
 }
 
 .form-card{
@@ -43,7 +45,8 @@
 }
 
 .message-card{
-  //margin:3px;
+box-shadow:none;
+border: 1px solid $card-background-cream;
   padding: 0px;
   width: 97%;
   align-self: center;
@@ -56,6 +59,14 @@
  // margin-left:10px;
   align-self: center;
   
+}
+
+:host ::ng-deep .input-field .mdc-text-field--outlined {
+ // border:3px solid rgb(195, 203, 197);
+  //border-radius: 25px;
+  --mdc-outlined-text-field-container-shape: 20px;
+  --mdc-outlined-text-field-outline-width: 2px;
+  --mdc-outlined-text-field-focus-outline-width: 4px;
 }
 
 .input-field-2 {

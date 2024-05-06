@@ -31,7 +31,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   keyed_compounds: { [key: string]: any } = {};
   public godSolution = new Solution('God solution'); //solution to hold the user input
   public returnedSolution: Solution; //solution to hold the return from api
-
+  formSubmitted: boolean = false;
   filteredBufferSpecies: Observable<string[]>;
 
   constructor(
@@ -42,18 +42,21 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log("God prints on switch?")
     this.initializeForm();
     this.bufferSpecies = this.solutionMixtureService.bufferSpecies;
     this.bufferSpeciesKeys = Object.keys(this.bufferSpecies);
     this.keyed_compounds = this.solutionMixtureService.compounds;
     //we will monitor value changes on the autocomplete field of bufferSpeciesControl and filter the bufferSpeciesKeys accordingly
-    this.filteredBufferSpecies = this.bufferForm.get('bufferSpeciesControl').valueChanges.pipe(
-      startWith(''),
-      map((value: string) => this._filterBufferSpecies(value))
-    );
+    this.filteredBufferSpecies = this.bufferForm
+      .get('bufferSpeciesControl')
+      .valueChanges.pipe(
+        startWith(''),
+        map((value: string) => this._filterBufferSpecies(value))
+      );
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
-        if (solution) {
+        if (solution && solution.non_salt_compounds.length<=2) {
           //this.initializeForm();
           this.acidCompounds = this.solutionService.getAppAcidCompounds();
           // console.log("God acid option 2",this.acidCompounds)
@@ -85,25 +88,25 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
   private _filterBufferSpecies(value: string): string[] {
     const filterValue = value.replace(/-/g, ' ').toLowerCase();
-    const filteredOptions =  this.bufferSpeciesKeys.filter((bufferSpecies) =>
+    const filteredOptions = this.bufferSpeciesKeys.filter((bufferSpecies) =>
       bufferSpecies.replace(/-/g, ' ').toLowerCase().includes(filterValue)
     );
 
-      const sortedFilteredOptions = filteredOptions.sort((a, b) => {
-        // Check if either option starts with the filter value
-        const startsWithA = a.toLowerCase().startsWith(filterValue) ? -1 : 1;
-        const startsWithB = b.toLowerCase().startsWith(filterValue) ? -1 : 1;
+    const sortedFilteredOptions = filteredOptions.sort((a, b) => {
+      // Check if either option starts with the filter value
+      const startsWithA = a.toLowerCase().startsWith(filterValue) ? -1 : 1;
+      const startsWithB = b.toLowerCase().startsWith(filterValue) ? -1 : 1;
 
-        // If both or neither start with the filter value, preserve original order
-        if (startsWithA === startsWithB) {
-          return 0;
-        }
+      // If both or neither start with the filter value, preserve original order
+      if (startsWithA === startsWithB) {
+        return 0;
+      }
 
-        // Otherwise, sort by whether an option starts with the filter value
-        return startsWithA < startsWithB ? -1 : 1;
-      });
+      // Otherwise, sort by whether an option starts with the filter value
+      return startsWithA < startsWithB ? -1 : 1;
+    });
 
-      return sortedFilteredOptions;
+    return sortedFilteredOptions;
   }
   bufferSelectionValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -125,7 +128,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   }
 
   populateForm(solution: Solution) {
-    if (solution) {
+
+    if (solution && solution.non_salt_compounds.length<=2) {
+      this.bufferForm.controls['bufferSpeciesControl'].setValue(
+        solution.buffer_species
+      );
+      this.onBufferSpeciesSelectedTrigger(solution.buffer_species);
+      console.log("God: naemes, ", solution.non_salt_compounds[0].name, solution.non_salt_compounds[1].name);
       let acidname = solution.non_salt_compounds[0].name;
       let basename = solution.non_salt_compounds[1].name;
       // console.log("God in populate form option 2 ", solution)
@@ -142,9 +151,11 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       this.bufferForm.controls['totalConcentration'].setValue(
         parseFloat(solution.target_buffer_concentration.toFixed(4))
       );
-      this.bufferForm.controls['target_pH'].setValue(parseFloat(solution.pH.toFixed(3)));
+      this.bufferForm.controls['target_pH'].setValue(
+        parseFloat(solution.pH.toFixed(3))
+      );
       //console.log("God here in salt", solution.non_salt_compounds[0].name);
-      if (solution.compounds.length == 3) {
+      if (solution.salt_compound != null) {
         //console.log("God: came here because there is salt",solution.salt_compound.name );
         saltname = solution.salt_compound.name;
         saltconc = solution.compound_concentrations[saltname];
@@ -156,22 +167,18 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
         this.bufferForm.controls['saltConcentration'].setValue(saltconc);
       }
 
-      this.bufferForm.controls['bufferSpeciesControl'].setValue(
-        ''
-      );
       //console.log("God: populating", this.bufferForm.value);
 
-      this.bufferForm.updateValueAndValidity({
-        onlySelf: false,
-        emitEvent: true,
-      });
+      // this.bufferForm.updateValueAndValidity({
+      //   onlySelf: false,
+      //   emitEvent: true,
+      // });
     }
     //this.bufferForm.markAsUntouched();
   }
 
   onBufferSpeciesSelected($event) {
-    
-    
+    this.formSubmitted = false;
     let bufferSpeciesSelected = $event.option.value;
     console.log('God: buffer species selected', bufferSpeciesSelected);
 
@@ -179,8 +186,8 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     console.log('God: basic compounds', this.basicCompounds);
 
     const results: string[][] = [];
-   let acids = new Set<string>();
-   let bases = new Set<string>();
+    let acids = new Set<string>();
+    let bases = new Set<string>();
 
     // Iterate over each key in the object
     for (const [key, value] of Object.entries(this.bufferSpecies)) {
@@ -188,35 +195,37 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       if (key.toLowerCase().startsWith(bufferSpeciesSelected.toLowerCase())) {
         // If it matches, add its compounds to the results
         console.log('God: value', value.compounds);
-        value.compounds.forEach(compound => {
-          if(this.acidCompounds.includes(compound)){
+        value.compounds.forEach((compound) => {
+          if (this.acidCompounds.includes(compound)) {
             acids.add(compound);
-          }
-          else if(this.basicCompounds.includes(compound)){
+          } else if (this.basicCompounds.includes(compound)) {
             bases.add(compound);
           }
-      });
-
+        });
+      }
     }
-  }
 
-  console.log('God: acids', acids);
-  console.log('God: bases', bases);
-this.selectedAcidCompounds = Array.from(acids);
-this.selectedBasicCompounds = Array.from(bases);
-this.bufferForm.controls['acidicCompound'].setValue(
-  this.selectedAcidCompounds[0]
-);
-this.bufferForm.controls['basicCompound'].setValue(
-  this.selectedBasicCompounds[0]
-);
+    console.log('God: acids', acids);
+    console.log('God: bases', bases);
+    this.selectedAcidCompounds = Array.from(acids);
+    this.selectedBasicCompounds = Array.from(bases);
+    this.bufferForm.controls['acidicCompound'].setValue(
+      this.selectedAcidCompounds[0]
+    );
+    this.bufferForm.controls['basicCompound'].setValue(
+      this.selectedBasicCompounds[0]
+    );
 
-this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
+    this.buffer_label = bufferSpeciesSelected.split('-')[0] + ' Conc. (M)';
 
     console.log('God: results', results);
     let compoundobj = this.bufferSpecies[bufferSpeciesSelected];
     let compounds = compoundobj.compounds;
-    console.log('God: buffer species selected', compoundobj.compounds, compounds  );
+    console.log(
+      'God: buffer species selected',
+      compoundobj.compounds,
+      compounds
+    );
     // //write code to check which list compounds belong to
     // if (this.acidCompounds.includes(compounds[0])) {
     //   console.log('God: acid compound selected', compounds[0]);
@@ -233,10 +242,72 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
     //   this.bufferForm.controls['basicCompound'].setValue(compounds[1]);
     // }
 
-  //console.log("God: buffer species selected", this.bufferForm.value);
+    //console.log("God: buffer species selected", this.bufferForm.value);
 
- 
+    //console.log("God: buffer species selected", this.bufferForm.value);
+  }
 
+  onBufferSpeciesSelectedTrigger(bufferSpeciesSelected: string) {
+   
+    
+    console.log('God: buffer species selected', bufferSpeciesSelected);
+
+    console.log('God; acidic compounds', this.acidCompounds);
+    console.log('God: basic compounds', this.basicCompounds);
+
+    const results: string[][] = [];
+    let acids = new Set<string>();
+    let bases = new Set<string>();
+
+    // Iterate over each key in the object
+    for (const [key, value] of Object.entries(this.bufferSpecies)) {
+      // Check if the key starts with the given prefix, ignoring case
+      if (key.toLowerCase().startsWith(bufferSpeciesSelected.toLowerCase())) {
+        // If it matches, add its compounds to the results
+        console.log('God: value', value.compounds);
+        value.compounds.forEach((compound) => {
+          if (this.acidCompounds.includes(compound)) {
+            acids.add(compound);
+          } else if (this.basicCompounds.includes(compound)) {
+            bases.add(compound);
+          }
+        });
+      }
+    }
+
+    console.log('God: acids', acids);
+    console.log('God: bases', bases);
+    this.selectedAcidCompounds = Array.from(acids);
+    this.selectedBasicCompounds = Array.from(bases);
+
+
+    this.buffer_label = bufferSpeciesSelected.split('-')[0] + ' Conc. (M)';
+
+    console.log('God: results', results);
+    let compoundobj = this.bufferSpecies[bufferSpeciesSelected];
+    let compounds = compoundobj.compounds;
+    console.log(
+      'God: buffer species selected',
+      compoundobj.compounds,
+      compounds
+    );
+    // //write code to check which list compounds belong to
+    // if (this.acidCompounds.includes(compounds[0])) {
+    //   console.log('God: acid compound selected', compounds[0]);
+    //   this.bufferForm.controls['acidicCompound'].setValue(compounds[0]);
+    // } else if (this.basicCompounds.includes(compounds[0])) {
+    //   console.log('God: basic compound selected', compounds[0]);
+    //   this.bufferForm.controls['basicCompound'].setValue(compounds[0]);
+    // }
+    // if (this.acidCompounds.includes(compounds[1])) {
+    //   console.log('God: acid compound selected', compounds[1]);
+    //   this.bufferForm.controls['acidicCompound'].setValue(compounds[1]);
+    // } else if (this.basicCompounds.includes(compounds[1])) {
+    //   console.log('God: basic compound selected', compounds[1]);
+    //   this.bufferForm.controls['basicCompound'].setValue(compounds[1]);
+    // }
+
+    //console.log("God: buffer species selected", this.bufferForm.value);
 
     //console.log("God: buffer species selected", this.bufferForm.value);
   }
@@ -247,6 +318,7 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
     }
   }
   initializeForm() {
+    this.formSubmitted = false;
     this.bufferForm = this.formBuilder.group(
       {
         bufferSpeciesControl: [''],
@@ -255,18 +327,19 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
         saltCompound: 'Sodium Chloride',
         totalConcentration: [
           0.04,
-          [Validators.required, Validators.min(0), Validators.max(0.4)],
+          [Validators.required, Validators.min(0), Validators.max(0.5)],
         ],
         target_pH: [
           7.0,
           [Validators.required, Validators.min(3), Validators.max(10)],
         ],
-        saltConcentration: [0.1, [Validators.min(0), Validators.max(1)]],
+        saltConcentration: [0.1, [Validators.min(0), Validators.max(.5)]],
       },
       { validators: this.bufferSelectionValidator() }
     );
   }
   onSubmit() {
+    this.formSubmitted = true;
     this.godSolution = new Solution('God solution');
     if (this.bufferForm.invalid) {
       return;
@@ -291,18 +364,18 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
     }
 
     this.godSolution.pH = target_pH;
-    this.godSolution.buffer_species=this.bufferForm.get('bufferSpeciesControl').value;
-    console.log("God: god buffer species", this.bufferForm.get('bufferSpeciesControl').value);
+    this.godSolution.buffer_species = this.bufferForm.get(
+      'bufferSpeciesControl'
+    ).value;
+    console.log(
+      'God: god buffer species',
+      this.bufferForm.get('bufferSpeciesControl').value
+    );
     this.calculatepH();
     this.bufferForm.markAsUntouched();
   }
 
-  user = {
-    name: 'Phosphate',
-  };
-
   // We can get the first letter of the name like this
-
 
   calculatepH() {
     this.solutionService
@@ -310,7 +383,6 @@ this.buffer_label = bufferSpeciesSelected.split('-')[0] +' Conc. (M)';
       .subscribe((response: Solution) => {
         //  Update the returnedSolution property with the response
         this.returnedSolution = response;
-     
       });
   }
 }

@@ -4,7 +4,7 @@
 
       <div class="col1">
 
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+        <mat-form-field class="option1-full-width_Left" appearance="outline">
           <mat-label for="acidicCompound">Acidic Compound</mat-label>
           <mat-select id="acidicCompound" name="acidicCompound"
             ngDefaultControl
@@ -15,7 +15,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+        <mat-form-field class="option1-full-width_Left" appearance="outline">
           <mat-label>Basic Compound</mat-label>
           <mat-select formControlName="basicCompound" required>
             <mat-option *ngFor="let compound of basicCompounds"
@@ -25,7 +25,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Left" appearance="fill">
+        <mat-form-field class="option1-full-width_Left" appearance="outline">
           <mat-label>Salt Compound</mat-label>
           <mat-select formControlName="saltCompound">
             <mat-option *ngFor="let compound of saltCompounds"
@@ -39,26 +39,28 @@
       </div>
 
       <div class="col2">
-        <mat-form-field class="option1-full-width_Right">
+        <mat-form-field class="option1-full-width_Right" appearance="outline">
           <mat-label>Acidic Concentration</mat-label>
           <mat-hint *ngIf="bufferForm.get('acidicConcentration').errors?.['max']">Conc should be less than 0.4 </mat-hint>
-          <input matInput type="number" formControlName="acidicConcentration"
-         
+          <input matInput type="number" formControlName="acidicConcentration" class="right-align"
+             
            required>
-        
+        <span matTextSuffix>M</span>
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right">
+        <mat-form-field class="option1-full-width_Right" appearance="outline">
           <mat-label>Basic Concentration</mat-label>
           <mat-hint *ngIf="bufferForm.get('basicConcentration').errors?.['max']">Conc should be less than 0.4 </mat-hint>
-          <input matInput type="number" formControlName="basicConcentration"
+          <input matInput type="number" formControlName="basicConcentration" class="right-align"
             required>
+            <span matTextSuffix>M</span>
        
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right">
+        <mat-form-field class="option1-full-width_Right" appearance="outline">
           <mat-label>Salt Concentration</mat-label>
-          <input matInput type="number" formControlName="saltConcentration">
+          <input matInput type="number" formControlName="saltConcentration" class="right-align">
+          <span matTextSuffix>M</span>
           <mat-hint *ngIf="bufferForm.get('saltConcentration').errors?.['max']">Conc should be less than 1 </mat-hint>
         
         </mat-form-field>
@@ -75,7 +77,7 @@
     <mat-card class="solution-card" *ngIf="returnedSolution;">
       <mat-card-header>
         <!-- <div class="avatar">{{avatarLetter}}</div> -->
-        <mat-card-title>{{returnedSolution.name}}</mat-card-title>
+        <mat-card-title class="solution-name" [class.red-text]="returnedSolution.result_flag['flag'] === 'red'" >{{returnedSolution.name}}</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
       </mat-card-header>
@@ -93,7 +95,7 @@
       <mat-divider></mat-divider>
 
     </mat-card>
-    <mat-card class="message-card" *ngIf="returnedSolution && bufferForm.untouched==true">
+    <mat-card class="message-card" *ngIf="returnedSolution && formSubmitted">
      <p class="red_flag" *ngIf="returnedSolution?.result_flag['flag'] !== 'green'">  <span class="material-icons">
       error
       </span>

@@ -134,7 +134,7 @@ ionValidator():ValidatorFn {
         this.response_solution = new Solution("God");
         Object.assign(this.response_solution,response);
         this.solutionService.add_Solution(this.response_solution);
-
+        console.log("God response", this.response_solution)
         this.solutionService.changeSolution(this.response_solution);
         this.form.controls['userInput'].setValue(userInput);
        //this.form.reset();
@@ -147,13 +147,7 @@ ionValidator():ValidatorFn {
 }
 
 
-// Suppose we have a user object with a name property
-user = {
-  name: 'Phosphate'
-};
 
-// We can get the first letter of the name like this
-avatarLetter = this.user.name.charAt(0).toUpperCase();
 
 
 

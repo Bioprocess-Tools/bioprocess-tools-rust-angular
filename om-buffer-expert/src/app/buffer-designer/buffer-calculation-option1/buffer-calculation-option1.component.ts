@@ -23,7 +23,7 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
   saltCompounds: string[] = [];
   example_solution: Solution;
   //solutionedit:Solution;
-  submitted: boolean = false;
+  formSubmitted: boolean = false;
   public godSolution = new Solution("God solution");
   public returnedSolution: Solution;
   buffer_compound_names: string[] = [];
@@ -90,7 +90,7 @@ bufferSelectionValidator(): ValidatorFn {
 
   populateForm(solution: Solution) {
 
-    if(solution) {
+    if(solution && solution.non_salt_compounds.length<=2) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
     //console.log("God in change", solution)
@@ -106,7 +106,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.bufferForm.controls['acidicConcentration'].setValue( acidconc);
     this.bufferForm.controls['basicConcentration'].setValue (baseconc);
 
-    if(solution.compounds.length==3) {
+    if(solution.salt_compound != null) {
       //console.log("God here in salt", solution.compounds[2].name);
       saltname = solution.salt_compound.name;
       saltconc = solution.compound_concentrations[saltname];
@@ -132,6 +132,7 @@ bufferSelectionValidator(): ValidatorFn {
   }
 
   initializeForm() {
+    this.formSubmitted = false;
     this.bufferForm = this.formBuilder.group({
       acidicCompound: ['Sodium Phosphate Monobasic', Validators.required],
       basicCompound: ['Sodium Phosphate Dibasic', Validators.required],
@@ -149,6 +150,7 @@ bufferSelectionValidator(): ValidatorFn {
   
 
   onSubmit() {
+    this.formSubmitted = true;
     //console.log("god here", this.bufferForm);
     this.godSolution = new Solution("God solution");
     if (this.bufferForm.invalid) {
@@ -162,9 +164,9 @@ bufferSelectionValidator(): ValidatorFn {
 
  
 
-    const acidicCompoundConcentration = this.bufferForm.get('acidicConcentration').value;
-    const basicCompoundConcentration = this.bufferForm.get('basicConcentration').value;
-    const saltCompoundConcentration = this.bufferForm.get('saltConcentration').value;
+    const acidicCompoundConcentration = parseFloat(this.bufferForm.get('acidicConcentration').value);
+    const basicCompoundConcentration = parseFloat(this.bufferForm.get('basicConcentration').value);
+    const saltCompoundConcentration = parseFloat(this.bufferForm.get('saltConcentration').value);
 
 
 
@@ -176,19 +178,15 @@ bufferSelectionValidator(): ValidatorFn {
       this.godSolution.compound_concentrations[saltCompoundName] = saltCompoundConcentration;
     }
 
-    this.submitted=true;
+
 
     this.calculatepH();
     this.bufferForm.markAsUntouched();
   
   }
 
-  user = {
-    name: 'Buffer'
-  };
 
-  // We can get the first letter of the name like this
-  avatarLetter = this.user.name.charAt(0).toUpperCase();
+
 
   calculatepH() {
     // Make the API call to calculate pH

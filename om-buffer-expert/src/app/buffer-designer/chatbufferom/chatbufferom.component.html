@@ -3,7 +3,7 @@
   <mat-card class="form-card">
 
     <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="formf">
-      <mat-form-field class="input-field p">
+      <mat-form-field class="input-field" appearance="outline">
         <mat-label>Describe the buffer</mat-label>
         <input matInput class="chatin" type="text" placeholder="50mM Phosphate buffer, 0.1M Sodium Chloride pH 7.0"
           formControlName="userInput"

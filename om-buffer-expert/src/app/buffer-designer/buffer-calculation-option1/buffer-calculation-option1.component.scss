@@ -32,7 +32,9 @@
   justify-items: center;
   box-shadow: none;
 }
-
+.red-text {
+  color: red;
+}
 .option1-full-width_Left {
   width: 98%;
   margin-bottom: 8px;
@@ -94,10 +96,14 @@
 }
 
 .message-card {
-  //margin:15px;
-  // padding-left: px;
+box-shadow:none;
+border: 1px solid $card-background-cream;
+padding:3px;
   width: 99%;
   align-self: center;
+}
+.right-align {
+  text-align: right;
 }
 
 @media (max-width: 1500px) {

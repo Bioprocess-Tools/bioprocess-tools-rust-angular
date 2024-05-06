@@ -7,7 +7,7 @@
       <div class="super-calculator-col1">
         <mat-form-field
           class="super-calculator-full-width_Left"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>First Compound</mat-label>
           <mat-select
@@ -26,7 +26,7 @@
 
         <mat-form-field
           class="super-calculator-full-width_Left"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>Second Compound</mat-label>
           <mat-select
@@ -45,7 +45,7 @@
 
         <mat-form-field
           class="super-calculator-full-width_Left"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>Third Compound</mat-label>
           <mat-select
@@ -65,7 +65,7 @@
 
         <mat-form-field
           class="super-calculator-full-width_Left"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>Salt Compound</mat-label>
           <mat-select ngDefaultControl formControlName="salt_compound">
@@ -83,7 +83,7 @@
 <div class="super-calculator-col2">
         <mat-form-field
           class="super-calculator-full-width_Left"
-          appearance="fill"
+          appearance="outline"
         >
           <mat-label>First Compound Conc.</mat-label>
           <mat-hint *ngIf="bufferForm.get('concentration1').errors?.['max']"
@@ -92,12 +92,13 @@
           <input
             matInput
             type="number"
-            formControlName="concentration1"
+            formControlName="concentration1" class="right-align"
             required
           />
+          <span matTextSuffix>M</span>
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right">
+        <mat-form-field class="option1-full-width_Right" appearance="outline">
           <mat-label>Second Compound Conc.</mat-label>
           <mat-hint *ngIf="bufferForm.get('concentration2').errors?.['max']"
             >Conc should be less than 0.4
@@ -105,12 +106,13 @@
           <input
             matInput
             type="number"
-            formControlName="concentration2"
+            formControlName="concentration2" class="right-align"
             required
           />
+          <span matTextSuffix>M</span>
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right"  >
+        <mat-form-field class="option1-full-width_Right"  appearance="outline">
           <mat-label>Third Compound Conc.</mat-label>
           <mat-hint *ngIf="bufferForm.get('concentration3').errors?.['max']"
             >Conc should be less than 0.4
@@ -118,12 +120,13 @@
           <input
             matInput
             type="number"
-            formControlName="concentration3"
+            formControlName="concentration3" class="right-align"
             required
           />
+          <span matTextSuffix>M</span>
         </mat-form-field>
 
-        <mat-form-field class="option1-full-width_Right"  >
+        <mat-form-field class="option1-full-width_Right"  appearance="outline">
           <mat-label>Salt Conc.</mat-label>
           <mat-hint *ngIf="bufferForm.get('salt_concentration').errors?.['max']"
             >Conc should be less than 0.4
@@ -131,50 +134,48 @@
           <input
             matInput
             type="number"
-            formControlName="salt_concentration"
+            formControlName="salt_concentration" class="right-align"
             
           />
+          <span matTextSuffix>M</span>
         </mat-form-field>
 </div>
+    </mat-card>
+    <mat-card class="second_box">
 <div class="super-calculator-col3">
   <div class="adjust_pH">
-          <mat-label>Adjust pH</mat-label>
+          <mat-label class="adjust_pH_label">Adjust pH</mat-label>
           <mat-checkbox formControlName="adjust_pH"> </mat-checkbox>
           <mat-divider></mat-divider>
-        </div>
+  </div>
         
-        <div>
-          <mat-form-field class="option1-full-width_Right">
-
+        <mat-form-field class="option1-full-width_Right"  appearance="outline">
           <mat-label>Target pH</mat-label>
-<mat-hint *ngIf="bufferForm.get('adjust_pH').errors?.['min']">Minimum value is 2.</mat-hint>
-<mat-hint *ngIf="bufferForm.get('adjust_pH').errors?.['max']">Maximum value is 10.</mat-hint>
+                        <mat-hint *ngIf="bufferForm.get('adjust_pH').errors?.['min']">Minimum value is 2.</mat-hint>
+              <mat-hint *ngIf="bufferForm.get('adjust_pH').errors?.['max']">Maximum value is 10.</mat-hint>
+            
           <input
             matInput
             type="number"
-            formControlName="target_pH"
-            required
+            formControlName="target_pH" class="right-align"
+            
           />
+          <span matTextSuffix>pH</span>
         </mat-form-field>
+
+
+
+
+
+    
 </div>
-        <!-- <mat-form-field >
-                  <mat-label>Compound to Adjust pH</mat-label>
-          <mat-select ngDefaultControl formControlName="pH_adjusting_compound" >
-                         <mat-option value="None">None</mat-option>
-            <mat-option
-              *ngFor="let compound of pH_adjusting_compound_options"
-              [value]="compound"
-            >
-              {{ compound }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> -->
+
 
 
         <div class="super-calculator-button">
           <button class="super-button"
             mat-raised-button
-            color="primary"
+            color="accent"
             type="submit"
             [disabled]="!bufferForm.valid"
             
@@ -183,7 +184,8 @@
           </button>
           </div>
           
-      </div>
+    
     </mat-card>
+
   </form>
 </mat-card>

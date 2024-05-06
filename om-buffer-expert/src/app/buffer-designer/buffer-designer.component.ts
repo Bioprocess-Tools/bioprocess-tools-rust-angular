@@ -16,6 +16,7 @@ export class BufferDesignerComponent implements OnInit{
 
   title = 'om-buffer-expert';
   solution:Solution | undefined;
+  activeTab: string='';
   constructor(
     
     private solutionService: SolutionService,
@@ -53,4 +54,8 @@ export class BufferDesignerComponent implements OnInit{
   //       break;
   //   }
   // }
+
+  setActiveTab (tab:string) {
+    this.activeTab = tab;
+  }
 }

@@ -1,63 +1,100 @@
+@import "../../../shared-styles.scss";
+super-calculator-main-card{
+  box-shadow: none;
+
+}
+
+
+
+
 .super-calculator-card {
   display:grid;
-    grid-template-columns:1fr;
-    grid-auto-flow: row;
-    margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  grid-template-columns:1fr 1fr;
+gap:5px;
+    margin:0px;
+    padding:0px;
+  padding-bottom:10px;
+  padding-top:10px;
 
-  @media (min-width: 450px) {
-    grid-template-columns: 1fr 1fr;
-    
-  }
+  border-radius: 5px;
+  box-shadow: none;
+  
+
+}
+.pHbox {
+ // background-color: red;
+}
+
+
+.adjust_pH_label {
+  font-size:small;
 }
 
 .super-calculator-col1 {
+
 display:grid;
-grid-auto-flow:row;
-    @media (min-width: 450px) {
-      grid-auto-flow:column
-    }
+gap:10px;
 }
 .super-calculator-col2 {
+
 display:grid;
-grid-auto-flow:row;
-    @media (min-width: 450px) {
-      grid-auto-flow:column
-    }
+gap:10px;
 }
 
 .super-calculator-col3 {
-    grid-column: 1;
+  width:100%;
+
+  grid-column: 1;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  background-color: #f9f9f9;
-  @media (min-width: 450px) {
-    grid-template-columns: 1fr 1fr;
-  }
+  grid-template-columns:50% 1fr;
+
 }
 
+.option1-full-width_Right{
+  width:100%;
+  margin:0px;
+  padding:0px;
+}
+.second_box {
+  display:grid;
+  grid-template-columns:1fr;
+
+  padding: 2px;
+
+  border-radius: 5px;
+  box-shadow:none;
+
+}
 .super-calculator-button {
-    grid-column: 1/span 2 ;
-    //width: 300px;
+    display:flex;
+ 
+    padding-top:5px;
+    padding-left:20px;
+    padding-right:20px;
 }
 .super-button {
+  
   width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
+
+  padding: 3px;
+
   border-radius: 5px;
-  //background-color: #f9f9f9;
+  margin-bottom:5px;
+
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #2168c6;
   }
+
 }
 
 .adjust_pH {
+ // background-color: blue;
     align-self:center;
     margin-left: 16px;
+}
+
+.right-align {
+  text-align: right ;
 }

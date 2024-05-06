@@ -2,7 +2,7 @@
   <form [formGroup]="bufferForm" (ngSubmit)="onSubmit()" class="formf">
     <div class="input">
       <mat-card class="autocomplete_input">
-        <mat-form-field appearance="fill" class="rounded_input_om">
+        <mat-form-field appearance="outline" class="rounded_input_om">
           <input
             matInput
             type="text"
@@ -24,29 +24,31 @@
           </mat-autocomplete>
         </mat-form-field>
       </mat-card>
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label class="bold-label">{{ buffer_label }} </mat-label>
         <mat-hint *ngIf="bufferForm.get('totalConcentration').errors?.['max'] "
-          >Conc should be less than 0.4
+          >Conc should be less than 0.5
         </mat-hint>
         <input
           matInput
           type="number"
-          formControlName="totalConcentration"
+          formControlName="totalConcentration" class="right-align"
           placeholder="total conc. of buffer species (M)"
           required
         />
+        <span matTextSuffix>M</span>
       </mat-form-field>
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label>Target pH</mat-label>
         <mat-hint
           *ngIf="bufferForm.get('target_pH').errors?.['max'] || bufferForm.get('target_pH').errors?.['min'] "
-          >Conc should be between 3 and 10
+          >pH should be between 3 and 10
         </mat-hint>
-        <input matInput type="number" formControlName="target_pH" required />
+        <input matInput type="number" formControlName="target_pH" class="right-align" required />
+        <span matTextSuffix>pH</span>
       </mat-form-field>
 
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label for="acidicCompound">Acidic Compound</mat-label>
         <mat-select
           id="acidicCompound"
@@ -63,7 +65,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label>Basic Compound</mat-label>
         <mat-select formControlName="basicCompound" required>
           <mat-option
@@ -74,7 +76,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label>Salt Compound</mat-label>
         <mat-select formControlName="saltCompound">
           <mat-option *ngFor="let compound of saltCompounds" [value]="compound">
@@ -82,17 +84,18 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field class="option1-full-width" appearance="fill">
+      <mat-form-field class="option1-full-width" appearance="outline">
         <mat-label>Salt Conc. (M) </mat-label>
         <mat-hint *ngIf="bufferForm.get('saltConcentration').errors?.['max']"
-          >Conc should be less than 1
+          >Conc should be less than .5
         </mat-hint>
         <input
           matInput
           type="number"
-          formControlName="saltConcentration"
+          formControlName="saltConcentration" class="right-align"
           placeholder="salt concentration"
         />
+        <span matTextSuffix>M</span>
       </mat-form-field>
       <button
         class="wide-button"
@@ -113,7 +116,7 @@
   <mat-card class="summary">
     <mat-card class="solution-card" *ngIf="returnedSolution; else loadthis">
       <mat-card-header>
-        <mat-card-title>{{ returnedSolution.name }}</mat-card-title>
+        <mat-card-title class="solution-name" [class.red-text]="returnedSolution.result_flag['flag'] === 'red'" >{{ returnedSolution.name }}</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
       </mat-card-header>
@@ -134,7 +137,7 @@
     </mat-card>
     <mat-card
       class="message-card"
-      *ngIf="returnedSolution && bufferForm.untouched == true"
+      *ngIf="returnedSolution && formSubmitted"
     >
       <p
         class="red_flag"
