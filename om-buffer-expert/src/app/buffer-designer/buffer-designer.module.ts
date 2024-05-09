@@ -5,13 +5,13 @@ import { BufferCalculationOption1Component } from './buffer-calculation-option1/
 import { BufferCalculationOption2Component } from './buffer-calculation-option2/buffer-calculation-option2.component';  
 import { SolutionTableComponent } from './solution-table/solution-table.component';
 import { BufferDesignerComponent } from './buffer-designer.component';
-import { BrowserModule } from '@angular/platform-browser';
+
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
@@ -49,8 +49,8 @@ SuperCalculatorComponent
   ],
   imports: [
     CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
+
+
     MatToolbarModule,
     MatListModule,
     MatButtonModule,

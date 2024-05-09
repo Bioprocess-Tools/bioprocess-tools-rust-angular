@@ -103,6 +103,7 @@ export class SolutionsBrowseEditPrepareComponent
   ngOnInit() {
     this.solutions_selection_Control = new FormControl();
     this.solutionsLibrary = this.solutionMixtureService.solutionsLibrary;
+    console.log("God - solutionsLibrary", this.solutionsLibrary);
     this.filteredSolutions = this.solutions_selection_Control.valueChanges.pipe(
       startWith(''),
       map((value) => (typeof value === 'string' ? value.toLowerCase() : '')),
@@ -113,7 +114,7 @@ export class SolutionsBrowseEditPrepareComponent
 
       console.log("God -browse-edit-prepare", this.solution_mixture_steps);
     });
-
+  
     this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
       (solutionMixture) => {
         if (solutionMixture) {
@@ -126,6 +127,16 @@ export class SolutionsBrowseEditPrepareComponent
         }
       }
     );
+
+this.filteredSolutions.subscribe(
+  (data) => {
+    console.log('filteredSolutions data:', data);
+  },
+  (error) => {
+    console.error('filteredSolutions error:', error);
+  }
+);
+
 
     // this.solutions_selection_Control.valueChanges.subscribe(value => {
     //   if (typeof value === 'string') {
@@ -233,15 +244,18 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     } else {
       // If no category is selected, consider all solutions (optional based on UI logic)
       for (const category in this.solutionsLibrary) {
+        console.log("God category" , this.solutionsLibrary, category)
         for (const subCategory in this.solutionsLibrary[category]) {
+          console.log('God subcat',  subCategory);
           filteredSolutions = [
             ...filteredSolutions,
             ...this.solutionsLibrary[category][subCategory],
           ];
+          console.log("God - got here nothing was selected", this.solutionsLibrary[category][subCategory])
         }
       }
     }
-
+   console.log("God - filteredSolutions", this.selectedCategory, this.selectedSubCategory, filteredSolutions.length)
     // Now filter based on the input value
     return filteredSolutions.filter(
       (solution) =>

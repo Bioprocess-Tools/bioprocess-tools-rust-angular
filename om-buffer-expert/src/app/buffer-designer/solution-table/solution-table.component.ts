@@ -24,9 +24,27 @@ export class SolutionTableComponent
   imageUrl: string;
   example_solution: Solution;
   solutionSubscription?: Subscription;
+
+  data = [
+    {
+      z: [
+        [1, 20, 30],
+        [20, 1, 60],
+        [30, 60, 1],
+      ],
+      type: 'heatmap',
+    },
+  ];
   trace: any[];
   layout: any;
-
+  // colorscale_plotly: any[] = [
+  //   [0.0, '#B1C381'],
+  //   [greenBreakpoint, '#B1C381'],
+  //   [greenBreakpoint + 0.0001, '#EEC759'],
+  //   [orangeBreakpoint, '#EEC759'],
+  //   [orangeBreakpoint + 0.0001, '#FF8080'],
+  //   [1, '#FF8080'],
+  // ];
   annotation_font: 12;
   constructor(
     private solutionService: SolutionService,
@@ -41,6 +59,7 @@ export class SolutionTableComponent
     this.solutionElements.changes.subscribe((_) => {
       this.scrollToSolution(this.solution);
     });
+    //this.generateHeatMap();
   }
   scrollToSolution(solution: any, index?: number) {
     // If the index is not provided, find the index
@@ -65,9 +84,10 @@ export class SolutionTableComponent
     }
   }
 
-
   ngOnChanges(changes: SimpleChanges): void {
-   console.log('God active tab', changes['activeTab']);
+    //this.generateHeatMap();
+    //console.log('God changes');
+    //console.log('God active tab', changes['activeTab']);
     if (changes['activeTab']) {
       if (changes['activeTab'].currentValue != 'super-calculator') {
         for (let i = this.solutions.length - 1; i >= 0; i--) {
@@ -141,7 +161,7 @@ export class SolutionTableComponent
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;
           if (Object.keys(this.solution.heat_map_data).length > 0) {
-            //console.log('God heatmap', this.solution.heat_map_data);
+            console.log('God init heatmap');
             this.generateHeatMap();
           }
         }
@@ -149,11 +169,12 @@ export class SolutionTableComponent
     });
 
     window.addEventListener('resize', () => {
+      // console.log('God resize heatmap');
       this.generateHeatMap();
     });
   }
-  getKeys(sol: Solution): boolean{
-    if (Object.keys(sol.heat_map_data).length > 0){
+  getKeys(sol: Solution): boolean {
+    if (Object.keys(sol.heat_map_data).length > 0) {
       return true;
     }
     return false;
@@ -200,27 +221,27 @@ export class SolutionTableComponent
         y: yValues,
         z: zValues,
         type: 'heatmap',
-        colorscale: [
-          [0.0, '#B1C381'],
-          [greenBreakpoint, '#B1C381'],
-          [greenBreakpoint + 0.00001, '#EEC759'],
-          [orangeBreakpoint, '#EEC759'],
-          [orangeBreakpoint + 0.00001, '#FF8080'],
-          [1, '#FF8080'],
-        ],
+        // colorscale: [
+        //   [0.0, '#B1C381'],
+        //   [.33, '#B1C381'],
+        //   [.330001, '#EEC759'],
+        //   [.66, '#EEC759'],
+        //   [.66001, '#FF8080'],
+        //   [1, '#FF8080'],
+        // ],
         zmin: 0,
         zmax: maxZValue,
         showscale: true,
-        colorbar: {
-          x: 0.5,
-          xpad: 10,
-          y: 1,
-          ypad: 10,
-          len: 0.75,
-          thicknessmode: 'fraction',
-          thickness: 0.05,
-          orientation: 'h',
-        },
+        // colorbar: {
+        //   x: 0.5,
+        //   xpad: 10,
+        //   y: 1,
+        //   ypad: 10,
+        //   len: 0.75,
+        //   thicknessmode: 'fraction',
+        //   thickness: 0.05,
+        //   orientation: 'h',
+        // },
       },
     ];
     const xTickVals = xValues;
@@ -245,7 +266,47 @@ export class SolutionTableComponent
         family: 'Roboto, bold',
       },
 
-      annotations: [],
+      annotations: [
+        {
+          xref: 'paper',
+          yref: 'paper',
+          x: 0.1, // Centered horizontally
+          y: 1.1, // Positioning the text below the first color segment
+          text: '0 to 0.1',
+          showarrow: false,
+          font: {
+            family: 'Arial, sans-serif',
+            size: 12,
+            color: 'black',
+          },
+        },
+        {
+          xref: 'paper',
+          yref: 'paper',
+          x: 0.2,
+          y: 1.1, // Adjusted for the second color segment
+          text: '0.1 to 0.2',
+          showarrow: false,
+          font: {
+            family: 'Arial, sans-serif',
+            size: 12,
+            color: 'black',
+          },
+        },
+        {
+          xref: 'paper',
+          yref: 'paper',
+          x: 0.3,
+          y: 1.1, // Adjusted for the third color segment
+          text: '0.2 to 0.3',
+          showarrow: false,
+          font: {
+            family: 'Arial, sans-serif',
+            size: 12,
+            color: 'black',
+          },
+        },
+      ],
       xaxis: {
         title: {
           text: compoundNames[0] + '<br>(% change)',
@@ -295,6 +356,48 @@ export class SolutionTableComponent
         },
       });
     }
+
+    this.layout.shapes.push(
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.1,
+        x1: 0.2, // Centered and 75% width (0.5 - 0.375 to 0.5 + 0.375)
+        y0: 1.1,
+        y1: 1.2, // Positioned at the top with 5% thickness of the plot area
+        fillcolor: '#B1C381',
+        line: { width: 0 },
+      },
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.2,
+        x1: 0.3,
+        y0: 1.1,
+        y1: 1.2,
+        fillcolor: '#EEC759',
+        line: { width: 0 },
+      },
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.3,
+        x1: .4,
+        y0: 1.1,
+        y1: 1.2,
+        fillcolor: '#FF8080',
+        line: { width: 0 },
+      }
+    );
+
+
+
+
+
+
 
     dataPoints.forEach((dp) => {
       this.layout.annotations.push({

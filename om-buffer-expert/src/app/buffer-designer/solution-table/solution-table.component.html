@@ -13,8 +13,8 @@
     >
       <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" #solutionElement>{{ solution.name }}</p>
       <div class="bottom-line">
-        <p class="multi" *ngIf="solution.non_salt_compounds.length>2">M</p>
-        <p class="solution_num">{{ i + 1 }} of {{ solutions.length }}</p>
+        <p class="multi">{{solution.solution_type}}</p>
+        <!-- <p class="solution_num">{{ i + 1 }} of {{ solutions.length }}</p> -->
         <button
           mat-icon-button
           class="delete-button"
@@ -92,5 +92,6 @@
 
 <mat-card  class="heatmap" *ngIf="selectedSolution && getKeys(selectedSolution)" >
   <plotly-plot [data]="trace" [layout]="layout"></plotly-plot>
+  
 </mat-card>
 

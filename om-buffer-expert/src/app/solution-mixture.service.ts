@@ -96,7 +96,7 @@ export class SolutionMixtureService {
       dual: { withSalt: [], withoutSalt: [] },
       stock: { withSalt: [], withoutSalt: [] },
     };
-    //console.log(solutions);
+    console.log("God - solutions we got", solutions);
     for (let key in solutions) {
       let solution = solutions[key];
       if (solution.solution_type in categorized) {
@@ -116,7 +116,7 @@ export class SolutionMixtureService {
         }
       }
     }
-    console.log(categorized);
+    console.log("God: categorized", categorized);
     return categorized;
   }
 
@@ -255,6 +255,8 @@ export class SolutionMixtureService {
             this.solutionsLibrary = data.solutionsLibrary;
             this.compounds = data.compounds; // Assuming data.compounds is already processed
             this.bufferSpecies = data.bufferSpecies; // Assuming data.bufferS
+            console.log("God's data", data);
+            console.log('God - solutionsLibrary', this.solutionsLibrary);
             resolve(data);
           },
           error: (error) => reject(error),

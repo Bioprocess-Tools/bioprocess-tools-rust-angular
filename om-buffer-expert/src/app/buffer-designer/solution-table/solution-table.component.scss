@@ -96,6 +96,7 @@
 }
 
 .solution_title {
+
   margin-top: 5px;
   margin-bottom: 0px;
   align-self: flex-end;
@@ -104,7 +105,17 @@
 .red-text {
   color: red;
 }
-
+.multi{
+  margin-left:15px;
+  font-size: xx-small;
+  text-align: center;
+  //border:2px solid $accent-green;
+  background-color: $secondary-color;
+  color:white;
+  border-radius: 20px;
+  width:60px;
+  align-content: middle;
+}
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
   border: 3px solid $accent-green; /* Change color as per your requirement */
@@ -119,6 +130,7 @@
   margin-bottom: 1px;
   margin-top: 3px;
 }
+
 
 .pH {
   margin-bottom: 1px;
@@ -212,7 +224,7 @@ background-color: whitesmoke;
 }
 
 .scroll-title {
-  font-size: medium;
+  font-size: small;
 
   margin: 10px;
 

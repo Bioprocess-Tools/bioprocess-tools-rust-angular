@@ -48,7 +48,7 @@ ionValidator():ValidatorFn {
 
 
   ngOnInit() {
-    this.solutionService.get_ion_names();
+    //this.solutionService.get_ion_names();
     this.solutionService.ion_names$.subscribe(
       ion_names => {
         this.ion_names = ion_names;

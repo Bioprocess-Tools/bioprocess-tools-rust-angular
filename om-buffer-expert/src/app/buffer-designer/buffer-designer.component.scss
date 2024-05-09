@@ -67,8 +67,9 @@ mat-card {
   box-shadow: none;
 }
 
-.mat-mdc-tab-links {
-  justify-content: flex-end;
+:host ::ng-deep .mat-mdc-tab-links {
+  justify-content: space-evenly !important;
+gap:5px;
 }
 
 .small-title {
@@ -82,10 +83,15 @@ mat-card {
 }
 
 a {
-  font-size: larger;
+  //background-color: lightblue;
+  font-size: x-small;
   font-weight: 900;
-}
 
+}
+.mdc-tab {
+  padding-right: 5px !important;
+  padding-left: 5px !important;
+}
 .thick {
   border-width: 5px;
 }
