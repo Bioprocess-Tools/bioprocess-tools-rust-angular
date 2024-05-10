@@ -14,6 +14,7 @@
   grid-auto-flow: column;
   //margin: 5px;
   overflow-x: auto;
+  overflow-y:hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
   box-shadow: none;
@@ -70,13 +71,18 @@
   border-color: $border-color;
 }
 .heatmap {
-  //align-self: center;
-  //align-items: center;
+  
+  align-items: center;
   justify-content: center;
   width: 90vw;
+  padding-bottom:30px;
   @media screen and (max-width: 450px) {
     width: 90vw;
   }
+}
+
+.heatmap_title {
+ margin-left:40px;
 }
 .delete-button {
   color: rgb(183, 8, 8);

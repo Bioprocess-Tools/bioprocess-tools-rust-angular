@@ -66,17 +66,22 @@ export class SolutionTableComponent
     if (index === undefined) {
       index = this.solutions.indexOf(solution);
     }
+  const solutionElementsArray = this.solutionElements.toArray();
+  if (solutionElementsArray[index]) {
+    const element = solutionElementsArray[index].nativeElement;
+    const container = element.parentElement;
+    const scrollLeft =
+      element.offsetLeft + element.offsetWidth - container.offsetWidth;
 
-    // Scroll to the specific solution
-    const solutionElementsArray = this.solutionElements.toArray();
-    if (solutionElementsArray[index]) {
-      solutionElementsArray[index].nativeElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
-      });
-    }
+    // Scroll horizontally, but keep the vertical scroll position the same
+    container.scrollTo({
+      top: container.scrollTop, // Keep vertical scroll position the same
+      left: scrollLeft,
+      behavior: 'smooth',
+    });
   }
+}
+  
 
   ngOnDestroy(): void {
     if (this.solutionSubscription) {
@@ -221,17 +226,17 @@ export class SolutionTableComponent
         y: yValues,
         z: zValues,
         type: 'heatmap',
-        // colorscale: [
-        //   [0.0, '#B1C381'],
-        //   [.33, '#B1C381'],
-        //   [.330001, '#EEC759'],
-        //   [.66, '#EEC759'],
-        //   [.66001, '#FF8080'],
-        //   [1, '#FF8080'],
-        // ],
+        colorscale: [
+          [0.0, '#B1C381'],
+          [.33, '#B1C381'],
+          [.330001, '#EEC759'],
+          [.66, '#EEC759'],
+          [.66001, '#FF8080'],
+          [1, '#FF8080'],
+        ],
         zmin: 0,
         zmax: maxZValue,
-        showscale: true,
+        showscale: false,
         // colorbar: {
         //   x: 0.5,
         //   xpad: 10,
@@ -251,62 +256,59 @@ export class SolutionTableComponent
     const yTickText = yValues.map((val) => `${Math.round(val)}%`);
     this.layout = {
       autosize: true,
-      width: window.innerWidth * 0.95,
+      width: window.innerWidth * 0.90,
       margin: {
-        l: 75, // Adjust left margin
+        l: 100, // Adjust left margin
         r: 25, // Reduce right margin
-        b: 100, // Adjust bottom margin
-        t: 100, // Adjust top margin
+        b: 75, // Adjust bottom margin
+        t: 70, // Adjust top margin
         pad: 0,
       },
-      title: 'Composition variability heatmap',
-      titlefont: {
-        size: title_font,
-        color: 'black',
-        family: 'Roboto, bold',
-      },
+      // title: '',
+      // titlefont: {
+      //   size: title_font,
+      //   color: 'black',
+      //   family: 'Roboto, bold',
+      // },
+      // x:0.75,
+      // //xanchor: 'center',
 
       annotations: [
         {
           xref: 'paper',
           yref: 'paper',
-          x: 0.1, // Centered horizontally
+          x: 0.35, // Centered horizontally
           y: 1.1, // Positioning the text below the first color segment
-          text: '0 to 0.1',
+          text: '0',
           showarrow: false,
-          font: {
-            family: 'Arial, sans-serif',
-            size: 12,
-            color: 'black',
-          },
         },
         {
           xref: 'paper',
           yref: 'paper',
-          x: 0.2,
+          x: 0.45, // Centered horizontally
+          y: 1.1, // Positioning the text below the first color segment
+          text: '0.1',
+          showarrow: false,
+        },
+        {
+          xref: 'paper',
+          yref: 'paper',
+          x: 0.55,
           y: 1.1, // Adjusted for the second color segment
-          text: '0.1 to 0.2',
+          text: '0.2',
           showarrow: false,
-          font: {
-            family: 'Arial, sans-serif',
-            size: 12,
-            color: 'black',
-          },
         },
         {
           xref: 'paper',
           yref: 'paper',
-          x: 0.3,
+          x: 0.65,
           y: 1.1, // Adjusted for the third color segment
-          text: '0.2 to 0.3',
+          text: '0.3',
           showarrow: false,
-          font: {
-            family: 'Arial, sans-serif',
-            size: 12,
-            color: 'black',
-          },
         },
       ],
+
+      
       xaxis: {
         title: {
           text: compoundNames[0] + '<br>(% change)',
@@ -357,41 +359,41 @@ export class SolutionTableComponent
       });
     }
 
-    this.layout.shapes.push(
-      {
-        type: 'rect',
-        xref: 'paper',
-        yref: 'paper',
-        x0: 0.1,
-        x1: 0.2, // Centered and 75% width (0.5 - 0.375 to 0.5 + 0.375)
-        y0: 1.1,
-        y1: 1.2, // Positioned at the top with 5% thickness of the plot area
-        fillcolor: '#B1C381',
-        line: { width: 0 },
-      },
-      {
-        type: 'rect',
-        xref: 'paper',
-        yref: 'paper',
-        x0: 0.2,
-        x1: 0.3,
-        y0: 1.1,
-        y1: 1.2,
-        fillcolor: '#EEC759',
-        line: { width: 0 },
-      },
-      {
-        type: 'rect',
-        xref: 'paper',
-        yref: 'paper',
-        x0: 0.3,
-        x1: .4,
-        y0: 1.1,
-        y1: 1.2,
-        fillcolor: '#FF8080',
-        line: { width: 0 },
-      }
-    );
+this.layout.shapes.push(
+  {
+    type: 'rect',
+    xref: 'paper',
+    yref: 'paper',
+    x0: 0.35, // Middle of the shape is at 0.4 (0.4 - 0.05)
+    x1: 0.45, // Middle of the shape is at 0.4 (0.4 + 0.05)
+    y0: 1.1,
+    y1: 1.2, // Positioned at the top with 5% thickness of the plot area
+    fillcolor: '#B1C381',
+    line: { width: 0 },
+  },
+  {
+    type: 'rect',
+    xref: 'paper',
+    yref: 'paper',
+    x0: 0.45, // Middle of the shape is at 0.5 (0.5 - 0.05)
+    x1: 0.55, // Middle of the shape is at 0.5 (0.5 + 0.05)
+    y0: 1.1,
+    y1: 1.2,
+    fillcolor: '#EEC759',
+    line: { width: 0 },
+  },
+  {
+    type: 'rect',
+    xref: 'paper',
+    yref: 'paper',
+    x0: 0.55, // Middle of the shape is at 0.6 (0.6 - 0.05)
+    x1: 0.65, // Middle of the shape is at 0.6 (0.6 + 0.05)
+    y0: 1.1,
+    y1: 1.2,
+    fillcolor: '#FF8080',
+    line: { width: 0 },
+  }
+);
 
 
 
