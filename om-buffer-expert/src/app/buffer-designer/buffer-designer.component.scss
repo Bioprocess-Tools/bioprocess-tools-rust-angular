@@ -1,10 +1,12 @@
 @import "../../shared-styles.scss";
 .main {
   display: flex;
+  
 }
 
 //////////////////////////////////TWO PAGE LAYOUT////////////////////////////////////////////////////////////
 .content {
+  
   grid-area: content;
   padding-top: 0.5vh;
   padding-left: 0.5vw;
@@ -21,8 +23,10 @@
 }
 
 .calculator {
+  border: 2px solid $divider-green;
   overflow-y: auto;
   padding: 5px;
+  box-shadow:none;
 }
 .intro {
   //width:100%;
@@ -41,19 +45,20 @@
 .intro-text-main {
   padding: 2px;
   margin: 2px;
-  background-color: whitesmoke;
-  box-shadow: inset;
+
+  //border: 1px solid $border-color;
+  box-shadow: none;
 }
 
 .intro-text {
   // font-size: large;
-  background-color: transparent;
+    border: 1px solid $border-color;
   box-shadow: none;
   //margin:10px;
 }
 
 .small-title {
-  font-size: large;
+  font-size: medium;
   padding: 0px;
 }
 
@@ -61,7 +66,7 @@
   padding: 0 8px;
   padding: 8px 8px;
   text-align: justify;
-  font-size: medium;
+  font-size: small;
 }
 mat-card {
   box-shadow: none;

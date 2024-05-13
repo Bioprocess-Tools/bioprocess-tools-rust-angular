@@ -1,8 +1,9 @@
+<mat-card class="container">
 <mat-card *ngIf="solution" class="card-background">
   <!-- <mat-card-title>Your solutions</mat-card-title> -->
   <mat-card class="grid-container">
     <mat-card
-      class="grid-item"
+      class="grid-item" 
       *ngFor="let solution of solutions; let i = index"
       [ngClass]="{
         'highlighted-card':
@@ -11,7 +12,7 @@
       }"
       (click)="viewDetails(solution, i, $event)"
     >
-      <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" #solutionElement>{{ solution.name }}</p>
+      <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" #solutionElement >{{ solution.name }}</p>
       <div class="bottom-line">
         <p class="multi">{{solution.solution_type}}</p>
         <!-- <p class="solution_num">{{ i + 1 }} of {{ solutions.length }}</p> -->
@@ -29,7 +30,6 @@
 </mat-card>
 
 <mat-card class="solution_summary" *ngIf="solution">
-
   <mat-card-header>
     <h4 class="solution_title">{{ solution.name }}</h4>
   </mat-card-header>
@@ -89,7 +89,7 @@
       </mat-card-content>
   </mat-card>
 </mat-card>
-
+</mat-card>
 <mat-card  class="heatmap" *ngIf="selectedSolution && getKeys(selectedSolution)" >
   <mat-card-title class="heatmap_title">Compositional Variability Heatmap</mat-card-title>
   <plotly-plot [data]="trace" [layout]="layout"></plotly-plot>

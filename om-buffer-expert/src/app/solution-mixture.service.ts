@@ -24,9 +24,17 @@ export class SolutionMixtureService {
   } = {};
   bufferSpecies: { [key: string]: any } = {};
   compounds: { [key: string]: any } = {};
+  acidic_compounds: string[] = [];
+  basic_compounds: string[] = [];
+  salt_compounds: string[] = [];
+
+  bufferSpeciespHMap: { [key: string]: any } = {};
+  buffer_compounds: string[] = [];
   solutionMixtureSolutionsReviewSubject = new BehaviorSubject<SolutionMixture>(
     null
   );
+
+  example_solution: Solution;
   solutionMixtureSolutionsReview$ =
     this.solutionMixtureSolutionsReviewSubject.asObservable();
   StepsSubject = new BehaviorSubject<Step[]>([]);
@@ -96,7 +104,7 @@ export class SolutionMixtureService {
       dual: { withSalt: [], withoutSalt: [] },
       stock: { withSalt: [], withoutSalt: [] },
     };
-    console.log("God - solutions we got", solutions);
+    //console.log('God - solutions we got', solutions);
     for (let key in solutions) {
       let solution = solutions[key];
       if (solution.solution_type in categorized) {
@@ -112,11 +120,10 @@ export class SolutionMixtureService {
           categorized[solution.solution_type].withoutSalt.push(solution);
         } else if (solution.solution_type === 'stock') {
           categorized['stock'].withoutSalt.push(solution);
-          console.log(categorized);
         }
       }
     }
-    console.log("God: categorized", categorized);
+    //console.log('God: categorized', categorized);
     return categorized;
   }
 
@@ -152,8 +159,22 @@ export class SolutionMixtureService {
       }
     }
 
-    console.log(processed);
+    //console.log(processed);
     return processed;
+  }
+
+  getBufferSpeciespHMap(): Observable<any> {
+    return this.http
+      .get<{ [key: string]: any }>(`${this.apiUrl}/get_buffer_species_pH_map`)
+      .pipe(
+        map((data) => {
+          const bufferSpeciespHMap: { [key: string]: any } = {};
+          for (const key in data) {
+            bufferSpeciespHMap[key] = data[key];
+          }
+          return bufferSpeciespHMap;
+        })
+      );
   }
 
   processCompounds(compounds: { [key: string]: any }): any {
@@ -168,10 +189,13 @@ export class SolutionMixtureService {
       }
     }
 
-    console.log(processed);
     return processed;
   }
 
+  get_example_solution(): Observable<any> {
+    return this.http.get<Solution>(`${this.apiUrl}/get_example_solution`);
+    
+  }
   // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
   // to display the solutions in the mixture
   // solution_mixture object will be a single object
@@ -249,14 +273,22 @@ export class SolutionMixtureService {
         forkJoin({
           solutionsLibrary: this.getSolutionsLibraryProcessed(),
           compounds: this.getCompoundsProcessed(),
+          example_solution: this.get_example_solution(),
           bufferSpecies: this.getBufferSpeciesProcessed(),
+          bufferSpeciespHMap: this.getBufferSpeciespHMap(),
         }).subscribe({
           next: (data) => {
             this.solutionsLibrary = data.solutionsLibrary;
             this.compounds = data.compounds; // Assuming data.compounds is already processed
             this.bufferSpecies = data.bufferSpecies; // Assuming data.bufferS
-            console.log("God's data", data);
-            console.log('God - solutionsLibrary', this.solutionsLibrary);
+            this.bufferSpeciespHMap = data.bufferSpeciespHMap;
+            this.example_solution = data.example_solution;
+            this.buffer_compounds = data.compounds['A'].concat(
+              data.compounds['B']
+            );
+            this.acidic_compounds = data.compounds['A'];
+            this.basic_compounds = data.compounds['B'];
+            this.salt_compounds = data.compounds['S'];
             resolve(data);
           },
           error: (error) => reject(error),

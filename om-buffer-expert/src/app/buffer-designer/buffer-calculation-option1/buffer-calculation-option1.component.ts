@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../../solution.service';
-import { Compound } from '../../shared/models/compound.model';
+import { SolutionMixtureService } from '../../solution-mixture.service';
+
 import { AbstractControl, FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Solution } from '../../shared/models/solution.model';
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    public solutionService: SolutionService,
+    public solutionService: SolutionService,public solutionMixtureService: SolutionMixtureService,
    // public omroute:Router
 
   ) { 
@@ -44,27 +44,20 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
 
     //this.bufferForm.reset;
     this.initializeForm();
+          this.acidCompounds = this.solutionMixtureService.acidic_compounds;
+          this.basicCompounds = this.solutionMixtureService.basic_compounds;
+          this.saltCompounds = this.solutionMixtureService.salt_compounds;
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next:(solution) => {
       if (solution) {
-
-        this.acidCompounds = this.solutionService.getAppAcidCompounds();
-       // console.log("God acid option 1",this.acidCompounds)
-        this.basicCompounds = this.solutionService.getAppBasicCompounds();
-        this.saltCompounds = this.solutionService.getAppSaltCompounds();
-        this.buffer_compound_names = this.solutionService.getAppBufferCompounds();
-        // Assuming you have a method to handle the form population
         this.returnedSolution = solution;
         this.populateForm(solution);
-
          this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true})
-  
       }
     }
   }
     );
 
-   // this.initializeForm();
   }
 
 bufferSelectionValidator(): ValidatorFn {

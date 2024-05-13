@@ -44,21 +44,26 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
 
     // console.log("God acid option 1",this.acidCompounds)
 
+    this.acid_compound_names = this.solutionMixtureService.acidic_compounds;
+    this.basic_compound_names = this.solutionMixtureService.basic_compounds;
+    this.salt_compound_names = this.solutionMixtureService.salt_compounds;
+    this.all_buffer_compound_names = this.solutionMixtureService.buffer_compounds
+
+
+
     this.compounds = this.solutionMixtureService.compounds;
-    this.acid_compound_names = this.compounds['A'].filter(
+    this.acid_compound_names = this.acid_compound_names.filter(
       (compound) =>
         compound !== 'Hydrochloric Acid' && compound != 'Sulfuric Acid'
     );
-    this.basic_compound_names = this.compounds['B'].filter(
+    this.basic_compound_names = this.basic_compound_names.filter(
       (compound) =>
         compound !== 'Sodium Hydroxide' && compound != 'Potassium Hydroxide'
     );
-    this.salt_compound_names = this.compounds['S'].filter(
+    this.salt_compound_names = this.salt_compound_names.filter(
       (compound) => compound !== 'Water'
     );
-    this.all_buffer_compound_names = this.acid_compound_names.concat(
-      this.basic_compound_names
-    );
+
 
 
     this.first_compound_options = this.all_buffer_compound_names;
@@ -127,13 +132,6 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
                     },
                   });
 
-
-
-
-    console.log('God acids', this.acid_compound_names);
-    console.log('God bases', this.basic_compound_names);
-    console.log('God salts', this.salt_compound_names);
-    console.log('God buffers', this.all_buffer_compound_names);
 
       this.bufferForm.get('adjust_pH').valueChanges.subscribe((checked) => {
     const target_pH = this.bufferForm.get('target_pH');

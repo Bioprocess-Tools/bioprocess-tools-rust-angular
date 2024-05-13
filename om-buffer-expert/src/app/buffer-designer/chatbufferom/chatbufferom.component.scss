@@ -13,7 +13,7 @@
   margin-top:5px;
   margin-bottom: 10px;
   box-shadow: none;
-  //align-items: center;
+  align-items: center;
 }
 .instruct {
   font-size:small;
@@ -31,13 +31,14 @@
 }
 
 .form-card{
- //background-color:whitesmoke
+ 
   display:flex;
-  width:96%;
-  margin-left: 10px;
+  width:99%;
+  align-self: center;
+  margin-left: 5px;
   box-shadow: none;
-  border-color: $primary-color;
-  border-width: 3px;
+  //border-color:$card-background-cream;
+  //border-width: 1px;
 
 }
 .formf {display:flex;flex-direction: column;
@@ -70,12 +71,12 @@ border: 1px solid $card-background-cream;
 }
 
 .input-field-2 {
-  display:none;
+ 
   width:98%;
   margin-top:6px;
  // margin-left:10px;
   align-self: center;
-  
+  margin-bottom:10px;
 }
 
 .wide-button{

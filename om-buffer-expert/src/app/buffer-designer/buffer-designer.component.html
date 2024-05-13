@@ -28,48 +28,10 @@
               "40mM Phosphate buffer, 0.1M Sodium Chloride, pH 7.0"
               and the ChatGPT will do the magic, along with the powerful
               calculation engine to generate a recipe.</p>
-            <p> Here are the buffers names you can use:    Acetate,
-              Acetate-Sodium,
-              Acetate-Tris,
-              Acetate-Trolamine,
-              Arginine,
-              Arginine-Acetate,
-              Arginine-Citrate,
-              Aspartate,
-              Aspartate-Sodium,
-              Bis-Tris,
-              Bis-Tris-Acetate,
-              Bis-Tris-Propane,
-              Bis-Tris-Propane-Acetate,
-              Citrate,
-              Citrate-Sodium,
-              Citrate-Tris,
-              Citrate-Trolamine,
-              Formate,
-              Formate-Sodium,
-              Formate-Tris,
-              Formate-Trolamine,
-              Glutamate,
-              Glutamate-Sodium,
-              Histidine,
-              Histidine-Acetate,
-              Histidine-Citrate,
-              MES,
-              Phosphate,
-              Phosphate-Potassium,
-              Phosphate-Sodium,
-              Phosphate-Tris,
-              Tris,
-              Tris-Acetate,
-              Tris-Citrate,
-              Tris-Formate,
-              Tris-Phosphate,
-              Trolamine,
-              Trolamine-Acetate,
-              Trolamine-Citrate,
-              Trolamine-Formate</p>
-            
-            
+              <p> To make it even easier, now you can choose a buffer species using autocomplete 
+                and it will automatically populate the buffer name for you, which you can easily edit.
+              </p>
+    
             </mat-card-content>
             </mat-card>
        
@@ -86,6 +48,14 @@
               <mat-card-content class="small-content">
               Of course you can also calculate the pH of a solution by
               providing the compounds and their concentrations.
+            </mat-card-content>
+            </mat-card>
+                        <mat-card class="intro-text">
+              <mat-card-title class="small-title">Super Calculator</mat-card-title>
+              <mat-card-content class="small-content">
+              All new! You can now add upto 3 different buffer compounds, one salt compound!
+              In addition, you can have the calculator adjust the pH to a target for you. It will use 
+              either Sodium Hydroxide or Hydrochloric Acid to adjust the pH.
             </mat-card-content>
             </mat-card>
          
@@ -128,13 +98,13 @@
             [active]="thirdTab.isActive">
             Calculator
           </a>
-          <a mat-tab-link
+          <a mat-tab-link 
             [routerLink]="['super-calculator']"
             (click)="setActiveTab('super-calculator'); $event.preventDefault()"
             routerLinkActive
             #fourthTab="routerLinkActive"
             [active]="fourthTab.isActive">
-            Super-Calculator
+            Super Calculator
           </a>
         </nav>
         <mat-tab-nav-panel #tabPanel>

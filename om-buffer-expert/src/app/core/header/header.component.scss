@@ -1,5 +1,5 @@
-@use '@angular/material' as mat;
-@import '../../../shared-styles.scss';
+// @use '@angular/material' as mat;
+ @import '../../../shared-styles.scss';
 
 
 .header-card {
@@ -18,12 +18,13 @@
   
 }
 .mat-headline-4 {
+  
   margin-bottom: 2px;
   margin-left: 10px;
   font-weight: 800;
   font-stretch: expanded;
   font-size: xx-large;
-  color: whitesmoke;
+  //color: $card-background-cream;
   white-space: nowrap;
 
   @media (max-width: 650px) {

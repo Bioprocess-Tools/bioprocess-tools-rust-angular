@@ -1,36 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-
-
-
-
-
-
-
-  
 
  @import './shared-styles';
- @import './buffer-theme';
-
+//  @import './buffer-theme';
 
   body {
-   // background-color:rgb(149, 115, 115);
+ font-family: $Lato-font-family;
    // display:flex;
     //height:100%;
-    font-family: "Roboto";
+    
     margin:0;
     padding:0;
   }
 
 
 
-
- // styles.scss
-
-
-
-
-
-// Include the theme mixins for other components you use here.
 
 
 

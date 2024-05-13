@@ -25,26 +25,10 @@ export class SolutionTableComponent
   example_solution: Solution;
   solutionSubscription?: Subscription;
 
-  data = [
-    {
-      z: [
-        [1, 20, 30],
-        [20, 1, 60],
-        [30, 60, 1],
-      ],
-      type: 'heatmap',
-    },
-  ];
+
   trace: any[];
   layout: any;
-  // colorscale_plotly: any[] = [
-  //   [0.0, '#B1C381'],
-  //   [greenBreakpoint, '#B1C381'],
-  //   [greenBreakpoint + 0.0001, '#EEC759'],
-  //   [orangeBreakpoint, '#EEC759'],
-  //   [orangeBreakpoint + 0.0001, '#FF8080'],
-  //   [1, '#FF8080'],
-  // ];
+
   annotation_font: 12;
   constructor(
     private solutionService: SolutionService,
@@ -61,27 +45,27 @@ export class SolutionTableComponent
     });
     //this.generateHeatMap();
   }
-  scrollToSolution(solution: any, index?: number) {
-    // If the index is not provided, find the index
-    if (index === undefined) {
-      index = this.solutions.indexOf(solution);
-    }
-  const solutionElementsArray = this.solutionElements.toArray();
-  if (solutionElementsArray[index]) {
-    const element = solutionElementsArray[index].nativeElement;
-    const container = element.parentElement;
-    const scrollLeft =
-      element.offsetLeft + element.offsetWidth - container.offsetWidth;
+ 
 
-    // Scroll horizontally, but keep the vertical scroll position the same
-    container.scrollTo({
-      top: container.scrollTop, // Keep vertical scroll position the same
-      left: scrollLeft,
-      behavior: 'smooth',
-    });
+  scrollToSolution(solution: any) {
+    // If the index is not provided, find the index
+    const index = this.solutions.indexOf(solution);
+    if (index !== -1) {
+      const element = this.solutionElements.toArray()[index].nativeElement;
+      const container = element.parentElement;
+      const superContainer = container.parentElement;
+      //console.log('God element', element, container, superContainer);
+      // Adjust this calculation if it doesn't correctly align items
+      const scrollLeft = container.offsetLeft - element.offsetLeft + 10;
+      //console.log('God scroll left', scrollLeft, container.offsetLeft, element.offsetLeft);
+      // Scroll horizontally, but keep the vertical scroll position the same
+      superContainer.scrollTo({
+        top: container.scrollTop, // Keep vertical scroll position the same
+        left: scrollLeft,
+        behavior: 'smooth',
+      });
+    }
   }
-}
-  
 
   ngOnDestroy(): void {
     if (this.solutionSubscription) {
@@ -98,7 +82,7 @@ export class SolutionTableComponent
         for (let i = this.solutions.length - 1; i >= 0; i--) {
           if (this.solutions[i].non_salt_compounds.length <= 2) {
             this.selectedSolution = this.solutions[i];
-            this.scrollToSolution(this.solutions[i], i);
+            this.scrollToSolution(this.solutions[i]);
             this.solutionService.changeSolution(this.solutions[i]);
             this.solution = this.selectedSolution;
             break; // Add a break statement to exit the loop after finding the selected solution
@@ -113,13 +97,21 @@ export class SolutionTableComponent
     this.selectedSolution = solution;
 
     this.editSolution(solution);
-    this.scrollToSolution(solution, index);
+    this.scrollToSolution(solution);
   }
   deleteSolution(solution: Solution, i: number) {
-    this.solutionService.deleteSolution(solution);
-    if (this.solutions.length > 0) {
+    if (this.solutions.length > 1 && i > 0) {
       this.selectedSolution = this.solutions[i - 1];
       this.solution = this.selectedSolution;
+      this.solutionService.deleteSolution(solution);
+    } else if (this.solutions.length > 1 && i == 0) {
+      this.selectedSolution = this.solutions[i + 1];
+      this.solution = this.selectedSolution;
+      this.solutionService.deleteSolution(solution);
+    } else if (this.solutions.length == 1) {
+      this.solutionService.deleteSolution(solution);
+      this.solution = null;
+      this.selectedSolution = null;
     } else {
       this.solution = null;
       this.selectedSolution = null;
@@ -155,6 +147,7 @@ export class SolutionTableComponent
   }
 
   ngOnInit() {
+    //this.example_solution = this.solutionService.example_solution;
     this.solutionService.solutions_list.subscribe((solutions) => {
       this.solutions = solutions;
     });
@@ -165,8 +158,9 @@ export class SolutionTableComponent
 
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;
+
           if (Object.keys(this.solution.heat_map_data).length > 0) {
-            console.log('God init heatmap');
+            //console.log('God init heatmap');
             this.generateHeatMap();
           }
         }
@@ -185,6 +179,12 @@ export class SolutionTableComponent
     return false;
   }
   generateHeatMap() {
+
+    const defaultLayout = {
+      font: {
+        family: "Lato, sans-serif",
+      },
+    };
     let fontSize;
     if (window.innerWidth <= 480) {
       fontSize = 8; // Small font size for small screens
@@ -228,10 +228,10 @@ export class SolutionTableComponent
         type: 'heatmap',
         colorscale: [
           [0.0, '#B1C381'],
-          [.33, '#B1C381'],
-          [.330001, '#EEC759'],
-          [.66, '#EEC759'],
-          [.66001, '#FF8080'],
+          [0.33, '#B1C381'],
+          [0.330001, '#EEC759'],
+          [0.66, '#EEC759'],
+          [0.66001, '#FF8080'],
           [1, '#FF8080'],
         ],
         zmin: 0,
@@ -256,22 +256,17 @@ export class SolutionTableComponent
     const yTickText = yValues.map((val) => `${Math.round(val)}%`);
     this.layout = {
       autosize: true,
-      width: window.innerWidth * 0.90,
+      width: window.innerWidth * 0.9,
       margin: {
-        l: 100, // Adjust left margin
-        r: 25, // Reduce right margin
+        l:
+          window.innerWidth < 800
+            ? window.innerWidth * 0.15
+            : window.innerWidth * 0.075, // Adjust left margin
+        r: 20, // Reduce right margin
         b: 75, // Adjust bottom margin
         t: 70, // Adjust top margin
         pad: 0,
       },
-      // title: '',
-      // titlefont: {
-      //   size: title_font,
-      //   color: 'black',
-      //   family: 'Roboto, bold',
-      // },
-      // x:0.75,
-      // //xanchor: 'center',
 
       annotations: [
         {
@@ -308,12 +303,13 @@ export class SolutionTableComponent
         },
       ],
 
-      
       xaxis: {
         title: {
           text: compoundNames[0] + '<br>(% change)',
           standoff: 30,
           font: {
+            //family: 'Lato, sans-serif',
+
             size: axis_font,
             color: 'black',
           },
@@ -321,6 +317,7 @@ export class SolutionTableComponent
         tickvals: xTickVals,
         ticktext: xTickText,
         tickfont: {
+          //family: 'Lato,sans-serif',
           size: fontSize,
           color: 'black',
         },
@@ -338,6 +335,7 @@ export class SolutionTableComponent
         tickvals: yTickVals,
         ticktext: yTickText,
         tickfont: {
+          //family: 'Lato, sans-serif',
           size: fontSize,
           color: 'black',
         },
@@ -359,48 +357,42 @@ export class SolutionTableComponent
       });
     }
 
-this.layout.shapes.push(
-  {
-    type: 'rect',
-    xref: 'paper',
-    yref: 'paper',
-    x0: 0.35, // Middle of the shape is at 0.4 (0.4 - 0.05)
-    x1: 0.45, // Middle of the shape is at 0.4 (0.4 + 0.05)
-    y0: 1.1,
-    y1: 1.2, // Positioned at the top with 5% thickness of the plot area
-    fillcolor: '#B1C381',
-    line: { width: 0 },
-  },
-  {
-    type: 'rect',
-    xref: 'paper',
-    yref: 'paper',
-    x0: 0.45, // Middle of the shape is at 0.5 (0.5 - 0.05)
-    x1: 0.55, // Middle of the shape is at 0.5 (0.5 + 0.05)
-    y0: 1.1,
-    y1: 1.2,
-    fillcolor: '#EEC759',
-    line: { width: 0 },
-  },
-  {
-    type: 'rect',
-    xref: 'paper',
-    yref: 'paper',
-    x0: 0.55, // Middle of the shape is at 0.6 (0.6 - 0.05)
-    x1: 0.65, // Middle of the shape is at 0.6 (0.6 + 0.05)
-    y0: 1.1,
-    y1: 1.2,
-    fillcolor: '#FF8080',
-    line: { width: 0 },
-  }
-);
-
-
-
-
-
-
-
+    this.layout.shapes.push(
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.35, // Middle of the shape is at 0.4 (0.4 - 0.05)
+        x1: 0.45, // Middle of the shape is at 0.4 (0.4 + 0.05)
+        y0: 1.1,
+        y1: 1.15, // Positioned at the top with 5% thickness of the plot area
+        fillcolor: '#B1C381',
+        line: { width: 0 },
+      },
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.45, // Middle of the shape is at 0.5 (0.5 - 0.05)
+        x1: 0.55, // Middle of the shape is at 0.5 (0.5 + 0.05)
+        y0: 1.1,
+        y1: 1.15,
+        fillcolor: '#EEC759',
+        line: { width: 0 },
+      },
+      {
+        type: 'rect',
+        xref: 'paper',
+        yref: 'paper',
+        x0: 0.55, // Middle of the shape is at 0.6 (0.6 - 0.05)
+        x1: 0.65, // Middle of the shape is at 0.6 (0.6 + 0.05)
+        y0: 1.1,
+        y1: 1.15,
+        fillcolor: '#FF8080',
+        line: { width: 0 },
+      }
+    );
+    this.layout = { ...this.layout, ...defaultLayout };
     dataPoints.forEach((dp) => {
       this.layout.annotations.push({
         x: dp.x * 100 - 100,
@@ -410,14 +402,14 @@ this.layout.shapes.push(
         text: dp.pH.toFixed(2),
         showarrow: false,
         font: {
-          family: 'Roboto, bold',
+          //family: 'Lato,bold, sans-serif',
           size: fontSize,
           color: 'black',
         },
       });
     });
 
-    console.log('God trace', this.trace);
-    console.log('God layout', this.layout);
+    //console.log('God trace', this.trace);
+    //console.log('God layout', this.layout);
   }
 }
