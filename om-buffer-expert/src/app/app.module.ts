@@ -16,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
+import { PlotlyModule } from 'angular-plotly.js';
+import PlotlyJS from 'plotly.js-cartesian-dist-min';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
@@ -30,7 +32,7 @@ import { BufferDesignerModule } from './buffer-designer/buffer-designer.module';
 import { StaticPagesModule } from './static-pages/static-pages.module';
 import { SolutionMixtureMainModule } from './solution-mixture/solution-mixture-main/solution-mixture-main.module';
 
-
+PlotlyModule.plotlyjs = PlotlyJS;
 
 
 @NgModule({
@@ -61,8 +63,8 @@ import { SolutionMixtureMainModule } from './solution-mixture/solution-mixture-m
     CoreModule,
     StaticPagesModule,
     MatStepperModule,
-    MatChipsModule
-
+    MatChipsModule,
+    PlotlyModule
  
     
   ],

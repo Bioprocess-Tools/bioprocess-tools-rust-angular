@@ -1,4 +1,4 @@
-import isEqual from 'lodash/isEqual';
+
 import { SolutionMixture } from './solution_mixture.model';
 import { Solution } from './solution.model';
 
@@ -24,7 +24,9 @@ export class Step {
         this.validation_flag = { flag: "None", comment: "None" };
         
     }
-
+static isEqual(obj1: any, obj2: any): boolean {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
 
     // This method is used to check if a new step is equal to any of the existing steps
 
@@ -41,7 +43,7 @@ export class Step {
 
         // if both the operation method and the parameters are the same, then check if the parameter values are the same
       else { 
-        if (isEqual(this.parameters, step.parameters)) {
+        if (Step.isEqual(this.parameters, step.parameters)) {
             duplicategod = true;
             //console.log("God: Parameters are the same - It is a duplicate", this.parameters, step.parameters)
             

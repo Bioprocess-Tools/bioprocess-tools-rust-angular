@@ -18,13 +18,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-
-
-
 import { PlotlyModule } from 'angular-plotly.js';
-import * as PlotlyJS from 'plotly.js-dist-min';
+
 import { MatExpansionModule } from '@angular/material/expansion';
 
+import PlotlyJS from 'plotly.js-cartesian-dist-min';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
