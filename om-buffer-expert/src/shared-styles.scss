@@ -52,6 +52,7 @@ $accent-green:  mat.get-color-from-palette(mat.$green-palette,500);
 $card-background-cream: #CFD8DC;
 $border-color: #b0b7c1;
 $accent-chip: #0f968b;
+$dull-text-color:  rgb(199, 190, 190);
 
 
 @include mat.all-component-themes($buffer-theme);

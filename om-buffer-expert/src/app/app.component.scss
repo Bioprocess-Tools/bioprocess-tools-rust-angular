@@ -11,16 +11,18 @@
   padding: 0px;
   box-shadow: none;
   background-color: #e3e2d9;
+
 }
 
 .header {
   grid-area: header;
   width:100%;
+  margin:1px;
 }
 
 .main-content {
   grid-area: main-content;
-  padding-top: 5px;
+  //padding-top: 5px;
   width: 100%
 }
 

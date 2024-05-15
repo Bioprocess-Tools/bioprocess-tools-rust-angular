@@ -1,124 +1,100 @@
+@import "../../../shared-styles.scss";
+
 .hero-container {
-display:flex;
-flex-direction: column;
-background-image: url("/assets/images/backom.png");
-background-size: cover;
-height:90vh;
-justify-content: center; 
-align-items: center; 
-text-align: center;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0.75fr 0.5fr 0.5fr 0.5fr 1fr;
 
+  background-image: url("/assets/images/backom.png");
+  background-size: cover;
+  height: calc(100vh - 81px);
+  justify-content: center;
+  justify-self:center;
+  align-items: center;
+  align-self:center;
+  text-align: center;
+  @media (max-width: 450px) {
+    height: calc(100vh - 56px);
   }
 
+}
 
-  .hero-overlay {
-     display: flex;
-      flex-direction: column;
-       justify-content: center; 
-       align-items: center; 
-       text-align: center;
-       
+.hero-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.mat-headline-5 {
+  color: $dull-text-color;
+  margin: 0px;
+        @media (max-width: 450px) {
+    font-size: medium;
+}
+}
+
+.mat-headline-4 {
+  color: $dull-text-color;
+    font-size:x-large;
+
+  margin: 0px;
+      @media (max-width: 450px) {
+    font-size: medium;
+}
+}
+
+.mat-headline-3 {
+  color: $dull-text-color;
+  font-size:xx-large;
+  margin: 0px;
+    @media (max-width: 450px) {
+    font-size: large;
   }
+}
+.main-text {
+  background-color: transparent;
+  align-self: center;
+  justify-self: center;
+  color: $dull-text-color;
+  width: 80%;
+}
 
-  .main-text{
-    color: rgb(199, 190, 190);
-     font-size: 50px; 
-     margin-bottom: 8px;  
-     margin-top: 0.3vh;
+.button-container {
+  display: flex;
+  width: 100%;
 
+  //flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  //gap: 20px;
+  background-color: transparent;
+}
+
+.action-button {
+  font-weight: 800;
+  font-stretch: extra-expanded;
+  width: 40vw;
+  height:10vw !important;
+  align-self: center;
+
+  //padding: 30px;
+  font-size: x-large;
+  //background-color: #4CAF50;
+  color: whitesmoke;
+  border-radius: 40px;
+    transition: all 0.3s ease; // This will animate the color and transform changes
+
+  &:hover {
+    background-color: $accent-green; // Change to the hover color you want
+    transform: scale(1.05); // This will slightly enlarge the button
   }
-  .middle-text{
-    color: rgb(199, 190, 190);
-    margin-top: 10px;
-    margin-right: 50px; 
-    margin-left: 50px;
-    font-size: 30px; 
-    margin-bottom: 16px;
-  }
+@media (max-width: 450px) {
+  width: 70vw;
+  height: 10vw !important;
+  font-size: large;
 
-  .end-text {
-    color: rgb(199, 190, 190);
-    margin-top: 10px;
-    margin-right: 50px; 
-    margin-left: 50px;
-    font-size: 25px; 
-    margin-bottom: 80px;
-
-  }
-
-  .button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-    background-color:transparent;
-  }
-
-  .action-button {
-    width: 300px;
-    height: 100px;
-    padding: 10px 20px;
-     font-size: xx-large; 
-     //background-color: #4CAF50; 
-     color: whitesmoke;
-
-  }
-
-  /* For tablets */
-@media (max-width: 768px) {
-    .hero-container {
-        background-image: url("/assets/images/BackOM.png");
-        background-size: cover;
-        height:91vh;
-        width:100%;
-    }
-  }
-  
-  /* For mobile phones */
-  @media (max-width: 480px) {
-    .hero-container {
-        background-image: url("/assets/images/BackOM.png");
-        background-size: cover;
-        width:100%;
-       // height:100vh;
-    }
-
-    .main-text{
-      color: rgb(199, 190, 190);
-         font-size: 30px; 
-         margin-bottom: 8px;  
-         margin-top: 0.3vh;
-    
-      }
-      .middle-text{
-        color: rgb(199, 190, 190);
-        margin-top: 30px;
-        margin-right: 50px; 
-        margin-left: 50px;
-        font-size: 20px; 
-        margin-bottom: 16px;
-      }
-    
-      .end-text {
-        color: rgb(199, 190, 190);
-        margin-top: 30px;
-        margin-right: 50px; 
-        margin-left: 50px;
-        font-size: 20px; 
-        margin-bottom: 80px;
-    
-      }
-    
-      .action-button {
-        width: 200px;
-        height: 50px;
-        padding: 10px 20px;
-         font-size: large;
-        
-        // background-color: #4CAF50; 
-        color: rgb(199, 190, 190);
-    
-      }
-  }
+}
+}
