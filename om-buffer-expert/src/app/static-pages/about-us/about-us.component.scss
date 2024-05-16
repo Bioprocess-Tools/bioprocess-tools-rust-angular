@@ -4,11 +4,23 @@
     height:90vh;
     overflow-y: auto;
   }
-  
+  .title {
+@media (max-width: 300px) {
+  font-size:small;   
+  padding:10px;
+      margin: 0 auto;
+    }
+
+  }
   .intro {
+    padding:50px;
     margin: 10px 0;
     line-height: 1.6;
     text-align: justify;
+    @media (max-width: 300px) {
+     padding:10px;
+      margin: 0 auto;
+    }
   }
   
   .card-container {

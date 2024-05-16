@@ -33,6 +33,11 @@ const bufferDesignerRoutes: Routes = [
         path: 'super-calculator',
         component: SuperCalculatorComponent,
       },
+      {
+        path: '**', // empty path for default route
+        redirectTo: 'genai-buffer-designer', // redirect to the GenAI component path
+        pathMatch: 'full',
+      }
     ],
   },
 ];

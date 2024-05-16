@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'feedback', component: FeedbackComponent },
   { path: 'user-guide', component: UserGuideComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: '**', redirectTo: 'home', pathMatch: 'full'},
   { 
     path: 'buffer-designer', 
     loadChildren: () => import('./buffer-designer/buffer-designer.module').then(m => m.BufferDesignerModule)} ,

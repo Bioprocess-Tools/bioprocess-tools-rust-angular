@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SolutionMixtureMainComponent } from './solution-mixture-main.component';
 
 const routes: Routes = [
-  { path: '', component: SolutionMixtureMainComponent },
+  { path: 'process-designer', component: SolutionMixtureMainComponent },
 ];
 
 @NgModule({
