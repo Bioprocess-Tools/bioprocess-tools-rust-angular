@@ -38,24 +38,8 @@ $buffer-theme: mat.define-light-theme((
  typography: $custom-typography
 ));
 
-$primary-color: whitesmoke;
-$secondary-color:#202A44;
-$background-color:whitesmoke;
-$headtext-color: mat.get-color-from-palette(mat.$indigo-palette,900);
-$quaternary-color: #EFCDAF;
-//$card-background: #a6bdb1;
-//$card-background: #CFD8DC;
-//$card-background:#b0dbed;
-$card-background: mat.get-color-from-palette(mat.$blue-palette,50);
-$divider-green:  mat.get-color-from-palette(mat.$green-palette,900);
-$accent-green:  mat.get-color-from-palette(mat.$green-palette,500);
-$card-background-cream: #CFD8DC;
-$border-color: #b0b7c1;
-$accent-chip: #0f968b;
-$dull-text-color:  rgb(199, 190, 190);
 
 
 @include mat.all-component-themes($buffer-theme);
 @include mat.typography-hierarchy($custom-typography);
-// Emit theme-dependent styles for common features used across multiple components.
-//@include mat.core-theme($my-theme);
+

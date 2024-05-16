@@ -104,7 +104,7 @@ export class SolutionMixtureService {
       dual: { withSalt: [], withoutSalt: [] },
       stock: { withSalt: [], withoutSalt: [] },
     };
-    //console.log('God - solutions we got', solutions);
+
     for (let key in solutions) {
       let solution = solutions[key];
       if (solution.solution_type in categorized) {
@@ -123,7 +123,7 @@ export class SolutionMixtureService {
         }
       }
     }
-    //console.log('God: categorized', categorized);
+
     return categorized;
   }
 
@@ -159,7 +159,7 @@ export class SolutionMixtureService {
       }
     }
 
-    //console.log(processed);
+
     return processed;
   }
 
@@ -178,7 +178,7 @@ export class SolutionMixtureService {
   }
 
   processCompounds(compounds: { [key: string]: any }): any {
-    //console.log(compounds);
+
     const processed = { A: [], B: [], S: [] };
 
     for (let name in compounds) {
@@ -196,19 +196,7 @@ export class SolutionMixtureService {
     return this.http.get<Solution>(`${this.apiUrl}/get_example_solution`);
     
   }
-  // create a http request to post the steps to the backend and receive a solution-mixture object. this object will be used by the browse-edit component
-  // to display the solutions in the mixture
-  // solution_mixture object will be a single object
-  // postStepsAndGetSolutionMixture(steps: any[]) {
 
-  //   this.http.post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, { steps })
-  //   .subscribe({
-  //   next: (solutionMixture) => {
-  //   this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
-  // },
-  // error: (error) => console.error(error)
-  // });
-  // }
 
   postStepswithTrigger() {
     let steps = this.StepsSubject.value;
@@ -239,7 +227,7 @@ export class SolutionMixtureService {
       })
       .subscribe({
         next: (solutionMixture) => {
-          //write code to add the associated_solution to steps based on the solution_mixture object's solutions
+
           let solutionIndex = 0; // To keep track of the current index in the solutions list
 
           steps.forEach((step) => {
