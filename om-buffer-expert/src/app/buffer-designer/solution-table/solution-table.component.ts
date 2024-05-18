@@ -25,7 +25,32 @@ export class SolutionTableComponent
   example_solution: Solution;
   solutionSubscription?: Subscription;
 
-
+  ion_colors: string[] = [
+    '#832c76',
+    '#4F3F84',
+    '#BB3630',
+    '#d0b285',
+    '#00a1d3',
+    '#929580',
+    '#3d5859',
+    '#769f52',
+  ];
+  compound_colors: string[] = [
+    '#3e94e5',
+    '#c54b6c',
+    '#37667e',
+    '#dc828f',
+    '#d29f8c',
+    '#a15d98',
+    '#8c7386',
+    '#218b82',
+    '#f27348',
+    '#9c9359',
+    '#874741',
+    '#40393e',
+    '#f4c815',
+    '#2cced2',
+  ];
   trace: any[];
   layout: any;
 
@@ -45,7 +70,6 @@ export class SolutionTableComponent
     });
     //this.generateHeatMap();
   }
- 
 
   scrollToSolution(solution: any) {
     // If the index is not provided, find the index
@@ -179,10 +203,9 @@ export class SolutionTableComponent
     return false;
   }
   generateHeatMap() {
-
     const defaultLayout = {
       font: {
-        family: "Lato, sans-serif",
+        family: 'Lato, sans-serif',
       },
     };
     let fontSize;

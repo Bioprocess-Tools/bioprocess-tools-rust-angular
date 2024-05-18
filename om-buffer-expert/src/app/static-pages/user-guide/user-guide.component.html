@@ -1,1038 +1,1172 @@
 <div class="main-user-guide">
+  <mat-card class="user-guide">
   <h1>User Guide</h1>
-  <mat-accordion multi="true" displayMode="default" class="mat-elevation-z0">
+  <mat-accordion multi="true" displayMode="default" class="accord_om">
 
-    <!-- Section 1: Introduction -->
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          Introduction
-        </mat-panel-title>
+        <mat-panel-title> <h2>Introduction</h2> </mat-panel-title>
       </mat-expansion-panel-header>
-      <p>Welcome to our software tool, a comprehensive tool that enables you to
-        design your buffers. The
-        calculation engine is a first-principles based predictor, and has been
-        time-tested. The algorithm used
-        is so powerful, robust, and fast, that it can handle the very non-linear
-        nature of the solution. Henderson Hasselbalch equation is typically used for buffer calculation, but it is severly limited, as it works for a single dissociation constant for a single buffering species.       </p>
-        <p>With this designer & calculator, you can perform comprehensive calculations and use it for acid base titration, understand buffer chemistry, determining pH of a solution, titration end point, as well as determining the recipe or buffer composition for your buffer.</p>
- 
+      <mat-card class="text-block">
+        <p>
+          Welcome to Expert Buffer Designer, a comprehensive tool that enables
+          you to design your buffers. The calculation engine is a
+          first-principles based predictor, and has been time-tested. The
+          algorithm used is so powerful, robust, and fast, that it can handle
+          the very non-linear nature of the solution. Henderson Hasselbalch
+          equation is typically used for buffer calculation, but it is severly
+          limited, as it works for a single dissociation constant for a single
+          buffering species.
+        </p>
+        <p>
+          With this designer & calculator, you can perform comprehensive
+          calculations and use it for acid base titration, understand buffer
+          chemistry, determining pH of a solution, titration end point, as well
+          as determining the recipe or buffer composition for your buffer.
+        </p>
+      </mat-card>
     </mat-expansion-panel>
-    <!-- Section 1: Introduction -->
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title><h2>Quick Start Guide</h2>  </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Gen AI Buffer Designer</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <article>
+            <section>
+              <h3>Step 1: Enter the buffer description</h3>
+              <p>In the following format:</p>
+              <ul>
+                <li>
+                  target buffer species concentration buffer species name(s)
+                  salt concentration salt compound name "pH" target pH
+                </li>
+                <li>Example: 50 mM Phosphate 0.1M Sodium Chloride pH 7.0</li>
+              </ul>
+              <h3>Details</h3>
+              <ul>
+                <li>
+                  Target buffer species concentration: Needs to be provided as a
+                  number...
+                </li>
+                <li>
+                  Buffer species name: Needs to be provided as a single or dual
+                  buffering species...
+                </li>
+                <li>Salt concentration: Needs to be provided as a number...</li>
+                <li>Salt compound name: Choose from Sodium Chloride...</li>
+                <li>Target pH: Use the word pH before the number...</li>
+              </ul>
+              <h3>Step 2: Click on the Get Recipe button!</h3>
+              <p>
+                The Buffer Composition Summary, Buffer Details, etc. will
+                appear...
+              </p>
+              <ul>
+                <li>
+                  pH range choice limits: Please note that when certain
+                  compounds are chosen...
+                </li>
+                <li>
+                  Concentration and pH limits: The classic Designer has built-in
+                  constraints...
+                </li>
+              </ul>
+            </section>
+          </article>
+        </mat-card>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Classic Buffer Designer</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <article>
+            <section>
+              <h3>Step 1: Pick Acidic and Basic Compounds</h3>
+              <p>
+                From the first drop-down list, which is a list of acidic
+                compounds, pick the one that contains the buffering species that
+                you want to target. Alternatively, you can pick a non-buffering
+                compound from this list. However, you have to make sure you pick
+                a buffering compound from the basic compound list below.
+              </p>
+              <p>
+                From the second drop-down list, which is a list of basic
+                compounds, pick the one that contains the buffering species that
+                you want to target. Alternatively, you can pick a non-buffer
+                containing compound, or a compound that provides a different
+                buffering species. Please note that if the second compound does
+                not contain the same buffering species as the first, this
+                compound's concentration will be adjusted freely to achieve the
+                target pH.
+              </p>
+            </section>
+            <section>
+              <h3>Step 2: Enter the Target Buffer Species Concentration</h3>
+              <p>
+                This number is entered as molar concentration. Enter only the
+                number. Please note that this will be the concentration of the
+                buffering species in the final buffer. In case both compounds
+                contain the same buffering species, the compound concentrations
+                will be adjusted to achieve this concentration. If the basic
+                compound is non-buffering or has a different buffering species
+                from the first one, the concentration used here will be the
+                target concentration for the first (acidic compound) buffering
+                species.
+              </p>
+              <p>
+                From the second drop-down list, which is a list of basic
+                compounds, pick the one that contains the buffering species that
+                you want to target. Alternatively, you can pick a non-buffer
+                containing compound, or a compound that provides a different
+                buffering species. Please note that if the second compound does
+                not contain the same buffering species as the first, this
+                compound's concentration will be adjusted freely to achieve the
+                target pH. Alternatively, if you picked a non-buffering compound
+                from the acidic compound list (e.g., Hydrochloric Acid), you
+                have to pick a buffering compound from the basic compound list
+                (e.g., Tris Base).
+              </p>
+            </section>
+            <section>
+              <h3>
+                Step 3: Pick a Salt Compound Name (Optional) and Concentration
+              </h3>
+              <p>
+                You can pick a salt compound name from the Salt Compound list.
+                Currently, the list is restricted to Sodium Chloride, Sodium
+                Sulfate, and Ammonium Sulfate. Enter a concentration for the
+                salt compound. This will be in Molar.
+              </p>
+            </section>
+            <section>
+              <h3>Step 4: Enter the Target pH</h3>
+              <p>
+                Enter the desired target pH. The compound concentrations (acidic
+                and basic) will be adjusted as applicable to achieve the target
+                pH.
+              </p>
+            </section>
+            <section>
+              <h3>Step 5: Click the Get Recipe Button!</h3>
+              <p>
+                The request will be sent to the server to calculate the recipe
+                and the details will be populated.
+              </p>
+            </section>
+            <section>
+              <h3>Additional Notes</h3>
+              <ul>
+                <li>
+                  <strong>pH range choice limits:</strong> Please note that when
+                  certain compounds are chosen, with the specified target
+                  concentrations, only a limited range of pH can be achieved,
+                  due to the inherent chemistry involved. In this case, an error
+                  will be reported below the result, with the range of
+                  achievable pH. Of course, this will vary depending on the
+                  compounds, target concentration, etc.
+                </li>
+                <li>
+                  <strong>Concentration and pH limits:</strong> The classic
+                  Designer has built-in constraints on the choice of
+                  concentrations for the target concentration for the buffer
+                  compounds and salt compounds. While this is not a limitation
+                  of the Designer calculation engine, we imposed these
+                  constraints to produce meaningful buffers, normally used in
+                  practice. Further, please realize that the ionic strength
+                  correction has its limitations, as these corrections are not
+                  accurate beyond 0.4M. Since the GenAI Designer doesn’t have
+                  this limitation, you can choose a broad range of
+                  concentrations but will likely result in recipes that are not
+                  meaningful.
+                </li>
+              </ul>
+            </section>
+          </article>
+        </mat-card>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>pH Calculator</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <article>
+            <section>
+              <h3>Step 1: Pick Acidic and Basic Compounds</h3>
+              <p>
+                From the first drop-down list, which is a list of acidic
+                compounds, pick the one that contains the buffering species that
+                you want. Alternatively, you can pick a non-buffering compound
+                from this list. However, you have to make sure you pick a
+                buffering compound from the basic compound list below.
+              </p>
+              <p>
+                From the second drop-down list, which is a list of basic
+                compounds, pick the one that contains the buffering species that
+                you want to target. Alternatively, you can pick a non-buffer
+                containing compound, or a compound that provides a different
+                buffering species.
+              </p>
+            </section>
+            <section>
+              <h3>Step 2: Enter Acidic and Basic Compound Concentrations</h3>
+              <p>
+                Enter the concentration for the acidic compound in the input
+                provided. Similarly, enter the concentration for the basic
+                compound in the input provided. This number is entered as molar
+                concentration. Enter only the number.
+              </p>
+            </section>
+            <section>
+              <h3>
+                Step 3: Pick a Salt Compound Name (Optional) and Concentration
+              </h3>
+              <p>
+                You can pick a salt compound name from the Salt Compound list.
+                Currently, the list is restricted to Sodium Chloride, Sodium
+                Sulfate, and Ammonium Sulfate. Enter a concentration for the
+                salt compound. This will be in Molar.
+              </p>
+            </section>
+            <section>
+              <h3>Step 4: Click the Calculate pH Button</h3>
+              <p>
+                The request will be sent to the server to calculate the recipe
+                and the details will be populated.
+              </p>
+            </section>
+          </article>
+        </mat-card>
+      </mat-expansion-panel>
+          <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Super Calculator</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <article>
+            <section>
+              <h3>Step 1: Pick Acidic and Basic Compounds</h3>
+              <p>
+                From the first drop-down list, you can pick any acid or basic compound
+              </p>
+                          <p>
+                From the second drop-down list, you can pick any acid or basic compound
+              </p>
+              <p>
+                From the third drop-down list, you can pick any acid or basic compound
+              </p>
+   
+            </section>
+            <section>
+              <h3>Step 2: Enter Compound Concentrations</h3>
+             <p>
+                In the corresponding concentration inputs you can enter the concentration of the compounds in Molar
+              </p>
+            </section>
+            <section>
+              <h3>
+                Step 3: Pick a Salt Compound Name (Optional) and Concentration
+              </h3>
+              <p>
+                You can pick a salt compound name from the Salt Compound list.
+                Currently, the list is restricted to Sodium Chloride, Sodium
+                Sulfate, and Ammonium Sulfate. Enter a concentration for the
+                salt compound. This will be in Molar.
+              </p>
+            </section>
+             <section>
+              <h3>Step 4: Check the "Adjust pH" box (optional)</h3>
+              <p>
+                You can check this box, which will enable you to enter the target pH for the solution.  The tool will automatically pick Sodium Hydroxide or Hydrochloric Acid to adjust the pH to the target pH.
+              </p>
+            </section>
+                         <section>
+              <h3>Step 5: Enter the target pH (optional)</h3>
+              <p>
+                You can check this box, which will enable you to enter the target pH for the solution.  The tool will automatically pick Sodium Hydroxide or Hydrochloric Acid to adjust the pH to the target pH.
+              </p>
+            </section>
+            <section>
+              <h3>Step 6: Click the Calculate pH Button</h3>
+              <p>
+                The request will be sent to the server to calculate the recipe
+                and the details will be populated.
+              </p>
+            </section>
+          </article>
+        </mat-card>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>General Concept and Terminologies</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <article>
+            <section>
+              <ul>
+                <li>
+                  Buffers are a fundamental concept in chemistry, particularly
+                  in the field of biochemistry. Buffers are solutions that
+                  resist changes in pH when small amounts of acid or base are
+                  added to them. They are essential in maintaining the pH of
+                  biological systems, as well as in many laboratory
+                  applications.
+                </li>
+                <li>
+                  Buffers are generally composed of a buffering species (such as
+                  Phosphate) and a counter-ion (Sodium), and optionally a fully
+                  ionized salt, such as Sodium Chloride. The buffering species
+                  provides the specific characteristic of the buffer, due to its
+                  dissociation properties. Buffering species can have multiple
+                  dissociation steps, with each step having a specific
+                  dissociation constant (referred to as pKa). For a detailed
+                  explanation of the dissociation constants jump to the section
+                  below.
+                </li>
+                <li>
+                  Counter-ions are ions that are present in a buffering solution
+                  that provide the appropriate charge balance to achieve a
+                  specific pH. See the charge balance equations below in the
+                  next section for details. The counter-ions should produce ions
+                  of the opposite charge to be able to modify the pH.
+                </li>
+                <li>
+                  In order to prepare buffered solutions, we typically use
+                  compounds containing the buffering species, either in a "pure"
+                  form, (e.g., Phosphoric Acid) or "salt form" where the
+                  buffering species is present in combination with the counter
+                  ion (e.g., Sodium Phosphate Monobasic).
+                </li>
+                <li>
+                  If a pure form is chosen as one of the compounds, then the
+                  counter-ion is supplied separately as a "strong acid" (e.g.,
+                  Hydrochloric Acid) or "strong base" (e.g., Sodium Hydroxide),
+                  depending on the counter-ion desired. We can call this pairing
+                  as "Weak Acid/Base" - "Strong Base/Acid".
+                </li>
+                <li>
+                  If a salt form is chosen as one of the compounds, and if the
+                  compound in solution is "acidic", then the secondary compound
+                  is chosen to be one that will be "basic" essentially to
+                  provide the charge balance to achieve the target pH. There are
+                  several scenarios with this pairing, which are described, and
+                  the way to achieve the target pH and concentration in the app
+                  are included below.
+                </li>
+              </ul>
+            </section>
+          </article>
+        </mat-card>
+      </mat-expansion-panel>
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <h2>Buffer design options</h2> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Gen AI Input Considerations</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <h4>GenAI Buffer Designer Input:</h4>
+          <p>
+            The GenAI Buffer Designer is quite flexible in handling different
+            type of inputs. First it checks if the input has one or more of the
+            buffer species, and will not allow for you to proceed without it.
+            The concentration of the buffer can be specified as 0.4M or 40mM. If
+            you skip the units, it will interpret the number to be mM if it is
+            greater than 1 and as M if it is less than 1. You can specify the
+            concentration within parenthesis. You need to specify the salt with
+            compound names. You can use "salt" for Sodium Chloride. Please note
+            that the salts in the classic Designer, namely Sodium Sulfate,
+            Sodium Chloride and Ammonium Sulfate are the only salts you can
+            specify in GenAI too. You also need to use the word pH in the
+            request, with the value specified generally anywhere in context. For
+            example, this will yield the right recipe: Yo dude can you whip me
+            up a seventy one phosphate with good chunk of hundred Sodium
+            Chloride with an awesome pH of seven?
+          </p>
+        </mat-card>
+        <!-- Include subsections or further detailed information here -->
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Single buffering species</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+          <section>
+            <ul>
+              <h4>Both Compounds Containing Same Buffering Species</h4>
+              <li>
+                <p>
+                  Single buffering species, with each compound containing both
+                  the counter-ion and the buffering species - Example: Sodium
+                  Phosphate Monobasic, Sodium Phosphate Dibasic. Here both
+                  compounds contain Phosphate as the buffering species, which is
+                  a negatively charged buffering species. The counter-ion is
+                  Sodium (positively charged) and is supplied by both compounds.
+                </p>
+              </li>
+              <h5>Classic Buffer Designer</h5>
+              <p>
+                In specifying this buffer in the app with the "Classic Buffer
+                Designer", you can pick an acidic compound from the first list,
+                and a basic compound from the second list, such that both
+                contain the same buffering species and the same counter-ion.
+                Then you can specify the target buffer concentration, which
+                specifies the total buffering species concentration in the final
+                buffer and the target pH. The Design calculation engine will
+                then determine the right proportion of each compound to achieve
+                the target pH, while maintaining the target buffering species
+                concentration.
+              </p>
+              <h5>Gen AI Input</h5>
+              <p>
+                With the GenAI Input, you can simply specify the buffering
+                species (e.g., Phosphate), specifying the target concentration
+                as 40mM Phosphate. The Designer in this case will pick the
+                appropriate compounds (typically two compounds, both containing
+                the buffering species, with one or both containing the
+                counter-ion). The target pH is simply requested as "with a pH of
+                X".
+              </p>
+              <h4>One Compound Only Containing Buffering Species</h4>
+              <li>
+                <p>
+                  Single buffering species, with one compound containing the
+                  buffering species - counter-ion combination, and the other
+                  compound containing the counter-ion only. Example: Sodium
+                  Phosphate Monobasic and Sodium Hydroxide. Here the Sodium
+                  Phosphate Monobasic provides both Phosphate and Sodium, while
+                  the Sodium Hydroxide provides the counter-ion only. Again, the
+                  Sodium Phosphate Monobasic is "acidic" in solution and the
+                  Sodium Hydroxide is "basic" in solution, forming a pair.
+                  Notice that the "strong base" (Sodium Hydroxide) has the same
+                  ion as the ion in the first compound. While this is desirable
+                  to keep the solution simple, it is necessary to choose the
+                  same counter-ion. For example, you can choose Potassium
+                  Hydroxide, to achieve the target pH.
+                </p>
+                <h5>Classic Buffer Designer</h5>
+                <p>
+                  In specifying this buffer in the app with the "Classic Buffer
+                  Designer", you can pick a compound in either of the lists
+                  containing the buffering species counter-ion salt, and then
+                  choose the other compound which contains only the counter-ion
+                  Again, you will specify the target buffering species
+                  concentration in the final solution, and the target pH. The
+                  Design calculation engine will determine the right
+                  concentration of the two compounds to achieve the target pH,
+                  while achieving the target buffering species concentration.
+                </p>
+                <h5>Gen AI Input</h5>
+                <p>
+                  You cannot achieve this with GenAI input currently, as
+                  mentioned above, it only chooses the pair with both containing
+                  the buffering species.
+                </p>
+              </li>
+            </ul>
+          </section>
+        </mat-card>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Two buffering species</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+<mat-card>
+   <section>
+    
+      <p>
+        Two buffering species, achieved with two compounds one of each
+        containing only the "pure form" of the buffering species. One will
+        choose the buffering species such that one contributes the positive (or
+        basic) ions and the other the negative (or acidic) ions. A popular
+        example of this, is Acetate-Tris buffer, where Acetic Acid and Tris Base
+        combined to produce the buffer. In designing this buffer, you will first
+        choose Acetic Acid from the first list and Tris Base from the second
+        list. It is important to note that the target concentration refers to
+        the buffering species in the acidic component and not the basic
+        component (the flexibility of choosing either will be a future
+        improvement in the app). With a target pH, the Design calculation engine
+        will find the concentration of the second compound that will achieve the
+        target pH.
+      </p>
+      <h4>GenAI Input</h4>
+      <p>
+        With GenAI, you can easily achieve this by specifying it like this "Make
+        a 50mM Acetate Tris buffer, with pH of 5" to get the similar behavior as
+        with the Classic Designer. However with GenAI, you can also achieve the
+        reverse case easily, for example, you can target a 50mM Tris, by saying
+        "Make a 50mM Tris Acetate buffer, pH 8". In this case the GenAI Designer
+        will achieve a Tris concentration of 50mM and adjust Acetic acid to
+        achieve the target pH.
+      </p>
+      <h4>Classic Designer</h4>
+      <p>
+        You can easily achieve this with the Classic Designer. First you choose
+        the buffering species pair using the autocomplete input. As soon as you
+        choose the pair, the drop downs corresponding to the compounds will auto
+        populate. All you need to do is specify the buffer concentration (of the
+        first species) and the target pH. If you want to choose a pair that is
+        not in the autocomplete, you can choose the appropriate secondary buffer
+        compound. The primary buffer species concentration will be set and the
+        secondary compound will be used to adjust the pH, if possible.
+      </p>
+      
+    </section>
+
+
+</mat-card>
+
+       
+        <!-- Include subsections or further detailed information here -->
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>Other considerations and features</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-card>
+      
+          <h4>Salt addition</h4>
+      <p>
+        With each of these options, you can optionally choose to add a salt
+        compound and specify the concentration. The salt concentration, along
+        with concentration of the buffering compounds plays a critical role in
+        ionic strength of the solution, which affects the dissociation constant
+        of the buffering species, and hence the pH.
+      </p>
+
+      <h4>pH and target buffer concentration limits</h4>
+      <p>
+        Please note that when certain compounds are chosen, with the specified
+        target concentrations, only limited range of pH can be achieved, due to
+        the inherent chemistry involved. In this case, an error will be reported
+        below the result, with the range of achievable pH. Of course this will
+        vary depending on the compounds, target concentration, pH, etc.
+      </p>
+
+      <p>
+        The various combinations have been tested and the general guidance is to
+        pick concentrations less than 0.4M and choose pH within two units of the
+        pKa of the primary buffer species
+      </p>
+   
+
+
+        </mat-card>
+
+
+
+
+
+
+
+
+       
+        <!-- Include subsections or further detailed information here -->
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>Super Calculator</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="indent1">
+          Super Calculator has been designed to provide versatile capability of adding three buffer compounds, one salt compound and additionally the option to automatically adjust the solution with acid or base to target pH.  Alternatively, you can calculate the pH of the composition you specify. </p>
+          
+          <p>You need to use caution in choosing compounds as it gives you the complete flexibility, with the only constraint of not choosing the same compound twice.  For example, you can choose three basic compounds, or two acidic and one basic, or one acidic and two basic compounds.  The choice is yours.   
+        </p>
+        <!-- Include subsections or further detailed information here -->
+      </mat-expansion-panel>
+       <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> <h3>pH-Calculator Usage</h3> </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="indent1">
+          pH Calculator gives the full flexibiity to specify the acidic and
+          basic compounds from the list, and their concentrations respectively,
+          and an optional salt compound and its concentration, and then have the
+          pH calculator determine the pH of the solution. While the calculator
+          will provide the accurate prediction of the pH of the solution, it is
+          then upto you to determine if this is a viable and useful buffer.
+        </p>
+        <!-- Include subsections or further detailed information here -->
+      </mat-expansion-panel>
+    </mat-expansion-panel>
+
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Quick Start Guide
+          <h2>Understanding the results display and details</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
+      <section>
+        <p>The output consists of the following components:</p>
+        <ol>
+          <li>Status and Error Message</li>
+          <li>Buffer List</li>
+          <li>Summary of the buffer composition</li>
+          <li>Compounds in the buffer</li>
+          <li>Ions in the buffer</li>
+          <li>Ionic species in the buffer</li>
+        </ol>
 
-      <ul>
-        <li>
-          <span><h2>Gen AI Buffer Designer</h2></span>
-          <ul>
-            <span><h3>Step 1: Enter the buffer description, in the following
-                format:</h3></span>
-            <li>
-              <span><h4>target buffer species concentration buffer species
-                  name(s) salt concentration salt compound name "pH" target pH
-                </h4></span>
-            </li>
-            <li>
-              <span><h4>50 mM Phosphate 0.1M Sodium Chloride pH 7.0 </h4></span>
-            </li>
-            <li>
-              <span><h4>Target buffer species concentration : Needs to provided
-                  as number, followed by the units (mM or M) [Eg. 50mM or 0.05M
-                  or .05M ] </h4></span>
-            </li>
-            <li>
-              <span><h4>Buffer species name: Needs to be provided as a single or
-                  dual buffering species. The order determines which buffering
-                  species concentration will be targeted [Phosphate or Tris
-                  Acetate or Tris-Acetate or Acetate-Tris, etc.] The list of
-                  acceptable buffer species is in the tooltip. The input is
-                  validated for the presence of an acceptable buffer species</h4></span>
-            </li>
-            <li>
-              <span><h4>Salt concentration: Needs to provided as number (),
-                  followed by the units (mM or M) [Eg. 50mM or 0.05M or .05M ]</h4></span>
-            </li>
-            <li>
-              <span><h4>Salt compound name: Choose from Sodium Chloride (or
-                  salt), Sodium Sulfate, Ammonium Sulfate. </h4></span>
-            </li>
-            <li>
-              <span><h4>Target pH: use the word pH before the number, you can
-                  specify as 7.0 or 7 or 7.12 etc. </h4></span>
-            </li>
-            <span><h3>Step 2: Click on the Get Recipe button!</h3></span>
-            <li>
-              <span> <h4> The Buffer Composition Summary, Buffer Details, etc
-                  will appear about a second or so later, due to the delay in
-                  API calls
-                </h4></span>
-              <span> <h4> pH range choice limits: Please note that when certain
-                  compounds are chosen, with the specified target
-                  concentrations, only limited range of pH can be achieved, due
-                  to the inherent
-                  chemistry involved. In this case, an error will be reported
-                  below the result, with the range of achievable pH. Of course
-                  this will vary depending on the compounds, target
-                  concentration, etc.
-                </h4></span>
-              <span> <h4> Concentration and pH limits: The classic Designer has
-                  built in constraints on the choice of concentrations for the
-                  target concentration for the buffer compounds and salt
-                  compounds.
-                  While this is not a limitation of the Designer calculation
-                  engine, we imposed these constraints to produce meaningful
-                  buffers, normally used in practice. Further, please realize
-                  that the ionic strength correction has its limitations, as
-                  these corrections are not accurate beyond 0.4M. Since the
-                  GenAI Designer doesnt have this limitation, you can
-                  choose a broad range of concentrations, but will likely result
-                  in recipes that are not meaningful.
-                </h4></span>
+        <h3>Errors</h3>
+        <p>
+          Prior to the details on the buffer, a message box is displayed which
+          shows whether the buffer design was successful, indicated with a
+          "Done" message. If the calculation was not successful, a message is
+          displayed in red with details on why the calculation failed. The most
+          frequent error is that the buffer pH chosen was unable to be achieved
+          using the compounds and the target concentration, and represents the
+          limitation of the buffer system rather than the calculation. Another
+          common error is when the concentration required to achieve the pH is
+          in excess of the 0.6M upper limit. This has been set as ionic strength
+          correction is not accurate beyond 0.6M. If there are runtime errors,
+          you will see an "undefined" message.
+        </p>
+        <h3>Buffer List</h3>
+        <p>
+          Every buffer you design with the tool, using any of the interfaces
+          results in a solution which is added to the list that is displayed as
+          a scrollable list. The highlighted card is either the last one added
+          or the one the user clicked. In either case the tool will implicitly
+          display the inputs corresponding to the solution (i.e the inputs
+          needed in that interface to recreate that solution) such that the user
+          can edit to create a new solution. The only exception is the Super
+          Calculator, whose input, as you can image will not be compatible with
+          the typical interface that is restricted to a maximum of two buffer
+          compounds. Please note that the solutions created by any of the
+          interfaces can be displayed in the Super Calculator inputs, which
+          makes it convenient to enhance a "base buffer".
+        </p>
+        <p>The buffer list also allows you to delete an item</p>
 
-            </li>
-          </ul>
-        </ul>
+        <h3>Summary</h3>
 
-        <ul>
+        <p>
+          The first output you see is the summary, which provides the compound
+          name and molar concentration of each of the compounds in solution, as
+          well as the actual pH achieved, to 3 decimal precision. Internally the
+          engine targets a tolerance of 10^-6.
+        </p>
+        <h3>Compound List</h3>
+        <p>
+          Here we have the next level details on the Compounds in the buffer.
+          For each of the compounds, we provide the molecular weight, molar
+          concentration, mass conc. (g/L) . We also identify the buffer ion in
+          that compound. Next, for each compound, we provide the ions in the
+          compound, and their total molar concentration.
+        </p>
+        <h3>Ion List</h3>
+        <p>
+          Next, we provide details at the ion level. We identify the unique ions
+          in the buffer. For each unique ion, we provide the total
+          concentration, pkA, and the concentration of species of each charge.
+          The species concentrations are not charge concentrations, which you
+          can obtain by multiplying the charge of the species with the provided
+          molar concentration of the species.
+        </p>
+      </section>
+      <!-- Include subsections or further detailed information here -->
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Buffer Calculation Fundamentals - Phosphate Buffer Example</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section>
+        <p>
+          For the system containing sodium phosphate monobasic
+          (NaH<sub>2</sub>PO<sub>4</sub>), sodium phosphate dibasic
+          (Na<sub>2</sub>HPO<sub>4</sub>), and sodium chloride (NaCl), we apply
+          first principles methods to calculate pH, involving dissociation
+          equilibrium, and charge balance.
+        </p>
+
+        <h3>
+          Dissociation Equations and Equilibrium Constants for Phosphoric Acid:
+        </h3>
+        <p>
+          Phosphoric acid (H<sub>3</sub>PO<sub>4</sub>) is a triprotic acid,
+          meaning it can donate three protons (H<sup>+</sup>), each step with
+          its specific equilibrium constant. The dissociation steps are as
+          follows:
+        </p>
+
+        <ol>
           <li>
-            <span><h2>Classic Buffer Designer</h2></span>
-            <ul>
-              <span><h3>Step 1: Pick Acidic and Basic Compounds</h3></span>
-              <li>
-                <span><h4>From the first drop-down list, which is a list of
-                    acidic compounds, pick the one that contains the buffering
-                    species that you want to target. Alternatively
-                    you can pick a non-buffering compound from this list.
-                    However, you have to make sure you pick a buffering compound
-                    from the basic compound list below. </h4></span>
-              </li>
-              <li>
-                <span><h4>From the second drop-down list, which is a list of
-                    basic compounds, pick the one that contains the buffering
-                    species
-                    that you want to target. Alternatively you can pick a
-                    non-buffer containing compound,
-                    or a compound that provides a different buffering species.
-                    Please note that if the second compound does not contain the
-                    same buffering species as the first, this compound's
-                    concentration will be adjusted freely to achieve the target
-                    pH </h4></span>
-              </li>
-              <span><h3>Step 2: Enter the target buffer species concentration</h3></span>
-              <li>
-                <span><h4>This number is entered as molar concentration. Enter
-                    only the number. Please note that this will the
-                    concentration of the
-                    buffering species in the final buffer. In case both
-                    compounds contain the same buffering species, the compound
-                    concentrations will
-                    be adjusted to achieve this concentration. If the basic
-                    compound is non-buffering or has a different buffering
-                    species from
-                    the first one, the concentration used here will be the
-                    target concentration for the first (acidic compound)
-                    buffering species.
-                  </h4></span>
-              </li>
-              <li>
-                <span><h4>From the second drop-down list, which is a list of
-                    basic compounds, pick the one that contains the buffering
-                    species
-                    that you want to target. Alternatively you can pick a
-                    non-buffer containing compound,
-                    or a compound that provides a different buffering species.
-                    Please note that if the second compound does not contain the
-                    same buffering species as the first, this compound's
-                    concentration will be adjusted freely to achieve the target
-                    pH. Alternatively if you picked a non-buffering
-                    compound from the acidic compound list (eg. Hydrochloric
-                    Acid), you have to pick a buffering compound from the basic
-                    compound list (eg. Tris Base). </h4></span>
-              </li>
-              <span><h3>Step 3: Pick a salt compound name (optional) and
-                  concentration </h3></span>
-              <li>
-                <span><h4> You can pick a salt compound name from the Salt
-                    Compound list. Currently the list is restricted to Sodium
-                    Chloride, Sodium Sulfate and
-                    Ammonium Sulfate.
-                  </h4></span>
-                <span><h4> Enter a concentration for the salt compound. This
-                    will be in Molar.
-                  </h4></span>
-              </li>
-              <span><h3>Step 4: Enter the target pH </h3></span>
-              <li>
-                <span><h4> Enter the desired target pH. The compound
-                    concentrations (acidic and basic) will be adjusted as
-                    applicable to achieve the target pH.
-                  </h4></span>
-
-              </li>
-
-              <span><h3>Step 4: Click the Get Recipe button! </h3></span>
-              <li>
-                <span><h4> The request will be sent to the server to calculate
-                    the recipe and the details will be populated.
-                  </h4></span>
-              </li>
-              <li>
-                <span> <h4> pH range choice limits: Please note that when
-                    certain compounds are chosen, with the specified target
-                    concentrations, only limited range of pH can be achieved,
-                    due to the inherent
-                    chemistry involved. In this case, an error will be reported
-                    below the result, with the range of achievable pH. Of course
-                    this will vary depending on the compounds, target
-                    concentration, etc.
-                  </h4></span>
-              </li>
-              <li>
-                <span> <h4> Concentration and pH limits: The classic Designer
-                    has built in constraints on the choice of concentrations for
-                    the target concentration for the buffer compounds and salt
-                    compounds.
-                    While this is not a limitation of the Designer calculation
-                    engine, we imposed these constraints to produce meaningful
-                    buffers, normally used in practice. Further, please realize
-                    that the ionic strength correction has its limitations, as
-                    these corrections are not accurate beyond 0.4M. Since the
-                    GenAI Designer doesnt have this limitation, you can
-                    choose a broad range of concentrations, but will likely
-                    result in recipes that are not meaningful.
-                  </h4></span>
-              </li>
-            </ul>
-          </ul>
-
-          <ul>
-            <li>
-              <span><h2>pH Calculator</h2></span>
-              <ul>
-                <span><h3>Step 1: Pick Acidic and Basic Compounds</h3></span>
-                <li>
-                  <span><h4>From the first drop-down list, which is a list of
-                      acidic compounds, pick the one that contains the buffering
-                      species that you want. Alternatively
-                      you can pick a non-buffering compound from this list.
-                      However, you have to make sure you pick a buffering
-                      compound from the basic compound list below. </h4></span>
-                </li>
-                <li>
-                  <span><h4>From the second drop-down list, which is a list of
-                      basic compounds, pick the one that contains the buffering
-                      species
-                      that you want to target. Alternatively you can pick a
-                      non-buffer containing compound,
-                      or a compound that provides a different buffering species.
-                    </h4></span>
-                </li>
-                <span><h3>Step 2: Enter Acidic and Basic Compound concentrations</h3></span>
-                <li>
-                  <span><h4>Enter the concentration for the acidic compound in
-                      the input provided. Similarly enter the concentration for
-                      the basic compound in the input provided.
-                      This number is entered as molar concentration. Enter only
-                      the number.
-                    </h4></span>
-                </li>
-                <span><h3>Step 3: Pick a salt compound name (optional) and
-                    concentration </h3></span>
-                <li>
-                  <span><h4> You can pick a salt compound name from the Salt
-                      Compound list. Currently the list is restricted to Sodium
-                      Chloride, Sodium Sulfate and
-                      Ammonium Sulfate.
-                    </h4></span>
-                  <span><h4> Enter a concentration for the salt compound. This
-                      will be in Molar.
-                    </h4></span>
-                </li>
-                <span><h3>Step 4: Click the Calculate pH button </h3></span>
-                <li>
-                  <span><h4> The request will be sent to the server to calculate
-                      the recipe and the details will be populated.
-                    </h4></span>
-                </li>
-              </ul>
-            </ul>
-
-          </mat-expansion-panel>
-
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-           List of Compounds available in the Designer 
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <ul class="two-column-list">
-              <li>Sodium Acetate</li>
-              <li>Sodium Formate</li>
-              <li>Sodium Citrate</li>
-              <li>Sodium MES</li>
-              <li>Potassium Phosphate Monobasic</li>
-              <li>Potassium Phosphate Dibasic</li>
-              <li>Sodium Phosphate Monobasic</li>
-              <li>Sodium Phosphate Dibasic</li>
-              <li>Tris Base</li>
-              <li>Bis-Tris Base</li>
-              <li>Bis-Tris-Propane Base</li>
-              <li>Histidine Base</li>
-              <li>Arginine Base</li>
-              <li>Arginine Chloride</li>
-              <li>Trolamine Base</li>
-              <li>Tris-HCl</li>
-              <li>Trolamine Chloride</li>
-              <li>Bis-Tris Chloride</li>
-              <li>Tris Chloride</li>
-              <li>Phosphoric Acid</li>
-              <li>Citric Acid</li>
-              <li>Acetic Acid</li>
-              <li>MES Acid</li>
-              <li>Formic Acid</li>
-              <li>Glutamic Acid</li>
-              <li>Aspartic Acid</li>
-              <li>Sodium Glutamate</li>
-              <li>Sodium Aspartate</li>
-              <li>Histidine Chloride</li>
-          </ul>
-
-          </mat-expansion-panel>
-
-
-
-
-
-
-          <!-- Section 2: General Concepts -->
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                General Concepts and Terminologies
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <p>Buffers are generally composed of a buffering species (such as
-              Phosphate) and a counter-ion (Sodium), and
-              optionally a fully ionized salt, such as Sodium Chloride.
-              The buffering species provides the specific characteristic of the
-              buffer, due to its dissociation properties. Buffering species can
-              have multiple dissociation steps, with each step having a specific
-              dissociation constant (referred to as pKa). For a detailed
-              explanation of the dissociation constants jump to the section
-              below.</p>
-
-            <p>Counter-ions are ions that are present in a buffering solution
-              that provide the appropriate charge balance to achieve a specific
-              pH. See the charge balance equations
-              below in the next section for details. The counter-ions should
-              produce ions of the opposite charge to be able to modify the pH.</p>
-
-            <p>In order to prepare buffered solutions, we typically use
-              compounds containing the buffering species, either in a "pure"
-              form,
-              (eg. Phosphoric Acid) or "salt form" where the buffering species
-              is present in combination with the counter ion (eg. Sodium
-              Phosphate Monobasic). </p>
-            <p>If a pure form is chosen as one of the compounds, then the
-              counter-ion is supplied separately as a "strong acid" (eg.
-              Hydrochloric Acid) or
-              "strong base" (eg. Sodium Hydroxide), depending on the counter-ion
-              desired. We can call this pairing as "Weak Acid/Base" -
-              "Strong Base/Acid".</p>
-            <p>If a salt form is chosen as one of the compounds, and if the
-              compound in solution is "acidic", then the secondary compound is
-              chosen to be one that will be "basic"
-              essentially to provide the charge balance to achieve the target
-              pH. There are several scenarios with this pairing, which are
-              described, and the way to achieve the target pH
-              and concentration in the app are included below.</p>
-            <!-- Include subsections or further detailed information here -->
-          </mat-expansion-panel>
-
-          <!-- Section 3: Getting Started -->
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Buffer design options
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Gen AI Input Considerations
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p> GenAI Buffer Designer Input: The GenAI Buffer Designer is
-                quite flexible in handling different type of inputs. First it
-                checks if the input has one or more of the buffer species, and
-                will not allow for you to proceed
-                without it. The concentration of the buffer can be specified as
-                0.4M or 40mM. If you skip the units, it will interpret the
-                number to be mM if it is greater than 1 and as M if it is less
-                than 1. You can
-                specify the concentration within parenthesis. You need to
-                specify the salt with compound names. You can use "salt" for
-                Sodium Chloride. Please note that the salts in the
-                classic Designer, namely Sodium Sulfate, Sodium Chloride and
-                Ammonium Sulfate are the only salts you can specify in GenAI
-                too. You also need to use the word pH in the request,
-                with the value specified generally anywhere in context. For
-                example, this will yield the right recipe: Yo dude can you whip
-                me up a seventy one phosphate with good chunk of hundred Sodium
-                Chloride with an awesome pH of seven?</p>
-              <!-- Include subsections or further detailed information here -->
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Single buffering species
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <p>1. Single buffering species, with each compound containing both
-                the counter-ion and the buffering species - Example: Sodium
-                Phosphate Monobasic, Sodium Phosphate Dibasic.
-                Here both compounds contain Phosphate as the buffering species,
-                which is a negatively charged buffering species. The counter-ion
-                is Sodium (positively charged) and is supplied
-                by both compounds.</p>
-
-              <p>In specifying this buffer in the app with the
-                "Classic Buffer Designer", you can pick an acidic compound from
-                the first list, and a basic compound from the
-                second list, such that both contain the same buffering species
-                and the same counter-ion. Then you can specify the target buffer
-                concentration, which specifies the total buffering species
-                concentration in the final buffer and the target pH. The Design
-                calculation engine will then determine the right proportion of
-                each compound to achieve the target pH, while
-                maintaining the target buffering species concentration.</p>
-
-              <p>With the GenAI Input, you can simply specify the buffering
-                species (eg. Phosphate), specifying the target concentration as
-                40mM Phosphate. The Designer in this case will
-                pick the appropriate compounds (typically two compounds, both
-                containing the buffering species, with one or both containing
-                the counter-ion). The target pH is simply requested as
-                "with a pH of X". </p>
-
-              <p>2. Single buffering species, with one compound containing the
-                buffering species - counter ion combination, and the other
-                compound containing the counter-ion only.
-                Example: Sodium Phosphate Monobasic and Sodium Hydroxide. Here
-                the Sodium Phosphate Monobasic provides both Phosphate and
-                Sodium, while the Sodium Hydroxide provides the counter-ion
-                only.
-                Again, the Sodium Phosphate Monobasic is "acidic" in solution
-                and the Sodium Hydroxide is "basic" in solution, forming a pair.
-                Notice that the "strong base" (Sodium Hydroxide)
-                has the same ion as the ion in the first compound. While this is
-                desirable to keep the solution simple, it is necessary to choose
-                the same counter-ion. For example, you can
-                choose Potassium Hydroxide, to achieve the target pH. </p>
-
-              <p>In specifying this buffer in the app with the
-                "Classic Buffer Designer", you can pick a compound in either of
-                the list containing the buffering species counter-ion salt, and
-                then
-                choose the other compound which contains only the counter-ion.
-                Again, you will specify the target buffering species
-                concentration in the final solution, and the target pH.
-                The Design calculation engine will determine the right
-                concentration of the two compounds to achieve the target pH,
-                while achieving the target buffering species concentration.</p>
-
-              <p>You cannot achieve this with GenAI input currently, as
-                mentioned above, it only chooses the pair with both containing
-                the buffering species.
-                <!-- Include subsections or further detailed information here -->
-              </mat-expansion-panel>
-
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Two buffering species
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                3. Two buffering species, achieved with two compounds one of
-                each containing only the "pure form" of the buffering species.
-                One will choose the buffering species such that one
-                contributes the positive (or basic) ions and the other the
-                negative (or acidic) ions. A popular example of this, is
-                Acetate-Tris buffer, where Acetic Acid and Tris Base
-                combined to produce the buffer. In designing this buffer, you
-                will first choose Acetic Acid from the first list and Tris Base
-                from the second list. It is important to note
-                that the target concentration refers to the buffering species in
-                the acidic component and not the basic component (the
-                flexibility of choosing either will be a future improvement in
-                the app).
-                With a target pH, the Design calculation engine will find the
-                concentration of the second compoound that will achieve the
-                target pH
-
-                <p>With GenAI, you can easily achieve this by specifying it like
-                  this "Make a 50mM Acetate Tris buffer, with pH of 5" to get
-                  the similar behavior as with the Classic Designer.
-                  However with GenAI, you can also achieve the reverse case
-                  easily, for example, you can target a 50mM Tris, by saying
-                  "Make a 50mM Tris Acetate buffer, pH 8". In this case the
-                  GenAI Designer will achieve a Tris concentration of 50mM and
-                  adjust Acetic acid to achieve the target pH. </p>
-
-                <p>3. Two buffering species, achieved with two compounds, each
-                  containing a different buffering species, both may be salt
-                  forms or one pure and one salt form. In either case the target
-                  concentration refers to the concentration of the acidic
-                  compound. The other compound is adjusted to achieve the target
-                  pH. </p>
-
-                <p>You cannot achieve this with GenAI input currently, as the
-                  Gen AI Designer automatically chooses the buffering compounds
-                  that will make the buffer. </p>
-
-                <p>With each of these options, you can optionally choose to add
-                  a salt compound and specify the concentration. The salt
-                  concentration, along with concentration of the buffering
-                  compounds plays a critical role in ionic strength of the
-                  solution, which affects the dissociation constant of the
-                  buffering species, and hence the pH.</p>
-                <!-- Include subsections or further detailed information here -->
-              </mat-expansion-panel>
-
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    pH and target buffer concentration limits
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                pH range choice limits: Please note that when certain compounds
-                are chosen, with the specified target concentrations, only
-                limited range of pH can be achieved, due to the inherent
-                chemistry involved. In this case, an error will be reported
-                below the result, with the range of achievable pH. Of course
-                this will vary depending on the compounds, target concentration,
-                etc.
-
-                Concentration and pH limits: The classic Designer has built in
-                constraints on the choice of concentrations for the target
-                concentration for the buffer compounds and salt compounds.
-                While this is not a limitation of the Designer calculation
-                engine, we imposed these constraints to produce meaningful
-                buffers, normally used in practice. Further, please realize
-                that the ionic strength correction has its limitations, as these
-                corrections are not accurate beyond 0.4M. Since the GenAI
-                Designer doesnt have this limitation, you can
-                choose a broad range of concentrations, but will likely result
-                in recipes that are not meaningful.
-                <!-- Include subsections or further detailed information here -->
-              </mat-expansion-panel>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    pH-Calculator Usage
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                pH Calculator gives the full flexibiity to specify the acidic
-                and basic compounds from the list, and their concentrations
-                respectively, and an optional salt compound and its
-                concentration, and then have the pH calculator determine the pH
-                of the solution. While the calculator will provide the accurate
-                prediction of the pH of the solution, it is then
-                upto you to determine if this is a viable and useful buffer.
-                <!-- Include subsections or further detailed information here -->
-              </mat-expansion-panel>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Understanding the results display and details
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <ul>
-                <li>Since the Design calculation engine is based on
-                  first-principles, ionic species level details are available
-                  for each ion in solution. For the sake of simplicity, the
-                  results are
-                  summarized as provided in the app.
-                </li>
-
-                <li> The first output you see is the Buffer Composition Summary,
-                  which provides the compound name and molar concentration of
-                  each of the compounds in solution, as well as the actual pH
-                  achieved, to 3 decimal precision. Internally the engine
-                  targets a tolerance of 10^-6.
-                  Below the Buffer Composition Summary, you get a status card,
-                  which shows green if the results were achieved or shows red,
-                  and provides comments if there were any errors. In general,
-                  you
-                  can expect to see more errors with the GenAI as there are no
-                  constraints on the input. With the pH Calculator, you will see
-                  the least errors as you are requesting a pH calculation versus
-                  targeting
-                  a buffer concentration and pH level. </li>
-
-                <li> Next, you see the Buffer List and Details. Here each of the
-                  buffers that were calculated, regardless of the calculator
-                  that you used, are listed here. You can scroll horizontally
-                  to browse the buffers. The buffer that was last
-                  calculated is highlighted with green. Alternatively, if you
-                  had clicked the "Details" button, the buffer whose details are
-                  shown below will be highlighted with a green outline.
-                  You can click on the details button on any buffer card to get
-                  its details. </li>
-
-                <li>The next button is the Edit button, which designed to
-                  intelligently take the buffer composition and represent it in
-                  both formats (Designer with target concentration and pH) and
-                  pH calculator
-                  regardless of what produced the results. You can then go to
-                  either of tabs and edit the appropriate values to create a new
-                  buffer. Note that the concentrations are rounded to three
-                  decimal
-                  precision, which could result in minor errors in the results
-                  when you try editing on a different calculator. </li>
-
-                <li>Below the scroll llist, we have the next level details on
-                  the Compounds in the buffer. For each of the compounds, we
-                  provide the molecular weight, molar concentration, mass conc.
-                  (g/L)
-                  . We also identify the buffer ion in that compound. Next, for
-                  each compound, we provide the ions in the compound, and their
-                  total molar concentration.
-                </li>
-                <li>Next, we provide details at the ion level. We identify the
-                  unique ions in the buffer. For each unique ion, we provide the
-                  total concentration, pkA, and the unionized concentration.
-                  Keep
-                  in mind that the ion concentrations includes both the buffer
-                  and non-buffer compounds. The ionic species concentration is
-                  available, but will be provided in future releases.
-                </li>
-              </ul>
-              <!-- Include subsections or further detailed information here -->
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Buffer Calculation Fundamentals - Phosphate Buffer Example
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>For the system containing sodium phosphate monobasic (NaH<sub>2</sub>PO<sub>4</sub>),
-                sodium phosphate dibasic (Na<sub>2</sub>HPO<sub>4</sub>), and
-                sodium chloride (NaCl), we apply
-                first principles methods to calculate pH, involving dissociation
-                equilibrium, and charge balance.</p>
-
-              <h2>Dissociation Equations and Equilibrium Constants for
-                Phosphoric Acid:</h2>
-              <p>Phosphoric acid (H<sub>3</sub>PO<sub>4</sub>) is a triprotic
-                acid, meaning it can donate three protons (H<sup>+</sup>), each
-                step with its specific equilibrium constant. The dissociation
-                steps are as follows:</p>
-
-              <ol>
-                <li><strong>First dissociation:</strong>
-                  <p>H<sub>3</sub>PO<sub>4</sub> ⇌ H<sup>+</sup> + H<sub>2</sub>PO<sub>4</sub><sup>-</sup></p>
-                  <p>The equilibrium constant expression for this step is:</p>
-                  <p>K<sub>a1</sub> = [H<sup>+</sup>][H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]/[H<sub>3</sub>PO<sub>4</sub>]</p>
-                </li>
-
-                <li><strong>Second dissociation:</strong>
-                  <p>H<sub>2</sub>PO<sub>4</sub><sup>-</sup> ⇌ H<sup>+</sup> +
-                    HPO<sub>4</sub><sup>2-</sup></p>
-                  <p>The equilibrium constant expression for this step is:</p>
-                  <p>K<sub>a2</sub> = [H<sup>+</sup>][HPO<sub>4</sub><sup>2-</sup>]/[H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]</p>
-                </li>
-
-                <li><strong>Third dissociation:</strong>
-                  <p>HPO<sub>4</sub><sup>2-</sup> ⇌ H<sup>+</sup> + PO<sub>4</sub><sup>3-</sup></p>
-                  <p>The equilibrium constant expression for this step is:</p>
-                  <p>K<sub>a3</sub> = [H<sup>+</sup>][PO<sub>4</sub><sup>3-</sup>]/[HPO<sub>4</sub><sup>2-</sup>]</p>
-                </li>
-              </ol>
-
-              <h2>Charge Balance Equation:</h2>
-              <p>The charge balance equation ensures that the total positive
-                charges in solution equal the total negative charges. For the
-                system with NaH<sub>2</sub>PO<sub>4</sub>, Na<sub>2</sub>HPO<sub>4</sub>,
-                and NaCl, we consider all species that contribute to the charge,
-                including the dissociation products of phosphoric acid and the
-                ions from NaCl.</p>
-
-              <p>Here's how the charge balance equation would look for this
-                system:</p>
-              <p>[H<sup>+</sup>] + [Na<sup>+</sup>] = [H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]
-                + 2[HPO<sub>4</sub><sup>2-</sup>] + 3[PO<sub>4</sub><sup>3-</sup>]
-                + [Cl<sup>-</sup>] + [OH<sup>-</sup>]</p>
-              <!-- Include subsections or further detailed information here -->
-              <p>By solving the charge balance equation, in combination with the
-                dissociation equations, while accounting for the mass balance,
-                you can calculate the [H<sup>+</sup>], which gives us the pH.
-
-                Given that the pkA depends on the ionic strength, one needs to
-                incorporate corrections to the pKA using Debye-Huckel
-                approximations. The calculation engine incorporates this
-                correction. However, as mentioned before,
-                the correction is only applicable upto 0.4M ionic strength,
-                beyond which the actual results and predicted results will
-                likely not match.
-              </p>
-            </mat-expansion-panel>
-            <!-- More sections... -->
-            <h1>Buffer Guide</h1>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  What are buffers and how do they work?
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <p>Buffers are a fundamental concept in chemistry, particularly in
-                the context of maintaining pH levels in various environments. A
-                buffer is essentially a solution that can resist changes in pH
-                when small quantities of acid or base are added. This property
-                is crucial in many biological and chemical processes where the
-                pH must remain relatively constant. The ability of a buffer to
-                maintain pH is due to the presence of a weak acid and its
-                conjugate base, or a weak base and its conjugate acid, in
-                significant concentrations. These components work together to
-                neutralize added acids or bases, thus preventing drastic changes
-                in pH levels.</p>
-
-              <p>In practical terms, when an acid (proton donor) is introduced
-                into a buffer system, the conjugate base present in the buffer
-                will bind the free hydrogen ions, thereby mitigating the
-                increase in acidity. Conversely, if a base (proton acceptor) is
-                added, the weak acid in the buffer donates hydrogen ions to
-                counteract the rise in basicity. This dual capacity to moderate
-                pH changes makes buffers indispensable in chemical reactions and
-                biological systems that are sensitive to pH fluctuations, such
-                as enzymatic pathways and cellular environments.</p>
-
-              <p>The effectiveness of a buffer is determined by its capacity,
-                which is the amount of acid or base the buffer can neutralize,
-                and by its range, which is the pH spectrum over which the buffer
-                acts effectively. Commonly, buffers are designed to work
-                optimally within a pH range close to the pKa of the acid
-                component of the buffer system. This range is typically within
-                one pH unit above or below the pKa value. The careful selection
-                and application of buffer systems are thus crucial in many
-                scientific and industrial processes.</p>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Where are buffers used?
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <p> Buffers are utilized across a wide array of scientific
-                disciplines and industrial applications due to their ability to
-                stabilize pH levels. In biology, buffers are vital for
-                maintaining the pH of biological fluids, such as blood, which is
-                essential for proper physiological function. Enzymatic
-                reactions, often highly sensitive to pH, rely on buffers to
-                create an optimal environment for activity and stability. Beyond
-                the human body, buffers are also essential in agricultural
-                practices, environmental monitoring, and food science, where pH
-                control is necessary for maintaining the health of ecosystems
-                and ensuring the safety and quality of food products.</p>
-
-              <p>In the pharmaceutical industry, buffers play a pivotal role in
-                drug formulation and stability. They help maintain the pH of a
-                drug product within a narrow range to prevent degradation and
-                ensure consistent therapeutic efficacy. In drug design, buffers
-                are used to enhance solubility and bioavailability of
-                medications. In analytical chemistry, buffers are essential for
-                techniques such as chromatography and spectroscopy, where
-                precise pH control is required to achieve accurate and
-                reproducible results.</p>
-
-              <p>Moreover, buffers are utilized in various technological
-                applications, such as water treatment processes, where they
-                assist in maintaining the pH balance to ensure safe drinking
-                water. They also find applications in chemical manufacturing,
-                where they are used in catalytic reactions, and in material
-                science, particularly in the production of polymers and other
-                advanced materials. The versatility of buffers makes them a
-                cornerstone in both basic and applied sciences.</p>
-            </mat-expansion-panel>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  How are buffers used in biopharma and biotechnology?
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>In biopharmaceutical and biotechnological processes, buffers
-                are indispensable for both upstream and downstream processing.
-                During the upstream phase, buffers are used to maintain the pH
-                of culture media within a range that is optimal for cell growth
-                and protein expression. By keeping the pH stable, buffers ensure
-                that the cells are producing the desired biologics, such as
-                therapeutic proteins, under the most favorable conditions. This
-                is crucial since even slight deviations in pH can significantly
-                affect cell health and productivity.</p>
-
-              <p> During downstream processing, buffers are integral to the
-                purification and stabilization of biopharmaceuticals. They are
-                used in chromatography, a key technique for purifying
-                proteins, where the buffer composition can directly affect the
-                binding and elution of proteins from the chromatography media.
-                Buffers also play a role in protecting these biomolecules from
-                denaturation or degradation due to pH fluctuations. For
-                instance, they ensure that antibodies retain their structure
-                and functionality throughout the purification process, which
-                is vital for their efficacy as therapeutic
-                agents.</p>
-
-              <p>In addition to their role in production, buffers are also
-                crucial in the formulation of biopharmaceutical products. They
-                are used to adjust the pH of the final product to ensure
-                stability and prolong shelf life. For sensitive biologics,
-                such as vaccines or gene therapy vectors, buffers safeguard
-                against pH-induced damage during storage and transport. As
-                such, the careful selection and optimization of buffers are
-                fundamental steps in the development and manufacturing of
-                biopharmaceuticals, impacting the quality and safety of these
-                critical healthcare products.</p>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Typical types of buffers used in bioprocesses and their
-                  characteristics
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>Bioprocessing requires buffers that are not only effective at
-                pH stabilization but also meet stringent safety and
-                compatibility requirements. Good's buffers, named after Norman
-                Good, who identified them, are a class of zwitterionic organic
-                chemical buffering agents that have become the gold standard in
-                biological research. These buffers, such as HEPES, MOPS, and
-                Tris, are designed to have minimal biological effects, making
-                them suitable for cell culture and enzymatic reactions. They
-                have pKa values close to physiological pH, which is typically
-                around 7.4, allowing them to maintain pH without interfering
-                with cellular processes</p>
-
-              <p> Another characteristic of buffers used in bioprocessing is
-                their limited absorption at wavelengths used for biological
-                assays, thereby minimizing interference in UV-spectrophotometric
-                and fluorescence-based measurements. This is critical in
-                analytical and diagnostic applications where the presence of the
-                buffer should not affect the accuracy of the results.
-                Additionally, Good's buffers have low membrane permeability,
-                which is important for maintaining pH gradients across cell
-                membranes, a vital aspect of many biological processes</p>
-
-              <p>Bioprocessing also requires buffers to be free of contaminants
-                such as heavy metals or endotoxins, which could interfere with
-                cell growth or product purity. As a result, high purity and
-                stringent quality control are necessary for buffers used in
-                these applications. The choice of buffer can also impact the
-                scalability of bioprocessing operations, with considerations for
-                how buffers will be stored, handled, and disposed of, thus
-                affecting the overall sustainability and cost-efficiency of the
-                manufacturing process</p>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Typical buffers used in the purification of antibodies
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>Antibody purification is a critical step in the production of
-                monoclonal and polyclonal antibodies, which are used for
-                therapeutic and diagnostic purposes. The purification process
-                often involves the use of affinity chromatography, utilizing
-                materials such as Protein A, G, and L, which bind specifically
-                to the Fc region of antibodies. Buffers are essential in this
-                process, as they provide the correct pH and ionic strength
-                needed for antibodies to bind and subsequently be eluted from
-                the chromatography media</p>
-
-              <p>The choice of buffer in antibody purification is influenced by
-                the type of antibody, the desired purity, and the specific
-                affinity material being used. For instance, Protein A affinity
-                chromatography, commonly used for purifying IgG antibodies,
-                requires a specific buffer composition for optimal binding and
-                elution. These buffers typically include a loading buffer to
-                prepare the sample, a wash buffer to remove non-specifically
-                bound proteins, and an elution buffer to release the bound
-                antibodies.</p>
-
-              <p>Post-purification, the antibodies may be subject to additional
-                processing steps such as desalting or buffer exchange to prepare
-                them for final formulation. These steps ensure that the
-                antibodies are in a buffer that is suitable for storage or
-                further use, such as in a therapeutic context. The final buffer
-                must be chosen carefully to maintain antibody stability and
-                activity over time.</p>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Quality of buffer chemicals needed for biopharmaceutical
-                  manufacture
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>The quality of buffer chemicals is paramount in
-                biopharmaceutical manufacturing, where the highest standards of
-                purity and consistency are required. Buffers must be free from
-                contaminants that could interfere with the bioprocess or
-                compromise the safety of the final product. This necessitates
-                the use of high-purity chemicals and adherence to Good
-                Manufacturing Practices (GMPs) throughout the production and
-                handling of these buffer components.</p>
-
-              <p>Quality assurance of buffer chemicals involves rigorous testing
-                and documentation to ensure that they meet all regulatory
-                requirements. This includes assessing the chemical's provenance,
-                ensuring that raw materials are sourced from reputable
-                suppliers, and that the manufacturing process is controlled and
-                traceable. The ability to track the origin and handling of
-                buffer materials is essential for auditing and compliance
-                purposes, particularly in an industry that is heavily
-                regulated.</p>
-
-              <p>Furthermore, the manufacturing of buffer chemicals for
-                biopharmaceutical applications often requires additional
-                certifications, such as ISO standards, which further validate
-                the quality and reliability of the products. The demand for
-                high-quality buffer chemicals has led to the development of
-                specialized grades of these materials, specifically designed to
-                meet the stringent requirements of the biopharmaceutical
-                industry.</p>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Vendors providing quality buffer chemicals
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <p>Several vendors specialize in providing high-quality buffer
-                chemicals tailored for biopharmaceutical manufacturing. These
-                suppliers not only offer a range of products but also provide
-                support and services to ensure that the buffers meet the
-                specific needs of their clients.</p>
-
-              <p>
-                <strong>Thermo Fisher Scientific:</strong> Thermo Fisher
-                Scientific offers a wide range of buffers and standards for
-                various applications including molecular biology, cell culture,
-                and biochemical assays. Their portfolio includes precise
-                buffering agents and pre-made solutions, all characterized by
-                high quality and consistency to meet research and
-                biopharmaceutical manufacturing needs.
-              </p>
-
-              <p>
-                <strong>Avantor:</strong> Avantor's laboratory reagents and
-                chemicals include a variety of buffers crucial for
-                pharmaceutical development and manufacturing. Their products are
-                designed for precision in pH control and comply with stringent
-                regulations, serving the life sciences and advanced technology
-                sectors with high-quality supplies.
-              </p>
-
-              <p>
-                <strong>VWR:</strong> Part of Avantor, VWR provides a vast
-                selection of buffers suitable for scientific research and
-                industrial applications. Their range includes both ready-to-use
-                solutions and dry powders for versatile buffer preparation,
-                supporting pharmaceutical development and ensuring quality
-                across various applications.
-              </p>
-
-              <p>
-                <strong>MilliporeSigma:</strong> MilliporeSigma, a branch of
-                Merck KGaA, offers an extensive array of buffers for
-                bioprocessing, life science research, and analytical purposes.
-                They feature a Buffer Reference Center for optimal buffering
-                agent selection, certified reference solutions, and custom
-                formulations, emphasizing their dedication to precision and
-                reliability in critical research and manufacturing.
-              </p>
-
-            <p> <a href="https://www.thermofisher.com" target="_blank">Thermo
-                Fisher Scientific - Buffers and Standards</a>   </p>
-
-                <p>  <a href="https://www.avantorsciences.com" target="_blank">Avantor
-                - Laboratory Reagents and Chemicals</a></p>
-
-                <p>    <a href="https://us.vwr.com" target="_blank">VWR - Buffers</a>  </p>
-
-                <p>   <a href="https://www.sigmaaldrich.com" target="_blank">MilliporeSigma
-                - Buffer Reference Center</a> </p>
-
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Links to articles on buffers used in biopharmaceuticals
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <ol>
-                <li>
-                  "Evaluation of the design, development, and performance of a mass-flow based, open-source buffer manufacturing system"
-                  - Journal of Pharmaceutical and Development Administration.
-                  Available at:
-                  <a
-                    href="https://journal.pda.org/content/early/2022/08/19/pdajpst.2021.012660#:~:text=Buffer%20solutions%20are%20a%20critical,that%20has%20an%20open"
-                    target="_blank">https://journal.pda.org</a>
-                </li>
-                <li>
-                  "Buffers in Biologics Manufacturing" - BioProcess
-                  International. Available at:
-                  <a
-                    href="https://bioprocessintl.com/analytical/qa-qc/biopharmaceutical-buffers/#:~:text=In%20upstream%20processes%2C%20buffers%20are,during%20primary%20recovery%20before%20purification"
-                    target="_blank">https://bioprocessintl.com</a>
-                </li>
-                <li>
-                  "The Importance of Buffers in Downstream Processing" -
-                  BioPharm International. Available at:
-                  <a
-                    href="https://www.biopharminternational.com/view/importance-buffers-downstream-processing#:~:text=Buffers%20are%20used%20in%20a,per%20year%20exceeds%202000%20kL"
-                    target="_blank">https://www.biopharminternational.com</a>
-                </li>
-                <li>
-                  "Role of Buffers in Protein Formulations" - ScienceDirect.
-                  Available at:
-                  <a
-                    href="https://www.sciencedirect.com/science/article/pii/S0022354916418794"
-                    target="_blank">https://www.sciencedirect.com</a>
-                </li>
-                <li>
-                  "Behind the Scenes with Buffers in Biopharma Manufacturing" -
-                  BioPharm International. Available at:
-                  <a
-                    href="https://www.biopharminternational.com/view/behind-scenes-buffers#:~:text=Cynthia%20A,large%20part%20on%20their%20structure"
-                    target="_blank">https://www.biopharminternational.com</a>
-                </li>
-              </ol>
-
-            </mat-expansion-panel>
-
-          </mat-accordion>
-        </div>
+            <strong>First dissociation:</strong>
+            <p>
+              H<sub>3</sub>PO<sub>4</sub> ⇌ H<sup>+</sup> + H<sub>2</sub>PO<sub
+                >4</sub
+              ><sup>-</sup>
+            </p>
+            <p>The equilibrium constant expression for this step is:</p>
+            <p>
+              K<sub>a1</sub> = [H<sup>+</sup>][H<sub>2</sub>PO<sub>4</sub
+              ><sup>-</sup>]/[H<sub>3</sub>PO<sub>4</sub>]
+            </p>
+          </li>
+
+          <li>
+            <strong>Second dissociation:</strong>
+            <p>
+              H<sub>2</sub>PO<sub>4</sub><sup>-</sup> ⇌ H<sup>+</sup> + HPO<sub
+                >4</sub
+              ><sup>2-</sup>
+            </p>
+            <p>The equilibrium constant expression for this step is:</p>
+            <p>
+              K<sub>a2</sub> = [H<sup>+</sup>][HPO<sub>4</sub
+              ><sup>2-</sup>]/[H<sub>2</sub>PO<sub>4</sub><sup>-</sup>]
+            </p>
+          </li>
+
+          <li>
+            <strong>Third dissociation:</strong>
+            <p>
+              HPO<sub>4</sub><sup>2-</sup> ⇌ H<sup>+</sup> + PO<sub>4</sub
+              ><sup>3-</sup>
+            </p>
+            <p>The equilibrium constant expression for this step is:</p>
+            <p>
+              K<sub>a3</sub> = [H<sup>+</sup>][PO<sub>4</sub
+              ><sup>3-</sup>]/[HPO<sub>4</sub><sup>2-</sup>]
+            </p>
+          </li>
+        </ol>
+
+        <h3>Charge Balance Equation:</h3>
+        <p>
+          The charge balance equation ensures that the total positive charges in
+          solution equal the total negative charges. For the system with
+          NaH<sub>2</sub>PO<sub>4</sub>, Na<sub>2</sub>HPO<sub>4</sub>, and
+          NaCl, we consider all species that contribute to the charge, including
+          the dissociation products of phosphoric acid and the ions from NaCl.
+        </p>
+
+        <p>
+          Here's how the charge balance equation would look for this system:
+        </p>
+        <p>
+          [H<sup>+</sup>] + [Na<sup>+</sup>] = [H<sub>2</sub>PO<sub>4</sub
+          ><sup>-</sup>] + 2[HPO<sub>4</sub><sup>2-</sup>] + 3[PO<sub>4</sub
+          ><sup>3-</sup>] + [Cl<sup>-</sup>] + [OH<sup>-</sup>]
+        </p>
+        <!-- Include subsections or further detailed information here -->
+        <p>
+          By solving the charge balance equation, in combination with the
+          dissociation equations, while accounting for the mass balance, you can
+          calculate the [H<sup>+</sup>], which gives us the pH. Given that the
+          pkA depends on the ionic strength, one needs to incorporate
+          corrections to the pKA using Debye-Huckel approximations. The
+          calculation engine incorporates this correction. However, as mentioned
+          before, the correction is only applicable upto 0.4M ionic strength,
+          beyond which the actual results and predicted results will likely not
+          match.
+        </p>
+      </section>
+    </mat-expansion-panel>
+
+
+    <h1>Buffer Guide</h1>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>What are buffers and how do they work?</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        Buffers are a fundamental concept in chemistry, particularly in the
+        context of maintaining pH levels in various environments. A buffer is
+        essentially a solution that can resist changes in pH when small
+        quantities of acid or base are added. This property is crucial in many
+        biological and chemical processes where the pH must remain relatively
+        constant. The ability of a buffer to maintain pH is due to the presence
+        of a weak acid and its conjugate base, or a weak base and its conjugate
+        acid, in significant concentrations. These components work together to
+        neutralize added acids or bases, thus preventing drastic changes in pH
+        levels.
+      </p>
+
+      <p>
+        In practical terms, when an acid (proton donor) is introduced into a
+        buffer system, the conjugate base present in the buffer will bind the
+        free hydrogen ions, thereby mitigating the increase in acidity.
+        Conversely, if a base (proton acceptor) is added, the weak acid in the
+        buffer donates hydrogen ions to counteract the rise in basicity. This
+        dual capacity to moderate pH changes makes buffers indispensable in
+        chemical reactions and biological systems that are sensitive to pH
+        fluctuations, such as enzymatic pathways and cellular environments.
+      </p>
+
+      <p>
+        The effectiveness of a buffer is determined by its capacity, which is
+        the amount of acid or base the buffer can neutralize, and by its range,
+        which is the pH spectrum over which the buffer acts effectively.
+        Commonly, buffers are designed to work optimally within a pH range close
+        to the pKa of the acid component of the buffer system. This range is
+        typically within one pH unit above or below the pKa value. The careful
+        selection and application of buffer systems are thus crucial in many
+        scientific and industrial processes.
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> <h2>Where are buffers used?</h2> </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        Buffers are utilized across a wide array of scientific disciplines and
+        industrial applications due to their ability to stabilize pH levels. In
+        biology, buffers are vital for maintaining the pH of biological fluids,
+        such as blood, which is essential for proper physiological function.
+        Enzymatic reactions, often highly sensitive to pH, rely on buffers to
+        create an optimal environment for activity and stability. Beyond the
+        human body, buffers are also essential in agricultural practices,
+        environmental monitoring, and food science, where pH control is
+        necessary for maintaining the health of ecosystems and ensuring the
+        safety and quality of food products.
+      </p>
+
+      <p>
+        In the pharmaceutical industry, buffers play a pivotal role in drug
+        formulation and stability. They help maintain the pH of a drug product
+        within a narrow range to prevent degradation and ensure consistent
+        therapeutic efficacy. In drug design, buffers are used to enhance
+        solubility and bioavailability of medications. In analytical chemistry,
+        buffers are essential for techniques such as chromatography and
+        spectroscopy, where precise pH control is required to achieve accurate
+        and reproducible results.
+      </p>
+
+      <p>
+        Moreover, buffers are utilized in various technological applications,
+        such as water treatment processes, where they assist in maintaining the
+        pH balance to ensure safe drinking water. They also find applications in
+        chemical manufacturing, where they are used in catalytic reactions, and
+        in material science, particularly in the production of polymers and
+        other advanced materials. The versatility of buffers makes them a
+        cornerstone in both basic and applied sciences.
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+         <h2>How are buffers used in biopharma and biotechnology?</h2> 
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        In biopharmaceutical and biotechnological processes, buffers are
+        indispensable for both upstream and downstream processing. During the
+        upstream phase, buffers are used to maintain the pH of culture media
+        within a range that is optimal for cell growth and protein expression.
+        By keeping the pH stable, buffers ensure that the cells are producing
+        the desired biologics, such as therapeutic proteins, under the most
+        favorable conditions. This is crucial since even slight deviations in pH
+        can significantly affect cell health and productivity.
+      </p>
+
+      <p>
+        During downstream processing, buffers are integral to the purification
+        and stabilization of biopharmaceuticals. They are used in
+        chromatography, a key technique for purifying proteins, where the buffer
+        composition can directly affect the binding and elution of proteins from
+        the chromatography media. Buffers also play a role in protecting these
+        biomolecules from denaturation or degradation due to pH fluctuations.
+        For instance, they ensure that antibodies retain their structure and
+        functionality throughout the purification process, which is vital for
+        their efficacy as therapeutic agents.
+      </p>
+
+      <p>
+        In addition to their role in production, buffers are also crucial in the
+        formulation of biopharmaceutical products. They are used to adjust the
+        pH of the final product to ensure stability and prolong shelf life. For
+        sensitive biologics, such as vaccines or gene therapy vectors, buffers
+        safeguard against pH-induced damage during storage and transport. As
+        such, the careful selection and optimization of buffers are fundamental
+        steps in the development and manufacturing of biopharmaceuticals,
+        impacting the quality and safety of these critical healthcare products.
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Buffers used in bioprocesses and their
+          characteristics</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        Bioprocessing requires buffers that are not only effective at pH
+        stabilization but also meet stringent safety and compatibility
+        requirements. Good's buffers, named after Norman Good, who identified
+        them, are a class of zwitterionic organic chemical buffering agents that
+        have become the gold standard in biological research. These buffers,
+        such as HEPES, MOPS, and Tris, are designed to have minimal biological
+        effects, making them suitable for cell culture and enzymatic reactions.
+        They have pKa values close to physiological pH, which is typically
+        around 7.4, allowing them to maintain pH without interfering with
+        cellular processes
+      </p>
+
+      <p>
+        Another characteristic of buffers used in bioprocessing is their limited
+        absorption at wavelengths used for biological assays, thereby minimizing
+        interference in UV-spectrophotometric and fluorescence-based
+        measurements. This is critical in analytical and diagnostic applications
+        where the presence of the buffer should not affect the accuracy of the
+        results. Additionally, Good's buffers have low membrane permeability,
+        which is important for maintaining pH gradients across cell membranes, a
+        vital aspect of many biological processes
+      </p>
+
+      <p>
+        Bioprocessing also requires buffers to be free of contaminants such as
+        heavy metals or endotoxins, which could interfere with cell growth or
+        product purity. As a result, high purity and stringent quality control
+        are necessary for buffers used in these applications. The choice of
+        buffer can also impact the scalability of bioprocessing operations, with
+        considerations for how buffers will be stored, handled, and disposed of,
+        thus affecting the overall sustainability and cost-efficiency of the
+        manufacturing process
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Typical buffers used in the purification of antibodies</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        Antibody purification is a critical step in the production of monoclonal
+        and polyclonal antibodies, which are used for therapeutic and diagnostic
+        purposes. The purification process often involves the use of affinity
+        chromatography, utilizing materials such as Protein A, G, and L, which
+        bind specifically to the Fc region of antibodies. Buffers are essential
+        in this process, as they provide the correct pH and ionic strength
+        needed for antibodies to bind and subsequently be eluted from the
+        chromatography media
+      </p>
+
+      <p>
+        The choice of buffer in antibody purification is influenced by the type
+        of antibody, the desired purity, and the specific affinity material
+        being used. For instance, Protein A affinity chromatography, commonly
+        used for purifying IgG antibodies, requires a specific buffer
+        composition for optimal binding and elution. These buffers typically
+        include a loading buffer to prepare the sample, a wash buffer to remove
+        non-specifically bound proteins, and an elution buffer to release the
+        bound antibodies.
+      </p>
+
+      <p>
+        Post-purification, the antibodies may be subject to additional
+        processing steps such as desalting or buffer exchange to prepare them
+        for final formulation. These steps ensure that the antibodies are in a
+        buffer that is suitable for storage or further use, such as in a
+        therapeutic context. The final buffer must be chosen carefully to
+        maintain antibody stability and activity over time.
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Quality of buffer chemicals needed for biopharmaceutical manufacture</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        The quality of buffer chemicals is paramount in biopharmaceutical
+        manufacturing, where the highest standards of purity and consistency are
+        required. Buffers must be free from contaminants that could interfere
+        with the bioprocess or compromise the safety of the final product. This
+        necessitates the use of high-purity chemicals and adherence to Good
+        Manufacturing Practices (GMPs) throughout the production and handling of
+        these buffer components.
+      </p>
+
+      <p>
+        Quality assurance of buffer chemicals involves rigorous testing and
+        documentation to ensure that they meet all regulatory requirements. This
+        includes assessing the chemical's provenance, ensuring that raw
+        materials are sourced from reputable suppliers, and that the
+        manufacturing process is controlled and traceable. The ability to track
+        the origin and handling of buffer materials is essential for auditing
+        and compliance purposes, particularly in an industry that is heavily
+        regulated.
+      </p>
+
+      <p>
+        Furthermore, the manufacturing of buffer chemicals for biopharmaceutical
+        applications often requires additional certifications, such as ISO
+        standards, which further validate the quality and reliability of the
+        products. The demand for high-quality buffer chemicals has led to the
+        development of specialized grades of these materials, specifically
+        designed to meet the stringent requirements of the biopharmaceutical
+        industry.
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Vendors providing quality buffer chemicals</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <p>
+        Several vendors specialize in providing high-quality buffer chemicals
+        tailored for biopharmaceutical manufacturing. These suppliers not only
+        offer a range of products but also provide support and services to
+        ensure that the buffers meet the specific needs of their clients.
+      </p>
+
+      <p>
+        <strong>Thermo Fisher Scientific:</strong> Thermo Fisher Scientific
+        offers a wide range of buffers and standards for various applications
+        including molecular biology, cell culture, and biochemical assays. Their
+        portfolio includes precise buffering agents and pre-made solutions, all
+        characterized by high quality and consistency to meet research and
+        biopharmaceutical manufacturing needs.
+      </p>
+
+      <p>
+        <strong>Avantor:</strong> Avantor's laboratory reagents and chemicals
+        include a variety of buffers crucial for pharmaceutical development and
+        manufacturing. Their products are designed for precision in pH control
+        and comply with stringent regulations, serving the life sciences and
+        advanced technology sectors with high-quality supplies.
+      </p>
+
+      <p>
+        <strong>VWR:</strong> Part of Avantor, VWR provides a vast selection of
+        buffers suitable for scientific research and industrial applications.
+        Their range includes both ready-to-use solutions and dry powders for
+        versatile buffer preparation, supporting pharmaceutical development and
+        ensuring quality across various applications.
+      </p>
+
+      <p>
+        <strong>MilliporeSigma:</strong> MilliporeSigma, a branch of Merck KGaA,
+        offers an extensive array of buffers for bioprocessing, life science
+        research, and analytical purposes. They feature a Buffer Reference
+        Center for optimal buffering agent selection, certified reference
+        solutions, and custom formulations, emphasizing their dedication to
+        precision and reliability in critical research and manufacturing.
+      </p>
+
+      <p>
+        <a href="https://www.thermofisher.com" target="_blank"
+          >Thermo Fisher Scientific - Buffers and Standards</a
+        >
+      </p>
+
+      <p>
+        <a href="https://www.avantorsciences.com" target="_blank"
+          >Avantor - Laboratory Reagents and Chemicals</a
+        >
+      </p>
+
+      <p><a href="https://us.vwr.com" target="_blank">VWR - Buffers</a></p>
+
+      <p>
+        <a href="https://www.sigmaaldrich.com" target="_blank"
+          >MilliporeSigma - Buffer Reference Center</a
+        >
+      </p>
+      </mat-card>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h2>Links to articles on buffers used in biopharmaceuticals</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card class="buffer_guide_card">
+      <ol>
+        <li>
+          "Evaluation of the design, development, and performance of a mass-flow
+          based, open-source buffer manufacturing system" - Journal of
+          Pharmaceutical and Development Administration. Available at:
+          <a
+            href="https://journal.pda.org/content/early/2022/08/19/pdajpst.2021.012660#:~:text=Buffer%20solutions%20are%20a%20critical,that%20has%20an%20open"
+            target="_blank"
+            >https://journal.pda.org</a
+          >
+        </li>
+        <li>
+          "Buffers in Biologics Manufacturing" - BioProcess International.
+          Available at:
+          <a
+            href="https://bioprocessintl.com/analytical/qa-qc/biopharmaceutical-buffers/#:~:text=In%20upstream%20processes%2C%20buffers%20are,during%20primary%20recovery%20before%20purification"
+            target="_blank"
+            >https://bioprocessintl.com</a
+          >
+        </li>
+        <li>
+          "The Importance of Buffers in Downstream Processing" - BioPharm
+          International. Available at:
+          <a
+            href="https://www.biopharminternational.com/view/importance-buffers-downstream-processing#:~:text=Buffers%20are%20used%20in%20a,per%20year%20exceeds%202000%20kL"
+            target="_blank"
+            >https://www.biopharminternational.com</a
+          >
+        </li>
+        <li>
+          "Role of Buffers in Protein Formulations" - ScienceDirect. Available
+          at:
+          <a
+            href="https://www.sciencedirect.com/science/article/pii/S0022354916418794"
+            target="_blank"
+            >https://www.sciencedirect.com</a
+          >
+        </li>
+        <li>
+          "Behind the Scenes with Buffers in Biopharma Manufacturing" - BioPharm
+          International. Available at:
+          <a
+            href="https://www.biopharminternational.com/view/behind-scenes-buffers#:~:text=Cynthia%20A,large%20part%20on%20their%20structure"
+            target="_blank"
+            >https://www.biopharminternational.com</a
+          >
+        </li>
+      </ol>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
+  </mat-card>
+</div>
