@@ -53,7 +53,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       this.buffer_compound_names = this.solutionMixtureService.buffer_compounds;
       this.selectedAcidCompounds = this.acidCompounds;
       this.selectedBasicCompounds = this.basicCompounds;
-      //console.log('God buffer_compound_names', this.buffer_compound_names);
+
 
       // Monitor value changes on the autocomplete field of bufferSpeciesControl and filter the bufferSpeciesKeys accordingly
       this.filteredBufferSpecies = this.bufferForm

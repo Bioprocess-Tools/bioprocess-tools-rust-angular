@@ -79,7 +79,7 @@ export class ChatbufferomComponent implements OnInit {
        if (solution && solution.non_salt_compounds.length <= 2) {
          this.currentSolution = solution;
          this.response_solution = solution;
-         console.log('God in chatbufferom cr', this.currentSolution);
+
          this.populateForm(solution);
 
          this.form.updateValueAndValidity({

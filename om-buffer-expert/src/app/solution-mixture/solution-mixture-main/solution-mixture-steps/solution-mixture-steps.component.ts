@@ -356,7 +356,7 @@ action_structure = {
           // do something with solutionMixture
           this.solution_mixture_steps_edit = solutionMixture;
           this.prepareAllData(solutionMixture.data_dictionary);
-          console.log(this.allPlotsData);
+
           //this.generateAllMeasurements(this.allPlotsData);
           const rValue = 1;
           this.allPlotsData.forEach(series => {
@@ -410,7 +410,7 @@ action_structure = {
 
   onOperationGroupSelect(event: MatChipSelectionChange) {
     this.selectedStepIndex = null;
-    console.log("god event", event);
+
     const id = event.source.value;
     if (event.source.selected) {
       //this.selectedOperationGroup.setValue(id);
@@ -423,19 +423,19 @@ action_structure = {
       this.volumeAdditions = true;
       this.targetConc_pH = false;
       this.solutionModification = false;
-      console.log('God volume additions chosen', this.volumeAdditions);
+
     }
     if (id === 'targetConc_pH') {
       this.targetConc_pH = true;
       this.volumeAdditions = false;
       this.solutionModification = false;
-      console.log('God targetConc_pH chosen', this.targetConc_pH);
+
     }
     if (id === 'solutionModification') {
       this.solutionModification = true;
       this.volumeAdditions = false;
       this.targetConc_pH = false;
-      console.log('God solutionModification chosen', this.solutionModification);
+
     }}
     else {
       this.selectedOperationGroup.setValue(null);
@@ -524,12 +524,7 @@ action_structure = {
   onVolumeActionSelect(event: MatChipSelectionChange) {
     this.selectedStepIndex = null;
     const id = event.source.value;
-    console.log(
-      'God-parameters',
-      this.getParametersById(this.volume_actions, id)
-    );
-    // console.log("God-id",this.volume_actions[id].id);
-    // console.log("God-parameters",this.volume_actions[id].parameters);
+
     if(event.source.selected){
      // this.selectedActionItem.setValue(id);
     this.volumeAdditionsActionsSelected = true;
@@ -537,14 +532,13 @@ action_structure = {
     this.solutionModificationActionsSelected = false;
 
     const config = this.form_config_volume_actions[id];
-    console.log('God config formcontrols', config, config.formControls);
+
     this.currentStepForm = this.fb.group(config.formControls);
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(this.volume_actions, id);
-    console.log('God', config.templateRef);
+
     this.selectedTemplate = this[config.templateRef];
-    console.log(this.currentStepForm);
-        console.log("God - template" ,this.selectedTemplate);
+
   }
   else{
     this.selectedActionItem.setValue(null);
@@ -567,13 +561,13 @@ action_structure = {
     this.volumeAdditionsActionsSelected = false;
     this.targetConc_pHActionsSelected = true;
     this.solutionModificationActionsSelected = false;
-      console.log('God', id);
-      console.log('God', this.form_config_target_conc_pH_actions[id]);
+
+
     const config =
       this.form_config_target_conc_pH_actions[
         id
       ];
-      console.log('God config formcontrols', config, config.formControls);
+
     this.currentStepForm = this.fb.group(config.formControls);
     this.selected_operations_method = id;
     this.selected_parameters = this.getParametersById(
@@ -609,7 +603,7 @@ action_structure = {
       this.solution_modification_actions,id);
     this.selectedTemplate = this[config.templateRef];
 
-    console.log(id);
+
     }
     else{
      // this.selectedActionItem.setValue(null);
@@ -629,9 +623,9 @@ action_structure = {
   }
 
   onSubmit() {
-    console.log(this.currentStepForm.value);
+
     this.selected_parameters = this.currentStepForm.value;
-    console.log('God param', this.selected_parameters);
+ 
     if (this.edit_step_index == null) {
 
       this.steps_list.push(
@@ -643,19 +637,19 @@ action_structure = {
       );
       this.steps_list[this.steps_list.length - 1].category= this.action_structure[this.selected_operations_method].mainCategory;
       Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.steps_list.length - 1], this.steps_list);
-      console.log('God - add step:', this.steps_list);
+
       this.selectedStepIndex= this.steps_list.length - 1;
   
       // this.steps_list.push(this.currentStepForm.value);
-      console.log('God - add step:', this.steps_list);
+
         }
     else {
-      console.log("God - edit step index", this.edit_step_index);
+
       this.steps_list[this.edit_step_index].operation_method = this.selected_operations_method;
       this.steps_list[this.edit_step_index].parameters = this.selected_parameters;
       Step.evaluateEffectOfOperationStep(this.solution_mixture_steps_edit, this.steps_list[this.edit_step_index], this.steps_list);
       this.selectedStepIndex= this.steps_list.length - 1;
-      console.log('God - edit step:', this.steps_list);
+
       this.edit_step_index = null;
       this.add_edit_label = 'Add';
       this.volumeAdditionsActionsSelected = false;
@@ -670,7 +664,7 @@ action_structure = {
   }
 
   onExecute() {
-    console.log('God subscribed list', this.steps_list);
+    
     this.solutionMixtureService.postStepswithTrigger();
     this.IsFormulationSubmitted = true;
 this.selectedActionItem.setValue(null);
@@ -689,9 +683,9 @@ this.selectedOperationGroup.setValue(null);
 
   removeStep(i: number) {
     this.steps_list = this.steps_list.filter(s => s !== this.steps_list[i]);
-    console.log("God this is the slist now", this.steps_list)
+   
     this.solutionMixtureService.StepsSubject.next(this.steps_list)
-    console.log("God this is the slist after", this.steps_list)
+
     this.selectedActionItem.setValue(null);
     this.selectedOperationGroup.setValue(null);
     if (this.steps_list.length > 0) {
@@ -706,23 +700,21 @@ this.selectedOperationGroup.setValue(null);
     //this.edit_step_index = i;
    // this.add_edit_label = 'Update';
     this.selected_operations_method = this.steps_list[i].operation_method;
-    console.log('God edit step:', this.steps_list[i].operation_method);
-    console.log('God edit step:', this.steps_list[i].parameters);
+
     this.selectedOperationGroup.setValue(this.action_structure[this.steps_list[i].operation_method].mainCategory);
     this.selectedActionItem.setValue(this.action_structure[this.steps_list[i].operation_method].id);
     this.selectedTemplate = this[this.action_structure[this.steps_list[i].operation_method].templateRef];
-    console.log('God edit step after template:', this.steps_list[i].parameters);
+
     this.volumeAdditionsActionsSelected=true;
     this.selectedStepIndex=i;
     this.currentStepForm = this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
     this.currentStepForm.patchValue(this.steps_list[i].parameters);
-    console.log('God edit step:', this.currentStepForm);
-    
+
   }
 
   onCancelEdit(i:number) {
     this.selectedStepIndex=i
-    console.log('God selected step index:', this.selectedStepIndex);
+
     this.edit_step_index = null;
     this.add_edit_label = 'Add';
     this.currentStepForm= this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
@@ -740,16 +732,15 @@ this.selectedOperationGroup.setValue(null);
     this.edit_step_index = i;
     this.add_edit_label = 'Update';
     this.selected_operations_method = this.steps_list[i].operation_method;
-    console.log('God edit step:', this.steps_list[i].operation_method);
-    console.log('God edit step:', this.steps_list[i].parameters);
+
     this.selectedOperationGroup.setValue(this.action_structure[this.steps_list[i].operation_method].mainCategory);
     this.selectedActionItem.setValue(this.action_structure[this.steps_list[i].operation_method].id);
     this.selectedTemplate = this[this.action_structure[this.steps_list[i].operation_method].templateRef];
-    console.log('God edit step after template:', this.steps_list[i].parameters);
+
     this.volumeAdditionsActionsSelected=true;
     this.currentStepForm = this.fb.group(this.action_structure[this.steps_list[i].operation_method].formControls);
     this.currentStepForm.patchValue(this.steps_list[i].parameters);
-    console.log('God edit step:', this.currentStepForm);
+  
     //this.currentStepForm = this.fb.group(this.steps_list[i].parameters);
   }
 

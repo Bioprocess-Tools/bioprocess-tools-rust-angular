@@ -201,7 +201,7 @@ export class SolutionMixtureService {
   postStepswithTrigger() {
     let steps = this.StepsSubject.value;
     this.StepsSubject.next(steps);
-    console.log('God this is what is going out', this.StepsSubject.value);
+
     this.http
       .post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, {
         steps: this.StepsSubject.value,
@@ -210,7 +210,7 @@ export class SolutionMixtureService {
         next: (solutionMixture) => {
           this.solutionMixtureSolutionsReviewSubject.next(solutionMixture);
 
-          console.log('God just got data back', solutionMixture);
+       
         },
         error: (error) => console.error(error),
       });
@@ -220,7 +220,7 @@ export class SolutionMixtureService {
     let steps = this.StepsSubject.value;
     this.StepsSubject.next(steps);
     let makeSteps = steps.filter((step) => step.category === 'Make');
-    console.log('God - your make steps', makeSteps);
+    
     this.http
       .post<SolutionMixture>(`${this.apiUrl}/execute_steps_solution_mixture`, {
         steps: makeSteps,
@@ -231,12 +231,7 @@ export class SolutionMixtureService {
           let solutionIndex = 0; // To keep track of the current index in the solutions list
 
           steps.forEach((step) => {
-            console.log(
-              'God - iterating through steps',
-              step.category,
-              solutionIndex,
-              step.associated_solution
-            );
+            
             if (step.category === 'Make') {
               // Check to prevent index out-of-bound error
               if (solutionIndex < solutionMixture.solutions.length) {

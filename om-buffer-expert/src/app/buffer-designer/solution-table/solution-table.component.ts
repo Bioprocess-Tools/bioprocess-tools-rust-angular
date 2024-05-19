@@ -78,10 +78,10 @@ export class SolutionTableComponent
       const element = this.solutionElements.toArray()[index].nativeElement;
       const container = element.parentElement;
       const superContainer = container.parentElement;
-      //console.log('God element', element, container, superContainer);
+
       // Adjust this calculation if it doesn't correctly align items
       const scrollLeft = container.offsetLeft - element.offsetLeft + 10;
-      //console.log('God scroll left', scrollLeft, container.offsetLeft, element.offsetLeft);
+
       // Scroll horizontally, but keep the vertical scroll position the same
       superContainer.scrollTo({
         top: container.scrollTop, // Keep vertical scroll position the same
@@ -99,8 +99,8 @@ export class SolutionTableComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     //this.generateHeatMap();
-    //console.log('God changes');
-    //console.log('God active tab', changes['activeTab']);
+
+
     if (changes['activeTab']) {
       if (changes['activeTab'].currentValue != 'super-calculator') {
         for (let i = this.solutions.length - 1; i >= 0; i--) {
@@ -184,7 +184,7 @@ export class SolutionTableComponent
           this.solution = this.selectedSolution;
 
           if (Object.keys(this.solution.heat_map_data).length > 0) {
-            //console.log('God init heatmap');
+         
             this.generateHeatMap();
           }
         }
@@ -192,7 +192,7 @@ export class SolutionTableComponent
     });
 
     window.addEventListener('resize', () => {
-      // console.log('God resize heatmap');
+
       this.generateHeatMap();
     });
   }
@@ -225,7 +225,7 @@ export class SolutionTableComponent
 
     // Assuming centerConcentrations is an array of objects like [{name: 'compound1', value: 0.95}, {name: 'compound2', value: 1.0}]
     let compoundNames = Object.keys(centerConcentrations);
-    //console.log('god center', centerConcentrations);
+
 
     let dataPoints = this.solution.heat_map_data['data_points'];
     // const dataPoints = [
@@ -242,7 +242,7 @@ export class SolutionTableComponent
 
     const greenBreakpoint = 0.1 / maxZValue;
     const orangeBreakpoint = 0.2 / maxZValue;
-    //console.log('god dev', zValues);
+
     this.trace = [
       {
         x: xValues,
@@ -432,7 +432,6 @@ export class SolutionTableComponent
       });
     });
 
-    //console.log('God trace', this.trace);
-    //console.log('God layout', this.layout);
+
   }
 }

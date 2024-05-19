@@ -103,7 +103,7 @@ export class SolutionsBrowseEditPrepareComponent
   ngOnInit() {
     this.solutions_selection_Control = new FormControl();
     this.solutionsLibrary = this.solutionMixtureService.solutionsLibrary;
-    console.log("God - solutionsLibrary", this.solutionsLibrary);
+
     this.filteredSolutions = this.solutions_selection_Control.valueChanges.pipe(
       startWith(''),
       map((value) => (typeof value === 'string' ? value.toLowerCase() : '')),
@@ -112,13 +112,13 @@ export class SolutionsBrowseEditPrepareComponent
     this.solutionMixtureService.Steps$.subscribe((steps) => {
       this.solution_mixture_steps = steps;
 
-      console.log("God -browse-edit-prepare", this.solution_mixture_steps);
+
     });
   
     this.solutionMixtureService.solutionMixtureSolutionsReview$.subscribe(
       (solutionMixture) => {
         if (solutionMixture) {
-          console.log("God - solutionMixture", solutionMixture)
+
           this.solution_mixture_result_object = solutionMixture;
           // do something with solutionMixture
           this.solutions = solutionMixture.solutions;
@@ -130,7 +130,7 @@ export class SolutionsBrowseEditPrepareComponent
 
 this.filteredSolutions.subscribe(
   (data) => {
-    console.log('filteredSolutions data:', data);
+
   },
   (error) => {
     console.error('filteredSolutions error:', error);
@@ -142,12 +142,11 @@ this.filteredSolutions.subscribe(
     //   if (typeof value === 'string') {
     //     // The value is a string, so the user has edited the input
     //     // You can now process the string as needed
-    //     console.log('User input:', value);
+
     //   } else if (value instanceof Solution) {
     //     // The value is a Solution object, so the user has selected an option from the dropdown
     //     // You can now process the Solution object as needed
-    //     console.log('Selected solution:', value);
-    //   }
+
     // });
 
     // this.scrollRefs.changes.subscribe((queryList: QueryList<ElementRef>) => {
@@ -185,21 +184,21 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-    //console.log("God - category", event.source.value, "God - event", event.selected)
+
     if (event.selected == false)
     {
-      //console.log("God - false category", event.source.value, "God false event", event.selected);
+
       this.selectedCategory = null;
       this.selectedSubCategory = null;
-      //console.log("God filtered false",this.filterSolutions('').length);
+
       this.solutions_selection_Control.setValue(this.filterSolutions(''));  ;
     }
     else {
-      console.log("God - true category", event.source.value, "God true event", event.selected);
+
       this.selectedCategory = event.source.value;
       this.selectedSubCategory = null; // Reset subCategory selection
       this.solutions_selection_Control.setValue('');
-      //console.log("God filtered true",this.filterSolutions('').length);
+
       this.solutions_selection_Control.setValue(this.filterSolutions(''));  ;
     }
 
@@ -244,18 +243,18 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     } else {
       // If no category is selected, consider all solutions (optional based on UI logic)
       for (const category in this.solutionsLibrary) {
-        console.log("God category" , this.solutionsLibrary, category)
+
         for (const subCategory in this.solutionsLibrary[category]) {
-          console.log('God subcat',  subCategory);
+
           filteredSolutions = [
             ...filteredSolutions,
             ...this.solutionsLibrary[category][subCategory],
           ];
-          console.log("God - got here nothing was selected", this.solutionsLibrary[category][subCategory])
+
         }
       }
     }
-   console.log("God - filteredSolutions", this.selectedCategory, this.selectedSubCategory, filteredSolutions.length)
+
     // Now filter based on the input value
     return filteredSolutions.filter(
       (solution) =>
@@ -266,11 +265,7 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     );
   }
 
-  // selectCategory(category: string | null) {
-  //   this.selectedCategory = category;
-  //   this.selectedSubCategory = null; // Reset subCategory selection
-  //   this.solutions_selection_Control.setValue('');
-  // }
+
 
 
 
@@ -328,7 +323,7 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
 
   onSubmitBufferwithSalt() {
     this.isDuplicate = false;
-    console.log(this.bufferspecieswithSaltForm.value);
+
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
@@ -370,11 +365,11 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
       this.solution_mixture_steps.push(step_to_add);
       this.solution_mixture_steps[this.solution_mixture_steps.length - 1].category="Make";
       this.selectedStepIndex= this.solution_mixture_steps.length - 1;
-      console.log("God - ready to post", this.solution_mixture_steps)
+
       this.triggerStepPOST();
       this.message = '';
     } else {
-      console.log("God - duplicate", this.solution_mixture_steps)
+
       this.message = 'You have already added this solution';
     }
 
@@ -390,7 +385,7 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-    //   console.log(this.bufferspecieswithoutSaltForm.value);
+
     let id;
     if (this.solution_mixture_steps === null) {
       id = 1;
@@ -423,7 +418,7 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
       this.solution_mixture_steps.push(step_to_add);
       this.solution_mixture_steps[this.solution_mixture_steps.length - 1].category="Make";
       this.selectedStepIndex= this.solution_mixture_steps.length - 1;
-      console.log("God - ready to post", this.solution_mixture_steps);
+
       this.triggerStepPOST();
       this.message = '';
     } else {
@@ -436,7 +431,7 @@ onCategoryChange(category: string, event: MatChipSelectionChange) {
     this.isBufferwithSaltSolution = false;
     this.isBufferwithoutSaltSolution = false;
     this.isStockSolution = false;
-    console.log(this.stockSolutionForm.value);
+
     let id;
     if (this.solution_mixture_steps === null) {
       id = 1;
@@ -494,9 +489,9 @@ removeSolution(i: number) {
     let isInvalidSteps = Step.evaluateEffectOfRemovingSolution(this.solution_mixture_result_object, 
       this.solution_mixture_steps[i], this.solution_mixture_steps);
     if (isInvalidSteps.length > 0) {
-      console.log("God - invalid steps", isInvalidSteps)
+      
     } else {
-      console.log("God - no invalid steps")
+      
     }
   }
     this.solution_mixture_steps.splice(i, 1);

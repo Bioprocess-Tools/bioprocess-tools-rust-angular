@@ -78,9 +78,7 @@ constructor () {}
     // if an ion from the solution is used in the step, we need to flag the step as invalid
     // if the step is invalid, we need to add a comment to the step
     // if the step is invalid, we need to add a flag to the step
-    omFun() {
-        console.log("OM Function");
-    }
+
 
 
 }

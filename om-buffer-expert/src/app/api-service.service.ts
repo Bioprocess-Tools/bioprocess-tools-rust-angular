@@ -13,7 +13,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   sendUserInput(userInput: string) {
-     //console.log("God",userInput)
+
     return this.http.post<any>(`${this.apiUrl}/chat`, { userInput });
   }
 

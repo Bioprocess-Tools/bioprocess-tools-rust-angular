@@ -278,9 +278,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         },
       ];
     }
-    console.log('God traces', traces);
+
     linePlotData.push(...traces);
-    console.log('God line plot data', linePlotData);
+
 
     return linePlotData;
   }
@@ -404,8 +404,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     //   });
     // });
 
-    console.log('God trace', this.traceOM);
-    console.log('God layout', this.layoutOM);
+
   }
 
   createDataLayoutselCompoundIonpHDataAllPhases() {
@@ -549,100 +548,16 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     };
   }
 
-  // preparePlotData(
-  //   slicedData: any,
-  //   selectedPhases: string[],
-  //   category: string,
-  //   specificSelection: string
-  // ): any[] {
-  //   let plotData: any[] = [];
-  //   if (slicedData) {
-  //     console.log(
-  //       'God slected phases, category, specific selection',
-  //       selectedPhases,
-  //       category,
-  //       specificSelection
-  //     );
-
-  //     if (this.selectedPhases.length != 0) {
-  //       // Define relevant names based on category
-  //       let relevantNames: string[] = [];
-  //       if (category === 'compound') {
-  //         relevantNames = this.selectedCompounds;
-  //       } else if (category === 'ion') {
-  //         relevantNames = this.selectedIons;
-  //       }
-  //       if (selectedPhases.includes('all')) {
-  //         selectedPhases = Object.keys(slicedData);
-  //       }
-  //       selectedPhases.forEach((selectedPhase) => {
-  //         const phaseData = slicedData[selectedPhase];
-  //         console.log("God phase data udpaed", phaseData)
-  //         if (!phaseData) {
-  //           console.error(
-  //             'Selected phase data not found for phase',
-  //             selectedPhase
-  //           );
-  //           return;
-  //         }
-
-  //         // Depending on the category, prepare data for plotting
-  //         phaseData.forEach((dataPoint: any) => {
-  //           relevantNames.forEach((key) => {
-  //             // Check if we should include the current key based on specificSelection
-  //             if (specificSelection === 'all' || specificSelection === key) {
-  //               console.log("God key", key)
-  //               let entry = plotData.find((entry) => entry.name === key);
-  //               if (!entry) {
-  //                 entry = { name: key, series: [] };
-  //                 plotData.push(entry);
-  //               }
-  //               entry.series.push({ x: dataPoint.volume, y: dataPoint[key] });
-  //               console.log("God entry", entry)
-  //             }
-  //             //console.log("God not if", plotData)
-  //           });
-  //         });
-  //       });
-
-  //       // Special handling for pH if selected
-  //       if (category === 'pH') {
-  //         selectedPhases.forEach((selectedPhase) => {
-  //           const phaseData = slicedData[selectedPhase];
-  //           if (!phaseData) return;
-
-  //           const pHData = phaseData.map((dataPoint: any) => ({
-  //             x: dataPoint.volume,
-  //             y: dataPoint.pH,
-  //           }));
-  //           let pHEntry = plotData.find((entry) => entry.name === 'pH');
-  //           if (!pHEntry) {
-  //             pHEntry = { name: 'pH', series: [] };
-  //             plotData.push(pHEntry);
-  //           }
-  //           pHEntry.series = pHEntry.series.concat(pHData);
-  //         });
-  //       }
-  //     }
-  //   }
-  //   console.log("God plot data renewed", plotData)
-  //   return plotData;
-  // }
 
   prepareLinePlotData(): any[] {
     let linePlotData = [];
     let traces = [];
-    console.log('God selected phases', this.selectedPhases);
-    console.log('God selected compounds', this.selectedCompounds);
-    console.log('God selected ions', this.selectedIons);
-    console.log('God category', this.category);
+
+
+
 
     for (let phase of this.selectedPhases.filter((phase) => phase != 'all')) {
-      console.log('God phase', phase);
-      console.log(
-        'God phase data',
-        this.solutionMixture.phase_sliced_data[phase]
-      );
+
       traces = [];
       if (this.category === 'compound') {
         traces = this.selectedCompounds.map((compound) => {
@@ -657,7 +572,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
             name: `${compound} - ${phase}`,
           };
         });
-        console.log('God compound traces', traces);
+
       } else if (this.category === 'ion') {
         traces = this.selectedIons.map((ion) => {
           return {
@@ -685,9 +600,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
           },
         ];
       }
-      console.log('God traces', traces);
+
       linePlotData.push(...traces);
-      console.log('God line plot data', linePlotData);
+
     }
 
     return linePlotData;
@@ -698,9 +613,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
     // Initialize a map or object to hold the traces for each compound/ion/pH
     let tracesMap = {};
-    console.log('God selected phases in lineplotdatav2', this.selectedPhases);
+
     for (let phase of this.selectedPhases.filter((phase) => phase != 'all')) {
-      console.log('God phase iterating', phase);
+
       if (this.category === 'compound') {
         this.selectedCompounds.forEach((compound) => {
           // Initialize the trace for the compound if it doesn't exist
@@ -754,7 +669,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
     // Convert the tracesMap object to an array of traces
     linePlotData = Object.values(tracesMap);
-    console.log('God line plot data v2', linePlotData);
+ 
 
     return linePlotData;
   }
@@ -764,9 +679,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
     // Initialize a map or object to hold the traces for each compound/ion/pH
     let tracesMap = {};
-    console.log('God selected phases in lineplotdatav2', this.selectedPhases);
+    
     for (let phase of this.selectedPhases.filter((phase) => phase != 'all')) {
-      console.log('God phase iterating', phase);
+    
       if (category === 'compound') {
         this.selectedCompounds.forEach((compound) => {
           // Initialize the trace for the compound if it doesn't exist
@@ -820,7 +735,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
     // Convert the tracesMap object to an array of traces
     linePlotData = Object.values(tracesMap);
-    console.log('God line plot data v2', linePlotData);
+  
 
     return linePlotData;
   }
@@ -832,7 +747,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   // // let names = [];
   // // let endVolumes = [];
   // // let beginVolume;
-  // // console.log("God selected phases", this.selectedPhases)
+ 
   // // let stepNumbers = this.selectedPhases
   // // .filter(name => name !== 'all')  // Filter out 'all'
   // // .map(name =>name.charAt(0));
@@ -849,14 +764,11 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
   // //   }
   // // });
 
-  // // console.log("God names", names)
-  // // console.log("God end volumes", endVolumes)
-  // // console.log("God begin volume", beginVolume)
-  // // console.log("God step numbers", stepNumbers)
 
-  // console.log("God phase data", this.solutionMixture.phase_data)
+
+
   // // let filteredPhaseData = Object.keys(this.solutionMixture.phase_data).filter(id => stepNumbers.includes(id));
-  // // console.log("God filtered phase data", filteredPhaseData)
+
   //  let phaseData = this.solutionMixture.phase_data;
   //   if (phaseData) {
   //   let maxValue = 0;
@@ -864,13 +776,10 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
 
   // let phaseBoundaries = Object.values(phaseDataTyped).map(phase => phase.end_volume);
   // let phaseNames = Object.values(phaseDataTyped).map(phase => phase.name);
-  //   console.log("God phase boundaries", phaseBoundaries)
-  //   console.log("God phase names", phaseNames)
 
-  // // phaseBoundaries= endVolumes;
-  // //   phaseNames = names;
-  // //   console.log("God phase boundaries after", phaseBoundaries)
-  // //   console.log("God phase names after", phaseNames)
+
+
+
 
   //   const volumes = this.solutionMixture.volume_interval_data; // Volumes
   // //  const yValues = this.solutionMixture.pH_interval_data; // Corresponding y-values
@@ -1201,10 +1110,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     this.ionbyPhase = this.prepareLinePlotDataCategoryInput('ion');
     this.pHbyPhase = this.prepareLinePlotDataCategoryInput('pH');
 
-    console.log(
-      'God phase based data by category',
-      this.phaseBasedDataByCategory
-    );
+
     this.pHBarLayout = this.omtryphasev2('pH');
     this.compBarLayout = this.omtryphasev2('compound');
     this.ionBarLayout = this.omtryphasev2('ion');
@@ -1234,16 +1140,13 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         // Add the selected phase, ensuring no duplicates
         if (!this.selectedCompounds.includes(compound)) {
           this.selectedCompounds.push(compound);
-          console.log(
-            'God added phase if not duplicate',
-            this.selectedCompounds
-          );
+
           if (
             this.selectedCompounds.length ===
             this.compoundOptions.length - 1
           ) {
             // this.selectedCompounds.push('all');
-            // console.log('God added all', this.selectedCompounds);
+
           }
         }
       } else {
@@ -1251,11 +1154,11 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         this.selectedCompounds = this.selectedCompounds.filter(
           (id) => id !== compound
         );
-        console.log('God: removed phase', this.selectedCompounds);
+
         this.selectedCompounds = this.selectedCompounds.filter(
           (id) => id !== 'all'
         );
-        console.log('God: removed phase and all', this.selectedCompounds);
+ 
       }
 
       //   // Remove 'all' if it's there and not all phases are selected
@@ -1273,7 +1176,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       // if (this.selectedPhases.length === this.phaseOptions.length) {
       //   this.selectedPhases.push('all');
       // }
-      console.log('God selected compounds', this.selectedCompounds);
+
       this.updatePlot();
     }
   }
@@ -1283,7 +1186,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       .filter((name) => name !== 'all')
       .map((name) => parseInt(name.charAt(0)));
     stepNumbers.sort((a, b) => a - b); // Sort the step numbers in ascending order
-    console.log('God step numbers', stepNumbers);
+
     for (let i = 1; i < stepNumbers.length; i++) {
       if (stepNumbers[i] !== stepNumbers[i - 1] + 1) {
         return false;
@@ -1296,10 +1199,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
     const phaseId = event.source.value;
     const isSelected = event.source.selected;
 
-    console.log(
-      'God - map understand',
-      this.phaseOptions.map((p) => p.id).filter((id) => id != 'all')
-    );
+
     if (phaseId === 'all') {
       if (isSelected) {
         // Select all phases including 'all'
@@ -1320,10 +1220,10 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         // Add the selected phase, ensuring no duplicates
         if (!this.selectedPhases.includes(phaseId)) {
           this.selectedPhases.push(phaseId);
-          console.log('God added phase if not duplicate', this.selectedPhases);
+
           if (this.selectedPhases.length === this.phaseOptions.length - 1) {
             this.selectedPhases.push('all');
-            console.log('God added all', this.selectedPhases);
+
           }
         }
       } else {
@@ -1331,9 +1231,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         this.selectedPhases = this.selectedPhases.filter(
           (id) => id !== phaseId
         );
-        console.log('God: removed phase', this.selectedPhases);
+
         this.selectedPhases = this.selectedPhases.filter((id) => id !== 'all');
-        console.log('God: removed phase and all', this.selectedPhases);
+
       }
 
       //   // Remove 'all' if it's there and not all phases are selected
@@ -1356,16 +1256,13 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       // if (this.selectedPhases.length === this.phaseOptions.length) {
       //   this.selectedPhases.push('all');
       // }
-      console.log('God selected phases', this.selectedPhases);
-      console.log(
-        'God selected phase numbers',
-        this.selectedPhases.map((name) => parseInt(name.charAt(0)))
-      );
+
+
       if (!this.isContiguous(this.selectedPhases)) {
         this.selectedPhases = this.selectedPhases.filter(
           (id) => id !== phaseId
         );
-        console.log('God selected phases new', this.selectedPhases);
+
       }
       this.updatePlot();
     }
@@ -1385,7 +1282,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       this.selectedIons = [];
       this.selectedCompounds = [];
     }
-    console.log('God selected category', this.category);
+
     this.updatePlot();
   }
 
@@ -1399,21 +1296,21 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         this.selectedIons.splice(index, 1);
       }
     }
-    console.log('God selected ions', this.selectedIons);
+
     this.updatePlot();
   }
 
   deselectAllCompounds(): void {
     this.selectedCompounds = [];
 
-    console.log('God deselected all compounds', this.selectedCompounds);
+
     //this.updatePlot();
   }
 
   deselectAllIons(): void {
     this.selectedIons = [];
 
-    console.log('God deselected all ions', this.selectedIons);
+
     this.updatePlot();
   }
 
@@ -1428,7 +1325,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         this.selectedCompounds.splice(index, 1);
       }
     }
-    console.log('God selected compounds', this.selectedCompounds);
+
     this.updatePlot();
   }
 
@@ -1471,7 +1368,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         },
       ];
 
-      console.log('God bar data', this.solution_volumes_data);
+
 
       this.solution_volumes_layout = {
         title: 'Solution Volumes',
@@ -1521,9 +1418,9 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
       ];
       let colorArray = [];
       for (let ion of Object.keys(solutionMixture.ion_concentrations)) {
-        //console.log("God ion ", ion)
+
         if (ion != 'H' && ion != 'OH') {
-          //console.log ("God came here", ion)
+
           xdata.push(ion);
           ydata.push(solutionMixture.ion_concentrations[ion]);
           colorArray.push(colors[colorArray.length % colors.length]);
@@ -1539,7 +1436,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         },
       ];
 
-      console.log('God ion data', this.ion_concs_data);
+      
 
       this.ion_concs_layout = {
         title: 'Ion Concentrations',
@@ -1598,7 +1495,7 @@ export class SolutionMixtureAnalysisComponent implements OnInit {
         },
       ];
 
-      console.log('God compound data', this.compound_concs_data);
+
 
       this.compound_concs_layout = {
         title: 'Compound Concentrations',

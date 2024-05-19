@@ -67,9 +67,9 @@ bufferSelectionValidator(): ValidatorFn {
       const selection2 = control.get('basicCompound')?.value;
       if (this.buffer_compound_names.length!=0) {
        isValid = this.buffer_compound_names.includes(selection1) || this.buffer_compound_names.includes(selection2);
-      //console.log("God: validator ", this.buffer_compound_names,isValid)
+
       }
-      //console.log("God: validator true ", this.buffer_compound_names,isValid)
+
   
       // Return error object or null based on validation result
       return isValid ? null : { 'invalidBufferSelection': true };
@@ -86,7 +86,7 @@ bufferSelectionValidator(): ValidatorFn {
     if(solution && solution.non_salt_compounds.length<=2) {
     let acidname = solution.non_salt_compounds[0].name;
     let basename = solution.non_salt_compounds[1].name;
-    //console.log("God in change", solution)
+
     let saltname:string="None";
     let saltconc =0;
     let acidconc = 0;
@@ -100,7 +100,7 @@ bufferSelectionValidator(): ValidatorFn {
     this.bufferForm.controls['basicConcentration'].setValue (baseconc);
 
     if(solution.salt_compound != null) {
-      //console.log("God here in salt", solution.compounds[2].name);
+
       saltname = solution.salt_compound.name;
       saltconc = solution.compound_concentrations[saltname];
       this.bufferForm.controls['saltCompound'].setValue(saltname);
@@ -144,13 +144,12 @@ bufferSelectionValidator(): ValidatorFn {
 
   onSubmit() {
     this.formSubmitted = true;
-    //console.log("god here", this.bufferForm);
+
     this.godSolution = new Solution("God solution");
     if (this.bufferForm.invalid) {
       return;
     }
-    //console.log("god here 2");
-    //console.log(this.bufferForm)
+
     const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
     const basicCompoundName = this.bufferForm.get('basicCompound').value;
     const saltCompoundName = this.bufferForm.get('saltCompound').value;

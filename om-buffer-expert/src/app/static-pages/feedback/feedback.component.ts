@@ -40,14 +40,14 @@ export class FeedbackComponent {
   countStar(star, field) {
     this.selectedValues[field] = star;
     this.feedbackForm.patchValue({[field]: star});
-    //console.log(`Star clicked: ${star} for ${field}`);
+
   }
 
   onSubmit() {
     // Process the collected data
     if (this.feedbackForm.valid) {
       const feedbackInformation = this.feedbackForm.value;
-      //console.log(feedbackInformation);
+
 
       this.apiService.sendFeedbackFormData(this.feedbackForm.value).subscribe(response => {}
       , error => {console.error(error);});

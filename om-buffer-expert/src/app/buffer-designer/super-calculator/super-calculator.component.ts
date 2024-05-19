@@ -42,7 +42,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
 
 
 
-    // console.log("God acid option 1",this.acidCompounds)
+
 
     this.acid_compound_names = this.solutionMixtureService.acidic_compounds;
     this.basic_compound_names = this.solutionMixtureService.basic_compounds;
@@ -270,10 +270,10 @@ this.bufferForm.updateValueAndValidity({onlySelf:false, emitEvent:true});
 
   }
 
-  console.log('Got here 2', data);
+
   this.solutionService.super_calculate_pH(data).subscribe({
   next: (response) => {
-    console.log('Response received:', response);
+
   },
   error: (error) => {
     console.error('Error:', error);
