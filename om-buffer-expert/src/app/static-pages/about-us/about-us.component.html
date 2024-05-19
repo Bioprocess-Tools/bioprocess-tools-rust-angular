@@ -1,5 +1,5 @@
 <mat-card class="about-container">
-    <mat-card-title ><h2 class="title">About Us</h2></mat-card-title>
+    <mat-card-title ><h2>About Us</h2></mat-card-title>
     <div class="intro">
       <p> Welcome to Expert Buffer Designer, the go-to-place for buffer design, today! </p>
       <p>Our vision is to revolutionize research by making advanced buffer calculations and design accessible to everyone across the globe. 
@@ -14,14 +14,16 @@
     </div>
   
     <h2>Meet the Team</h2>
-    <div class="card-container">
+    <mat-card class="card-container">
       
       <!-- Card for each team member -->
-      <div class="team-card" *ngFor="let member of teamMembers">
+      <mat-card class="team-card" *ngFor="let member of teamMembers">
+        
         <img [src]="member.image" alt="Photo of {{member.name}}" class="team-photo">
-        <h3>{{member.name}}</h3>
-        <H3 class="title">{{member.title}}</H3>
-        <p class="bio">{{member.bio}}</p>
-      </div>
-    </div>
+        <p class="mat-h2">{{member.name}}</p>
+        <p class="mat-body">{{member.title}}</p>
+        <p class="mat-body">{{member.bio}}</p>
+    
+      </mat-card>
+ 
   </mat-card>
