@@ -1,9 +1,9 @@
 .contact-form {
     display:flex;
     flex-direction: column;
-    //width:90%;
+    width:98%;
     margin: 0 auto;
-    height:91vh;
+    height:93vh;
     align-items: center;
     //background-color: aqua;
   }
@@ -11,12 +11,13 @@
   .contact_f {
     display:flex;
     flex-direction: column;
-    width:96%;
+    width:80%;
     min-width:150px;
     max-width:800px;
     gap:10px;
     padding:30px;
     background-color: #dee1e5;
+    box-shadow: inset 0 0 5px #000000;
   }
   .contact-form h2 {
     text-align: center;

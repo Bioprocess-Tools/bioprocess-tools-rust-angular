@@ -3,7 +3,7 @@
 .hero-container {
   width: 100%;
   display: grid;
-  grid-template-rows: 0.75fr 0.5fr 0.5fr 0.5fr 1fr;
+  grid-template-rows: 0.75fr 0.5fr 0.5fr 0.5fr 1.5fr;
 
   background-image: url("/assets/images/backom.png");
   background-size: cover;
@@ -79,8 +79,8 @@ font-weight: 800 ;
 .action-button {
   font-weight: 800;
   font-stretch: extra-expanded;
-  width: 40vw;
-  height:15vw !important;
+  width: 25vw;
+  height:10vh !important;
   align-self: center;
 
   //padding: 30px;
@@ -95,8 +95,8 @@ font-weight: 800 ;
     transform: scale(1.05); // This will slightly enlarge the button
   }
 @media (max-width: 450px) {
-  width: 70vw;
-  height: 10vw !important;
+  width: 60vw;
+  height: 10vh !important;
   font-size: large;
 
 }

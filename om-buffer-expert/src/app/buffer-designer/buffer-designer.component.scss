@@ -1,12 +1,9 @@
 @import "../../buffer_colors.scss";
-.main {
-  display: flex;
-  
-}
+
 
 //////////////////////////////////TWO PAGE LAYOUT////////////////////////////////////////////////////////////
 .content {
-  
+  width:100%;
   grid-area: content;
   padding-top: 0.5vh;
   padding-left: 0.5vw;
@@ -21,13 +18,28 @@
     "calculator"
     "summary";
 }
-
+mat-card {
+  box-shadow:none;
+}
 .calculator {
-  border: 2px solid $secondary-color;
+  width:100%;
+  //border: 2px solid $secondary-color;
   overflow-y: auto;
   padding: 5px;
   box-shadow:inset 0 0 5px black
 }
+
+.intro {
+  border-bottom:3px solid $border-color;
+  width:100%;
+}
+
+.mat-accordion {
+  width:100%;
+}
+.mat-expansion-panel {
+  width:100%;
+} 
 
 .intro-text-main {
   padding: 2px;
@@ -35,14 +47,14 @@
   box-shadow: none;
 }
 .intro-text {
-  // font-size: large;
+
     border: 1px solid $border-color;
   box-shadow: none;
   padding: 8px 10px;
   //margin:10px;
 }
 .small-title {
-  font-size: small;
+  //font-size: small;
   font-weight: 600;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -55,7 +67,7 @@
   padding: 0 8px;
   padding: 2px 2px;
   text-align: justify;
-  font-size: x-small;
+  //font-size: x-small;
 }
 
 .mat-headline-5 {
@@ -68,15 +80,18 @@
   padding: 5px;
 }
 
+  .navigate {
+    width: 100%;
+    justify-content:center;
+    //align-items: center;
+
+  }
 
 
 
 
 
 
-mat-card {
-  box-shadow: none;
-}
 
 :host ::ng-deep .mat-mdc-tab-links {
   justify-content: space-evenly !important;
@@ -89,8 +104,11 @@ gap:5px;
 
 a {
   //background-color: lightblue;
-  font-size: x-small;
+  font-size: large;
   font-weight: 900;
+  @media (max-width: 480px) {
+    font-size: medium;
+  }
 
 }
 .mdc-tab {
@@ -98,6 +116,7 @@ a {
   padding-left: 5px !important;
 }
 .thick {
+  width:100%;
   border-width: 5px;
 }
 
@@ -106,9 +125,11 @@ a {
 .example-stretched-tabs {
   width: 98%;
   margin: 5px;
+  
 }
 
 .summary {
+  width:100%;
   // min-width: 400px;
   overflow-y: auto;
   //max-height: 90vh;
@@ -128,7 +149,7 @@ a {
   padding-bottom: 10px;
   text-align: center;
   font-weight: 600;
-  font-size: 24px;
+ // font-size: 24px;
   //margin-top:20px;
   margin-bottom: 5px;
   color: $headtext-color;
@@ -166,7 +187,7 @@ a {
 @media (max-width: 480px) {
   .example-stretched-tabs {
     margin: 0px;
-    font-size: small;
+  //  font-size: small;
     width: 100%;
 
   }
@@ -178,7 +199,7 @@ a {
 
 
   .a {
-    font-size: small;
+   // font-size: small;
     padding: 0px;
   }
 
@@ -192,7 +213,7 @@ a {
   }
   .mat-mdc-tab-header {
     line-height: 12px;
-    font-size: 12px;
+   // font-size: 12px;
   }
 
   .mat-tab-label {
@@ -200,7 +221,7 @@ a {
     min-width: 20px !important;
   }
   .intro-text {
-    font-size: small;
+    //font-size: small;
     text-align: left;
     //padding: 10px 10px;
   }

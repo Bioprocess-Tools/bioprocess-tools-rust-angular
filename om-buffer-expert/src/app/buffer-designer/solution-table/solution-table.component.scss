@@ -1,16 +1,24 @@
 @import "src/buffer_colors.scss";
 
+
+
 .card-background {
-  
+  width:100%;
   color: black;
-  margin: 5px;
+  //margin: 5px;
   box-shadow: none;
+  background-color:transparent;
+  align-items:center;
+ // padding:5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  
 }
 
 ///////This is for the solutions scroll list///////////////
 .grid-container {
   display: grid;
-  background-color:rgb(217, 217, 219);
+  //background-color: whitesmoke;
   grid-auto-flow: column;
   //margin: 5px;
   overflow-x: auto;
@@ -18,11 +26,20 @@
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
   box-shadow:none;
-  //border-width: 3px;
-  //border-color: $border-color;
+  border-width: 3px;
+  background-color: $card-background-cream  ;
+  border:1px solid $border-color;
   gap: 5px;
-
+  padding:5px;
+  //padding:15px;
+  //height:calc(max-content + 10px);
   width:100%;
+
+
+  @media (max-width: 450px) {
+   
+    //height: 22vh;
+  }
 }
 
 .grid-item {
@@ -31,19 +48,17 @@
   justify-content: space-between;
   align-items: center;
   align-self:center;
-  height: 90%;
-  margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left:5px;
+  //height: 90%;
+
   scroll-snap-align: start;
   background-color: whitesmoke;
   color: black;
   //margin: 3px;
-  width: 30vw;
-
+  width: 250px;
+  padding:10px;
   //border: 1px solid $card-background-cream;
   @media (max-width: 450px) {
- width: 35vw;
+ width: 200px;
   }
 }
 .solution_num {
@@ -60,13 +75,17 @@
   }
 }
 .container {
-  border:2px solid $secondary-color;
+    width:100%;
+  //border:2px solid $secondary-color;
   margin-bottom:3px;
-  box-shadow:inset 0 0 5px black;
+  //box-shadow:inset 0 0 5px black;
+    padding-left:5px;
+  padding-right:5px;
+  gap:5px;
 }
 .bottom-line {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
   justify-content: right;
   width: 100%;
 }
@@ -75,29 +94,35 @@
   //background-color: rgb(19, 82, 4);
   //color:whitesmoke;
   align-self:center;
-  margin: 3px;
-  width:90%;
+  //margin: 3px;
+  width:100%;
   border-width: 5px;
   border-color: $border-color;
   border-radius:25px;
   box-shadow: inset 0 0 10px #000000;
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 }
 .heatmap {
-  border:2px solid $secondary-color;
+  //border:2px solid $secondary-color;
   box-shadow:inset 0 0 5px black;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding-bottom:30px;
   @media screen and (max-width: 450px) {
-    width:100%;
+    
   }
 }
 
 .heatmap_title {
-  margin-top:20px;
- margin-left:40px;
+ // font-size: large;
+padding-top:10px;
  font-weight: bold;
+  @media screen and (max-width: 450px) {
+    font-size: small;
+  }
 }
 .delete-button {
   color: rgb(183, 8, 8);
@@ -117,7 +142,7 @@
 }
 
 .solution_title {
-
+  font-size:large;
   margin-top: 5px;
   margin-bottom: 0px;
   align-self: flex-end;
@@ -127,15 +152,19 @@
   color: red;
 }
 .multi{
-  margin-left:15px;
-  font-size: xx-small;
+  //margin-left:5px;
+  //padding:5px;
+  font-size: x-small;
   text-align: center;
   //border:2px solid $accent-green;
   background-color: $secondary-color;
   color:white;
   border-radius: 20px;
-  width:60px;
-  align-content: middle;
+  //width: 80%;
+  @media (max-width: 450px) {
+    font-size: xx-small;
+    //width: 80%;
+  }
 }
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
@@ -148,6 +177,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .less-space {
+  font-size:normal;
   margin-bottom: 1px;
   margin-top: 3px;
 }
@@ -194,10 +224,7 @@
   margin-left: 15px;
 }
 
-mat-card-title {
-  margin-left: 8px;
-  font-size: medium;
-}
+
 .utext {
   color: black;
 }
@@ -245,17 +272,17 @@ background-color: whitesmoke;
 }
 
 .scroll-title {
-  font-size: small;
+  font-size: large;
 
-  margin: 10px;
+  //margin: 10px;
 
     @media screen and (max-width: 800px)
   {
-   font-size:small;
+   font-size:medium;
   }
   @media screen and (max-width: 450px)
   {
-   font-size:x-small;
+   font-size:medium;
   }
 }
 
@@ -275,7 +302,7 @@ background-color: whitesmoke;
   }
 
   .less-space {
-    font-size: xx-small;
+    font-size: small;
   }
   .compound-name {
     font-size: x-small;
@@ -296,9 +323,6 @@ background-color: whitesmoke;
   }
 
 
-  .grid-container {
-    grid-auto-columns: auto;
-  }
 
 
 
@@ -316,28 +340,68 @@ background-color: whitesmoke;
 //box-shadow:inset 0 0 15px black;
 border:1px solid rgb(217, 217, 219);
  // background-color:rgb(217, 217, 219);
-gap:2px;
+gap:5px;
+
 padding:5px;
-width:99%;
+width:100%;
 justify-content: space-evenly;
 overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
+
+  @media (max-width: 450px) {
+
+  }
 }
 .compound-card {
 background-color: whitesmoke;
-width:31vw;
-box-shadow:inset 0 0 5px rgb(172, 171, 171);
-border:1px solid  rgb(217, 217, 219);
+
+width:25vw;
+
+  align-self:center;
+justify-self: center;
+//box-shadow:inset 0 0 5px rgb(172, 171, 171);
+border-width: 2px;
 padding:5px;
+
+@media (max-width: 1500px) {
+   width: 290px;
+}
 @media (max-width: 450px) {
-  width: 50vw;
+  width: 270px;
+}
+@media (max-width: 300px) {
+  width: 250px;
+  
+}
+
+}
+.compound-concs span {
+  position:absolute;
+  right: 20px;
+  display:inline-block;
+  width: calc(100% - 20px);
+  text-align:right;
+ // padding-right: 10px;
+}
+.compound-mw span {
+  position:absolute;
+  right: 20px;
+  display:inline-block;
+  width: calc(100% - 20px);
+  text-align:right;
+}
+.ions-info span {
+  position:absolute;
+  right: 20px;
+  display:inline-block;
+  width: calc(100% - 20px);
+  text-align:right;
 }
 
 
-}
 .compound_name {
-    font-size: x-small;
+    font-size: large;
     font-weight: bold;
     margin: 0px;
     margin-left: 3px;
@@ -345,36 +409,52 @@ padding:5px;
       box-sizing:border-box;
       width:100%;
        // color:whitesmoke;
-  
+  height:60px;
     @media (max-width: 450px) {
-      font-size: xx-small;
-      font-weight: bold;
+      font-size:small;
+      height:30px;
     }
 }
 .compound-mw {
-  font-size: xx-small;
+  font-size: medium;
   //font-weight: bold;
   padding: 0px;
   margin:0px;
     box-sizing:border-box;
     width:100%;
+    border-bottom:0.5px solid $border-color;
+
+      @media (max-width: 450px) {
+      font-size:small;
+      
+    }
 }
 .compound-concs {
-  font-size: xx-small;
+  font-size: medium;
   //font-weight: bold;
   padding: 0px;
     margin:0px;
       box-sizing:border-box;
       width:100%;
+      border-bottom:0.5px solid $border-color;
+      @media (max-width: 450px) {
+      font-size:small;
+      
+    }
 }
 
 .ions-info {
-    font-size: xx-small;
+    font-size: medium;
   //font-weight: bold;
   padding: 0px;
     margin:0px;
       box-sizing:border-box;
       width:100%;
+      border-bottom:0.5px solid $border-color;
+      @media (max-width: 450px) {
+      font-size:small;
+      
+    }
 }
 
 /////////////////ION CARDS/////////////////////
@@ -385,34 +465,44 @@ padding:5px;
   display: grid;
   grid-auto-flow: column;
 box-shadow:none;
-border:1px solid $card-background-cream;
+border-width:2px;
   background-color:rgb(217, 217, 219);
 //background-color:  #018786;
-margin-top:5px;
-margin-bottom:5px;
+
 gap:2px;
 padding:5px;
-width:99%;
+
+width:100%;
 justify-content: space-evenly;
 align-items: center;
 overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
+  @media (max-width: 450px) {
+   // height: 20vh;
+  }
 }
 
 .ion-card-instance {
 background-color: whitesmoke;
-width:31vw;
-border:1px solid $card-background-cream;
+width:30vw;
+border-width:2px;
 align-self:center;
-//margin-left:5px;
-//margin-right:5px;
+justify-self:center;
+
 padding:3px;
 //margin-top:1px;
 //margin-bottom:1px;
 //box-shadow:none;
+@media (max-width: 1500px) {
+   width: 320px;
+}
 @media (max-width: 450px) {
-  width: 50vw;
+  width: 300px;
+}
+@media (max-width: 300px) {
+  width: 250px;
+  
 }
 }
 //padding:5px;
@@ -421,7 +511,7 @@ padding:3px;
 .species-grid-container {
   display: grid;
   width:100%;
-  grid-template-columns: 50px 1fr 1fr 1fr 1fr;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr;
   gap:1px;
   padding:0px;
   margin-top:2px;
@@ -433,7 +523,7 @@ padding:3px;
   }
 
   @media screen and (max-width: 450px) {
-    grid-template-columns: 40px  1fr 1fr 1fr 1fr;
+    grid-template-columns: 50px  1fr 1fr 1fr 1fr;
     
   }
 }
@@ -441,7 +531,7 @@ padding:3px;
 .pka-grid-container {
   display: grid;
   width:100%;
-  grid-template-columns: 50px 1fr 1fr 1fr;
+  grid-template-columns: 60px 1fr 1fr 1fr;
   gap:1px;
   & > div {
     text-align: center;
@@ -451,7 +541,7 @@ padding:3px;
   }
 
   @media screen and (max-width: 450px) {
-    grid-template-columns: 40px 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 1fr;
     
   }
 }
@@ -459,7 +549,7 @@ padding:3px;
 .conc-grid-container {
   display: grid;
   width:100%;
-  grid-template-columns: 50px 1fr ;
+  grid-template-columns: 60px 1fr ;
   margin-top:2px;
   & > div {
     text-align: center;
@@ -469,7 +559,7 @@ padding:3px;
   }
 
   @media screen and (max-width: 450px) {
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 50px 1fr;
     
   }
 }
@@ -480,135 +570,50 @@ padding:3px;
 
 
 .ion_names-title {
-    font-size: x-small;
+    font-size: large;
     font-weight: bold;
     margin: 0px;
     margin-left: 3px;
+    @media (max-width: 450px) {
+      font-size:small;
+      
+    }
   }
 .pka-names {
-    font-size: xx-small;
+    font-size: medium;
     margin: 0px;
     width:100%;
     //margin-left: 3px;
+    @media (max-width: 450px) {
+      font-size:small;
+      
+    }
   }
 
 .pka-names, .ion-names {
-  font-size:xx-small;
+  font-size:medium;
  border: 1px solid rgb(224, 222, 222);
   //padding: 5px;
   box-sizing:border-box;
+  @media (max-width: 450px) {
+      font-size:small;
+      
+    }
 }
 
 .pka-names-label, .ion-names-label {
-  font-size: xx-small;
+  font-size: medium;
   //font-weight: bold;
   padding: 0px;
   margin:0px;
+  @media (max-width: 450px) {
+      font-size:x-small;
+      
+    }
+  //border-bottom: 0.5px solid $border-color;
 }
 
 
 
 
 
-.grid-table {
-  display: grid;
-  grid-template-columns: auto auto ;
-  grid-gap: 2px;
-  align-items: center;
-}
-
-.header {
-  font-size:x-small;
-  font-weight: bold;
-  background-color: #f0f0f0;
-  padding: 8px;
-  text-align: center;
-}
-
-.cell {
-  font-size: x-small;
-  padding: 8px;
-  //border: 1px solid #ddd;
-  text-align: center;
-  //background-color: green;
-}
-.line_grid {
-
-  border: 1px solid #ddd;
-}
-
-// .compound_name {
-//  grid-column: span 2; /* Compound name spans across two rows */
-//  grid-row: 1 / span 2; 
-//  //height:65px;
-// }
-
-
-.conc_molar {
-  grid-column: 2; /* Concentration spans across the sixth column */
-//grid-row: span 2; 
-//height:65px;
-text-align: center;
-
-}
-
-
-.ion_name {
-  //grid-column: 3; /* Ion name spans across the first four columns */
-  //height:25px;
-}
-.cell2 {
-  font-size:x-small;
-  padding:1px;
-}
-
-.ion-info {
-
-  grid-column: 2; /* Each ion spans across two columns (ions and ion concentrations) */
- 
- display:grid;
-  grid-template-columns: auto auto;
-  //height:25px;
-}
-
-.uion_name {
-  grid-column: 1; /* Ion name spans across the first four columns */
-  //height:100px;
-}
-
-.uion_total_conc {
-  grid-column: 2; /* Each ion spans across two columns (ions and ion concentrations) */
-  height:25px;
-}
-
-.uion_pka {
-  grid-column: 3; /* Each ion spans across two columns (ions and ion concentrations) */
-  //height:25px;
-}
-
-.uion-card {
-  display : grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: yellowgreen;
-}
-.uion_charge {
-  grid-column: 3; /* Each ion spans across two columns (ions and ion concentrations) */
-  height:25px;
-}
-.uion_conc {
-  grid-column: 4; /* Each ion spans across two columns (ions and ion concentrations) */
-  height:25px;
-}
-
-.grid-table2 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 2px;
-  align-items: center;
-}
-.grid-table3 {
-  display: grid;
-  grid-template-rows:auto;
-  grid-gap: 2px;
-  align-items: center;
-}

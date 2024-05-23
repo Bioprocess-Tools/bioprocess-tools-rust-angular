@@ -24,7 +24,7 @@ export class SolutionTableComponent
   imageUrl: string;
   example_solution: Solution;
   solutionSubscription?: Subscription;
-
+  config: {displayModeBar:false};
   ion_colors: string[] = [
     '#832c76',
     '#4F3F84',
@@ -203,6 +203,7 @@ export class SolutionTableComponent
     return false;
   }
   generateHeatMap() {
+    this.config = {displayModeBar:false};
     const defaultLayout = {
       font: {
         family: 'Lato, sans-serif',
@@ -210,14 +211,14 @@ export class SolutionTableComponent
     };
     let fontSize;
     if (window.innerWidth <= 480) {
-      fontSize = 8; // Small font size for small screens
+      fontSize = 10; // Small font size for small screens
     } else if (window.innerWidth <= 768) {
-      fontSize = 10; // Medium font size for medium screens
+      fontSize = 12; // Medium font size for medium screens
     } else {
-      fontSize = 12; // Large font size for large screens
+      fontSize = 14; // Large font size for large screens
     }
     let title_font = fontSize + 10;
-    let axis_font = fontSize + 2;
+    let axis_font = fontSize + 4;
 
     // Assuming you have a method to handle the heatmap generation
     let centerConcentrations =
@@ -278,6 +279,7 @@ export class SolutionTableComponent
     const yTickVals = yValues;
     const yTickText = yValues.map((val) => `${Math.round(val)}%`);
     this.layout = {
+      dragmode:false,
       autosize: true,
       width: window.innerWidth * 0.9,
       margin: {

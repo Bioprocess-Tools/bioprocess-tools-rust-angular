@@ -36,13 +36,13 @@
   <mat-card-content
     *ngFor="let compound of solution.compound_concentrations | keyvalue"
   >
-    <p class="less-space" mat-headline-1>
+    <p class="less-space mat-headline-5">
       {{ compound.key }} : {{ compound.value | number : "1.4-4" }}M
     </p>
     <mat-divider></mat-divider>
   </mat-card-content>
   <mat-card-content
-    ><p class="pH">
+    ><p class="pH mat-headline-5">
       pH : {{ solution.pH | number : "1.3-3" }}
     </p></mat-card-content
   >
@@ -55,12 +55,13 @@
   <mat-card class="compound-card" *ngFor="let compound of solution.compounds; let i = index" [ngStyle]="{'border-color': compound_colors[i % compound_colors.length]}">
     <p class="compound_name" [ngStyle]="{'color': compound_colors[i % compound_colors.length]}">{{compound.name}}</p>
     <mat-card-content  class="ion-card-content">
-      <p class="compound-mw">MW: {{compound.molecular_weight}}</p>
-      <p class="compound-concs">Conc:  {{ solution.compound_concentrations[compound.name] | number: '1.4-4' }}M ({{ (solution.compound_concentrations[compound.name] * compound.molecular_weight) | number: '1.3-3' }} g/L)</p>
+      <p class="compound-mw">MW: <span>{{compound.molecular_weight}}</span></p>
+      <p class="compound-concs">Conc: <span>{{ solution.compound_concentrations[compound.name] | number: '1.4-4' }} M</span> </p>
+       <p class="compound-concs"> Conc:  <span>{{ (solution.compound_concentrations[compound.name] * compound.molecular_weight) | number: '1.3-3' }} g/L </span></p>
       <p class="ions-info">
-  {{ compound.ions[0].name}} ({{ getIonConcentration(compound, 0) | number: '1.3-3' }}M)
+  {{ compound.ions[0].name}} ion:<span>{{ getIonConcentration(compound, 0) | number: '1.3-3' }} M</span>
   <ng-container *ngIf="compound.ions[1]">
-    <br> {{ compound.ions[1].name}} ({{ getIonConcentration(compound, 1) | number: '1.3-3' }}M)
+    <br> {{ compound.ions[1].name}} ion: <span>{{ getIonConcentration(compound, 1) | number: '1.3-3' }} M</span>
   </ng-container>
 </p>
     </mat-card-content>
@@ -89,10 +90,10 @@
       </mat-card-content>
   </mat-card>
 </mat-card>
-</mat-card>
+
 <mat-card  class="heatmap" *ngIf="selectedSolution && getKeys(selectedSolution)" >
   <mat-card-title class="heatmap_title mat-headline-5">Compositional Variability Heatmap</mat-card-title>
-  <plotly-plot [data]="trace" [layout]="layout"></plotly-plot>
+  <plotly-plot [data]="trace" [layout]="layout" [config] = "config"></plotly-plot>
   
 </mat-card>
-
+</mat-card>
