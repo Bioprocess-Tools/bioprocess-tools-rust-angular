@@ -27,7 +27,7 @@ $custom-typography: mat.define-typography-config(
 
 @include mat.core();
 
-$my-primary: mat.define-palette(mat.$green-palette, 500);
+$my-primary: mat.define-palette(mat.$blue-palette, 900);
 $my-accent: mat.define-palette(mat.$indigo-palette, 500);
 
 $buffer-theme: mat.define-light-theme((
@@ -38,6 +38,13 @@ $buffer-theme: mat.define-light-theme((
  typography: $custom-typography
 ));
 
+$buffer-dark-theme: mat-dark-theme((
+  color: (
+    primary: mat-palette($mat-indigo),
+    accent: mat-palette($mat-pink, A200, A100, A400),
+    warn: mat-palette($mat-red),
+  ),
+));
 
 
 @include mat.all-component-themes($buffer-theme);

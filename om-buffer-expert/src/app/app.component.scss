@@ -1,4 +1,4 @@
-
+@import 'src/buffer_colors.scss';
 
 .main {
   display: grid;
@@ -10,19 +10,25 @@
   padding: 0px;
   box-shadow: none;
   background-color: #e3e2d9;
-
+   
 }
 
 .header {
   grid-area: header;
   width:100%;
   margin:1px;
+
 }
 
 .main-content {
+  position:fixed;
   grid-area: main-content;
   //padding-top: 5px;
-  width: 100%
+  width: 100%;
+  overflow-y: scroll;
+  height:100%;
+  background-color: $primary-color;
+ 
 }
 
 

@@ -208,6 +208,8 @@ export class SolutionTableComponent
       font: {
         family: 'Lato, sans-serif',
       },
+      plot_bgcolor: 'rgba(0,0,0,0)',
+      paper_bgcolor: 'rgba(0,0,0,0)',
     };
     let fontSize;
     if (window.innerWidth <= 480) {
@@ -284,7 +286,7 @@ export class SolutionTableComponent
       width: window.innerWidth * 0.9,
       margin: {
         l:
-          window.innerWidth < 800
+          window.innerWidth < 1300
             ? window.innerWidth * 0.15
             : window.innerWidth * 0.075, // Adjust left margin
         r: 20, // Reduce right margin
