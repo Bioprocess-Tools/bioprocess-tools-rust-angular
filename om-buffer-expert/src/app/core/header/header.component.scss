@@ -3,8 +3,11 @@
 
 
 .header-card {
-  width: 99.8%;
+  align-self:center;
+  width: 100%;
   box-shadow: none;
+//  margin:3px;
+//  margin-right:5px;
  
 }
 
@@ -17,6 +20,9 @@
 }
 .toolbar-row {
   
+}
+.header-toolbar {
+  background-color: $background-primary ;
 }
 .mat-headline-4 {
   

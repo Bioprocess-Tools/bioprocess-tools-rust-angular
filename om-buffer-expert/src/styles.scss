@@ -1,5 +1,6 @@
 
 @import 'src/shared-styles.scss';
+@import 'src/buffer_colors.scss';
 
 * {
   margin: 0;
@@ -13,8 +14,9 @@
     padding:0;
     width:100%;
   overflow: hidden;
-    background-color: lightblue;
+    background-color:transparent;
   }
+
 
 // html {
 //   box-sizing: border-box;

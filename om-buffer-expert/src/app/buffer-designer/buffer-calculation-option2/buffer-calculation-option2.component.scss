@@ -52,7 +52,7 @@
   margin-bottom: 8px;
 
   align-self: center;
-  background-color: whitesmoke;
+ // background-color: whitesmoke;
 
   box-shadow: none;
   @media (max-width: 550px) {
@@ -84,24 +84,7 @@
 
 padding-bottom: 15px;
 }
-// .rounded_input_om {
-//   //border: 2px solid $accent-green;
-//   border-radius: 15px;
-//   padding: 3px;
-//     font-size:small;
-//   @media (max-width: 550px) {
-//     font-size:x-small;
-//   }
 
-  /* Applies rounded corners to the input area */
-
-
-
-// ::ng-deep .mat-form-field-outline-start {
-//   border:2px solid $accent-green !important;
-//   border-radius: 20px 0 0 20px !important;
-//   min-width: 20px !important;
-// }
 
 .bold-label {
   font-size: medium;
@@ -119,26 +102,6 @@ padding-bottom: 15px;
   //background-color: yellow;
 }
 
-// ::ng-deep .mat-form-field-outline-end {
-//   border:2px solid $accent-green !important;
-//   border-radius: 0 25px 25px 0 !important;
-//   min-width: 15px !important;
-// }
-
-// /* Add padding to move the label and input into the center to prevent overlapping the rounded border */
-// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
-//   padding: 0 15px !important;
-//     border:2px solid $accent-green !important;
-// }
-
-// ::ng-deep .mat-form-field-underline {
-//   display: none !important;
-// }
-
-// ::ng-deep .mat-form-field-ripple {
-//   display: none !important;
-//    border:2px solid $accent-green !important;
-// }
 
 .solution-card {
   display: none;

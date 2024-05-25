@@ -1,38 +1,38 @@
-@import '../../../buffer_colors.scss';
+// @import '../../../buffer_colors.scss';
 
 
-:host{
+// :host{
 
-    grid-area: nav;
+//     grid-area: nav;
 
 
-}
+// }
 
-mat-card{
-    background-color: whitesmoke;
-    width:95%;
-    margin-left:0.6rem;
-    padding-bottom: 5px;
-}
+// mat-card{
+//     background-color: whitesmoke;
+//     width:95%;
+//     margin-left:0.6rem;
+//     padding-bottom: 5px;
+// }
 
-.nav-content {
-    display:flex;   
-    padding:2px;
-    flex-direction: row;
-    justify-content: flex-start;
-}
+// .nav-content {
+//     display:flex;   
+//     padding:2px;
+//     flex-direction: row;
+//     justify-content: flex-start;
+// }
 
-.nav-button-cols {
-    padding-bottom: 2px;
-   // padding: 2px;
-   // margin:2px;
-}
+// .nav-button-cols {
+//     padding-bottom: 2px;
+//    // padding: 2px;
+//    // margin:2px;
+// }
 
-.men_button {
-   // width:90%;
-    font-size: xx-small;
-    background-color: lightgray;
-    margin-right:2px;
-    margin-top:4px;
-    margin-bottom: 0px;
-}
+// .men_button {
+//    // width:90%;
+//     font-size: xx-small;
+//     background-color: lightgray;
+//     margin-right:2px;
+//     margin-top:4px;
+//     margin-bottom: 0px;
+// }

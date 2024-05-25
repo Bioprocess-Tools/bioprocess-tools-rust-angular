@@ -15,13 +15,14 @@ $custom-typography: mat.define-typography-config(
   $headline-4: mat.define-typography-level(34px, 34px, 400),
   $headline-5: mat.define-typography-level(24px, 24px, 400),
   $headline-6: mat.define-typography-level(20px, 20px, 500),
-  $subtitle-1: mat.define-typography-level(16px, 16px, 400),
+  $subtitle-1: mat.define-typography-level(16px, 16px, 400 ),
   $subtitle-2: mat.define-typography-level(14px, 14px, 500),
   $body-1: mat.define-typography-level(16px, 24px, 400),
   $body-2: mat.define-typography-level(14px, 20px, 400),
   $button: mat.define-typography-level(14px, 14px, 500),
   $caption: mat.define-typography-level(12px, 20px, 400),
   $overline: mat.define-typography-level(10px, 10px, 500),
+
 
 );
 
@@ -41,12 +42,15 @@ $buffer-theme: mat.define-light-theme((
 $buffer-dark-theme: mat-dark-theme((
   color: (
     primary: mat-palette($mat-indigo),
-    accent: mat-palette($mat-pink, A200, A100, A400),
+    accent: mat-palette($my-accent, A200, A100, A400),
     warn: mat-palette($mat-red),
   ),
 ));
 
 
-@include mat.all-component-themes($buffer-theme);
+@include mat.all-component-themes($buffer-dark-theme);
 @include mat.typography-hierarchy($custom-typography);
 
+p, h1, h2, h3, h4, h5, h6, span, a {
+  color: whitesmoke;
+}

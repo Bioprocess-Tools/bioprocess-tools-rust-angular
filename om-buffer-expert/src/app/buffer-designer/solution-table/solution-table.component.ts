@@ -24,18 +24,40 @@ export class SolutionTableComponent
   imageUrl: string;
   example_solution: Solution;
   solutionSubscription?: Subscription;
-  config: {displayModeBar:false};
-  ion_colors: string[] = [
-    '#832c76',
-    '#4F3F84',
-    '#BB3630',
-    '#d0b285',
-    '#00a1d3',
-    '#929580',
-    '#3d5859',
-    '#769f52',
+  config: { displayModeBar: false };
+
+  ion_colors_old2 = [
+    '#00BCD4',
+    '#FFEB3B',
+    '#FF9800',
+    '#8BC34A',
+    '#E91E63',
+    '#2196F3',
+    '#9C27B0',
+    '#F44336',
   ];
-  compound_colors: string[] = [
+  ion_colors = [
+    '#03A9F4',
+    '#FFC107',
+    '#FF5722',
+    '#CDDC39',
+    '#673AB7',
+    '#009688',
+    '#3F51B5',
+    '#795548',
+  ];
+  compound_colors = [
+    '#00BCD4',
+    '#FFEB3B',
+    '#FF9800',
+    '#8BC34A',
+    '#E91E63',
+    '#2196F3',
+    '#9C27B0',
+    '#F44336',
+  ];
+  ion_colorsold: string[] = ['#832c76', '#929580', '#769f52'];
+  compound_colors_old: string[] = [
     '#3e94e5',
     '#c54b6c',
     '#37667e',
@@ -99,7 +121,6 @@ export class SolutionTableComponent
 
   ngOnChanges(changes: SimpleChanges): void {
     //this.generateHeatMap();
-
 
     if (changes['activeTab']) {
       if (changes['activeTab'].currentValue != 'super-calculator') {
@@ -184,7 +205,6 @@ export class SolutionTableComponent
           this.solution = this.selectedSolution;
 
           if (Object.keys(this.solution.heat_map_data).length > 0) {
-         
             this.generateHeatMap();
           }
         }
@@ -192,7 +212,6 @@ export class SolutionTableComponent
     });
 
     window.addEventListener('resize', () => {
-
       this.generateHeatMap();
     });
   }
@@ -203,17 +222,21 @@ export class SolutionTableComponent
     return false;
   }
   generateHeatMap() {
-    this.config = {displayModeBar:false};
+    const green_color = '#098109';
+    const orange_color = '#db8e1a';
+    const red_color = '#BB3630';
+    this.config = { displayModeBar: false };
     const defaultLayout = {
       font: {
         family: 'Lato, sans-serif',
+        color: 'rgb(199, 190, 190)',
       },
       plot_bgcolor: 'rgba(0,0,0,0)',
       paper_bgcolor: 'rgba(0,0,0,0)',
     };
     let fontSize;
     if (window.innerWidth <= 480) {
-      fontSize = 10; // Small font size for small screens
+      fontSize = 8; // Small font size for small screens
     } else if (window.innerWidth <= 768) {
       fontSize = 12; // Medium font size for medium screens
     } else {
@@ -228,7 +251,6 @@ export class SolutionTableComponent
 
     // Assuming centerConcentrations is an array of objects like [{name: 'compound1', value: 0.95}, {name: 'compound2', value: 1.0}]
     let compoundNames = Object.keys(centerConcentrations);
-
 
     let dataPoints = this.solution.heat_map_data['data_points'];
     // const dataPoints = [
@@ -253,12 +275,12 @@ export class SolutionTableComponent
         z: zValues,
         type: 'heatmap',
         colorscale: [
-          [0.0, '#B1C381'],
-          [0.33, '#B1C381'],
-          [0.330001, '#EEC759'],
-          [0.66, '#EEC759'],
-          [0.66001, '#FF8080'],
-          [1, '#FF8080'],
+          [0.0, green_color],
+          [0.33, green_color],
+          [0.330001, orange_color],
+          [0.66, orange_color],
+          [0.66001, red_color],
+          [1, red_color],
         ],
         zmin: 0,
         zmax: maxZValue,
@@ -281,9 +303,9 @@ export class SolutionTableComponent
     const yTickVals = yValues;
     const yTickText = yValues.map((val) => `${Math.round(val)}%`);
     this.layout = {
-      dragmode:false,
+      dragmode: false,
       autosize: true,
-      width: window.innerWidth * 0.9,
+      width: window.innerWidth * 0.8,
       margin: {
         l:
           window.innerWidth < 1300
@@ -338,7 +360,6 @@ export class SolutionTableComponent
             //family: 'Lato, sans-serif',
 
             size: axis_font,
-            color: 'black',
           },
         },
         tickvals: xTickVals,
@@ -346,7 +367,6 @@ export class SolutionTableComponent
         tickfont: {
           //family: 'Lato,sans-serif',
           size: fontSize,
-          color: 'black',
         },
       },
       yaxis: {
@@ -355,7 +375,6 @@ export class SolutionTableComponent
           standoff: 0,
           font: {
             size: axis_font,
-            color: 'black',
           },
         },
 
@@ -364,7 +383,6 @@ export class SolutionTableComponent
         tickfont: {
           //family: 'Lato, sans-serif',
           size: fontSize,
-          color: 'black',
         },
       },
       shapes: [], // add this line to initialize the shapes array
@@ -378,7 +396,7 @@ export class SolutionTableComponent
         x1: i,
         y1: i,
         line: {
-          color: 'rgb(159, 159, 159)',
+          color: 'white',
           width: 1,
         },
       });
@@ -393,7 +411,7 @@ export class SolutionTableComponent
         x1: 0.45, // Middle of the shape is at 0.4 (0.4 + 0.05)
         y0: 1.1,
         y1: 1.15, // Positioned at the top with 5% thickness of the plot area
-        fillcolor: '#B1C381',
+        fillcolor: green_color,
         line: { width: 0 },
       },
       {
@@ -404,7 +422,7 @@ export class SolutionTableComponent
         x1: 0.55, // Middle of the shape is at 0.5 (0.5 + 0.05)
         y0: 1.1,
         y1: 1.15,
-        fillcolor: '#EEC759',
+        fillcolor: orange_color,
         line: { width: 0 },
       },
       {
@@ -415,7 +433,7 @@ export class SolutionTableComponent
         x1: 0.65, // Middle of the shape is at 0.6 (0.6 + 0.05)
         y0: 1.1,
         y1: 1.15,
-        fillcolor: '#FF8080',
+        fillcolor: red_color,
         line: { width: 0 },
       }
     );
@@ -435,7 +453,5 @@ export class SolutionTableComponent
         },
       });
     });
-
-
   }
 }
