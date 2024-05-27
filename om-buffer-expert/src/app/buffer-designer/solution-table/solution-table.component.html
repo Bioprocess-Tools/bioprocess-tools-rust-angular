@@ -30,6 +30,53 @@
 </mat-card>
 
 <mat-card class="solution_summary" *ngIf="solution">
+  <mat-card-header class="solution_title">
+    <h4 >{{ solution.name }}</h4>
+  </mat-card-header>
+  <mat-card-content class="solution-content">
+    <div class="compound-summary-grid" *ngFor="let compound of solution.compound_concentrations | keyvalue">
+      <div class="summary-grid-label">{{ compound.key }}</div>
+      <div class="summary-grid-value">{{ compound.value | number: "1.4-4" }}M</div>
+
+    </div>
+    <div class="compound-summary-grid-pH">
+
+      <!-- <div class="summary-grid-label pH-label">
+        
+        <span class="pH_label_only">pH</span>
+
+        </div> -->
+      <div class="summary-grid-label pH-label">
+        <span class="pH_label_only">pH</span>
+      </div>
+
+      <div class="summary-grid-value pH-value">
+        <span class="pH_value_only">{{ solution.pH | number: "1.3-3" }}</span>
+      </div>
+
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<mat-card class="solution_summary" *ngIf="solution">
   <mat-card-header>
     <h4 class="solution_title">{{ solution.name }}</h4>
   </mat-card-header>
@@ -46,12 +93,59 @@
       pH : {{ solution.pH | number : "1.3-3" }}
     </p></mat-card-content
   >
-</mat-card>
+</mat-card> -->
 
 
 
 <mat-card class="compound-card-background">
-<mat-card *ngIf="solution" class = "compound-cards">
+<mat-card *ngIf="solution" class="compound-cards">
+  <mat-card 
+    class="compound-card" 
+    *ngFor="let compound of solution.compounds; let i = index" 
+    
+  >
+    <!-- <p class="compound_name" [ngStyle]="{'color': compound_colors[i % compound_colors.length]}">
+      {{compound.name}}
+    </p> -->
+    <p class="compound_name">
+      {{compound.name}}
+    </p>
+
+
+    <mat-card-content class="ion-card-content">
+      <div class="compound-grid">
+        <div class="grid-label">MW:</div>
+        <div class="grid-value">{{compound.molecular_weight}}</div>
+        <div class="grid-label">Conc:</div>
+        <div class="grid-value">{{ solution.compound_concentrations[compound.name] | number: '1.4-4' }} M</div>
+        <div class="grid-label">Conc:</div>
+        <div class="grid-value">{{ (solution.compound_concentrations[compound.name] * compound.molecular_weight) | number: '1.3-3' }} g/L</div>
+        <div class="grid-label">{{ compound.ions[0].name }} ion:</div>
+        <div class="grid-value">{{ getIonConcentration(compound, 0) | number: '1.3-3' }} M</div>
+        <ng-container *ngIf="compound.ions[1]">
+          <div class="grid-label">{{ compound.ions[1].name }} ion:</div>
+          <div class="grid-value">{{ getIonConcentration(compound, 1) | number: '1.3-3' }} M</div>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card *ngIf="solution" class = "compound-cards">
   <mat-card class="compound-card" *ngFor="let compound of solution.compounds; let i = index" [ngStyle]="{'border-color': compound_colors[i % compound_colors.length]}">
     <p class="compound_name" [ngStyle]="{'color': compound_colors[i % compound_colors.length]}">{{compound.name}}</p>
     <mat-card-content  class="ion-card-content">
@@ -66,12 +160,14 @@
 </p>
     </mat-card-content>
   </mat-card>
-</mat-card>
+</mat-card> -->
 </mat-card>
 <mat-card class="ion-card-background">
 <mat-card *ngIf="solution" class = "ion-cards">
-  <mat-card class="ion-card-instance" *ngFor="let uion of solution.unique_ions; let i=index" [ngStyle]="{'border-color': ion_colors[i % ion_colors.length]}">
-    <p class="ion_names-title" [ngStyle]="{'color': ion_colors[i % ion_colors.length]}">{{uion.name}}</p>
+ <!--  <mat-card class="ion-card-instance" *ngFor="let uion of solution.unique_ions; let i=index" [ngStyle]="{'border-color': ion_colors[i % ion_colors.length]}">
+    <p class="ion_names-title" [ngStyle]="{'color': ion_colors[i % ion_colors.length]}">{{uion.name}}</p> -->
+<mat-card class="ion-card-instance" *ngFor="let uion of solution.unique_ions; let i=index" >
+      <p class="ion_names-title">{{uion.name}}</p> 
     <mat-card-content class="ion-card-content">
      
       <div class="pka-grid-container">

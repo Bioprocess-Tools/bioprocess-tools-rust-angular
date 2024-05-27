@@ -225,6 +225,7 @@ export class SolutionTableComponent
     const green_color = '#098109';
     const orange_color = '#db8e1a';
     const red_color = '#BB3630';
+    const gray_color = '#b0b7c1';
     this.config = { displayModeBar: false };
     const defaultLayout = {
       font: {
@@ -274,6 +275,7 @@ export class SolutionTableComponent
         y: yValues,
         z: zValues,
         type: 'heatmap',
+        hovertemplate: `${compoundNames[0]}: %{x}<br>${compoundNames[1]}: %{y}<br>pH: %{z}<extra></extra>`,
         colorscale: [
           [0.0, green_color],
           [0.33, green_color],
@@ -396,7 +398,7 @@ export class SolutionTableComponent
         x1: i,
         y1: i,
         line: {
-          color: 'white',
+          color: gray_color,
           width: 1,
         },
       });

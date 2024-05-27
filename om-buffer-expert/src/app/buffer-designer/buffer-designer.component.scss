@@ -107,11 +107,17 @@ gap:5px;
   white-space:nowrap !important;
 }
 
+:host ::ng-deep .mat-mdc-tab-link:hover {
+  color:rgb(145, 10, 10) !important;
+  //background-color: darken(rgb(123, 123, 123), 20%); // replace with your color
+}
 
 
 a {
-  //background-color: lightblue;
-  font-size: small;
+ 
+  //background-color: $border-color;
+  border-radius:10px;
+  font-size: large;
   font-weight: 900;
   @media (max-width: 480px) {
     font-size: xx-small;
@@ -127,7 +133,11 @@ a {
   border-width: 5px;
 }
 
+:host ::ng-deep .mat-mdc-tab-link.mdc-tab--active .mdc-tab__text-label {
+  color: whitesmoke !important;
+  font-weight: 800;
 
+}
 
 .example-stretched-tabs {
   width: 98%;

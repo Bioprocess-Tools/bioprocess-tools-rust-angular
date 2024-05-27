@@ -1,4 +1,18 @@
 @use '@angular/material' as mat;
+@import 'src/shared-styles.scss';
+
+ $dark-background: mat.get-color-from-palette($medium-gray-palette,800);
+
+
+
+
+
+
+
+
+
+
+
 $primary-color: whitesmoke;
 $secondary-color:#202A44;
 $background-color:whitesmoke;
@@ -14,11 +28,14 @@ $divider-green:  mat.get-color-from-palette(mat.$green-palette,900);
 $accent-green:  mat.get-color-from-palette(mat.$green-palette,500);
 $card-background-cream: #CFD8DC;
 $border-color: #b0b7c1;
-$accent-chip1: #086f66;
+//$accent-chip1: #086f66;
+
+$accent-chip1old:#166257;
+$accent-chip1: #00524e;
 $accent-chip2: #5d5e64;
 $accent-chip: #8d8e92;
 $dull-text-color:  #E0E0E0;
-$background-primary:$omtrybackground;
+$background-primary:$dark-background;
 $main-page-padding:10px;
 $main-border-color: #b0b7c1;
 $inset-shadow-color:rgba(124, 76, 9, 0.839);
@@ -31,3 +48,9 @@ $inset-shadow-color-white:rgba(143, 142, 139, 0.839);
   //border: 2px solid $main-border-color;
   box-shadow:inset 0 0 8px 2px $inset-shadow-color-white;
 }
+
+$omtest: #5b7579;
+$omtest2: #eee383;
+$omtest3: #007d56;
+$omtest4: #BC7640;
+$omtest5: #c2654c;
