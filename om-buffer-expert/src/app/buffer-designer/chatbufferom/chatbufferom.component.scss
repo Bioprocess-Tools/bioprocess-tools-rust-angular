@@ -7,7 +7,7 @@
   grid-template-areas: 
   "form-card"
   "solution-card";
- // background-color: whitesmoke;
+ 
   padding-top:10px;
   gap: 10px;
   margin-top:5px;
@@ -19,12 +19,12 @@
   font-size:small;
 }
 .red_flag {
-  color:red;
+  color:$red-error-color;
   margin-left:20px;
 }
 
 .green_flag {
-  color:rgb(18, 121, 7);
+  color:$green-success-color;
   margin:4px;
   margin-left:20px;
   padding:0px;
@@ -35,19 +35,18 @@
   display:flex;
   width:99%;
   align-self: center;
-  //margin-left: 5px;
+
   box-shadow: none;
-  //border-color:$card-background-cream;
-  //border-width: 1px;
+
 
 }
 .formf {display:flex;flex-direction: column;
-  //background-color:rgb(170, 15, 15);
+
 }
 
 .message-card{
 box-shadow:none;
-border: 1px solid $card-background-cream;
+border: 1px solid $gray-border-color;
   padding: 0px;
   width: 97%;
   align-self: center;
@@ -57,14 +56,13 @@ border: 1px solid $card-background-cream;
   display:flex;
   width:98%;
   margin-top:6px;
- // margin-left:10px;
+
   align-self: center;
   
 }
 
 :host ::ng-deep .input-field .mdc-text-field--outlined {
- // border:3px solid rgb(195, 203, 197);
-  //border-radius: 25px;
+
   --mdc-outlined-text-field-container-shape: 20px;
   --mdc-outlined-text-field-outline-width: 2px;
   --mdc-outlined-text-field-focus-outline-width: 4px;
@@ -74,7 +72,7 @@ border: 1px solid $card-background-cream;
  
   width:98%;
   margin-top:6px;
- // margin-left:10px;
+
   align-self: center;
   margin-bottom:10px;
 }
@@ -84,14 +82,14 @@ border: 1px solid $card-background-cream;
   margin-top:5px;
   margin-left:10px;
   margin-bottom: 10px;
-  //background-color: $my-viva-magenta;
+
   align-self: center;
 
 }
 
 .summary {
   width: 97%;
-  //background-color: whitesmoke;
+
   margin-left: 0.5vw;
   box-shadow: none;
  
@@ -101,25 +99,22 @@ border: 1px solid $card-background-cream;
   display:none;
   margin-top:0px;
   position:relative;
- // background-color: rgb(160, 57, 57);
+
   width:98%;
   align-self: center;
-  border-color: $primary-color;
+  border-color: $gray-border-color;
   border-width: 3px;
 }
 
 .solution-card-placeholder {
   position:relative;
- // background-color: rgb(248, 242, 247);
+
   width:98%;
   margin-left:5px;
   margin-bottom:5px;
 }
 
-mat-card img[mat-card-image] {
-  max-width: 100%;
-  height: auto;
-}
+
 
 .chatin {
   font-size: small;
@@ -130,19 +125,7 @@ align-self: center;
 padding-bottom:5px;
 
 }
-.avatar {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  color: #fff;
-  background: #ba4069;
-  font-size: 24px;
-  line-height: 50px;
-  text-align: center;
-}
+
 
 
 @media (max-width: 1500px) {
@@ -157,7 +140,7 @@ padding-bottom:5px;
 
   .summary {
     width: 97%;
-   // background-color: whitesmoke;
+
     margin-left: 1vw;
    
   }
@@ -165,7 +148,7 @@ padding-bottom:5px;
   .solution-card{
     margin-top:30px;
     position:relative;
-    //background-color: whitesmoke;
+
     width:97%;
     align-self: center;
   }

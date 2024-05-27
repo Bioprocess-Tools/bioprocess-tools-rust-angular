@@ -24,8 +24,7 @@
   grid-template-rows: 1fr;
   grid-template-areas: "col1" "col2";
   width: 98%;
-  border-color: $primary-color;
-  border-width: 3px;
+
   margin-left: 0.5vw;
   padding: 5px;
   align-items: center;
@@ -33,7 +32,7 @@
   box-shadow: none;
 }
 .red-text {
-  color: red;
+  color: $red-error-color;
 }
 .option1-full-width_Left {
   width: 98%;
@@ -69,14 +68,14 @@
   display: none;
   margin-top: 5px;
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: $gray-border-color;
   width: 99%;
   align-self: center;
 }
 
 .example-card-holder {
   position: relative;
-  background-color: rgb(248, 242, 247);
+  background-color:$primary-background-color;
   width: 98%;
   margin-left: 5px;
   margin-bottom: 5px;
@@ -89,17 +88,17 @@
   margin-bottom: 1px;
 }
 .red_flag {
-  color: red;
+  color:$red-error-color;
   margin-left: 20px;
 }
 .green_flag {
-  color: rgb(18, 121, 7);
+  color:$green-success-color;
   margin-left: 20px;
 }
 
 .message-card {
 box-shadow:none;
-border: 1px solid $card-background-cream;
+border: 1px solid $gray-border-color;
 padding:3px;
   width: 99%;
   align-self: center;
@@ -120,16 +119,15 @@ padding:3px;
 
   .calculator {
     display: grid;
-    border-color: $primary-color;
-    border-width: 3px;
+
     grid-template-columns: 1.25fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "col1" "col2";
 
     width: 100%;
-    //background-color: whitesmoke;
+
     margin-left: 0.5vw;
-    //gap:1em;
+
     padding: 5px;
     align-items: center;
     justify-items: center;
@@ -139,7 +137,7 @@ padding:3px;
     grid-column: span 2;
     width: 90%;
     margin-left: 5vw;
-    //background-color: $background-green;
+
   }
 }
 

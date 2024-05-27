@@ -43,7 +43,7 @@
   }
 }
 .red-text {
-  color: red;
+  color: $red-error-color;
 }
 .autocomplete_input {
   display: flex;
@@ -52,7 +52,7 @@
   margin-bottom: 8px;
 
   align-self: center;
- // background-color: whitesmoke;
+
 
   box-shadow: none;
   @media (max-width: 550px) {
@@ -99,7 +99,7 @@ padding-bottom: 15px;
   --mdc-outlined-text-field-container-shape: 20px;
   --mdc-outlined-text-field-outline-width: 2px;
   --mdc-outlined-text-field-focus-outline-width: 4px;
-  //background-color: yellow;
+
 }
 
 
@@ -107,7 +107,7 @@ padding-bottom: 15px;
   display: none;
   margin-top: 5px;
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: $gray-border-color;
   width: 99%;
   align-self: center;
   box-shadow: none;
@@ -115,7 +115,7 @@ padding-bottom: 15px;
 
 .example-card-holder {
   position: relative;
-  background-color: rgb(248, 242, 247);
+  border-color: $gray-border-color;
   width: 98%;
   margin-left: 5px;
   margin-bottom: 5px;
@@ -132,14 +132,14 @@ padding-bottom: 15px;
   margin-bottom: 1px;
 }
 .red_flag {
-  color: red;
+  color:$red-error-color;
   margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .green_flag {
-  color: rgb(18, 121, 7);
+  color: $green-success-color;
   margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -147,7 +147,7 @@ padding-bottom: 15px;
 
 .message-card {
 box-shadow:none;
-border: 1px solid $card-background-cream;
+border: 1px solid $gray-border-color;
   padding: 0px;
   width: 99%;
   align-self: center;
