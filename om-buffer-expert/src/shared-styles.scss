@@ -107,35 +107,35 @@ $charcoal-palette: mat.define-palette((
 
 
 $dark-terra-cotta-palette: mat.define-palette((
-  50: #fde9e5,
-  100: #fbd2cb,
-  200: #f6a89b,
-  300: #f27f6b,
-  400: #ec5c4b,
-  500: #bf5745,
-  600: #b05140,
-  700: #9e4938,
-  800: #8c4131,
-  900: #6e3124,
-  A100: #f6a89b,
-  A200: #ec5c4b,
-  A400: #bf5745,
-  A700: #6e3124,
-  contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #ffffff,
-    400: #ffffff,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
-    A100: #000000,
-    A200: #000000,
-    A400: #ffffff,
-    A700: #ffffff,
+   50 : #f7ebe9,
+    100 : #eccdc7,
+    200 : #dfaba2,
+    300 : #d2897d,
+    400 : #c97061,
+    500 : #bf5745,
+    600 : #b94f3e,
+    700 : #b14636,
+    800 : #a93c2e,
+    900 : #9b2c1f,
+    A100 : #ffd9d5,
+    A200 : #ffaaa2,
+    A400 : #ff7c6f,
+    A700 : #ff6556,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
   )
 ));
 
@@ -357,5 +357,5 @@ $buffer-designer-dark-theme: mat.define-dark-theme((
 
 @include mat.all-component-themes($buffer-designer-dark-theme);
 
-@include mat.typography-hierarchy($buffer-designer-typography);
+// @include mat.typography-hierarchy($buffer-designer-typography);
 

@@ -21,13 +21,12 @@ gap:5px;
   
 
 }
-.pHbox {
- // background-color: red;
-}
+
 
 
 .adjust_pH_label {
   font-size:small;
+  color:$primary-text-color;
 }
 
 .super-calculator-col1 {
@@ -75,34 +74,28 @@ gap:10px;
 .super-button {
   font-size:large;
   font-weight:bold;
-  color:white;
+  color:$primary-text-color;
   width: 100%;
-  //background-color:#6a1b9a;
-   // background-color:#581386;
-    background-color:  #079de9;
-    background-color: #BF6443;
-    background-color: #bf5745;
+
+    background-color: $orange-background-color;
   padding: 3px;
-  //border-color: #E9C46A;
-  //border-color: #079de9;
-  //border-width:3px;
+
   border-radius: 25px;
   margin-bottom:5px;
 
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-    //background-color:#a14a3a;
-    background-color:#BF6443;
-    font-weight: 800;
-    color: black;
+
+    background-color: $darker-orange-background-color;
+
     
   }
 
 }
 
 .adjust_pH {
- // background-color: blue;
+
     align-self:center;
     margin-left: 16px;
 }

@@ -1,6 +1,6 @@
 
 @use '@angular/material' as mat;
-@import 'src/shared-styles.scss';
+
 @import 'src/buffer_colors.scss';
 
 * {
@@ -107,4 +107,9 @@ p, h1, h2, h3, h4, h5, h6, span, a {
 @mixin inset-border {
   //border: 2px solid $main-border-color;
   box-shadow:inset 0 0 8px 2px $gray-inset-shadow-color;
+}
+
+@mixin new-inset{
+  //border: 2px solid $main-border-color;
+  box-shadow:inset 0 0 8px 2px $dark-scrollbar-track-color;
 }

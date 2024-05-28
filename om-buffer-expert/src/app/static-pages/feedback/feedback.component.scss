@@ -1,9 +1,22 @@
-// /* other styles... */
-
+@import 'src/buffer_colors.scss';
+.feedback-card-container {
+  background-color: $darker-background-color;
+  @include inset-border;
+  display: flex;
+  text-align: center;
+  padding: 10px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  @media (max-width: 450px) {
+    padding: 10px;
+  }
+}
 .feedback-form {
   display:flex;
   flex-direction: column;
-  width:90%;
+  width:100%;
   margin: 0 auto;
   //height:91vh;
   align-items: center;
@@ -18,6 +31,7 @@
 
   .label_q {
     font-size: x-small;
+    color:$primary-text-color;
   }
 
 .feedback_f {
@@ -40,6 +54,7 @@
 
 .input_full_width {
   width:100%;
+  background-color: $darker-background-color  ;
 }
 
 

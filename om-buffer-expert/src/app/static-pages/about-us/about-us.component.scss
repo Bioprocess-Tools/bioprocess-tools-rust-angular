@@ -1,63 +1,77 @@
+@import "src/buffer_colors.scss";
+
 .about-container {
-    text-align: center;
+  display: flex;
+  background-color: $primary-background-color;
+  @include inset-border;
+  text-align: center;
+  padding: 20px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow-y: auto;
+  @media (max-width: 450px) {
     padding: 10px;
-    margin:5px;
-    height:90vh;
-    overflow-y: auto;
-    //background-color: #b33434;
-    
-    width:98%;
   }
 
-  .intro {
-    font-size:x-small;
-    padding:20px;
-    padding-top:10px;
-    margin: 10px 0;
-    line-height: 1.6;
-    text-align: justify;
-     box-shadow: inset 0 0 5px black;
-    @media (max-width: 300px) {
-     padding:10px;
-      margin: 0 auto;
+  .about-container-card {
+    padding: 15px;
+    background-color: $primary-background-color;
+    @media (max-width: 450px) {
+      padding: 10px;
+    }
+    .intro {
+      font-size: x-small;
+      padding: 20px;
+      padding-top: 10px;
+      margin: 10px 0;
+      line-height: 1.6;
+      text-align: justify;
+      .int-p {
+        border-bottom: 1px solid $pink-background-color;
+
+      }
+      @media (max-width: 450px) {
+        padding: 10px;
+        margin: 0 auto;
+      }
     }
   }
-  
-  .card-container {
+  .team-card-container {
+    background-color: $primary-background-color;
+    @include inset-border;
     display: flex;
-   flex-direction:row;
+    flex-direction: row;
     flex-wrap: wrap;
-     box-shadow: inset 0 0 5px black;
-     @media (max-width: 300px) {
-     flex-direction: column;
-     // flex-wrap: nowrap;
-  }
-}
-  
-  .team-card {
-    //background-color: #363434; /* Example background color */
-    box-shadow: inset 0 0 10px rgb(4, 1, 16);
-    border-radius: 20px;
-    
-    padding: 8px;
-    margin: 8px;
-    flex: 1 0 25%; /* Default to 30% width */
 
-     @media (max-width: 450px) {
-     flex: 1 0 90%; 
-      
-  }
+    @media (max-width: 450px) {
+      flex-direction: column;
+      // flex-wrap: nowrap;
+    }
+    .team-card {
+      background-color: $primary-background-color;
+      border: 5px solid $yellow-border-color;
+      border-radius: 20px;
 
-  }
-  
-  .team-photo {
-    border-radius: 50%;
-    width: 75px; /* Adjust as needed */
-    height: auto;
-    align-self:center;
-  }
+      padding: 8px;
+      margin: 8px;
+      flex: 1 0 25%; /* Default to 30% width */
 
-.mat-body {
-  padding:3px;
-  margin:0;
+      @media (max-width: 450px) {
+        flex: 1 0 90%;
+      }
+      .team-photo {
+        border: 3px solid $darker-background-color;
+        border-radius: 50%;
+        width: 75px; /* Adjust as needed */
+        height: auto;
+        align-self: center;
+      }
+      .mat-body {
+        padding: 3px;
+        margin: 0;
+      }
+    }
+  }
 }

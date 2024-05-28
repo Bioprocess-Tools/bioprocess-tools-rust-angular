@@ -10,6 +10,7 @@
     width: 100%;
 
     @include inset-border;
+
     background-color: $primary-background-color;
     align-items: center;
 
@@ -89,7 +90,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: $dull-text-color;
+            color: $primary-text-color;
             font-size: x-small;
             text-align: center;
             background-color: $primary-background-color;
@@ -126,7 +127,7 @@
   align-items: center;
   width: 80%;
   border-width: 5px;
-  border-color: $accent-chip1;
+  border-color: $teal-background-color;
   border-radius: 25px;
   box-shadow: inset 0px 0px 3px 2px $gray-inset-shadow-color;
   @media (max-width: 450px) {
@@ -135,7 +136,7 @@
   .solution_title {
     display: flex;
     font-size: large;
-    color: $dull-text-color;
+    color: $primary-text-color;
     //margin-top: 5px;
     margin-bottom: 10px;
     justify-content: center;
@@ -262,7 +263,7 @@
       padding-bottom: 5px;
       &.pH-value {
         justify-content: flex-start;
-        background-color: none;
+ 
         font-weight: bold;
         background-color: transparent;
         box-shadow: none;
@@ -319,7 +320,7 @@
       width: 25vw;
       align-self: center;
       justify-self: center;
-      border-color: #c54b6c;
+      border-color: $pink-background-color;
       border-width: 5px;
       border-radius: 20px;
       padding: 10px;
@@ -378,7 +379,7 @@
   width: 100%;
   background-color: $primary-background-color;
   @include inset-border;
-  //color:whitesmoke;
+
   align-self: center;
   //margin: 3px;
   padding: 10px;
@@ -409,8 +410,8 @@
       width: 30vw;
       border-width: 4px;
       border-radius: 20px;
-      //border-color: #297e9e;
-      border-color: #1ba1e2;
+
+      border-color:$blue-background-color;
       padding: 10px;
       //margin-top:1px;
       //margin-bottom:1px;
@@ -452,7 +453,7 @@
             grid-template-columns: 50px 1fr 1fr 1fr;
           }
           .pka-names-label {
-            color: $dull-text-color;
+            color: $primary-text-color;
             font-size: small;
             //font-weight: bold;
             padding: 0px;
@@ -460,18 +461,13 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-            //border-bottom: 0.5px solid $border-color;
+
           }
           .pka-names {
             margin: 0px;
             width: 100%;
-            color: $dull-text-color;
+            color: $primary-text-color;
             font-size: small;
-            //background-color:rgb(99, 97, 97);
-
-            //box-shadow: inset 0px 0px 3px 2px rgb(194, 192, 192);
-            //border-left: 1px solid $border-color;
-            //padding: 5px;
             border-radius: 5px;
             background-color: $gray-background-color;
             box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
@@ -509,17 +505,12 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-            //border-bottom: 0.5px solid $border-color;
+
           }
 
           .ion-names {
             color: $primary-text-color;
             font-size: small;
-            //background-color:rgb(99, 97, 97);
-
-            //box-shadow: inset 0px 0px 3px 2px rgb(194, 192, 192);
-            //border-left: 1px solid $border-color;
-            //padding: 5px;
             border-radius: 5px;
             background-color: $gray-background-color;
             box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
@@ -545,7 +536,7 @@
             grid-template-columns: 50px 1fr;
           }
           .conc-names-label {
-            color: $dull-text-color;
+            color: $primary-text-color;
             font-size: small;
             //font-weight: bold;
             padding: 0px;
@@ -553,18 +544,13 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-            //border-bottom: 0.5px solid $border-color;
+
           }
           .conc-names {
             margin: 0px;
             width: 100%;
             color: $primary-text-color;
             font-size: small;
-            //background-color:rgb(99, 97, 97);
-
-            //box-shadow: inset 0px 0px 3px 2px rgb(194, 192, 192);
-            //border-left: 1px solid $border-color;
-            //padding: 5px;
             border-radius: 5px;
             background-color: $gray-background-color;
             box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
@@ -585,19 +571,15 @@
   width: 100%;
   background-color: $primary-background-color;
   @include inset-border;
-  //color:whitesmoke;
+
   align-self: center;
   //margin: 3px;
   padding: 10px;
 
   .heatmap {
-    //border:2px solid $secondary-color;
-
-    //border:2px solid $secondary-color;
     align-items: center;
     justify-content: center;
     width: 100%;
-    //background-color: whitesmoke;
     padding-bottom: 13px;
 
     @media screen and (max-width: 450px) {

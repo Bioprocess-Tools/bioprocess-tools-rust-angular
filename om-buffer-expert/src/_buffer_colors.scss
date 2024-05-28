@@ -9,6 +9,7 @@ $darker-background-color: mat.get-color-from-palette($charcoal-palette,500);
 $lighter-background-color: mat.get-color-from-palette($medium-gray-palette,600);
 $teal-background-color: mat.get-color-from-palette($deep-teal-palette,500);
 $orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,500);
+$darker-orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,800);
 $pink-background-color: mat.get-color-from-palette($fandango-palette,500);
 $blue-background-color: mat.get-color-from-palette($cerulean-palette,500);
 $gray-inset-shadow-color:mat.get-color-from-palette($charcoal-palette,200);
@@ -18,9 +19,10 @@ $green-success-color: #127907;
 $yellow-border-color: mat.get-color-from-palette($warn-palette,300);
 $black-box-shadow-color: mat.get-color-from-palette($charcoal-palette,500);
 $gray-background-color: mat.get-color-from-palette($charcoal-palette,400);
-
-
-
+$lighter-teal-background-color: mat.get-color-from-palette($deep-teal-palette,300);
+$lighter-orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,300);
+$lighter-pink-background-color: mat.get-color-from-palette($fandango-palette,300);
+$lighter-text-color: mat.get-color-from-palette($whitesmoke-palette,400);
 
 
 

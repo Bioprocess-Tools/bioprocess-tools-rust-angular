@@ -1,20 +1,20 @@
 <mat-card class="about-container">
-    <mat-card-title ><h2>About Us</h2></mat-card-title>
+<mat-card class="about-container-card">
+    <mat-card-title ><h2 class="mat-headline-5">About Us</h2></mat-card-title>
     <div class="intro">
-      <p> Welcome to Expert Buffer Designer, the go-to-place for buffer design, today! </p>
-      <p>Our vision is to revolutionize research by making advanced buffer calculations and design accessible to everyone across the globe. 
-      Today, most of these tools are hidden in books and journal articles, severely hindering the ability for the average 
-      scientist or engineer to understand characterize and improve their processes.</p>
-      <p>Our mission is to provide a platform that enables scientists and engineers to design buffers with confidence,
+      <p class="int-p"> Welcome to Expert Buffer Designer, the go-to-place for buffer design, today! </p>
+      <p class="int-p">Our vision is to revolutionize research by making advanced buffer calculations and design accessible to everyone across the globe. 
+      </p>
+      <p class="int-p">Our mission is to provide a platform that enables scientists and engineers to design buffers with confidence,
       and to provide a community where they can share their knowledge and experience with others. </p>
-      <p>Our goal is to provide a comprehensive set of tools and resources that will enable you to design buffers for a wide range of 
+      <p class="int-p">Our goal is to provide a comprehensive set of tools and resources that will enable you to design buffers for a wide range of 
         applications,and we seek new applications and challenges to adapt our tools for it!</p>
     
-      <p>This website represents very hard work by a few passionate individuals! </p>
+      <p class="int-p">This website represents very hard work by a few passionate individuals! </p>
     </div>
   
-    <h2>Meet the Team</h2>
-    <mat-card class="card-container">
+    <h2 class="mat-headline-5">Meet the Team</h2>
+    <mat-card class="team-card-container">
       
       <!-- Card for each team member -->
       <mat-card class="team-card" *ngFor="let member of teamMembers">
@@ -27,3 +27,4 @@
       </mat-card>
  
   </mat-card>
+</mat-card>

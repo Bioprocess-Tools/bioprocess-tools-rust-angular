@@ -1,9 +1,10 @@
+<mat-card class="feedback-card-container">
 <mat-card class="feedback-form">
   <h4>Provide feedback: <em>It is important for us!</em></h4>
   <form [formGroup]="feedbackForm" class="feedback_f" (ngSubmit)="onSubmit()">
     <label class="label_q">What were the issues you faced with the user
       interface? What did you like?</label>
-    <mat-form-field appearance="fill" class="input_full_width">
+    <mat-form-field appearance="outline" class="input_full_width">
       <textarea matInput formControlName="userExperienceComments" rows="2" required></textarea>
       <mat-label>User experience feedback</mat-label>
     </mat-form-field>
@@ -21,7 +22,7 @@
     </div>
     <label class="label_q">What were the issues you had with the
       calculations or designer results ? What went well?</label>
-    <mat-form-field appearance="fill" class="input_full_width">
+    <mat-form-field appearance="outline" class="input_full_width">
       <textarea matInput formControlName="calculationConfidenceComments" rows="2" required></textarea>
       <mat-label>Calculation and Designer feedback</mat-label>
     </mat-form-field>
@@ -39,7 +40,7 @@
     </div>
     <label class="label_q">What were features that you would like to
       see added? Which features did you like?</label>
-    <mat-form-field appearance="fill" class="input_full_width">
+    <mat-form-field appearance="outline" class="input_full_width">
       <textarea matInput formControlName="featureSetComments" rows="2" required></textarea>
       <mat-label>Feature set feedback</mat-label>
     </mat-form-field>
@@ -56,7 +57,7 @@
       <mat-divider></mat-divider>
     </div>
     <label class="label_q">May we contact you?, if yes, provide email</label>
-    <mat-form-field appearance="fill" class="input_full_width">
+    <mat-form-field appearance="outline" class="input_full_width">
       <mat-label>Email</mat-label>
       <input matInput type="email" formControlName="email">
     </mat-form-field>
@@ -64,4 +65,5 @@
     <button mat-raised-button color="accent" class="wide-button" type="submit"
     [disabled]="!feedbackForm.valid">Submit Feedback</button>
   </form>
+</mat-card>
 </mat-card>
