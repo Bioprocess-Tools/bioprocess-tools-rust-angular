@@ -8,7 +8,7 @@
   .card-background {
     width: 100%;
 
-    @include inset-border;
+   box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
 
     background-color: var(--primary-background-color);
     align-items: center;
@@ -290,7 +290,7 @@
 .compound-card-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  @include inset-border;
+  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
@@ -391,7 +391,7 @@
 .ion-card-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  @include inset-border;
+  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
@@ -581,7 +581,7 @@
 .heatmap-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  @include inset-border;
+  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
