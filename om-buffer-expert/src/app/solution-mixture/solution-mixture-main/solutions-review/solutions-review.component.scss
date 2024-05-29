@@ -1,4 +1,4 @@
-@import "../../../../buffer_colors.scss";
+
 
 .card-background {
   //background-color: rgb(201, 28, 28);
@@ -16,11 +16,11 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  //background-color: $card-background-cream;
+  //background-color: var(--card-background-cream);
   box-shadow: none;
   //background-color: rgb(176, 239, 239);
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: var(--primary-color);
   gap: 5px;
 }
 
@@ -30,7 +30,7 @@
   max-height: 350px;
   margin: 10px;
   scroll-snap-align: start;
-  //background-color: $card-background;
+  //background-color: var(--card-background);
   color: black;
   margin: 3px;
 
@@ -42,7 +42,7 @@
   //background-color: aqua;
   margin: 3px;
   border-width: 3px;
-  border-color: $primary-color;
+  border-color: var(--primary-color);
 }
 
 .solution_title {
@@ -52,12 +52,12 @@
 
 ///////This is for the solutions scroll list///////////////
 .highlighted-card {
-  border: 3px solid $accent-green; /* Change color as per your requirement */
+  border: 3px solid var(--accent-green); /* Change color as per your requirement */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .unhighlighted-card {
-  border: $primary-color;
+  border: var(--primary-color);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .less-space {
@@ -72,14 +72,13 @@
 }
 .thick {
   border-top-width: 2px;
-  border-color: $headtext-color;
+  border-color: var(--headtext-color);
 }
 .thick-color {
   border-top-width: 2px;
-  border-color: $divider-green;
+  border-color: var(--divider-green);
 }
 .solution-compunds {
-
   display: grid;
   grid-template-columns: 1fr;
 
@@ -125,7 +124,7 @@ mat-card-title {
   box-shadow: none;
 }
 .ion-sub {
-  //background-color: $card-background;
+  //background-color: var(--card-background);
 
   margin: 5px;
   //border-color: rgb(5, 13, 91);
@@ -147,7 +146,7 @@ mat-card-title {
 
 .unique-sub {
   // box-shadow: inset;
-  //background-color: $card-background;
+  //background-color: var(--card-background);
 
   margin: 5px;
 }
@@ -175,7 +174,6 @@ mat-icon {
 */
 
 @media (max-width: 450px) {
-
   .unique-sub {
     width: 38vw;
   }

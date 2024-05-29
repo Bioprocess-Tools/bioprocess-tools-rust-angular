@@ -1,90 +1,83 @@
-@import "src/buffer_colors.scss";
-
 .main-content-card {
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto;
-  grid-template-areas: 
-  "form-card"
-  "solution-card";
- 
-  padding-top:10px;
+  grid-template-areas:
+    "form-card"
+    "solution-card";
+
+  padding-top: 10px;
   gap: 10px;
-  margin-top:5px;
+  margin-top: 5px;
   margin-bottom: 10px;
   box-shadow: none;
   align-items: center;
 }
 .instruct {
-  font-size:small;
+  font-size: small;
 }
 .red_flag {
-  color:$red-error-color;
-  margin-left:20px;
+  color: var(--red-error-color);
+  margin-left: 20px;
 }
 
 .green_flag {
-  color:$green-success-color;
-  margin:4px;
-  margin-left:20px;
-  padding:0px;
+  color: var(--green-success-color);
+  margin: 4px;
+  margin-left: 20px;
+  padding: 0px;
 }
 
-.form-card{
-  grid-area:form-card;
-  display:flex;
-  width:99%;
+.form-card {
+  grid-area: form-card;
+  display: flex;
+  width: 99%;
   align-self: center;
 
   box-shadow: none;
-
-
 }
-.formf {display:flex;flex-direction: column;
-
+.formf {
+  display: flex;
+  flex-direction: column;
 }
 
-.message-card{
-box-shadow:none;
-border: 1px solid $gray-border-color;
+.message-card {
+  box-shadow: none;
+  border: 1px solid var(--gray-border-color);
   padding: 0px;
   width: 97%;
   align-self: center;
 }
 
 .input-field {
-  display:flex;
-  width:98%;
-  margin-top:6px;
+  display: flex;
+  width: 98%;
+  margin-top: 6px;
 
   align-self: center;
-  
 }
 
 :host ::ng-deep .input-field .mdc-text-field--outlined {
-
   --mdc-outlined-text-field-container-shape: 20px;
   --mdc-outlined-text-field-outline-width: 2px;
   --mdc-outlined-text-field-focus-outline-width: 4px;
 }
 
 .input-field-2 {
- 
-  width:98%;
-  margin-top:6px;
+  width: 98%;
+  margin-top: 6px;
 
   align-self: center;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
-.wide-button{
-  width:80%;
-  margin-top:5px;
-  margin-left:10px;
+.wide-button {
+  width: 80%;
+  margin-top: 5px;
+  margin-left: 10px;
   margin-bottom: 10px;
 
   align-self: center;
-
 }
 
 .summary {
@@ -92,41 +85,35 @@ border: 1px solid $gray-border-color;
 
   margin-left: 0.5vw;
   box-shadow: none;
- 
 }
 
-.solution-card{
-  display:none;
-  margin-top:0px;
-  position:relative;
+.solution-card {
+  display: none;
+  margin-top: 0px;
+  position: relative;
 
-  width:98%;
+  width: 98%;
   align-self: center;
-  border-color: $gray-border-color;
+  border-color: var(--gray-border-color);
   border-width: 3px;
 }
 
 .solution-card-placeholder {
-  position:relative;
+  position: relative;
 
-  width:98%;
-  margin-left:5px;
-  margin-bottom:5px;
+  width: 98%;
+  margin-left: 5px;
+  margin-bottom: 5px;
 }
-
-
 
 .chatin {
   font-size: small;
 }
 
 .pH {
-align-self: center;
-padding-bottom:5px;
-
+  align-self: center;
+  padding-bottom: 5px;
 }
-
-
 
 @media (max-width: 1500px) {
   .main-card-container {
@@ -137,21 +124,17 @@ padding-bottom:5px;
     grid-area: 1/1;
   }
 
-
   .summary {
     width: 97%;
 
     margin-left: 1vw;
-   
   }
 
-  .solution-card{
-    margin-top:30px;
-    position:relative;
+  .solution-card {
+    margin-top: 30px;
+    position: relative;
 
-    width:97%;
+    width: 97%;
     align-self: center;
   }
-
-
 }

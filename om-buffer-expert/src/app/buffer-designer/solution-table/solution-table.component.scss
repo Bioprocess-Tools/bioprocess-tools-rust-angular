@@ -1,17 +1,16 @@
-@import "src/buffer_colors.scss";
 .container {
   width: 100%;
   padding-left: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
   gap: 13px;
-  background-color: $primary-background-color;
+  background-color: var(--primary-background-color);
   .card-background {
     width: 100%;
 
     @include inset-border;
 
-    background-color: $primary-background-color;
+    background-color: var(--primary-background-color);
     align-items: center;
 
     padding-top: 10px;
@@ -21,7 +20,7 @@
 
     .grid-container {
       display: grid;
-
+      background-color: var(--primary-background-color);
       grid-auto-flow: column;
 
       overflow-x: auto;
@@ -38,18 +37,19 @@
       }
 
       .highlighted-card {
-        border: 3px solid $yellow-border-color; /* Change color as per your requirement */
-        box-shadow: 2px 6px 8px 0 $black-box-shadow-color;
+        border: 3px solid var(--yellow-border-color); /* Change color as per your requirement */
+        box-shadow: 2px 6px 8px 0 var(--black-box-shadow-color);
         border-radius: 20px;
       }
       .unhighlighted-card {
-        border: 3px solid $gray-border-color; /* Change color as per your requirement */
+        border: 3px solid var(--gray-border-color); /* Change color as per your requirement */
         border-width: 3px;
-        //box-shadow: 0 4px 8px 0 $black-box-shadow-color;
+        //box-shadow: 0 4px 8px 0 var(--black-box-shadow-color);
       }
 
       .grid-item {
         display: flex;
+
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
@@ -58,7 +58,7 @@
         scroll-snap-align: start;
         width: 250px;
         padding: 10px;
-        //border: 2px solid $gray-border-color;
+        //border: 2px solid var(--gray-border-color);
         border-radius: 20px;
         box-shadow: 5px;
         @media (max-width: 450px) {
@@ -69,9 +69,9 @@
           font-size: medium;
           font-weight: bold;
           text-align: center;
-          font-style: italic;
+          //font-style: italic;
           .red-text {
-            color: $red-error-color;
+            color: var(--red-error-color);
           }
           @media screen and (max-width: 800px) {
             font-size: medium;
@@ -90,17 +90,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: x-small;
             text-align: center;
-            background-color: $primary-background-color;
+            background-color: var(--primary-background-color);
             border-radius: 20px;
             height: 1.5em;
             @media (max-width: 450px) {
               font-size: xx-small;
             }
             .delete-button {
-              color: $red-error-color;
               border: none;
               border-radius: 5px;
 
@@ -109,6 +108,7 @@
               justify-self: right;
               .d_icon {
                 font-size: 20px;
+                color: aqua;
                 @media screen and (max-width: 450px) {
                   font-size: 18px;
                 }
@@ -127,26 +127,26 @@
   align-items: center;
   width: 80%;
   border-width: 5px;
-  border-color: $teal-background-color;
+  border-color: var(--teal-background-color);
   border-radius: 25px;
-  box-shadow: inset 0px 0px 3px 2px $gray-inset-shadow-color;
+  //box-shadow: inset 0px 0px 3px 2px var(--gray-inset-shadow-color);
   @media (max-width: 450px) {
     width: 95%;
   }
   .solution_title {
     display: flex;
     font-size: large;
-    color: $primary-text-color;
+    color: var(--primary-text-color);
     //margin-top: 5px;
     margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding-bottom: 15px;
-    border-bottom: 2px solid $gray-border-color;
+    border-bottom: 2px solid var(--gray-border-color);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    background-color: $accent-chip1;
+    background-color: var(--accent-chip1);
     width: 100%;
     box-sizing: border-box;
   }
@@ -163,7 +163,7 @@
     }
   }
   .compound-summary-grid {
-    color: $primary-text-color;
+    color: var(--primary-text-color);
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 3px 20px;
@@ -174,8 +174,8 @@
     .summary-grid-label {
       display: flex;
       border-radius: 5px;
-      background-color: $gray-background-color;
-      box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+      background-color: var(--gray-background-color);
+      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       //font-weight: bold;
       text-align: left;
       padding-left: 20px;
@@ -190,8 +190,8 @@
     }
     .summary-grid-value {
       border-radius: 5px;
-      background-color: $gray-background-color;
-      box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+      background-color: var(--gray-background-color);
+      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -203,7 +203,7 @@
     }
   }
   .compound-summary-grid-pH {
-    color: $primary-text-color;
+    color: var(--primary-text-color);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3px 5px;
@@ -215,8 +215,8 @@
     .summary-grid-label {
       display: flex;
       border-radius: 5px;
-      background-color: $gray-background-color;
-      box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+      background-color: var(--gray-background-color);
+      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       //font-weight: bold;
       text-align: left;
       padding-left: 20px;
@@ -244,15 +244,15 @@
           padding-right: 20px;
           padding-top: 10px;
           padding-bottom: 10px;
-          background-color: $teal-background-color;
+          background-color: var(--teal-background-color);
           width: 80px;
         }
       }
     }
     .summary-grid-value {
       border-radius: 5px;
-      background-color: $gray-background-color;
-      box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+      background-color: var(--gray-background-color);
+      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -263,7 +263,7 @@
       padding-bottom: 5px;
       &.pH-value {
         justify-content: flex-start;
- 
+
         font-weight: bold;
         background-color: transparent;
         box-shadow: none;
@@ -277,7 +277,7 @@
           padding-right: 20px;
           padding-top: 10px;
           padding-bottom: 10px;
-          background-color: $teal-background-color;
+          background-color: var(--teal-background-color);
           width: 80px;
         }
       }
@@ -289,7 +289,7 @@
 ///
 .compound-card-background {
   width: 100%;
-  background-color: $primary-background-color;
+  background-color: var(--primary-background-color);
   @include inset-border;
 
   align-self: center;
@@ -297,7 +297,7 @@
   padding: 10px;
 
   .compound-cards {
-    background-color: $primary-background-color;
+    background-color: var(--primary-background-color);
     align-self: center;
     display: grid;
     grid-auto-flow: column;
@@ -313,14 +313,14 @@
     }
 
     .compound-card {
-      background-color: $lighter-background-color;
+      background-color: var(--lighter-background-color);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       width: 25vw;
       align-self: center;
       justify-self: center;
-      border-color: $pink-background-color;
+      border-color: var(--pink-background-color);
       border-width: 5px;
       border-radius: 20px;
       padding: 10px;
@@ -349,21 +349,34 @@
       .ion-card-content {
         display: flex;
         flex-direction: column;
+        @media (max-width: 450px) {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
         .compound-grid {
-          color: $primary-text-color;
+          color: var(--primary-text-color);
           display: grid;
           grid-template-columns: auto 1fr;
           gap: 3px 20px;
           .grid-label {
+            //box-shadow: inset 0px 0px 1px 0.5px var(--gray-border-color);
+            border-radius: 5px;
+            //background-color: var(--gray-background-color);
             font-size: small;
             text-align: right;
+
             @media (max-width: 450px) {
               font-size: small;
             }
           }
           .grid-value {
+            box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
+            background-color: var(--gray-background-color);
+            border-radius: 5px;
             font-size: small;
             text-align: left;
+            padding-left: 8px;
+            padding-right: 5px;
             @media (max-width: 450px) {
               font-size: small;
             }
@@ -377,13 +390,14 @@
 /////////////////ION CARDS/////////////////////
 .ion-card-background {
   width: 100%;
-  background-color: $primary-background-color;
+  background-color: var(--primary-background-color);
   @include inset-border;
 
   align-self: center;
   //margin: 3px;
   padding: 10px;
   .ion-cards {
+    background-color: var(--primary-background-color);
     align-self: center;
     display: grid;
     grid-auto-flow: column;
@@ -411,7 +425,7 @@
       border-width: 4px;
       border-radius: 20px;
 
-      border-color:$blue-background-color;
+      border-color: var(--blue-background-color);
       padding: 10px;
       //margin-top:1px;
       //margin-bottom:1px;
@@ -453,7 +467,7 @@
             grid-template-columns: 50px 1fr 1fr 1fr;
           }
           .pka-names-label {
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             //font-weight: bold;
             padding: 0px;
@@ -461,16 +475,15 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-
           }
           .pka-names {
             margin: 0px;
             width: 100%;
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             border-radius: 5px;
-            background-color: $gray-background-color;
-            box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+            background-color: var(--gray-background-color);
+            box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size: small;
@@ -497,7 +510,7 @@
           }
 
           .ion-names-label {
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             //font-weight: bold;
             padding: 0px;
@@ -505,15 +518,14 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-
           }
 
           .ion-names {
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             border-radius: 5px;
-            background-color: $gray-background-color;
-            box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+            background-color: var(--gray-background-color);
+            box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size: x-small;
@@ -536,7 +548,7 @@
             grid-template-columns: 50px 1fr;
           }
           .conc-names-label {
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             //font-weight: bold;
             padding: 0px;
@@ -544,16 +556,15 @@
             @media (max-width: 450px) {
               font-size: x-small;
             }
-
           }
           .conc-names {
             margin: 0px;
             width: 100%;
-            color: $primary-text-color;
+            color: var(--primary-text-color);
             font-size: small;
             border-radius: 5px;
-            background-color: $gray-background-color;
-            box-shadow: inset 0px 0px 1px 2px $gray-inset-shadow-color;
+            background-color: var(--gray-background-color);
+            box-shadow: inset 0px 0px 1px 1px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size: x-small;
@@ -569,7 +580,7 @@
 
 .heatmap-background {
   width: 100%;
-  background-color: $primary-background-color;
+  background-color: var(--primary-background-color);
   @include inset-border;
 
   align-self: center;
@@ -587,7 +598,7 @@
   }
 
   .heatmap_title {
-    color: $primary-text-color;
+    color: var(--primary-text-color);
     // font-size: large;
     padding-top: 10px;
     font-weight: bold;

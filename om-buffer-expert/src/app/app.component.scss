@@ -1,5 +1,3 @@
-@import "src/buffer_colors.scss";
-
 .main {
   display: grid;
   width: 100%;
@@ -15,7 +13,6 @@
 .header {
   grid-area: header;
   width: 100%;
-  
 }
 
 .main-content {
@@ -25,6 +22,6 @@
   width: 100%;
   overflow-y: scroll;
   height: 100%;
-  background-color: $primary-background-color;
-  padding: $main-page-padding;
+  background-color: var(--primary-background-color);
+  padding: var(--main-page-padding);
 }

@@ -1,9 +1,8 @@
-@import 'src/buffer_colors.scss';
 .main-user-guide {
-  background-color: $darker-background-color;
+  background-color: var(--darker-background-color);
   @include inset-border;
   display: flex;
-  text-align: center;
+  //text-align: center;
   padding: 10px;
   overflow-y: auto;
   align-items: center;
@@ -15,38 +14,26 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
 .mat-expansion-panel {
-
-  background-color: $darker-background-color;
-  border: 1px solid $gray-border-color;
-  gap:3px;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--gray-border-color);
+  gap: 3px;
   //box-shadow: inset 0 0 10px #000000;
   margin: 0;
-    margin-left:20px;
+  margin-left: 20px;
 
   padding: 0;
   width: 98%;
   @media (max-width: 450px) {
-    width:95%;
-    margin-left:8px;
+    width: 95%;
+    margin-left: 8px;
   }
 }
 
-
-
 .user-guide {
-  justify-content:space-evenly;
-  align-self:center;
-  place-self:center;
+  justify-content: space-evenly;
+  align-self: center;
+  place-self: center;
 
   //background-color: #66157c;
   //border: 1px solid #840404;
@@ -60,20 +47,16 @@
 }
 
 .mat-accordion {
-  align-self:center;
+  align-self: center;
   //background-color: #7c1515;
   //border: 1px solid #d9d7d7;
-  gap:3px;
+  gap: 3px;
   //box-shadow: inset 0 0 10px #000000;
   margin: 0;
   padding: 0;
   width: 93%;
-  box-shadow:none;
+  box-shadow: none;
 }
-
-
-
-
 
 /* Global Styles */
 body {
@@ -81,77 +64,77 @@ body {
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  color:$lighter-text-color;
+  color: var(--lighter-text-color);
   font-weight: 300;
 }
-
 
 /* Article and Section */
 article {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: $darker-background-color;
-  border: 1px solid $gray-border-color;
-  box-shadow: 0 0 3px $black-box-shadow-color;
+  background-color: var(--darker-background-color);
+  border: 1px solid var(--gray-border-color);
+  box-shadow: 0 0 3px var(--black-box-shadow-color);
   border-radius: 8px;
-  text-align:justify;
+  text-align: justify;
 }
 
-header, section {
+header,
+section {
   margin-bottom: 20px;
 }
 
 /* Headings */
 h1 {
-  margin-top:10px;
+  margin-top: 10px;
   font-size: 1.8em;
-  
+
   text-align: center;
   margin-bottom: 10px;
-  color:$blue-background-color;
-  //background-color: $darker-background-color;
+  color: var(--blue-background-color);
+  //background-color: var(--darker-background-color);
 }
 
 h2 {
   font-size: 1.5em;
   margin-top: 20px;
   margin-bottom: 10px;
-  color:$yellow-border-color;
-  font-weight:300;
-  //background-color: $darker-background-color;
+  color: var(--yellow-border-color);
+  font-weight: 300;
+  text-align: left;
+  //background-color: var(--darker-background-color);
 }
 
 h3 {
   font-size: 1.25em;
   margin-top: 15px;
   margin-bottom: 10px;
-    font-weight:300;
-  color:$lighter-teal-background-color;
-
+  font-weight: 300;
+  color: var(--lighter-teal-background-color);
 }
 
 h4 {
   font-size: 1.1em;
   margin-top: 10px;
   margin-bottom: 10px;
-  color:$lighter-pink-background-color;
-  font-weight:300;
+  color: var(--lighter-pink-background-color);
+  font-weight: 300;
 }
 h5 {
   font-size: 1em;
   margin-top: 10px;
   margin-bottom: 10px;
-  color:$lighter-orange-background-color;
-  font-weight:300;
+  color: var(--lighter-orange-background-color);
+  font-weight: 300;
 }
 
 /* Paragraphs */
 p {
-  color:$lighter-text-color;
+  color: var(--lighter-text-color);
   margin-bottom: 10px;
   text-align: justify;
-  font-weight:300;
+  font-weight: 300;
 }
 
 /* Lists */

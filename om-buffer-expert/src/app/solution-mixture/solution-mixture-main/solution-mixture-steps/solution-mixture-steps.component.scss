@@ -1,4 +1,4 @@
-@import "../../../../buffer_colors.scss";
+
 .solution-mixture-steps-card {
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@
 }
 
 .solution-list-background {
-  border: solid 1px $card-background-cream;
+  border: solid 1px var(--card-background-cream);
   box-shadow: none;
   gap: 5px;
 }
@@ -34,10 +34,10 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
-  //background-color: $card-background-cream;
+  //background-color: var(--card-background-cream);
   box-shadow: none;
   //background-color: rgb(176, 239, 239);
-  border: 3px solid $card-background-cream;
+  border: 3px solid var(--card-background-cream);
   border-width: 3px;
   gap: 5px;
   justify-items: center;
@@ -60,15 +60,15 @@
   // max-height: 350px;
   //  margin: 10px;
   //  scroll-snap-align: start;
-  // //background-color: $card-background;
+  // //background-color: var(--card-background);
   //color: black;
   //background-color: none;
   margin: 3px;
   height: 95%;
-  border:3px solid $card-background-cream;
+  border: 3px solid var(--card-background-cream);
 }
 .buffer-name {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1em;
@@ -77,10 +77,10 @@
   text-wrap: pretty;
   color: black;
   //padding-bottom: 5px;
-  margin:5px;
-  height:50px;
+  margin: 5px;
+  height: 50px;
   overflow: normal;
-  box-shadow:0px 0px 1px 1px rgba(112, 103, 103, 0.5);;
+  box-shadow: 0px 0px 1px 1px rgba(112, 103, 103, 0.5);
 }
 .compound-container {
   display: flex;
@@ -111,7 +111,6 @@
   }
 }
 
-
 .header-button {
   justify-content: space-between;
 }
@@ -122,19 +121,18 @@ mat-card-content {
 }
 
 .grid-container {
-  
   display: grid;
-  grid-template-columns: 1.0fr 1.0fr 2.0fr;
+  grid-template-columns: 1fr 1fr 2fr;
   grid-template-areas: "choice-cards category_choice step-form-card";
   padding: 10px;
   gap: 10px;
   justify-content: center;
   align-items: center;
   align-content: center;
-  //background-color: $card-background-cream;
+  //background-color: var(--card-background-cream);
   box-shadow: none;
   border-width: 1px;
-  border-color: $card-background-cream;
+  border-color: var(--card-background-cream);
   border-style: solid;
   height: 300px;
   //background-color: rgb(176, 239, 239);
@@ -177,8 +175,8 @@ mat-card-title {
   gap: 5px;
   align-items: center;
   padding: 0 5px;
-  //background-color: $primary-color;
-  border: 2px solid $card-background-cream;
+  //background-color: var(--primary-color);
+  border: 2px solid var(--card-background-cream);
   //color: #333;
   box-shadow: none;
 }
@@ -188,7 +186,7 @@ mat-card-title {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  //background-color: $primary-color;
+  //background-color: var(--primary-color);
   border-bottom: 1px solid #e0e0e0;
   color: #333;
 }
@@ -196,9 +194,8 @@ mat-card-title {
   padding: 0px;
 }
 
-
 .selected-template-content {
-  width:100%;
+  width: 100%;
   padding: 5px;
   box-shadow: none;
 }
@@ -209,7 +206,7 @@ mat-card-title {
   align-items: center;
   gap: 10px;
   padding: 0 20px;
-  //background-color: $primary-color;
+  //background-color: var(--primary-color);
   border-bottom: 1px solid #e0e0e0;
   //color: #333;
 }
@@ -220,12 +217,9 @@ mat-card-title {
 }
 
 .step-card {
-  padding:0px;
+  padding: 0px;
   padding-bottom: 2px;
 }
-
-
-
 
 mat-card-header {
   padding: 0;
@@ -251,7 +245,7 @@ mat-card-header {
 }
 
 .less-space {
-  display:flex;
+  display: flex;
   flex-direction: row;
   margin-bottom: 1px;
   margin-top: 3px;
@@ -264,13 +258,13 @@ mat-card-header {
   width: 100%;
   font-size: 12px;
   background-color: transparent;
-  gap:5px;
+  gap: 5px;
   //justify-content: space-between;
 }
 
 .keyp {
   width: 100px;
-  flex:1;
+  flex: 1;
 }
 
 .valuep {
@@ -278,8 +272,8 @@ mat-card-header {
   overflow-wrap: break-word;
   white-space: normal;
   overflow: hidden;
-  flex:3;
-  margin-right:10px;
+  flex: 3;
+  margin-right: 10px;
 }
 
 .less-space-container {
@@ -298,11 +292,11 @@ mat-card-header {
   justify-content: space-evenly;
   align-items: center;
 
-  height:30px;
+  height: 30px;
 }
 
 .stroked_btn {
-  border: 3px solid $card-background-cream;
+  border: 3px solid var(--card-background-cream);
   background-color: transparent;
   //color: #333;
   font-size: 12px;
@@ -311,8 +305,7 @@ mat-card-header {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
-  height:25px;
-
+  height: 25px;
 }
 .stocked_btn:focus {
   //outline: none;
@@ -326,8 +319,7 @@ mat-card-header {
   //background-color: #a6d8a4;
   border-bottom: 1px solid #e0e0e0;
   color: #333;
-  width:100%;
-
+  width: 100%;
 }
 // .solution-volume-pH-card {
 //   display: flex;
@@ -339,8 +331,6 @@ mat-card-header {
 //   color: #333;
 // }
 
-
-
 .comp-ion-container {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -351,7 +341,6 @@ mat-card-header {
   width: 95%;
   align-self: center;
 }
-
 
 mat-card {
   box-shadow: none;
@@ -373,8 +362,6 @@ mat-card-content {
   color: #333;
   box-shadow: none;
 }
-
-
 
 .volumeAdditonsCard {
   display: flex;
@@ -413,9 +400,9 @@ mat-card-content {
   align-self: center;
   //padding: 0 20px;
   //background-color: #0f730a;
- border: 1px solid $card-background-cream;
+  border: 1px solid var(--card-background-cream);
   //color: #333;
- max-width:500px;
+  max-width: 500px;
 }
 .grid-contain {
   display: grid;
@@ -425,7 +412,7 @@ mat-card-content {
   padding: 10px; /* Padding around the grid container */
   max-width: 1000px; /* Adjust the width as necessary */
   margin: auto; /* For centering the grid container if needed */
-  width:100%;
+  width: 100%;
 }
 // .grid-contain2 {
 //   display: grid;
@@ -465,68 +452,61 @@ mat-card-content {
 //   flex-direction: column;
 //   background-color: #ECEFF1; /* Example color for main content, adjust as needed */
 
- 
 // }
 .vol_pH_solution {
-display:grid;
-grid-template-columns: 1fr;
-grid-template-rows: auto;
-grid-template-areas: 
-"solution-volume-pH-card";
-//gap: 10px;
-//padding: 10px;
-//background-color: #309ee8; /* Example color for main content, adjust as needed */
-
- 
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "solution-volume-pH-card";
+  //gap: 10px;
+  //padding: 10px;
+  //background-color: #309ee8; /* Example color for main content, adjust as needed */
 }
 
 .volume_pH_content {
-  grid-area:volume_pH_content;
-  display:flex;
+  grid-area: volume_pH_content;
+  display: flex;
   flex-direction: column;
   //background-color: #91c066; /* Example color for main content, adjust as needed */
-
- 
 }
 .solution-volume-pH-card {
-  grid-area:solution-volume-pH-card;
-  display:flex;
-  flex-direction:column;
+  grid-area: solution-volume-pH-card;
+  display: flex;
+  flex-direction: column;
   //justify-content: space-between;
   align-items: left;
   //padding: 0 20px;
   //background-color: #d3bc0c;
   border-bottom: 1px solid #e0e0e0;
   color: #333;
-  padding:0;
+  padding: 0;
   padding-left: 15px;
-  padding-right:15px;
-
+  padding-right: 15px;
 }
 
 .solution-name-vol {
-  display:flex;
-flex-direction: row;  //background-color: #333;
+  display: flex;
+  flex-direction: row; //background-color: #333;
   margin-bottom: 2px;
   margin-left: 10px;
   font-weight: 400;
-  gap:10px;
+  gap: 10px;
   //font-stretch: expanded;
   font-size: 1em;
   //color: whitesmoke;
   white-space: normal;
-  align-self:center;
-  align-items: left ;
-padding:0px;
+  align-self: center;
+  align-items: left;
+  padding: 0px;
 }
 .Volume {
-  grid-area:Volume;
+  grid-area: Volume;
 
-  display:flex;
+  display: flex;
   //background-color: #0a2362; /* Example color for sidebar, adjust as needed */
   //grid-column: 2; /* Occupies the second column */
   //grid-row:3;
-//background-color: #333;
+  //background-color: #333;
   margin-bottom: 2px;
   margin-right: 20px;
   font-weight: 400;
@@ -538,10 +518,9 @@ padding:0px;
 }
 
 .titles {
-  display:grid;
-  grid-template-columns:auto auto;
-  grid-template-areas:
-  "pH Volume";
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas: "pH Volume";
 
   //background-color: #333;
   margin-bottom: 2px;
@@ -551,15 +530,14 @@ padding:0px;
   font-size: medium;
   //color: whitesmoke;
   white-space: nowrap;
- //justify-content: space-between;
-  width:95%;
-
+  //justify-content: space-between;
+  width: 95%;
 }
 
 .pH {
- grid-area:pH;
-  display:flex;
-//background-color: #333;
+  grid-area: pH;
+  display: flex;
+  //background-color: #333;
   margin-bottom: 2px;
   margin-left: 20px;
   font-weight: 400;
@@ -567,9 +545,7 @@ padding:0px;
   font-size: medium;
   //color: whitesmoke;
   white-space: nowrap;
-justify-content: left ;
-
-
+  justify-content: left;
 }
 
 // .ion_list{
@@ -578,9 +554,7 @@ justify-content: left ;
 //   flex-direction: column;
 //   //background-color: #CDDC39; /* Example color for footer, adjust as needed */
 //   /* Occupies the first column */
- 
+
 // }
 
 /* Adjust the responsive design as needed */
-
-

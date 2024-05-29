@@ -1,105 +1,89 @@
-@import "../../../buffer_colors.scss";
-.super-calculator-main-card{
+
+.super-calculator-main-card {
   box-shadow: none;
-padding:10px;
+  padding: 10px;
 }
 
-
-
-
 .super-calculator-card {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-gap:5px;
-    margin:0px;
-    padding:0px;
-  padding-bottom:10px;
-  padding-top:10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 
   border-radius: 5px;
   box-shadow: none;
-  
-
 }
 
-
-
 .adjust_pH_label {
-  font-size:small;
-  color:$primary-text-color;
+  font-size: small;
+  color: var(--primary-text-color);
 }
 
 .super-calculator-col1 {
-
-display:grid;
-gap:10px;
+  display: grid;
+  gap: 10px;
 }
 .super-calculator-col2 {
-
-display:grid;
-gap:10px;
+  display: grid;
+  gap: 10px;
 }
 
 .super-calculator-col3 {
-  width:100%;
+  width: 100%;
 
   grid-column: 1;
-  display:grid;
-  grid-template-columns:50% 1fr;
-
+  display: grid;
+  grid-template-columns: 50% 1fr;
 }
 
-.option1-full-width_Right{
-  width:100%;
-  margin:0px;
-  padding:0px;
+.option1-full-width_Right {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 .second_box {
-  display:grid;
-  grid-template-columns:1fr;
+  display: grid;
+  grid-template-columns: 1fr;
 
   padding: 2px;
 
   border-radius: 5px;
-  box-shadow:none;
-
+  box-shadow: none;
 }
 .super-calculator-button {
-    display:flex;
- 
-    padding-top:5px;
-    padding-left:20px;
-    padding-right:20px;
+  display: flex;
+
+  padding-top: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 .super-button {
-  font-size:large;
-  font-weight:bold;
-  color:$primary-text-color;
+  font-size: large;
+  font-weight: bold;
+  color: var(--primary-text-color);
   width: 100%;
 
-    background-color: $orange-background-color;
+  background-color: var(--orange-background-color);
   padding: 3px;
 
   border-radius: 25px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
 
   cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
-
-    background-color: $darker-orange-background-color;
-
-    
+    background-color: var(--darker-orange-background-color);
   }
-
 }
 
 .adjust_pH {
-
-    align-self:center;
-    margin-left: 16px;
+  align-self: center;
+  margin-left: 16px;
 }
 
 .right-align {
-  text-align: right ;
+  text-align: right;
 }

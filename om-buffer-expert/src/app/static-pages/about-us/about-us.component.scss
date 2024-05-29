@@ -1,8 +1,6 @@
-@import "src/buffer_colors.scss";
-
 .about-container {
   display: flex;
-  background-color: $primary-background-color;
+  background-color: var(--primary-background-color);
   @include inset-border;
   text-align: center;
   padding: 20px;
@@ -17,7 +15,7 @@
 
   .about-container-card {
     padding: 15px;
-    background-color: $primary-background-color;
+    background-color: var(--primary-background-color);
     @media (max-width: 450px) {
       padding: 10px;
     }
@@ -29,8 +27,7 @@
       line-height: 1.6;
       text-align: justify;
       .int-p {
-        border-bottom: 1px solid $pink-background-color;
-
+        border-bottom: 1px solid var(--pink-background-color);
       }
       @media (max-width: 450px) {
         padding: 10px;
@@ -39,7 +36,7 @@
     }
   }
   .team-card-container {
-    background-color: $primary-background-color;
+    background-color: var(--primary-background-color);
     @include inset-border;
     display: flex;
     flex-direction: row;
@@ -50,8 +47,8 @@
       // flex-wrap: nowrap;
     }
     .team-card {
-      background-color: $primary-background-color;
-      border: 5px solid $yellow-border-color;
+      background-color: var(--primary-background-color);
+      border: 5px solid var(--yellow-border-color);
       border-radius: 20px;
 
       padding: 8px;
@@ -62,7 +59,7 @@
         flex: 1 0 90%;
       }
       .team-photo {
-        border: 3px solid $darker-background-color;
+        border: 3px solid var(--darker-background-color);
         border-radius: 50%;
         width: 75px; /* Adjust as needed */
         height: auto;

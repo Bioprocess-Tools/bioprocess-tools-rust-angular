@@ -1,6 +1,22 @@
-@import "../../../buffer_colors.scss";
 
+.main-hero-card {
+  background-color: var(--darker-background-color);
+ box-shadow:inset 0 0 8px 2px var(--inset-shadow-color-white);
+  display: flex;
+  //text-align: center;
+  padding: 10px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  @media (max-width: 450px) {
+    padding: 10px;
+  }
+
+}
 .hero-container {
+    background-color: var(--darker-background-color);
   width: 100%;
   display: grid;
   grid-template-rows: 0.75fr 0.5fr 0.5fr 0.5fr 1.0fr;
@@ -8,14 +24,15 @@
   background-image: url("/assets/images/backom.png");
   background-size: cover;
   //height:100vh;
-  height: calc(100vh - 84px);
+  padding-top:15px;
+  height: calc(100vh - 103px);
   justify-content: space-evenly;
   justify-self:center;
   align-items: center;
   align-self:center;
   text-align: center;
   @media (max-width: 450px) {
-    height: calc(100vh - 76px);
+    height: calc(100vh - 103px);
   }
 
 }
@@ -29,7 +46,7 @@
 }
 .mat-headline-5 {
   font-weight: 400 ;
-  color: $lighter-text-color;
+  color: var(--lighter-text-color);
   margin: 0px;
         @media (max-width: 450px) {
     font-size: medium;
@@ -38,7 +55,7 @@
 
 .mat-headline-4 {
   font-weight: 400 ;
-  color: $lighter-text-color;
+  color: var(--lighter-text-color);
     font-size:x-large;
 
   margin: 0px;
@@ -49,7 +66,7 @@
 
 .mat-headline-3 {
   font-weight: 400 ;
-  color: $lighter-text-color;
+  color: var(--lighter-text-color);
   font-size:xx-large;
 
   font-stretch: extra-expanded  ;
@@ -63,8 +80,28 @@
   align-self: center;
   justify-self: center;
   font-weight: 400 ;
-  color: $lighter-text-color;
-  width: 80%;
+  color: var(--lighter-text-color);
+width:80%;
+padding-bottom:10px;
+  border-bottom: 3px solid var(--yellow-border-color);
+
+}
+
+.one {
+  width:80%;
+    
+}
+.two {
+  width: 60%;
+
+}
+.three {
+  width: 50%;
+
+}
+.four {
+  width: 40%;
+
 }
 
 .button-container {
@@ -81,27 +118,33 @@
 }
 
 .action-button {
-  font-weight: 800;
-  font-stretch: extra-expanded;
+
   width: 35vw;
   height:10vh !important;
   align-self: center;
 
   //padding: 30px;
   font-size: x-large;
-  //background-color: #4CAF50;
-  color: whitesmoke;
+  background-color: #9b2c1f,;
+
   border-radius: 40px;
     transition: all 0.3s ease; // This will animate the color and transform changes
+.button-text {
+    font-weight: 800;
+    //font-stretch: extra-expanded;
+    font-size: x-large;
+    color: var(--lighter-text-color);
+    line-height: 1.5;
+  }
 
   &:hover {
-    background-color: $accent-green; // Change to the hover color you want
+    background-color: var(--accent-green); // Change to the hover color you want
     transform: scale(1.05); // This will slightly enlarge the button
   }
 @media (max-width: 450px) {
   width: 80vw;
   height: 10vh !important;
-  font-size: large;
+  //font-size: large;
 
 }
 }

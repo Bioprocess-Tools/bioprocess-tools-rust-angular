@@ -1,60 +1,57 @@
-@import "src/buffer_colors.scss";
-
 .omplot {
-    width:500px;
+  width: 500px;
 }
 
 .bar-chart {
-    width:500px;
-    background-color: $card-background-cream;
-    //min-width: 500px;
-}   
+  width: 500px;
+  background-color: var(--card-background-cream);
+  //min-width: 500px;
+}
 .bar-chart-container {
-    display: grid;
-    grid-auto-flow: column; // This will make the grid items flow horizontally
-    grid-gap: 10px; // This will add a gap between the grid items
-    overflow-x: auto; // This will add a horizontal scrollbar when necessary
-    background-color: $card-background;;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    align-items: center;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-   width:100%;
+  display: grid;
+  grid-auto-flow: column; // This will make the grid items flow horizontally
+  grid-gap: 10px; // This will add a gap between the grid items
+  overflow-x: auto; // This will add a horizontal scrollbar when necessary
+  background-color: var(--card-background);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  align-items: center;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  width: 100%;
 }
 
-
 .bar-chart-container3 {
-    display: grid;
-    grid-template-columns: auto;
-    grid-auto-flow: column; // This will make the grid items flow horizontally
-    grid-gap: 10px; // This will add a gap between the grid items
-    overflow-x: auto; // This will add a horizontal scrollbar when necessary
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x proximity;
-    
-    background-color: $card-background;;
-    padding: 10px;
-    margin: 10px;
-    border-radius: 5px;
-    //align-items: center;
-    border:solid 5px $card-background-cream;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-   max-width:98%;
-   height:500px;
-   place-items:center;
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-flow: column; // This will make the grid items flow horizontally
+  grid-gap: 10px; // This will add a gap between the grid items
+  overflow-x: auto; // This will add a horizontal scrollbar when necessary
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+
+  background-color: var(--card-background);
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  //align-items: center;
+  border: solid 5px var(--card-background-cream);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  max-width: 98%;
+  height: 500px;
+  place-items: center;
 }
 
 .bar-chart1 {
-    //width:350px;
-    //height:90%;
-    background-color: $card-background-cream;
-    //min-width: 500px;
-} 
+  //width:350px;
+  //height:90%;
+  background-color: var(--card-background-cream);
+  //min-width: 500px;
+}
 
 .bar-chart2 {
-    //width:600px;
-    //height:90%;
-    background-color: $card-background-cream;
-    //min-width: 500px;
-} 
+  //width:600px;
+  //height:90%;
+  background-color: var(--card-background-cream);
+  //min-width: 500px;
+}

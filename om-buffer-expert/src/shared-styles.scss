@@ -359,3 +359,76 @@ $buffer-designer-dark-theme: mat.define-dark-theme((
 
 // @include mat.typography-hierarchy($buffer-designer-typography);
 
+
+$primary-text-color: mat.get-color-from-palette($whitesmoke-palette,200);
+$dark-scrollbar-track-color: mat.get-color-from-palette($charcoal-palette,400);
+$light-scrollbar-thumb-color: mat.get-color-from-palette($charcoal-palette,200);
+$primary-background-color1: mat.get-color-from-palette($medium-gray-palette,800);
+$primary-background-color: mat.get-color-from-palette($charcoal-palette,800);
+$darker-background-color: mat.get-color-from-palette($charcoal-palette,500);
+$lighter-background-color: mat.get-color-from-palette($medium-gray-palette,600);
+$teal-background-color: mat.get-color-from-palette($deep-teal-palette,500);
+$orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,500);
+$darker-orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,800);
+$pink-background-color: mat.get-color-from-palette($fandango-palette,500);
+$blue-background-color: mat.get-color-from-palette($cerulean-palette,500);
+$gray-inset-shadow-color:mat.get-color-from-palette($charcoal-palette,200);
+$gray-border-color1: mat.get-color-from-palette($charcoal-palette,200);
+$gray-border-color: mat.get-color-from-palette($charcoal-palette,500);
+$red-error-color: mat.get-color-from-palette($error-palette,900);
+$green-success-color: #127907;
+$yellow-border-color: mat.get-color-from-palette($warn-palette,300);
+$black-box-shadow-color: mat.get-color-from-palette($charcoal-palette,500);
+$gray-background-color: mat.get-color-from-palette($charcoal-palette,400);
+$lighter-teal-background-color: mat.get-color-from-palette($deep-teal-palette,300);
+$lighter-orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,300);
+$lighter-pink-background-color: mat.get-color-from-palette($fandango-palette,300);
+$lighter-text-color: mat.get-color-from-palette($whitesmoke-palette,400);
+$inset-shadow-color-white:#8f8e8b;
+@mixin inset-border {
+  //border: 2px solid $main-border-color;
+  box-shadow:inset 0 0 8px 2px $inset-shadow-color-white;
+}
+$main-page-padding:10px;
+
+$primary-color: whitesmoke;
+$secondary-color:#202A44;
+$background-color:whitesmoke;
+$headtext-color: mat.get-color-from-palette(mat.$indigo-palette,900);
+$quaternary-color: #EFCDAF;
+$omtrybackground1: #dad8d7;
+$omtrybackground2: #d8d8db;
+$omtrybackground3: #e8e6e5;
+$omtrybackground4: #d5d6d8;
+$omtrybackground: #606162;
+$card-background: mat.get-color-from-palette(mat.$blue-palette,50);
+$divider-green:  mat.get-color-from-palette(mat.$green-palette,900);
+$accent-green:  mat.get-color-from-palette(mat.$green-palette,500);
+$card-background-cream: #CFD8DC;
+$border-color: #b0b7c1;
+//$accent-chip1: #086f66;
+
+$accent-chip1old:#166257;
+$accent-chip1: #00524e;
+$accent-chip2: #5d5e64;
+$accent-chip: #8d8e92;
+$dull-text-color:  #E0E0E0;
+$background-primary:$primary-background-color;
+
+$main-border-color: #b0b7c1;
+$inset-shadow-color:rgba(124, 76, 9, 0.839);
+$inset-shadow-color-blue:rgba(7, 7, 84, 0.839);
+$inset-shadow-color-grey:rgba(140, 139, 
+137, 0.839);
+$inset-shadow-color-tan:rgba(125, 124, 123, 0.839);
+$inset-shadow-color-white:#8f8e8b;
+$inset-shadow-color-white2:#808080;
+
+
+$omtest: #5b7579;
+$omtest2: #eee383;
+$omtest3: #007d56;
+$omtest4: #BC7640;
+$omtest5: #c2654c;
+
+
