@@ -2,9 +2,10 @@
 @use '@angular/material' as mat;
 
 @import '@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
+@include mat.core();
 
 $Lato-font-family: "Lato", sans-serif;
 $buffer-designer-typography: mat.define-typography-config(
@@ -25,14 +26,6 @@ $buffer-designer-typography: mat.define-typography-config(
 
 
 );
-
-@include mat.core();
-
-
-
-
-
-
 
 
 ////////////////////  SCSS for the buffer-designer component //////////////////////
@@ -246,7 +239,7 @@ $error-palette: mat.define-palette((
   200: #ef9a9a,
   300: #e57373,
   400: #ef5350,
-  500: #E76F51, // Red-Orange
+  500: #c62d07, // Red-Orange
   600: #e53935,
   700: #d32f2f,
   800: #c62828,
@@ -346,7 +339,7 @@ $buffer-designer-dark-theme: mat.define-dark-theme((
     accent: $dark-terra-cotta-palette,
     foreground:  $fandango-palette,
     error: $error-palette,
-    warn: $warn-palette,
+    warn: $error-palette,
     dark: $charcoal-palette,
     background: $medium-gray-palette,
     white: $whitesmoke-palette
@@ -359,7 +352,7 @@ $buffer-designer-dark-theme: mat.define-dark-theme((
 
 // @include mat.typography-hierarchy($buffer-designer-typography);
 
-
+$darkest-background-color: #2d2d2d;
 $primary-text-color: mat.get-color-from-palette($whitesmoke-palette,200);
 $dark-scrollbar-track-color: mat.get-color-from-palette($charcoal-palette,400);
 $light-scrollbar-thumb-color: mat.get-color-from-palette($charcoal-palette,200);
@@ -384,6 +377,7 @@ $lighter-teal-background-color: mat.get-color-from-palette($deep-teal-palette,30
 $lighter-orange-background-color: mat.get-color-from-palette($dark-terra-cotta-palette,300);
 $lighter-pink-background-color: mat.get-color-from-palette($fandango-palette,300);
 $lighter-text-color: mat.get-color-from-palette($whitesmoke-palette,400);
+$darker-inset-shadow-color: mat.get-color-from-palette($charcoal-palette,300);
 $inset-shadow-color-white:#8f8e8b;
 @mixin inset-border {
   //border: 2px solid $main-border-color;

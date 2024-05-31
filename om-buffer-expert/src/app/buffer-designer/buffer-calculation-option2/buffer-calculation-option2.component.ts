@@ -2,7 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SolutionService } from '../../solution.service';
 import { Observable, Subscription } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Solution } from '../../shared/models/solution.model';
 import { SolutionMixtureService } from 'src/app/solution-mixture.service';
 
@@ -31,14 +38,13 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   public returnedSolution: Solution; //solution to hold the return from api
   formSubmitted: boolean = false;
   filteredBufferSpecies: Observable<string[]>;
-  bufferSpeciespHMap: { [key: string]: number} = {}; // Consider providing a more specific type
+  bufferSpeciespHMap: { [key: string]: number } = {}; // Consider providing a more specific type
 
   constructor(
     private formBuilder: FormBuilder,
     public solutionService: SolutionService,
-    public solutionMixtureService: SolutionMixtureService,
+    public solutionMixtureService: SolutionMixtureService
   ) {}
-
 
   ngOnInit(): void {
     try {
@@ -48,12 +54,11 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       this.keyed_compounds = this.solutionMixtureService.compounds;
       this.bufferSpeciespHMap = this.solutionMixtureService.bufferSpeciespHMap;
       this.acidCompounds = this.solutionMixtureService.acidic_compounds;
-      this.basicCompounds = this.solutionMixtureService.basic_compounds
-      this.saltCompounds = this.solutionMixtureService.salt_compounds
+      this.basicCompounds = this.solutionMixtureService.basic_compounds;
+      this.saltCompounds = this.solutionMixtureService.salt_compounds;
       this.buffer_compound_names = this.solutionMixtureService.buffer_compounds;
       this.selectedAcidCompounds = this.acidCompounds;
       this.selectedBasicCompounds = this.basicCompounds;
-
 
       // Monitor value changes on the autocomplete field of bufferSpeciesControl and filter the bufferSpeciesKeys accordingly
       this.filteredBufferSpecies = this.bufferForm
@@ -221,8 +226,10 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
     this.bufferForm.controls['basicCompound'].setValue(
       this.selectedBasicCompounds[0]
     );
-   
-    this.bufferForm.controls['target_pH'].setValue(this.bufferSpeciespHMap[bufferSpeciesSelected.split('-')[0]]);
+
+    this.bufferForm.controls['target_pH'].setValue(
+      this.bufferSpeciespHMap[bufferSpeciesSelected.split('-')[0]]
+    );
     //set the buffer label - for user to know what to input
     this.buffer_label = bufferSpeciesSelected.split('-')[0] + ' Conc. (M)';
   }
@@ -296,7 +303,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   ////Function to handle form submission
   onSubmit() {
     this.formSubmitted = true;
-   
+
     if (this.bufferForm.invalid) {
       // Show error message to the user
       this.errorMessage = 'Please correct the errors in the form';
@@ -305,7 +312,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
 
     try {
       this.userInputSolution = new Solution('User Input Solution');
-      
+
       const acidicCompoundName = this.bufferForm.get('acidicCompound').value;
       const basicCompoundName = this.bufferForm.get('basicCompound').value;
       const saltCompoundName = this.bufferForm.get('saltCompound').value;

@@ -13,9 +13,9 @@ import { SolutionMixtureService } from './solution-mixture.service';
 export class SolutionService {
   omSolutions: Solution[] = [];
 
-  private solutionSource = new BehaviorSubject<Solution | null>(null);
+  public solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
-  private solution_list_Source = new BehaviorSubject<Solution[]>([]);
+  public solution_list_Source = new BehaviorSubject<Solution[]>([]);
   solutions_list = this.solution_list_Source.asObservable();
   example_solution: Solution;
 
@@ -32,17 +32,38 @@ export class SolutionService {
   changeSolution(solution: Solution) {
     this.solutionSource.next(solution);
   }
+  // deleteSolution(solution: Solution) {
+  //   const currentSolutions = this.solution_list_Source.value;
+  //   const updatedSolutions = currentSolutions.filter((s) => s !== solution);
+  //   this.solution_list_Source.next(updatedSolutions);
+  //  // if (this.solutionSource.value === solution) {
+  //     const newCurrentSolution = updatedSolutions[0] || null;
+  //     this.solutionSource.next(newCurrentSolution);
+  //   //}
+  // }
   deleteSolution(solution: Solution) {
     const currentSolutions = this.solution_list_Source.value;
-    const updatedSolutions = currentSolutions.filter((s) => s !== solution);
-    this.solution_list_Source.next(updatedSolutions);
-    if (this.solutionSource.value === solution) {
-      const newCurrentSolution = updatedSolutions[0] || null;
-      this.solutionSource.next(newCurrentSolution);
-    }
-  }
+    console.log("God: came to delete in service", currentSolutions, solution);
 
-  add_Solution(newSolution: Solution) {
+    const updatedSolutions = currentSolutions.filter((s) => s !== solution);
+
+
+    console.log("God: updated", updatedSolutions);
+    
+    const newCurrentSolution = updatedSolutions[0] || null;
+  
+    console.log("God - new current", this.solutionSource.value, newCurrentSolution);  
+      this.solutionSource.next(newCurrentSolution);
+    this.solution_list_Source.next(updatedSolutions);
+    console.log("God: after delete", this.solution_list_Source.value, this.solutionSource.value); 
+        // If the deleted solution is the current solution or the current solution is null
+    // if (this.solutionSource.value === solution || !this.solution_list_Source) {
+    //   console.log('God: current - removing current', this.solutionSource.value);
+    //   const newCurrentSolution = updatedSolutions[0] || null;
+    //   this.solutionSource.next(newCurrentSolution);
+    // }
+  }
+  add_Solution(newSolution: Solution) { 
     const currentSolutions = this.solution_list_Source.value;
 
     const updatedSolutions = [...currentSolutions, newSolution];

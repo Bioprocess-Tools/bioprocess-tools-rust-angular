@@ -2,6 +2,7 @@
 .super-calculator-main-card {
   box-shadow: none;
   padding: 10px;
+   background-color:var(--darkest-background-color);
 }
 
 .super-calculator-card {
@@ -15,6 +16,7 @@
 
   border-radius: 5px;
   box-shadow: none;
+   background-color:var(--darkest-background-color);
 }
 
 .adjust_pH_label {
@@ -52,6 +54,7 @@
 
   border-radius: 5px;
   box-shadow: none;
+   background-color:var(--darkest-background-color);
 }
 .super-calculator-button {
   display: flex;
@@ -86,4 +89,34 @@
 
 .right-align {
   text-align: right;
+}
+
+.red_flag {
+  color: var(--red-error-color);
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.green_flag {
+  color: var(--green-success-color);
+  margin: 4px;
+  margin-left: 20px;
+  padding: 0px;
+}
+.summary {
+  width: 97%;
+padding:10px;
+padding-top:3px;
+  box-shadow: none;
+     background-color:var(--darkest-background-color);
+}
+.message-card {
+
+  box-shadow: none;
+  border: 1px solid var(--gray-border-color);
+  padding: 0px;
+  width: 97%;
+  align-self: center;
+   background-color:var(--darkest-background-color);
 }

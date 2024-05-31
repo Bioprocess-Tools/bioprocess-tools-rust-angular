@@ -32,7 +32,7 @@
               "src/assets/images"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              
               "src/styles.scss","src/shared-styles.scss","src/_buffer_colors.scss"
             ],
             "scripts": []
@@ -115,7 +115,7 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
+              
               "src/styles.scss", "src/shared-styles.scss", "src/_buffer_colors.scss"
             ],
             "scripts": []

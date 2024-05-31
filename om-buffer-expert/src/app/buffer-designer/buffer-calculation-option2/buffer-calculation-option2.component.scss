@@ -29,7 +29,7 @@
   grid-area: input;
   display: grid;
   grid-template-columns: 1fr 1fr;
-
+  background-color:var(--darkest-background-color);
   width: 98%;
   margin-left: 0.5vw;
   box-shadow: none;
@@ -58,10 +58,11 @@
 }
 
 .summary {
-  grid-area: summary;
   width: 97%;
-  margin-left: 0.5vw;
+padding:10px;
+padding-top:3px;
   box-shadow: none;
+     background-color:var(--darkest-background-color);
 }
 .wide-button {
   grid-column: span 2;
@@ -74,7 +75,8 @@
 
 .rounded_input_om {
   padding-bottom: 15px;
-}
+ background-color:var(--darkest-background-color);
+} 
 
 .bold-label {
   font-size: medium;
@@ -137,6 +139,7 @@
   box-shadow: none;
   border: 1px solid var(--gray-border-color);
   padding: 0px;
-  width: 99%;
+  width: 97%;
   align-self: center;
+   background-color:var(--darkest-background-color);
 }

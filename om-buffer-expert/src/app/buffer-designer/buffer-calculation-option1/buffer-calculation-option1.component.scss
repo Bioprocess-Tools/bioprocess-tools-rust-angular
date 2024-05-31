@@ -28,6 +28,7 @@
   align-items: center;
   justify-items: center;
   box-shadow: none;
+  background-color:var(--darkest-background-color);
 }
 .red-text {
   color: var(--red-error-color);
@@ -53,8 +54,10 @@
 }
 .summary {
   width: 97%;
-  margin-left: 0.5vw;
+padding:10px;
+padding-top:3px;
   box-shadow: none;
+     background-color:var(--darkest-background-color);
 }
 
 .wide-button {
@@ -88,18 +91,23 @@
 .red_flag {
   color: var(--red-error-color);
   margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .green_flag {
   color: var(--green-success-color);
+  margin: 4px;
   margin-left: 20px;
+  padding: 0px;
 }
 
 .message-card {
   box-shadow: none;
   border: 1px solid var(--gray-border-color);
-  padding: 3px;
-  width: 99%;
+  padding: 0px;
+  width: 97%;
   align-self: center;
+   background-color:var(--darkest-background-color);
 }
 .right-align {
   text-align: right;

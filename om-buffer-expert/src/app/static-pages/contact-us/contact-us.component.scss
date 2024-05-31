@@ -1,16 +1,16 @@
 .contact-container {
   background-color: var(--primary-background-color);
-  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
+  box-shadow:inset 0 0 4px 2px var(--gray-inset-shadow-color);
   display: flex;
   text-align: center;
-  padding: 20px;
+  padding: 6px;
   overflow-y: auto;
   align-items: center;
   justify-content: center;
   width: 100%;
   overflow-y: auto;
   @media (max-width: 450px) {
-    padding: 10px;
+    padding: 6px;
   }
   .contact-form {
     display: flex;

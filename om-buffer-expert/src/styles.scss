@@ -1,7 +1,7 @@
 
 @use '@angular/material' as mat;
 @import 'src/shared-styles.scss';
-
+@include mat.core();
 
 * {
   margin: 0;
@@ -113,3 +113,4 @@ p, h1, h2, h3, h4, h5, h6, span, a {
   //border: 2px solid $main-border-color;
   box-shadow:inset 0 0 8px 2px $dark-scrollbar-track-color;
 }
+

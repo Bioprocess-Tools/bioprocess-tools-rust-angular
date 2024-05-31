@@ -78,7 +78,7 @@ export class SolutionTableComponent
 
   annotation_font: 12;
   constructor(
-    private solutionService: SolutionService,
+    public solutionService: SolutionService,
     private omRoute: Router,
     private apiService: ApiService
   ) {}
@@ -145,22 +145,22 @@ export class SolutionTableComponent
     this.scrollToSolution(solution);
   }
   deleteSolution(solution: Solution, i: number) {
-    if (this.solutions.length > 1 && i > 0) {
-      this.selectedSolution = this.solutions[i - 1];
-      this.solution = this.selectedSolution;
-      this.solutionService.deleteSolution(solution);
-    } else if (this.solutions.length > 1 && i == 0) {
-      this.selectedSolution = this.solutions[i + 1];
-      this.solution = this.selectedSolution;
-      this.solutionService.deleteSolution(solution);
-    } else if (this.solutions.length == 1) {
-      this.solutionService.deleteSolution(solution);
-      this.solution = null;
-      this.selectedSolution = null;
-    } else {
-      this.solution = null;
-      this.selectedSolution = null;
-    }
+    // console.log("God",this.solutions.length,i,this.solution)
+    console.log("God: component deleting solution",solution)
+     this.solutionService.deleteSolution(solution);
+   // this.solution = this.selectedSolution;
+    // console.log("God after",this.solutions.length,i,this.solution,this.selectedSolution);
+    // if (this.solutions.length == 2 && i == 1) {
+    //   this.selectedSolution = this.solutions[0];
+    //   this.solution = this.selectedSolution;
+    //   this.solutionService.deleteSolution(solution);
+    // } else if (this.solutions.length == 2 && i == 0) {
+    //   this.selectedSolution = this.solutions[1];
+    //   this.solution = this.selectedSolution;
+    //   this.solutionService.deleteSolution(solution);
+    // } else {
+      
+    // }
   }
 
   editSolution(solution: Solution) {
@@ -194,12 +194,14 @@ export class SolutionTableComponent
   ngOnInit() {
     //this.example_solution = this.solutionService.example_solution;
     this.solutionService.solutions_list.subscribe((solutions) => {
+
       this.solutions = solutions;
+      console.log('God: solutions list subscription', solutions);
     });
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution) {
-          // Assuming you have a method to handle the form population
+              console.log("God: solution subscription",solution);
 
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;
@@ -207,6 +209,10 @@ export class SolutionTableComponent
           if (Object.keys(this.solution.heat_map_data).length > 0) {
             this.generateHeatMap();
           }
+        }
+        else {
+          this.solution = null;
+          this.selectedSolution = null;
         }
       },
     });

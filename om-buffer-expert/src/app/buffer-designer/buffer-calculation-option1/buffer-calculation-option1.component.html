@@ -74,27 +74,7 @@
   </form>
 
   <mat-card class="summary">
-    <mat-card class="solution-card" *ngIf="returnedSolution;">
-      <mat-card-header>
-        <!-- <div class="avatar">{{avatarLetter}}</div> -->
-        <mat-card-title class="solution-name" [class.red-text]="returnedSolution.result_flag['flag'] === 'red'" >{{returnedSolution.name}}</mat-card-title>
-        <mat-divider></mat-divider>
-        <mat-card-subtitle>Buffer Composition Summary</mat-card-subtitle>
-      </mat-card-header>
-      <mat-divider></mat-divider>
-      <mat-card-content
-        *ngFor="let compound of returnedSolution.compound_concentrations | keyvalue">
-        <p class="less-space" mat-headline-1> {{ compound.key }} : {{ compound.value | number: '1.3-3' }}M</p>
-        <mat-divider></mat-divider>
-        <h1></h1>
-      </mat-card-content>
 
-
-      <h2 class="pH"> pH : {{returnedSolution.pH | number:
-        '1.3-3'}}</h2>
-      <mat-divider></mat-divider>
-
-    </mat-card>
     <mat-card class="message-card" *ngIf="returnedSolution && formSubmitted">
      <p class="red_flag" *ngIf="returnedSolution?.result_flag['flag'] !== 'green'">  <span class="material-icons">
       error

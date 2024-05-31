@@ -1,6 +1,7 @@
 @use '@angular/material' as mat;
 @import 'src/shared-styles.scss';
 :root {
+ --darkest-background-color: #{$darkest-background-color};
   --primary-text-color: #{$primary-text-color};
   --dark-scrollbar-track-color: #{$dark-scrollbar-track-color};
   --light-scrollbar-thumb-color: #{$light-scrollbar-thumb-color};
@@ -13,7 +14,7 @@
   --darker-orange-background-color: #{$darker-orange-background-color};
   --pink-background-color: #{$pink-background-color};
   --blue-background-color: #{$blue-background-color};
-  --gray-inset-shadow-color: #{$gray-inset-shadow-color};
+  --gray-inset-shadow-color: #{$darker-inset-shadow-color};
   --gray-border-color1: #{$gray-border-color1};
   --gray-border-color: #{$gray-border-color};
   --red-error-color: #{$red-error-color};
@@ -31,11 +32,6 @@
   --background-color: #{$background-color};
   --headtext-color: #{$headtext-color};
   --quaternary-color: #{$quaternary-color};
-  --omtrybackground1: #{$omtrybackground1};
-  --omtrybackground2: #{$omtrybackground2};
-  --omtrybackground3: #{$omtrybackground3};
-  --omtrybackground4: #{$omtrybackground4};
-  --omtrybackground: #{$omtrybackground};
   --card-background: #{$card-background};
   --divider-green: #{$divider-green};
   --accent-green: #{$accent-green};

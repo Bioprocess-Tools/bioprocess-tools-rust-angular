@@ -8,7 +8,7 @@
   .card-background {
     width: 100%;
 
-   box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
+    box-shadow: inset 0 0 4px 2px var(--gray-inset-shadow-color);
 
     background-color: var(--primary-background-color);
     align-items: center;
@@ -23,7 +23,7 @@
       background-color: var(--primary-background-color);
       grid-auto-flow: column;
 
-      overflow-x: auto;
+      overflow-x: scroll;
       overflow-y: hidden;
       overscroll-behavior-x: contain;
       scroll-snap-type: x proximity;
@@ -31,7 +31,7 @@
       gap: 5px;
       padding: 10px;
       width: 100%;
-      z-index: 3;
+      //z-index: 3;
 
       @media (max-width: 450px) {
       }
@@ -54,7 +54,7 @@
         justify-content: space-between;
         align-items: center;
         align-self: center;
-        z-index: 0;
+        //z-index: 0;
         scroll-snap-align: start;
         width: 250px;
         padding: 10px;
@@ -66,7 +66,7 @@
         }
 
         .scroll-title {
-          font-size: medium;
+          font-size: large;
           font-weight: bold;
           text-align: center;
           //font-style: italic;
@@ -91,13 +91,13 @@
             align-items: center;
             justify-content: center;
             color: var(--primary-text-color);
-            font-size: x-small;
+            font-size: medium;
             text-align: center;
             background-color: var(--primary-background-color);
             border-radius: 20px;
             height: 1.5em;
             @media (max-width: 450px) {
-              font-size: xx-small;
+              font-size: small;
             }
             .delete-button {
               border: none;
@@ -110,7 +110,7 @@
                 font-size: 20px;
                 color: aqua;
                 @media screen and (max-width: 450px) {
-                  font-size: 18px;
+                  font-size: small;
                 }
               }
             }
@@ -174,8 +174,9 @@
     .summary-grid-label {
       display: flex;
       border-radius: 5px;
+
+      box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
       background-color: var(--gray-background-color);
-      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       //font-weight: bold;
       text-align: left;
       padding-left: 20px;
@@ -184,14 +185,14 @@
       padding-bottom: 5px;
 
       @media (max-width: 450px) {
-        font-size: small;
+        font-size: medium;
         padding-left: 8px;
       }
     }
     .summary-grid-value {
       border-radius: 5px;
+      box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
       background-color: var(--gray-background-color);
-      box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -225,7 +226,7 @@
       padding-bottom: 5px;
 
       @media (max-width: 450px) {
-        font-size: small;
+        font-size: medium;
         padding-left: 8px;
       }
       &.pH-label {
@@ -239,6 +240,7 @@
         padding-top: 0px;
         padding-bottom: 0px;
         .pH_label_only {
+          border-radius: 10px;
           text-align: center;
           padding-left: 20px;
           padding-right: 20px;
@@ -273,6 +275,7 @@
         padding-bottom: 0px;
         .pH_value_only {
           text-align: center;
+          border-radius: 10px;
           padding-left: 20px;
           padding-right: 20px;
           padding-top: 10px;
@@ -290,11 +293,11 @@
 .compound-card-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
+  box-shadow: inset 0 0 4px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
-  padding: 10px;
+  padding: 6px;
 
   .compound-cards {
     background-color: var(--primary-background-color);
@@ -305,7 +308,7 @@
     padding: 15px;
     width: 100%;
     justify-content: space-evenly;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
@@ -326,7 +329,7 @@
       padding: 10px;
 
       @media (max-width: 1500px) {
-        width: 290px;
+        width: 320px;
       }
       @media (max-width: 450px) {
         width: 270px;
@@ -342,7 +345,7 @@
         margin-left: 3px;
         height: 60px;
         @media (max-width: 450px) {
-          font-size: small;
+          font-size: large;
           height: 50px;
         }
       }
@@ -362,23 +365,23 @@
             //box-shadow: inset 0px 0px 1px 0.5px var(--gray-border-color);
             border-radius: 5px;
             //background-color: var(--gray-background-color);
-            font-size: small;
+            font-size: medium;
             text-align: right;
 
             @media (max-width: 450px) {
-              font-size: small;
+              font-size: medium;
             }
           }
           .grid-value {
             box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
             background-color: var(--gray-background-color);
             border-radius: 5px;
-            font-size: small;
+            font-size: medium;
             text-align: left;
             padding-left: 8px;
             padding-right: 5px;
             @media (max-width: 450px) {
-              font-size: small;
+              font-size: medium;
             }
           }
         }
@@ -391,11 +394,11 @@
 .ion-card-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
+  box-shadow: inset 0 0 4px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
-  padding: 10px;
+  padding: 6px;
   .ion-cards {
     background-color: var(--primary-background-color);
     align-self: center;
@@ -406,7 +409,7 @@
     width: 100%;
     justify-content: space-evenly;
     align-items: center;
-    overflow-x: auto;
+    overflow-x: scroll;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
     scroll-snap-type: x proximity;
@@ -445,7 +448,7 @@
         margin: 0px;
         margin-left: 3px;
         @media (max-width: 450px) {
-          font-size: small;
+          font-size: medium;
         }
       }
       .ion-card-content {
@@ -468,25 +471,25 @@
           }
           .pka-names-label {
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             //font-weight: bold;
             padding: 0px;
             margin: 0px;
             @media (max-width: 450px) {
-              font-size: x-small;
+              font-size: medium;
             }
           }
           .pka-names {
             margin: 0px;
             width: 100%;
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             border-radius: 5px;
+            box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
             background-color: var(--gray-background-color);
-            box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
-              font-size: small;
+              font-size: medium;
             }
           }
         }
@@ -511,24 +514,24 @@
 
           .ion-names-label {
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             //font-weight: bold;
             padding: 0px;
             margin: 0px;
             @media (max-width: 450px) {
-              font-size: x-small;
+              font-size: medium;
             }
           }
 
           .ion-names {
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             border-radius: 5px;
+            box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
             background-color: var(--gray-background-color);
-            box-shadow: inset 0px 0px 1px 0.5px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
-              font-size: x-small;
+              font-size:medium;
             }
           }
         }
@@ -549,25 +552,25 @@
           }
           .conc-names-label {
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             //font-weight: bold;
             padding: 0px;
             margin: 0px;
             @media (max-width: 450px) {
-              font-size: x-small;
+              font-size: medium;
             }
           }
           .conc-names {
             margin: 0px;
             width: 100%;
             color: var(--primary-text-color);
-            font-size: small;
+            font-size: medium;
             border-radius: 5px;
+            box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
             background-color: var(--gray-background-color);
-            box-shadow: inset 0px 0px 1px 1px var(--gray-inset-shadow-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
-              font-size: x-small;
+              font-size: medium;
             }
           }
         }
@@ -581,11 +584,11 @@
 .heatmap-background {
   width: 100%;
   background-color: var(--primary-background-color);
-  box-shadow:inset 0 0 8px 2px var(--gray-inset-shadow-color);
+  box-shadow: inset 0 0 4px 2px var(--gray-inset-shadow-color);
 
   align-self: center;
   //margin: 3px;
-  padding: 10px;
+  padding: 6px;
 
   .heatmap {
     align-items: center;
@@ -599,11 +602,11 @@
 
   .heatmap_title {
     color: var(--primary-text-color);
-    // font-size: large;
+    font-size: large;
     padding-top: 10px;
     font-weight: bold;
     @media screen and (max-width: 450px) {
-      font-size: small;
+      font-size: medium;
     }
   }
 }

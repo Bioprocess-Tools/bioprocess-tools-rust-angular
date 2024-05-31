@@ -1,6 +1,10 @@
 <mat-card class="container">
-<mat-card *ngIf="solution" class="card-background">
-  <mat-card class="grid-container">
+
+<mat-card  class="card-background">
+
+  <mat-card class="grid-container" *ngIf="solutions.length>0">
+
+
     <mat-card
       class="grid-item" 
       *ngFor="let solution of solutions; let i = index"
@@ -12,6 +16,7 @@
       (click)="viewDetails(solution, i, $event)"
     >
       <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" #solutionElement >{{ solution.name }}</p>
+
       <div class="bottom-line">
         <p class="multi">{{solution.solution_type}}</p>
 
@@ -20,13 +25,14 @@
           class="delete-button"
           (click)="deleteSolution(solution,i)"
         >
-          <mat-icon  class="d_icon">delete</mat-icon>
+          <mat-icon  color='warn' class="d_icon">delete</mat-icon>
         </button>
       </div>
 
     </mat-card>
   </mat-card>
 </mat-card>
+
 
 <mat-card class="solution_summary" *ngIf="solution">
   <mat-card-header class="solution_title">
