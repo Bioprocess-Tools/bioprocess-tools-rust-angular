@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@angular/service-worker": "^16.1.0",
     "angular-plotly.js": "^5.2.2",
     "plotly.js-cartesian-dist-min": "^2.32.0",
     "rxjs": "~7.8.0",

@@ -1,4 +1,4 @@
-import { NgModule,APP_INITIALIZER } from '@angular/core';
+import { NgModule,APP_INITIALIZER, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SolutionMixtureService } from './solution-mixture.service';
 
@@ -31,6 +31,7 @@ import { CoreModule } from './core/core.module';
 import { BufferDesignerModule } from './buffer-designer/buffer-designer.module';
 import { StaticPagesModule } from './static-pages/static-pages.module';
 import { SolutionMixtureMainModule } from './solution-mixture/solution-mixture-main/solution-mixture-main.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -64,7 +65,13 @@ PlotlyModule.plotlyjs = PlotlyJS;
     StaticPagesModule,
     MatStepperModule,
     MatChipsModule,
-    PlotlyModule
+    PlotlyModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
  
     
   ],
