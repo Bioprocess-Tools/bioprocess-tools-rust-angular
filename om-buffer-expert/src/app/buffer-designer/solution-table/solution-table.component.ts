@@ -118,7 +118,16 @@ export class SolutionTableComponent
       this.solutionSubscription.unsubscribe();
     }
   }
+  getFontSize(name: string): string {
+    let length = name.length;
+    let fontSize = 24; // Default font size
 
+    if (length > 50) {
+      fontSize = 16; // Reduce font size if name is long
+    }
+
+    return fontSize + 'px';
+  }
   ngOnChanges(changes: SimpleChanges): void {
     //this.generateHeatMap();
 
@@ -146,9 +155,9 @@ export class SolutionTableComponent
   }
   deleteSolution(solution: Solution, i: number) {
     // console.log("God",this.solutions.length,i,this.solution)
-    console.log("God: component deleting solution",solution)
-     this.solutionService.deleteSolution(solution);
-   // this.solution = this.selectedSolution;
+    console.log('God: component deleting solution', solution);
+    this.solutionService.deleteSolution(solution);
+    // this.solution = this.selectedSolution;
     // console.log("God after",this.solutions.length,i,this.solution,this.selectedSolution);
     // if (this.solutions.length == 2 && i == 1) {
     //   this.selectedSolution = this.solutions[0];
@@ -159,7 +168,7 @@ export class SolutionTableComponent
     //   this.solution = this.selectedSolution;
     //   this.solutionService.deleteSolution(solution);
     // } else {
-      
+
     // }
   }
 
@@ -194,14 +203,13 @@ export class SolutionTableComponent
   ngOnInit() {
     //this.example_solution = this.solutionService.example_solution;
     this.solutionService.solutions_list.subscribe((solutions) => {
-
       this.solutions = solutions;
       console.log('God: solutions list subscription', solutions);
     });
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution) {
-              console.log("God: solution subscription",solution);
+          console.log('God: solution subscription', solution);
 
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;
@@ -209,8 +217,7 @@ export class SolutionTableComponent
           if (Object.keys(this.solution.heat_map_data).length > 0) {
             this.generateHeatMap();
           }
-        }
-        else {
+        } else {
           this.solution = null;
           this.selectedSolution = null;
         }
@@ -218,7 +225,10 @@ export class SolutionTableComponent
     });
 
     window.addEventListener('resize', () => {
-      this.generateHeatMap();
+                if (Object.keys(this.solution.heat_map_data).length > 0) {
+                  this.generateHeatMap();
+                }
+     
     });
   }
   getKeys(sol: Solution): boolean {

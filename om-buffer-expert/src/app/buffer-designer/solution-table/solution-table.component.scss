@@ -42,7 +42,7 @@
         border-radius: 20px;
       }
       .unhighlighted-card {
-        border: 3px solid var(--gray-border-color); /* Change color as per your requirement */
+        border: 3px solid var (--gray-border-color); /* Change color as per your requirement */
         border-width: 3px;
         //box-shadow: 0 4px 8px 0 var(--black-box-shadow-color);
       }
@@ -58,6 +58,7 @@
         scroll-snap-align: start;
         width: 250px;
         padding: 10px;
+        background-color: var(--darkest-background-color);
         //border: 2px solid var(--gray-border-color);
         border-radius: 20px;
         box-shadow: 5px;
@@ -108,7 +109,7 @@
               justify-self: right;
               .d_icon {
                 font-size: 20px;
-                color: aqua;
+
                 @media screen and (max-width: 450px) {
                   font-size: small;
                 }
@@ -129,6 +130,7 @@
   border-width: 5px;
   border-color: var(--teal-background-color);
   border-radius: 25px;
+ background-color: var(--darkest-background-color);
   //box-shadow: inset 0px 0px 3px 2px var(--gray-inset-shadow-color);
   @media (max-width: 450px) {
     width: 95%;
@@ -138,7 +140,7 @@
     font-size: large;
     color: var(--primary-text-color);
     //margin-top: 5px;
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -146,18 +148,22 @@
     border-bottom: 2px solid var(--gray-border-color);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    background-color: var(--accent-chip1);
+    background-color:var(--teal-background-color);
     width: 100%;
     box-sizing: border-box;
   }
   .solution-content {
+    display:flex;
+    padding-top:10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     //align-items: center;
     gap: 10px;
     //width:60%;
-
+    background-color: var(--darkest-background-color);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     @media (max-width: 450px) {
       //width: 95%;
     }
@@ -167,6 +173,7 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 3px 20px;
+       background-color: transparent;
     @media (max-width: 450px) {
       //grid-template-columns: auto 1fr;
       gap: 3px 5px;
@@ -192,7 +199,7 @@
     .summary-grid-value {
       border-radius: 5px;
       box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
-      background-color: var(--gray-background-color);
+      background-color: var(--primary-background-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -247,6 +254,7 @@
           padding-top: 10px;
           padding-bottom: 10px;
           background-color: var(--teal-background-color);
+          box-shadow:  0px 0px 3px .5px black;
           width: 80px;
         }
       }
@@ -281,6 +289,7 @@
           padding-top: 10px;
           padding-bottom: 10px;
           background-color: var(--teal-background-color);
+          box-shadow:  0px 0px 3px .5px black;
           width: 80px;
         }
       }
@@ -316,7 +325,7 @@
     }
 
     .compound-card {
-      background-color: var(--lighter-background-color);
+      background-color: var(--darkest-background-color);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -332,7 +341,7 @@
         width: 320px;
       }
       @media (max-width: 450px) {
-        width: 270px;
+        width: 300px;
       }
       @media (max-width: 300px) {
         width: 250px;
@@ -352,6 +361,7 @@
       .ion-card-content {
         display: flex;
         flex-direction: column;
+        padding-top:8px;
         @media (max-width: 450px) {
           padding-left: 8px;
           padding-right: 8px;
@@ -374,7 +384,7 @@
           }
           .grid-value {
             box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
-            background-color: var(--gray-background-color);
+            background-color: var(--primary-background-color);
             border-radius: 5px;
             font-size: medium;
             text-align: left;
@@ -422,25 +432,24 @@
       justify-content: space-between;
       align-self: center;
       justify-self: center;
-
+      
       //scroll-snap-align: start;
       width: 30vw;
       border-width: 4px;
       border-radius: 20px;
-
+      background-color:var(--darkest-background-color);
       border-color: var(--blue-background-color);
       padding: 10px;
-      //margin-top:1px;
-      //margin-bottom:1px;
-      //box-shadow:none;
+
+
       @media (max-width: 1500px) {
-        width: 320px;
+        width: 360px;
       }
       @media (max-width: 450px) {
-        width: 300px;
+        width: 320px;
       }
       @media (max-width: 300px) {
-        width: 250px;
+        width: 280px;
       }
       .ion_names-title {
         font-size: large;
@@ -486,7 +495,7 @@
             font-size: medium;
             border-radius: 5px;
             box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
-            background-color: var(--gray-background-color);
+            background-color: var(--primary-background-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size: medium;
@@ -528,7 +537,7 @@
             font-size: medium;
             border-radius: 5px;
             box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
-            background-color: var(--gray-background-color);
+            background-color: var(--primary-background-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size:medium;
@@ -567,7 +576,7 @@
             font-size: medium;
             border-radius: 5px;
             box-shadow: inset 0px 0px 1px 0.5px var(--inset-shadow-color-grey);
-            background-color: var(--gray-background-color);
+            background-color: var(--primary-background-color);
             box-sizing: border-box;
             @media (max-width: 450px) {
               font-size: medium;
@@ -583,6 +592,7 @@
 
 .heatmap-background {
   width: 100%;
+
   background-color: var(--primary-background-color);
   box-shadow: inset 0 0 4px 2px var(--gray-inset-shadow-color);
 
@@ -595,7 +605,7 @@
     justify-content: center;
     width: 100%;
     padding-bottom: 13px;
-
+  background-color: var(--darkest-background-color);
     @media screen and (max-width: 450px) {
     }
   }

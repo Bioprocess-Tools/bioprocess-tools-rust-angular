@@ -134,7 +134,12 @@ padding-top:3px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
+.red {
+  color: var(--red-error-color);
+}
+.green {
+  color: var(--green-success-color);
+}
 .message-card {
   box-shadow: none;
   border: 1px solid var(--gray-border-color);

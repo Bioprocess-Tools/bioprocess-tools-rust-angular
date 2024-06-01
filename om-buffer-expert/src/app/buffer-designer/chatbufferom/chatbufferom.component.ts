@@ -30,6 +30,7 @@ export class ChatbufferomComponent implements OnInit {
   buffer_species_names: string[] = [];
   filteredBufferSpecies: Observable<string[]>;
   buffer_species_pH: { [key: string]: any } = {};
+  submitted = false;
   currentSolution: Solution;
   private exampleSolutionSubscription: Subscription;
  currentSolutionSubscription: Subscription;
@@ -154,6 +155,7 @@ if (solution.solution_type === 'Single-Species' || solution.solution_type === 'D
     return matches ? matches : [];
   }
   onOptionSelected(event: MatAutocompleteSelectedEvent) {
+    this.submitted = false;
     const selectedOption = event.option.value;
     let buffer_species_first = selectedOption.split('-')[0];
 
@@ -167,6 +169,7 @@ if (solution.solution_type === 'Single-Species' || solution.solution_type === 'D
     }
   }
   onSubmit(form: FormGroup) {
+    this.submitted = true;
     const userInput = this.form.value.userInput;
     const inputclean = this.getWords(userInput);
     const isValid = inputclean.some((word) =>
@@ -179,6 +182,7 @@ if (solution.solution_type === 'Single-Species' || solution.solution_type === 'D
       this.apiService.sendUserInput(userInput.toLowerCase()).subscribe(
         (response) => {
           this.response_solution = new Solution('God');
+          this.submitted = true;
           Object.assign(this.response_solution, response);
           this.solutionService.add_Solution(this.response_solution);
           this.solutionService.changeSolution(this.response_solution);

@@ -89,7 +89,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
         this.second_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
-
+        this.submitted = false;
         this.third_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
@@ -101,7 +101,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
         this.first_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
-
+ this.submitted = false;
         this.third_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
@@ -113,7 +113,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
         this.second_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
-
+ this.submitted = false;
         this.first_compound_options = this.all_buffer_compound_names
           .filter((compound) => compound !== value)
           .sort();
@@ -122,7 +122,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
 
     this.bufferForm.get('adjust_pH').valueChanges.subscribe((checked) => {
       const target_pH = this.bufferForm.get('target_pH');
-
+ this.submitted = false;
       if (checked) {
         // If the checkbox is checked, enable the field and add the required validator
         target_pH.enable();
@@ -135,6 +135,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
         // If the checkbox is not checked, disable the field and remove the required validator
         target_pH.disable();
         target_pH.clearValidators();
+         this.submitted = false;
       }
 
       // Update the validity state of the pH_adjust_compound field
@@ -295,7 +296,9 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
 
     this.solutionService.super_calculate_pH(data).subscribe({
       next: (response: Solution) => {
+        this.returnedSolution = response;
         this.solution = response;
+        this.submitted = true;
       },
       error: (error) => {
         console.error('Error:', error);

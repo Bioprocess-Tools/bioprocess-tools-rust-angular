@@ -31,6 +31,12 @@
   padding: 0px;
 }
 
+.red {
+  color: var(--red-error-color);
+}
+.green {
+  color: var(--green-success-color);
+}
 .form-card {
   grid-area: form-card;
   display: flex;
@@ -131,7 +137,7 @@
 
   .summary {
     width: 97%;
-
+    padding-top:0px;
     margin-left: 1vw;
   }
 

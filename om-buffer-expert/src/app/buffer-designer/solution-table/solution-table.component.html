@@ -13,9 +13,14 @@
           solutions.length == 1 || selectedSolution === solution,
           'unhighlighted-card': selectedSolution !== null && selectedSolution !== solution
       }"
+ 
       (click)="viewDetails(solution, i, $event)"
     >
-      <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" #solutionElement >{{ solution.name }}</p>
+      <p class="scroll-title" [class.red-text]="solution.result_flag['flag'] === 'red'" 
+           [ngStyle]="{'font-size': getFontSize(solution.name)}" 
+      
+      
+      #solutionElement >{{ solution.name }}</p>
 
       <div class="bottom-line">
         <p class="multi">{{solution.solution_type}}</p>

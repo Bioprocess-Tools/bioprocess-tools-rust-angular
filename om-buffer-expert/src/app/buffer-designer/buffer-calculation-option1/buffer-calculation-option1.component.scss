@@ -101,6 +101,12 @@ padding-top:3px;
   padding: 0px;
 }
 
+.red {
+  color: var(--red-error-color);
+}
+.green {
+  color: var(--green-success-color);
+}
 .message-card {
   box-shadow: none;
   border: 1px solid var(--gray-border-color);

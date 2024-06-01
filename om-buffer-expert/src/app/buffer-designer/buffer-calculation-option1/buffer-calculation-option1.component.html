@@ -76,15 +76,15 @@
   <mat-card class="summary">
 
     <mat-card class="message-card" *ngIf="returnedSolution && formSubmitted">
-     <p class="red_flag" *ngIf="returnedSolution?.result_flag['flag'] !== 'green'">  <span class="material-icons">
+     <p class="red_flag" *ngIf="returnedSolution?.result_flag['flag'] !== 'green'">  <span class="material-icons red">
       error
       </span>
       {{ '  '+returnedSolution.result_flag['comment'] }}
       </p>
 
-      <p class="green_flag" *ngIf="returnedSolution?.result_flag['flag'] == 'green'">  <span class="material-icons">
+      <p class="green_flag" *ngIf="returnedSolution?.result_flag['flag'] == 'green'">  <mat-icon class="material-icons green">
         check_circle
-        </span>
+        </mat-icon>
         &nbsp; Done!
         </p>
     </mat-card>

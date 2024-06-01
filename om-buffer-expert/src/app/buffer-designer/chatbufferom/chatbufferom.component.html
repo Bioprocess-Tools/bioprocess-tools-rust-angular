@@ -23,16 +23,16 @@
           [matTooltip]="buffer_species_names.join(', ')" matTooltipPosition="above">
 
         <div *ngIf="form.get('userInput').errors">
-          <p class="instruct">Input needs a buffer species; See Quick Start above.</p>
+          <p class="instruct">Input needs a buffer species</p>
         </div>
       </mat-form-field>
 
-      <p class="green_flag" *ngIf="form.valid && form.dirty ==true"><span class="material-icons">
+      <p class="green_flag" *ngIf="form.valid && form.dirty ==true"><span class="material-icons green">
         check_circle
         </span>  Buffer species</p> 
   
       <!-- Cross icon for invalid state -->
-      <p class="red_flag" *ngIf="form.invalid && form.dirty==true"><span class="material-icons">
+      <p class="red_flag" *ngIf="form.invalid && form.dirty==true"><span class="material-icons red">
         error
         </span>  Buffer species</p>
       <button class="wide-button" color="accent" mat-raised-button type="submit"
@@ -43,13 +43,13 @@
 <mat-card class= "summary"> 
  
 
-    <mat-card class="message-card" *ngIf="response_solution">
-     <p class="red_flag" *ngIf="response_solution?.result_flag['flag'] == 'red'">  <span class="material-icons">
+    <mat-card class="message-card" *ngIf="response_solution &&submitted">
+     <p class="red_flag" *ngIf="response_solution?.result_flag['flag'] == 'red'">  <span class="material-icons red">
       error
       </span>
         {{ '  '+response_solution.result_flag['comment'] }}
       </p>
-      <p class="green_flag" *ngIf="response_solution?.result_flag['flag'] == 'green'">  <span class="material-icons">
+      <p class="green_flag" *ngIf="response_solution?.result_flag['flag'] == 'green'">  <span class="material-icons green">
         check_circle
         </span>
         &nbsp; Done!

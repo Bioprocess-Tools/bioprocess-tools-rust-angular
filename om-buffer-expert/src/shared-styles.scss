@@ -239,7 +239,7 @@ $error-palette: mat.define-palette((
   200: #ef9a9a,
   300: #e57373,
   400: #ef5350,
-  500: #c62d07, // Red-Orange
+  500: #d23e19, // Red-Orange
   600: #e53935,
   700: #d32f2f,
   800: #c62828,
@@ -369,7 +369,7 @@ $gray-inset-shadow-color:mat.get-color-from-palette($charcoal-palette,200);
 $gray-border-color1: mat.get-color-from-palette($charcoal-palette,200);
 $gray-border-color: mat.get-color-from-palette($charcoal-palette,500);
 $red-error-color: mat.get-color-from-palette($error-palette,900);
-$green-success-color: #127907;
+$green-success-color: #1c9d0d;
 $yellow-border-color: mat.get-color-from-palette($warn-palette,300);
 $black-box-shadow-color: mat.get-color-from-palette($charcoal-palette,500);
 $gray-background-color: mat.get-color-from-palette($charcoal-palette,400);
