@@ -56,6 +56,9 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
       this.acidCompounds = this.solutionMixtureService.acidic_compounds;
       this.basicCompounds = this.solutionMixtureService.basic_compounds;
       this.saltCompounds = this.solutionMixtureService.salt_compounds;
+      this.saltCompounds = this.saltCompounds.filter(
+        (compound) => compound !== 'Water'
+      );
       this.buffer_compound_names = this.solutionMixtureService.buffer_compounds;
       this.selectedAcidCompounds = this.acidCompounds;
       this.selectedBasicCompounds = this.basicCompounds;
@@ -149,11 +152,7 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
   populateForm(solution: Solution) {
     try {
       //we will not populate if it is from the super calculator, if the compounds is greater than 2
-      if (
-        solution &&
-        typeof solution === 'object' &&
-        solution.non_salt_compounds.length <= 2
-      ) {
+      if (solution && solution.non_salt_compounds.length <= 2) {
         this.bufferForm.controls['bufferSpeciesControl'].setValue(
           solution.buffer_species
         );
@@ -187,6 +186,11 @@ export class BufferCalculationOption2Component implements OnInit, OnDestroy {
           this.bufferForm.controls['saltCompound'].setValue(saltname);
           this.bufferForm.controls['saltConcentration'].setValue(saltconc);
         }
+
+        this.bufferForm.updateValueAndValidity({
+          onlySelf: false,
+          emitEvent: true,
+        });
       }
     } catch (error) {
       // Handle error

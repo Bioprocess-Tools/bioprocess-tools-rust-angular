@@ -16,12 +16,31 @@
 }
 
 .toolbar-items {
-  display: none;
+  //display: none;
+    @media (max-width: 450px) {
+    display:none;
+  }
 }
 .toolbar-row {
-  
+  @media (max-width: 450px) {
+    padding:2px;
+  }
+}
+.linkedin-icon {
+  color: #0e8dc8;
+  font-size: 1em;
+}
+.linkedin-icon:hover {
+  color: #0077b5;
+}
+.whatsapp-icon {
+  color: #25D366;
+    font-size: 1em;
 }
 
+.whatsapp-icon:hover {
+  color: #128C7E;
+}
 .mat-headline-4 {
   
   margin-bottom: 2px;

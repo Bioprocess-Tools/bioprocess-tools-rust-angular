@@ -104,13 +104,14 @@ p, h1, h2, h3, h4, h5, h6, span, a {
   scrollbar-color: $light-scrollbar-thumb-color $dark-scrollbar-track-color; // thumb and track color
 }
 
-@mixin inset-border {
-  //border: 2px solid $main-border-color;
-  box-shadow:inset 0 0 8px 2px $gray-inset-shadow-color;
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-@mixin new-inset{
-  //border: 2px solid $main-border-color;
-  box-shadow:inset 0 0 8px 2px $dark-scrollbar-track-color;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
-

@@ -35,10 +35,8 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     public solutionService: SolutionService,
-    public solutionMixtureService: SolutionMixtureService
-  ) // public omroute:Router
-
-  {}
+    public solutionMixtureService: SolutionMixtureService // public omroute:Router
+  ) {}
 
   ngOnInit(): void {
     //this.bufferForm.reset;
@@ -46,6 +44,9 @@ export class BufferCalculationOption1Component implements OnInit, OnDestroy {
     this.acidCompounds = this.solutionMixtureService.acidic_compounds;
     this.basicCompounds = this.solutionMixtureService.basic_compounds;
     this.saltCompounds = this.solutionMixtureService.salt_compounds;
+    this.saltCompounds = this.saltCompounds.filter(
+      (compound) => compound !== 'Water'
+    );
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution && solution.non_salt_compounds.length <= 2) {

@@ -32,36 +32,28 @@ export class SolutionService {
   changeSolution(solution: Solution) {
     this.solutionSource.next(solution);
   }
-  // deleteSolution(solution: Solution) {
-  //   const currentSolutions = this.solution_list_Source.value;
-  //   const updatedSolutions = currentSolutions.filter((s) => s !== solution);
-  //   this.solution_list_Source.next(updatedSolutions);
-  //  // if (this.solutionSource.value === solution) {
-  //     const newCurrentSolution = updatedSolutions[0] || null;
-  //     this.solutionSource.next(newCurrentSolution);
-  //   //}
-  // }
+
   deleteSolution(solution: Solution) {
-    const currentSolutions = this.solution_list_Source.value;
-    console.log("God: came to delete in service", currentSolutions, solution);
+  const currentSolutions = this.solution_list_Source.value;
+  const currentIndex = currentSolutions.indexOf(solution);
 
-    const updatedSolutions = currentSolutions.filter((s) => s !== solution);
+  const updatedSolutions = currentSolutions.filter((s) => s !== solution);
 
+  let newCurrentSolution = this.solutionSource.value;
+  if (newCurrentSolution === solution) {
+    if (updatedSolutions.length > 0) {
+      if (currentIndex >= updatedSolutions.length) {
+        newCurrentSolution = updatedSolutions[updatedSolutions.length - 1];
+      } else {
+        newCurrentSolution = updatedSolutions[currentIndex];
+      }
+    } else {
+      newCurrentSolution = null;
+    }
+    this.solutionSource.next(newCurrentSolution);
+  }
 
-    console.log("God: updated", updatedSolutions);
-    
-    const newCurrentSolution = updatedSolutions[0] || null;
-  
-    console.log("God - new current", this.solutionSource.value, newCurrentSolution);  
-      this.solutionSource.next(newCurrentSolution);
-    this.solution_list_Source.next(updatedSolutions);
-    console.log("God: after delete", this.solution_list_Source.value, this.solutionSource.value); 
-        // If the deleted solution is the current solution or the current solution is null
-    // if (this.solutionSource.value === solution || !this.solution_list_Source) {
-    //   console.log('God: current - removing current', this.solutionSource.value);
-    //   const newCurrentSolution = updatedSolutions[0] || null;
-    //   this.solutionSource.next(newCurrentSolution);
-    // }
+  this.solution_list_Source.next(updatedSolutions);
   }
   add_Solution(newSolution: Solution) { 
     const currentSolutions = this.solution_list_Source.value;

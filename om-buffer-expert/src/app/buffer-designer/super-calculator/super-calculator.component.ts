@@ -79,7 +79,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
         if (solution) {
           this.example_solution = solution;
           this.solution = solution;
-          this.populateForm(this.solution);
+          this.populateForm(solution);
         }
       },
     });
@@ -229,7 +229,7 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
           );
       }
 
-      if ((solution.salt_compound! = null)) {
+      if ((solution.salt_compound != null)) {
         this.bufferForm
           .get('salt_compound')
           ?.setValue(solution.salt_compound.name);
@@ -240,6 +240,11 @@ export class SuperCalculatorComponent implements OnInit, OnDestroy {
               solution.salt_compound.name
             ].toPrecision(3)
           );
+      }
+
+      else {
+        this.bufferForm.get('salt_compound')?.setValue('None');
+        this.bufferForm.get('salt_concentration')?.setValue(0);
       }
 
       this.bufferForm.get('adjust_pH')?.setValue(true);

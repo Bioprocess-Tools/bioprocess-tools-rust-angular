@@ -154,22 +154,9 @@ export class SolutionTableComponent
     this.scrollToSolution(solution);
   }
   deleteSolution(solution: Solution, i: number) {
-    // console.log("God",this.solutions.length,i,this.solution)
-    console.log('God: component deleting solution', solution);
-    this.solutionService.deleteSolution(solution);
-    // this.solution = this.selectedSolution;
-    // console.log("God after",this.solutions.length,i,this.solution,this.selectedSolution);
-    // if (this.solutions.length == 2 && i == 1) {
-    //   this.selectedSolution = this.solutions[0];
-    //   this.solution = this.selectedSolution;
-    //   this.solutionService.deleteSolution(solution);
-    // } else if (this.solutions.length == 2 && i == 0) {
-    //   this.selectedSolution = this.solutions[1];
-    //   this.solution = this.selectedSolution;
-    //   this.solutionService.deleteSolution(solution);
-    // } else {
 
-    // }
+    this.solutionService.deleteSolution(solution);
+
   }
 
   editSolution(solution: Solution) {
@@ -204,12 +191,12 @@ export class SolutionTableComponent
     //this.example_solution = this.solutionService.example_solution;
     this.solutionService.solutions_list.subscribe((solutions) => {
       this.solutions = solutions;
-      console.log('God: solutions list subscription', solutions);
+
     });
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution) {
-          console.log('God: solution subscription', solution);
+
 
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;

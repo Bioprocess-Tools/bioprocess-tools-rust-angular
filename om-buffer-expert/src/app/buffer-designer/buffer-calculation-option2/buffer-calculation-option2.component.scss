@@ -66,10 +66,25 @@ padding-top:3px;
 }
 .wide-button {
   grid-column: span 2;
-  width: 90%;
-  margin-left: 0.5vw;
-  @media (max-width: 550px) {
+font-size: large;
+  font-weight: bold;
+  color: var(--primary-text-color);
+  width: 60%;
+
+  background-color: var(--orange-background-color);
+  //padding: 3px;
+
+  border-radius: 25px;
+ //margin-bottom: 5px;
+
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--darker-orange-background-color);
+  }
+  @media (max-width: 450px) {
     grid-column: span 1;
+    font-size:small;
   }
 }
 
