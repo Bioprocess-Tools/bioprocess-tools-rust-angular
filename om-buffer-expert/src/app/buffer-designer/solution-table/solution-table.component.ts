@@ -119,12 +119,15 @@ export class SolutionTableComponent
     }
   }
   getFontSize(name: string): string {
-    let length = name.length;
-    let fontSize = 24; // Default font size
+    const maxLength = 150;
+    const minFontSize = 12;
+    const maxFontSize = 28;
 
-    if (length > 50) {
-      fontSize = 16; // Reduce font size if name is long
-    }
+    const length = name.length;
+    const fontSize = Math.max(
+      minFontSize,
+      maxFontSize - (length * (maxFontSize - minFontSize)) / maxLength
+    );
 
     return fontSize + 'px';
   }
@@ -154,9 +157,7 @@ export class SolutionTableComponent
     this.scrollToSolution(solution);
   }
   deleteSolution(solution: Solution, i: number) {
-
     this.solutionService.deleteSolution(solution);
-
   }
 
   editSolution(solution: Solution) {
@@ -191,13 +192,10 @@ export class SolutionTableComponent
     //this.example_solution = this.solutionService.example_solution;
     this.solutionService.solutions_list.subscribe((solutions) => {
       this.solutions = solutions;
-
     });
     this.solutionSubscription = this.solutionService.currentSolution.subscribe({
       next: (solution) => {
         if (solution) {
-
-
           this.selectedSolution = solution;
           this.solution = this.selectedSolution;
 
@@ -212,10 +210,9 @@ export class SolutionTableComponent
     });
 
     window.addEventListener('resize', () => {
-                if (Object.keys(this.solution.heat_map_data).length > 0) {
-                  this.generateHeatMap();
-                }
-     
+      if (Object.keys(this.solution.heat_map_data).length > 0) {
+        this.generateHeatMap();
+      }
     });
   }
   getKeys(sol: Solution): boolean {

@@ -31,10 +31,10 @@ const routes: Routes = [
   { 
     path: 'buffer-designer', 
     loadChildren: () => import('./buffer-designer/buffer-designer.module').then(m => m.BufferDesignerModule)} ,
-  {
-    path: 'solution-mixture-designer', 
-    loadChildren: () => import('./solution-mixture/solution-mixture-main/solution-mixture-main.module').then(m => m.SolutionMixtureMainModule)
-  },
+  // {
+  //   path: 'solution-mixture-designer', 
+  //   loadChildren: () => import('./solution-mixture/solution-mixture-main/solution-mixture-main.module').then(m => m.SolutionMixtureMainModule)
+  // },
   // ... more routes ...
 ];
 

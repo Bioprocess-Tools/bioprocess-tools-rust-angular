@@ -1,128 +1,158 @@
+<mat-card class="content">
+  <mat-card class="calculator">
+    <mat-card class="intro">
+      <!-- <h1 class="mat-headline-5">BUFFER DESIGNER</h1> -->
 
-<mat-card class="content"  >
-    <mat-card class="calculator">
+      <mat-accordion
+        multi="true"
+        displayMode="default"
+        class="mat-elevation-z0"
+      >
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <H3>Quick Start Guide</H3>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-
-
-      <mat-card class="intro">
-          <!-- <h1 class="mat-headline-5">BUFFER DESIGNER</h1> -->
-
-          <mat-accordion multi="true" displayMode = "default" class="mat-elevation-z0">
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                 <H3>Quick Start Guide</H3> 
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-
-
-        <mat-card class="intro-text-main">
-
-          <mat-card class="intro-text">
-            <mat-card-title class="small-title">Buffer Designer: Generative AI Input  </mat-card-title>
-            <mat-card-content class="small-content">
-              <p>You can now get receipe for your buffer by providing a natural
-              language input. </p>
-              <p> To make it even easier, now you can choose a buffer species using autocomplete 
-                and it will automatically populate the buffer name for you, which you can easily edit.
-              </p>
-              <p>Or simply
-              enter the buffer name as you see in the hint like
-              "40mM Phosphate buffer, 0.1M Sodium Chloride, pH 7.0"
-              and the ChatGPT will do the magic, along with the powerful
-              calculation engine to generate a recipe.</p>
-
-    
-            </mat-card-content>
-            </mat-card>
-       
+          <mat-card class="intro-text-main">
             <mat-card class="intro-text">
-              <mat-card-title class="small-title">Buffer Designer: Classical Input</mat-card-title>
-              <mat-card-content class="small-content">You can also provide input the classic way. The total
-              concentration value you
-              provide will be taken as the first compound's concentration, if
-              the buffering species is not present
-              in both the compounds.</mat-card-content>
+              <mat-card-title class="small-title"
+                >Buffer Designer: Generative AI Input
+              </mat-card-title>
+              <mat-card-content class="small-content">
+                <p>
+                  You can now get receipe for your buffer by providing a natural
+                  language input.
+                </p>
+                <p>
+                  To make it even easier, now you can choose a buffer species
+                  using autocomplete and it will automatically populate the
+                  buffer name for you, which you can easily edit.
+                </p>
+                <p>
+                  Or simply enter the buffer name as you see in the hint like
+                  "40mM Phosphate buffer, 0.1M Sodium Chloride, pH 7.0" and the
+                  ChatGPT will do the magic, along with the powerful calculation
+                  engine to generate a recipe.
+                </p>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="intro-text">
+              <mat-card-title class="small-title"
+                >Buffer Designer: Classical Input</mat-card-title
+              >
+              <mat-card-content class="small-content"
+                >You can also provide input the classic way. The total
+                concentration value you provide will be taken as the first
+                compound's concentration, if the buffering species is not
+                present in both the compounds.</mat-card-content
+              >
             </mat-card>
             <mat-card class="intro-text">
               <mat-card-title class="small-title">pH-Calculator</mat-card-title>
               <mat-card-content class="small-content">
-              Of course you can also calculate the pH of a solution by
-              providing the compounds and their concentrations.
-            </mat-card-content>
+                Of course you can also calculate the pH of a solution by
+                providing the compounds and their concentrations.
+              </mat-card-content>
             </mat-card>
-                        <mat-card class="intro-text">
-              <mat-card-title class="small-title">Super Calculator</mat-card-title>
+            <mat-card class="intro-text">
+              <mat-card-title class="small-title"
+                >Super Calculator</mat-card-title
+              >
               <mat-card-content class="small-content">
-              All new! You can now add upto 3 different buffer compounds, one salt compound!
-              In addition, you can have the calculator adjust the pH to a target for you. It will use 
-              either Sodium Hydroxide or Hydrochloric Acid to adjust the pH.
-            </mat-card-content>
+                All new! You can now add upto 3 different buffer compounds, one
+                salt compound! In addition, you can have the calculator adjust
+                the pH to a target for you. It will use either Sodium Hydroxide
+                or Hydrochloric Acid to adjust the pH.
+              </mat-card-content>
             </mat-card>
-         
+            <mat-card class="intro-text">
+              <mat-card-title class="small-title">Disclaimer</mat-card-title>
+              <mat-card-content class="small-content">
+                The Expert Buffer Designer web app is provided as a tool to
+                assist with buffer design and pH calculations. While we strive
+                to ensure the accuracy and reliability of the information
+                provided, we do not guarantee the completeness, accuracy, or
+                suitability of the results for any specific purpose. Users are
+                advised to independently verify any information before relying
+                on it for critical applications. By using this tool, you
+                acknowledge and agree that Bioprocess Tools, its affiliates, and
+                its partners shall not be held responsible or liable for any
+                errors, inaccuracies, or any actions taken in reliance on the
+                information provided by the tool. The use of this web app is at
+                your own risk.
+              </mat-card-content>
+            </mat-card>
           </mat-card>
-      
         </mat-expansion-panel>
       </mat-accordion>
 
-
-        <!-- <mat-divider class="thick"></mat-divider> -->
-      </mat-card>
-
-
-      <mat-card class="navigate">
-        <nav mat-tab-nav-bar mat-stretch-tabs="false"
-          color="accent"
-          class="example-stretched-tabs"  [tabPanel]="tabPanel">
-          <a mat-tab-link 
-
-            [routerLink]="['genai-buffer-designer']"
-            (click)="setActiveTab('genai-buffer-designer'); $event.preventDefault()"
-            routerLinkActive
-            #firstTab="routerLinkActive"
-            [active]="firstTab.isActive">
-            GenAI Input
-          </a>
-          <a mat-tab-link
-            [routerLink]="['classic-buffer-designer']"
-            (click)="setActiveTab('classic-buffer-designer'); $event.preventDefault()"
-            routerLinkActive
-            #secondTab="routerLinkActive"
-            [active]="secondTab.isActive">
-            Designer
-          </a>
-          <a mat-tab-link 
-            [routerLink]="['super-calculator']"
-            (click)="setActiveTab('super-calculator'); $event.preventDefault()"
-            routerLinkActive
-            #fourthTab="routerLinkActive"
-            [active]="fourthTab.isActive">
-            Super Calculator
-          </a>
-          <a mat-tab-link
-            [routerLink]="['ph-calculator']"
-            (click)="setActiveTab('ph-calculator'); $event.preventDefault()"
-            routerLinkActive
-            #thirdTab="routerLinkActive"
-            [active]="thirdTab.isActive">
-            Calculator
-          </a>
-
-        </nav>
-        <mat-tab-nav-panel #tabPanel>
-          <router-outlet></router-outlet>
-        </mat-tab-nav-panel>
-      </mat-card>
+      <!-- <mat-divider class="thick"></mat-divider> -->
     </mat-card>
 
-    <mat-card class="summary">
-
-        <!-- <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1> -->
-        <app-solution-table [activeTab]="activeTab"></app-solution-table>
-
- 
-
+    <mat-card class="navigate">
+      <nav
+        mat-tab-nav-bar
+        mat-stretch-tabs="false"
+        color="accent"
+        class="example-stretched-tabs"
+        [tabPanel]="tabPanel"
+      >
+        <a
+          mat-tab-link
+          [routerLink]="['genai-buffer-designer']"
+          (click)="
+            setActiveTab('genai-buffer-designer'); $event.preventDefault()
+          "
+          routerLinkActive
+          #firstTab="routerLinkActive"
+          [active]="firstTab.isActive"
+        >
+          GenAI Input
+        </a>
+        <a
+          mat-tab-link
+          [routerLink]="['classic-buffer-designer']"
+          (click)="
+            setActiveTab('classic-buffer-designer'); $event.preventDefault()
+          "
+          routerLinkActive
+          #secondTab="routerLinkActive"
+          [active]="secondTab.isActive"
+        >
+          Designer
+        </a>
+        <a
+          mat-tab-link
+          [routerLink]="['super-calculator']"
+          (click)="setActiveTab('super-calculator'); $event.preventDefault()"
+          routerLinkActive
+          #fourthTab="routerLinkActive"
+          [active]="fourthTab.isActive"
+        >
+          Super Calculator
+        </a>
+        <a
+          mat-tab-link
+          [routerLink]="['ph-calculator']"
+          (click)="setActiveTab('ph-calculator'); $event.preventDefault()"
+          routerLinkActive
+          #thirdTab="routerLinkActive"
+          [active]="thirdTab.isActive"
+        >
+          Calculator
+        </a>
+      </nav>
+      <mat-tab-nav-panel #tabPanel>
+        <router-outlet></router-outlet>
+      </mat-tab-nav-panel>
     </mat-card>
-
   </mat-card>
+
+  <mat-card class="summary">
+    <!-- <h1 class="mat-headline-5" class= "h4new" > BUFFER LIST & DETAILS</h1> -->
+    <app-solution-table [activeTab]="activeTab"></app-solution-table>
+  </mat-card>
+</mat-card>

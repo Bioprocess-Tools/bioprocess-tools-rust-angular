@@ -11,24 +11,47 @@
  
 }
 
-.men_button {
+.header-toolbar {
+  
+  
+}
+
+.men_button1 {
   font-size: x-large;
+   @media (max-width: 450px) {
+    display:none;
+  }
+}
+.men_button2 {
+  font-size: x-large;
+      @media (max-width: 450px) {
+    //display:none;
+  }
 }
 
 .toolbar-items {
   //display: none;
     @media (max-width: 450px) {
-    display:none;
+    //display:none;
   }
 }
 .toolbar-row {
+ // background-color: var(--teal-background-color);
+  //border-radius:8px;
+  margin-bottom:3px;
+
   @media (max-width: 450px) {
     padding:2px;
   }
 }
 .linkedin-icon {
+  
   color: #0e8dc8;
   font-size: 1em;
+      @media (max-width: 450px) {
+    font-size: 0.75em;
+    //display:none;
+}
 }
 .linkedin-icon:hover {
   color: #0077b5;
@@ -36,6 +59,9 @@
 .whatsapp-icon {
   color: #25D366;
     font-size: 1em;
+    @media (max-width: 450px) {
+    font-size: 0.75em;
+}
 }
 
 .whatsapp-icon:hover {
@@ -51,10 +77,11 @@
 
   white-space: nowrap;
 
-  @media (max-width: 650px) {
+  @media (max-width: 850px) {
     font-size: large;
   }
-  @media (max-width: 400px) {
+  @media (max-width: 600px) {
       font-size: medium;
   }
 }
+

@@ -6,15 +6,29 @@
   padding: 6px;
   overflow-y: auto;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   width: 100%;
+  height: calc(100vh - 78px);
   overflow-y: auto;
   @media (max-width: 450px) {
     padding: 6px;
   }
+  .mat-headline-5 {
+    padding:10px;
+    color: var(--primary-text-color);
+  }
   .link-items {
+    display: flex;
+    padding:10px;
+    gap:10px;
+    flex-direction: column;
+     border-top: 1px solid var(--yellow-border-color);
+    border-bottom: 1px solid var(--yellow-border-color);
+    width:95%;
+  @media (max-width: 450px) {
+    //padding: 6px;
+  }
 
-    border-bottom: 1px solid var(--primary-text-color);
     .linkedin-icon {
       color: #108dc7;
       font-size: 2em;
@@ -31,13 +45,20 @@
     .whatsapp-icon:hover {
       color: #128c7e;
     }
+
+    .email-icon {
+      color: var(--yellow-border-color);
+      font-size: 1.5em;
+    }
+
+    
   }
   .contact-form {
     display: flex;
     flex-direction: column;
     width: 100%;
     background-color: var(--primary-background-color);
-    padding-top:10px;
+    padding:10px;
     .int-p {
     }
     .contact-form h2 {
@@ -52,7 +73,8 @@
       min-width: 150px;
       max-width: 800px;
       gap: 10px;
-      padding: 30px;
+      padding: 15px;
+      justify-content: space-evenly ;
       //  background-color: var(--primary-background-color);
 
       .input_full_width {

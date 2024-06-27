@@ -142,7 +142,8 @@
 <mat-card  class="heatmap" *ngIf="selectedSolution && getKeys(selectedSolution)" >
   <mat-card-title class="heatmap_title mat-headline-5">Compositional Variability Heatmap</mat-card-title>
   <plotly-plot [data]="trace" [layout]="layout" [config] = "config"></plotly-plot>
-  
+  <p class="disclaimer">*Disclaimer*: Results above are not guaranteed for the completeness, accuracy, or
+                suitability for any specific purpose.</p>
 </mat-card>
 </mat-card>
 </mat-card>
