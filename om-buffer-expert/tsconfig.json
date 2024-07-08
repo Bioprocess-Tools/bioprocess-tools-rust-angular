@@ -14,6 +14,11 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
+    "paths": {
+      "om-rust-wasm": [
+        "./projects/om-rust-wasm/src/public-api.ts"
+      ]
+    },
 
     "importHelpers": true,
     "target": "ES2022",

@@ -6,13 +6,23 @@ import { Solution } from './shared/models/solution.model';
 
 import { environment } from 'src/environments/environment';
 import { SolutionMixtureService } from './solution-mixture.service';
+import init, {
+  get_chemical_database_as_json,
+  calculate_pH_compounds_json,
+  calculate_pH_compounds_json_db,
+  calculate_pH_compounds_changed_conc_json,
+} from 'src/assets/omRustWebA/pkg/omRustWebA.js';
+
+import { get_factorial, initExampleRust } from 'om-rust-wasm';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class SolutionService {
   omSolutions: Solution[] = [];
-
+  private omwasm: any;
+  private wasmModule: any;
   public solutionSource = new BehaviorSubject<Solution | null>(null);
   currentSolution = this.solutionSource.asObservable();
   public solution_list_Source = new BehaviorSubject<Solution[]>([]);
@@ -27,6 +37,71 @@ export class SolutionService {
   ) {
     this.example_solution = this.solutionMixtureService.example_solution;
     this.add_Solution(this.example_solution);
+    this.initWasm();
+    // initExampleRust();
+    // console.log("God :", get_factorial(5));
+  }
+
+  async initWasm() {
+    if ('WebAssembly' in window) {
+      const wasmPath = 'assets/omRustWebA/pkg/omRustWebA_bg.wasm';
+     const wasmModule = await init(wasmPath);
+     this.wasmModule = wasmModule;
+
+
+      console.log('WebAssembly supported');
+
+                     const dbJson = get_chemical_database_as_json();
+                     const chemicalDatabase = JSON.parse(dbJson);
+                     const compoundsNameJson = JSON.stringify([
+                       'Acetic Acid',
+                       'Sodium Acetate',
+                     ]);
+                     const compoundsConcJson = JSON.stringify([0.1, 0.1]);
+                     // Example function usage
+                     const result = calculate_pH_compounds_json(
+                       compoundsNameJson,
+                       compoundsConcJson
+                     ); // fill in the args as necessary
+                     console.log(
+                       'God: Result from calculate_concentration_change:',
+                       result
+                     );
+                     const result2 = calculate_pH_compounds_json_db(
+                       compoundsNameJson,
+                       compoundsConcJson,
+                       dbJson
+                     ); // fill in the args as necessary
+                     console.log(
+                       'God : Result from calculate_concentration_change:',
+                       result2
+                     );
+
+                     const newconcsome = JSON.stringify([0.15, 0.12]);
+                     const result3 = calculate_pH_compounds_changed_conc_json(
+                       result2,
+                       compoundsNameJson,
+                       newconcsome
+                     ); // fill in the args as necessary
+                     console.log(
+                       'God : Result 3 from calculate_concentration_only change:',
+                       result3
+                     );
+    }
+    else {
+      console.log('WebAssembly not supported');
+    }
+  
+
+
+
+
+    // try {
+    //   this.omwasm = await init();
+    //   console.log('WASM module loaded successfully');
+    // } catch (err) {
+    //   console.error('Error loading WASM module:', err);
+    // }
   }
 
   changeSolution(solution: Solution) {
@@ -34,28 +109,28 @@ export class SolutionService {
   }
 
   deleteSolution(solution: Solution) {
-  const currentSolutions = this.solution_list_Source.value;
-  const currentIndex = currentSolutions.indexOf(solution);
+    const currentSolutions = this.solution_list_Source.value;
+    const currentIndex = currentSolutions.indexOf(solution);
 
-  const updatedSolutions = currentSolutions.filter((s) => s !== solution);
+    const updatedSolutions = currentSolutions.filter((s) => s !== solution);
 
-  let newCurrentSolution = this.solutionSource.value;
-  if (newCurrentSolution === solution) {
-    if (updatedSolutions.length > 0) {
-      if (currentIndex >= updatedSolutions.length) {
-        newCurrentSolution = updatedSolutions[updatedSolutions.length - 1];
+    let newCurrentSolution = this.solutionSource.value;
+    if (newCurrentSolution === solution) {
+      if (updatedSolutions.length > 0) {
+        if (currentIndex >= updatedSolutions.length) {
+          newCurrentSolution = updatedSolutions[updatedSolutions.length - 1];
+        } else {
+          newCurrentSolution = updatedSolutions[currentIndex];
+        }
       } else {
-        newCurrentSolution = updatedSolutions[currentIndex];
+        newCurrentSolution = null;
       }
-    } else {
-      newCurrentSolution = null;
+      this.solutionSource.next(newCurrentSolution);
     }
-    this.solutionSource.next(newCurrentSolution);
-  }
 
-  this.solution_list_Source.next(updatedSolutions);
+    this.solution_list_Source.next(updatedSolutions);
   }
-  add_Solution(newSolution: Solution) { 
+  add_Solution(newSolution: Solution) {
     const currentSolutions = this.solution_list_Source.value;
 
     const updatedSolutions = [...currentSolutions, newSolution];

@@ -1,0 +1,10 @@
+/Users/natraj.ram/BioprocessTools/buffer_designer/buffer_designer_angular/bioprocess-tools-rust-angular/omRustWebA/target/debug/deps/liblog-30e5f27b6a72700e.rmeta: /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/lib.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/macros.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/serde.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/__private_api.rs
+
+/Users/natraj.ram/BioprocessTools/buffer_designer/buffer_designer_angular/bioprocess-tools-rust-angular/omRustWebA/target/debug/deps/liblog-30e5f27b6a72700e.rlib: /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/lib.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/macros.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/serde.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/__private_api.rs
+
+/Users/natraj.ram/BioprocessTools/buffer_designer/buffer_designer_angular/bioprocess-tools-rust-angular/omRustWebA/target/debug/deps/log-30e5f27b6a72700e.d: /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/lib.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/macros.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/serde.rs /Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/__private_api.rs
+
+/Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/lib.rs:
+/Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/macros.rs:
+/Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/serde.rs:
+/Users/natraj.ram/.cargo/registry/src/index.crates.io-6f17d22bba15001f/log-0.4.22/src/__private_api.rs:

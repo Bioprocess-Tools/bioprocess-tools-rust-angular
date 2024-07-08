@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-        "builder": "@angular-devkit/build-angular:browser",
+        "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             
             "outputPath": "dist/om-buffer-expert",
@@ -30,8 +30,17 @@
               "src/favicon.ico",
               "src/assets",
               "src/assets/images",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "src/assets/omRustWebA/pkg",
+               {
+                 "glob": "**/*.wasm",
+                 "input": "projects/om-rust-wasm/src/lib/rust-buffer-om/pkg",
+                 "output": "projects/om-rust-wasm/src/lib/rust-buffer-om/pkg"
+               }
             ],
+            "customWebpackConfig": {
+        "path": "./extra-webpack.config.js"
+      },
             "styles": [
               
               "src/styles.scss","src/shared-styles.scss","src/_buffer_colors.scss"
@@ -123,6 +132,39 @@
               "src/styles.scss", "src/shared-styles.scss", "src/_buffer_colors.scss"
             ],
             "scripts": []
+          }
+        }
+      }
+    },
+    "omRustWASM": {
+      "projectType": "library",
+      "root": "projects/om-rust-wasm",
+      "sourceRoot": "projects/om-rust-wasm/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/om-rust-wasm/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/om-rust-wasm/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/om-rust-wasm/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/om-rust-wasm/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
           }
         }
       }
