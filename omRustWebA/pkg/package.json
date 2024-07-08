@@ -1,0 +1,15 @@
+{
+  "name": "rust-buffer-om",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "rust_buffer_om_bg.wasm",
+    "rust_buffer_om.js",
+    "rust_buffer_om.d.ts"
+  ],
+  "main": "rust_buffer_om.js",
+  "types": "rust_buffer_om.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
