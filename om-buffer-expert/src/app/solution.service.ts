@@ -13,7 +13,7 @@ import init, {
   calculate_pH_compounds_changed_conc_json,
 } from 'src/assets/omRustWebA/pkg/omRustWebA.js';
 
-import { get_factorial, initExampleRust } from 'om-rust-wasm';
+
 
 
 @Injectable({

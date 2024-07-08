@@ -31,12 +31,8 @@
               "src/assets",
               "src/assets/images",
               "src/manifest.webmanifest",
-              "src/assets/omRustWebA/pkg",
-               {
-                 "glob": "**/*.wasm",
-                 "input": "projects/om-rust-wasm/src/lib/rust-buffer-om/pkg",
-                 "output": "projects/om-rust-wasm/src/lib/rust-buffer-om/pkg"
-               }
+              "src/assets/omRustWebA/pkg"
+
             ],
             "customWebpackConfig": {
         "path": "./extra-webpack.config.js"
